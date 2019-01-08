@@ -15,6 +15,7 @@
 //     return view('welcome');
 // });
 
+
 Auth::routes();
 
 // Route::get('/', 'HomeController@welcome');
@@ -27,6 +28,8 @@ Auth::routes();
 
 Route::get('/', 'pageController@home');
 
-Route::get('/home', 'pageController@home');
+Route::get('/loggedin', 'pageController@index')->name('loggedin');
+
+//Route::get('/login', 'pageController@login');
 
 Route::get('/my-car', 'pageController@myCar');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class pageController extends Controller
 {
@@ -17,26 +18,27 @@ class pageController extends Controller
          return view('home') ;
     }
 
+    public function index()
+    {
+
+      $usuarios = User::where('id',auth()->id())->get();
+
+      return view('/my-car',compact('usuarios'));
+    }
+
+
     public function browse(){
 
          return view('home');
     }
 
     public function myCar(){
-      $task =[
-           'Hola',
-           'Mundo',
-           'Att: Chris'
-         ];
+
 
          return view('my-car');
     }
 
 
-    public function login(){
-
-         return view('forms.login');
-    }
 
 
     public function sign_up(){
