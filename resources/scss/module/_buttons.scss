@@ -1,0 +1,302 @@
+button{
+	@include bold;
+}
+a{
+
+	@include main_font;
+	@include bold;
+	color: $grey;
+	&:hover{
+		color:$blue;
+	}
+
+	&:hover{
+		color:$blue;
+	}
+}
+.button{
+	min-width: 96px;
+	width: auto;
+	// max-width: 144px;
+	@include breakpoint(sm){
+		min-width: 144px;
+
+	}
+	margin: 0 8px;
+	height: 40px;
+	&-group{
+		.button{
+			margin: 0 8px;
+
+			&:first-child{
+				margin-left: 0;
+			}
+
+			&:last-child{
+				margin-right: 0;
+			}
+		}
+	}
+	i{
+		margin-right: 8px;
+	}
+
+	&[data-action='submit']{
+		margin-top: 24px;
+		margin-bottom: 24px;
+	}
+
+	&.hollow{
+		background-color: $white;
+		&:hover{
+			background: $white
+		}
+	}
+}
+
+.hollow{
+	border:1px solid $grey-hint ;
+	color:$primary-color ;
+}
+
+
+.faux-button{
+	min-width: 200px;
+padding: 0;
+@include clear-bg;
+	margin: 0;
+}
+
+.button{
+
+		span{
+			@include bold;
+		};
+
+		&.success{
+			color:$white;
+		}
+
+
+		&.secondary {
+
+			background: $white;
+
+				&:hover{
+					background: $grey-hint
+				}
+
+				&:focus{
+
+					background: $grey-hint
+				}
+
+				&.cancel{
+					color: $red;
+
+					&:hover{
+						border-color:$grey-hint;
+					}
+
+				}
+
+		}
+
+		&.alternative{
+		background-color: $orange;
+		color:$white
+		}
+
+
+		&.hollow{
+
+			&.secondary{
+
+				&.cancel{
+					color: $red;
+				}
+
+				color:$primary-color;
+
+			}
+
+		}
+
+
+
+}
+
+	.hollow.alternative{
+		border-color: $orange;
+		background-color: $white;
+		color:$orange;
+	}
+
+ul.dropdown.menu li a i.icon{
+	padding: 0;
+}
+	#account-settings-nav{
+			padding: 0;
+
+	}
+
+
+ul[data-misc] li{
+	a.button{
+		max-width: 42px;
+		min-width: 42px;
+
+		text-align: center;
+		padding: 0.7rem 1rem;
+		margin: 0 4px;
+
+		@include breakpoint(sm){
+			max-width: unset;
+			min-width: 144px;
+			margin: 0 8px;
+		}
+
+		i{
+			margin-left: 2px;
+			margin-right:  0;
+		}
+	}
+
+}
+
+ul[data-misc] li:nth-child(3) a.button{
+	min-width: 80px;
+
+	@include breakpoint(sm){
+	min-width: 144px;
+	}
+}
+
+.filters-accordion{
+	margin: 0;
+	height: auto;
+max-height: 42px;
+min-height: 42px;
+transition: all 400ms ease-in-out;
+padding: 0 8px!important;
+
+	a {
+
+		color: $text-color !important;
+		margin-bottom: 24px;
+		    padding: 16px 8px;
+	}
+	&-full{
+		a{
+			color: $blue;
+		}
+		max-height: 100%;
+	}
+}
+
+
+
+
+.fab {
+	position: fixed;
+	width: 56px;
+	right: 24px;
+	bottom: 32px;
+	margin-left: -28px;
+	z-index: 1000;
+}
+
+.fab.active .fab-action-button {
+	background-color: $orange;
+	transform: rotate(90deg);
+	box-shadow:4px  0px  8px rgba(0, 0, 0, 0.24), 0px 0 16px rgba(0, 0, 0, 0.12);
+}
+
+
+.fab.active .fab-buttons {
+	opacity: 1;
+	visibility: visible;
+}
+
+.fab.active .fab-buttons__link {
+	transform: scaleY(1) scaleX(1) translateY(-16px) translateX(0px);
+}
+
+.fab-action-button.active + .fab-buttons .fab-buttons__link:before {
+	visibility: visible;
+	opacity: 1;
+	transform: scale(1);
+	transform-origin: right center 0;
+	transition-delay: 0.3s;
+}
+
+.fab-action-button {
+	cursor: pointer;
+	position: absolute;
+	bottom: 0;
+	display: inline-block;
+	width: 56px;
+	height: 56px;
+	background-color: $blue;
+	border-radius: 0;
+	box-shadow:  -4px 4px 8px rgba(0, 0, 0, 0.24), 0 0 16px rgba(0, 0, 0, 0.12);;
+	right: 0;
+	transform: rotate(-45deg);
+		transition: .3s;
+	p{
+		font-size: 1.6rem;
+		color: #ffffff;
+		text-align: center;
+		line-height: 3.5rem;
+		position: relative;
+		left: .5px;
+		bottom: .5px;
+		transform: rotate(45deg);
+	}
+}
+
+.fab-buttons {
+	position: absolute;
+	// left: -96px;
+	right: 0;
+	bottom: 48px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	opacity: 0;
+	visibility: hidden;
+	transition: 0.2s;
+}
+
+
+
+.fab-buttons__item {
+}
+
+.fab-buttons__link {
+	display: inline-block;
+	width: 172px;
+	height: 42px;
+	padding: 0.5rem 1rem;
+
+	font-size: 1rem;
+	@include primary_text_color;
+	@include bold;
+	margin-bottom: 24px;
+	text-decoration: none;
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.24), 0px 8px 16px rgba(0, 0, 0, 0.12);
+	transform: translateX(70px) translateY(-16px);
+	-moz-transition: .4s;
+	-webkit-transition: .4s;
+	-o-transition: .4s;
+	transition: .4s;
+	text-align: center;
+}
+
+.icon-material {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+}

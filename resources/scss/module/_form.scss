@@ -1,0 +1,128 @@
+label,legend{
+  @include bold;
+  color: $primary-color;
+}
+
+
+[type="radio"] + label[for] {
+
+    cursor: pointer;
+    font-weight: 400;
+    margin-right: 24px;
+
+}
+
+[type="text"],
+[type="password"],
+[type="date"],
+[type="datetime"],
+[type="datetime-local"],
+[type="month"],
+[type="week"],
+[type="email"],
+[type="number"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="url"],
+[type="color"],
+textarea {
+  box-shadow: none;
+  @include border;
+  border-color:$grey;
+  // margin-top: 8px;
+  &:focus{
+    box-shadow: none;
+    border-color: $blue;
+  }
+
+}
+
+select{
+  height: 40px;
+}
+
+fieldset{
+  margin: 32px auto;
+}
+
+
+
+
+#form-container{
+
+	margin-top: 52px;
+
+	@include breakpoint(sm){
+		margin-top: 124px;
+	}
+
+	form{
+		margin-top:32px;
+		p{
+			display: inherit;
+      line-height: 2;
+		}
+		@include breakpoint(sm){
+			margin-top: 32px;
+
+			p{
+				display: inherit;
+			}
+
+
+		}
+
+	}
+	select{
+		margin-bottom: 44px;
+	}
+	input{
+		&[type='text']{
+      @include breakpoint(sm){
+				margin-bottom: 44px;
+			}
+		}
+
+    &[type='password']{
+      // margin-bottom: 44px;
+      // @include breakpoint(sm){
+			// 	margin-bottom: 44px;
+			// }
+		}
+
+    &[type='email']{
+      @include breakpoint(sm){
+				margin-bottom: 44px;
+			}
+		}
+
+    &[type='number']{
+      @include breakpoint(sm){
+				margin-bottom: 44px;
+			}
+		}
+
+    &[type='date']{
+      @include breakpoint(sm){
+				margin-bottom: 44px;
+			}
+		}
+
+
+
+		&[type='password']{
+
+			@include breakpoint(sm){
+				margin-bottom: 44px;
+			}
+
+		}
+
+	}
+
+	.button{
+		// margin: 32px 0;
+	}
+
+}

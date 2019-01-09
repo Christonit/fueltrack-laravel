@@ -1,0 +1,57 @@
+/* CSS Document */
+.clear-card{
+	@include clear-card;
+}
+.full-height{
+	height: 100%;
+}
+
+.select-dropdown{
+	margin:0 !important;
+}
+
+.flex-middle{
+		justify-content: center!important;
+
+	display: inline-flex!important;
+	align-items: center!important;
+	text-align: center!important;
+	padding: 0;
+
+
+}
+
+.no-m-top{
+	margin-top: 0 !important;
+
+}
+
+.no-m-bottom{
+	margin-bottom: 0 !important;
+}
+
+
+.cancel{
+	color:$red;
+}
+
+
+.red{
+
+}
+
+
+
+.overlay{
+	display: block;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background: rgba(0,0,0,0.25);
+	z-index: 99;
+}
+.highlight{
+	font-weight: inherit;
+	color: $blue;
+}
