@@ -1,0 +1,180 @@
+body{
+background: $body;
+}
+.grid-container.fluid {
+    padding-right: 0;
+    padding-left: 0;
+		@include breakpoint(sm){
+			padding-right: 0.5rem;
+	    padding-left: 0.5rem;
+
+		}
+
+	}
+
+.grid-container:not(.full) > .grid-padding-x {
+    margin-right: 0;
+    margin-left: 0;
+
+    @include breakpoint(sm){
+			margin-right: -0.5rem;
+	    margin-left: -0.5rem;
+
+		}
+}
+
+
+#hero-image {
+	background: $hero-image-bg  no-repeat  center;
+	background-size: contain;
+	position: relative;
+	height: 300px;
+	width: 100%;
+	@include breakpoint(sm){
+		height: 460px;
+	}
+
+	bottom: 0;
+}
+
+
+
+#section-header{
+	margin: 56px 16px 24px;
+  text-transform: capitalize;
+
+  h3{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.5rem;
+    @include breakpoint(sm){
+    text-align: left;
+    font-size: 1.9375rem;
+    }
+  }
+
+  .button-group{
+    flex-wrap: wrap;
+    justify-content: center;
+    @include breakpoint(sm){
+      flex-wrap: nowrap;
+      justify-content: initial;
+
+    }
+
+  .button{
+      min-width: 144px;
+      @include breakpoint(sm){
+
+        // min-width: inherit;
+
+      }
+    }
+  }
+
+  .input-group-label:first-child {
+    border-right: 0;
+    margin: 1rem 0;
+    @include breakpoint(sm){
+
+    margin: initial
+    }
+
+    }
+
+}
+
+
+#expenses-resume{
+  &.card{
+    padding: 4px 0;
+    margin: 16px 0;
+
+    @include breakpoint(sm){
+      margin: 16px 8px;
+      padding: 24px;
+    }
+
+  }
+
+
+
+
+  .stats-list{
+    justify-content: left;
+    overflow-x: scroll;
+  }
+}
+
+
+#main-container{
+  background: $white;
+
+	@include breakpoint(sm) {
+		height: 100vh;
+	}
+	// display: block;
+}
+
+#landing-header{
+			padding-top: 52px;
+
+		@include breakpoint(sm) {
+			padding-top: 128px;
+
+		}
+
+  & form{
+		margin-top: 32px;
+
+		@include breakpoint(sm){
+			margin-top: 64px;
+
+		}
+
+		input{
+
+		}
+
+  }
+}
+
+#vehicle-search{
+	margin-left: 1.2rem;
+	margin-right: 1.2rem;
+}
+canvas {
+	display: block;
+	max-width: 100%;
+	margin: 0  auto;
+
+
+  @include breakpoint(sm) {
+    @include margin-bottom-large;
+
+	}
+}
+
+
+#login-form{
+	position: relative;
+  min-height: 100vh;
+
+	@include breakpoint(sm) {
+		height: 100vh;
+	}
+
+	.top-bar-right{
+		 float: right;
+		 margin: 0;
+		 padding-left: 0;
+		 padding-right: 0;
+		 flex: initial;
+
+		 	 @include breakpoint(sm) {
+		 		 margin-left: auto;
+		 	  	}
+	 }
+
+
+}

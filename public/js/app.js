@@ -12,16 +12,10 @@ var xl = 1280;
 
 // URL and view validator
 
-// var url = window.location.pathname;
-//     url = url.substring(0,(url.lastIndexOf('/')+1));
-//
-// var filename = window.location.pathname;
-//     filename = filename.substring(url.length,filename.lastIndexOf('.'));
 
 var filename = window.location.pathname;
 
-//Session info Parameter to know when user is sign to control which menu to show.
-var userSignedUp = true;
+
 
 var emailPtrn = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
 
@@ -71,7 +65,6 @@ function previewsTab(e){
 
     vehicleInfoBasic.classList.add('hide');
     userDetails.classList.remove('hide');
-    // document.querySelector('.tabs-title.is-active').previousSibling.classList.remove('is-done').classList.add('is-active');
     document.querySelector('.tabs-title.is-active').classList.remove('is-active');
     document.querySelector('.tabs-title.is-done').classList.add('is-active');
     document.querySelector('.tabs-title.is-done').classList.remove('is-done');
@@ -127,7 +120,6 @@ function vehicleUsageValidation(e){
 
         vehicleInfoUsage.classList.add('hide');
         vehicleInfoMisc.classList.remove('hide');
-        // continueBTN = document.querySelector(addVehicleForms[3] + ' a.success').onclick = vehicleUsageValidation;
       }
 
 }
@@ -158,7 +150,7 @@ function signUpValidation(){
 
 //Sign up and login validation and tabs management.
 
-if (filename == 'sign-up') {
+if (filename == '/sign-up') {
 
   continueBTN.onclick = function(){
     signUpValidation();
@@ -246,11 +238,10 @@ class overlayPop{
 // Creates menu overlay
 var p = new overlayPop();
 
-if(filename == '/index' || filename == '/my-car' || filename == '/'  || filename == '/#' ){
+if(filename == '/index' || filename == '/my-car' || filename == '/' ){
 
 
   selector.onclick = function(e){
-      console.log('hola');
 
     if (overlayExist == false) {
       p.createOverlay();
@@ -274,7 +265,6 @@ if(filename == '/my-car'){
 
       var filters = [].slice.call(document.querySelectorAll('[data-expense-filter]'));
       var filtersBtn = document.createElement('a');
-      // filtersBtn.setAttribute('class','accordion-title');
       filtersBtn.setAttribute('href','#');
       var overviewFilters = document.createElement('div');
 
@@ -283,27 +273,15 @@ if(filename == '/my-car'){
 
       filtersBtn.onclick= (e)=>{
             overviewFilters.classList.toggle('filters-accordion-full');
-        // overviewFilters.style.height = ;
-
         e.preventDefault();
 
       };
 
-    // overviewFilters.style.height = accHeight + 'px';
 
 
-          // overviewFilters.innerHTML = ' <li class="accordion-item is-active" data-accordion-item></li>';
       filtersBtn.innerText = 'Filters';
       expenses.insertBefore(overviewFilters, overviewGraph);
-      // var accordionContent = document.createElement('div');
-      //     accordionContent.classList.add = 'accordion-content';
-      //     accordionContent.setAttribute('data-tab-content','');
-      // var accordionContent = document.createElement('div');
-
-
-      // // overviewFilters = overviewFilters.children;
       overviewFilters.appendChild(filtersBtn);
-      // overviewFilters.appendChild(accordionContent);
       for (var r in filters) {
         overviewFilters.appendChild(filters[r]);
       }
@@ -416,11 +394,11 @@ $('[data-open-details]').click(function (e) {
 if(windowSize <= sm){
 
   // creates Floating Action Button
-    if(filename == '/my-car' & userSignedUp == true){
+    if(filename == '/my-car' & isUserSignedIn == true){
       var fActionButton = document.querySelector('.fab');
 
           fActionButton.addEventListener('touchstart', function(e){
-              // console.log(e);
+
               this.classList.toggle('active');
 
                   if(overlayExist == false){
@@ -437,10 +415,11 @@ if(windowSize <= sm){
 
           });
     }
-    //User vehicle stats selectors and content
+
     var statsViewsAnchors = '<li class="tabs-title is-active"><a href="#m-expenses"  aria-selected="true">Expenses</a></li><li class="tabs-title"><a data-tabs-target="m-maintenances" href="#m-maintenances">Maintenances</a></li><li class="tabs-title "><a href="#m-performance"  data-tabs-target="m-performance" >Performance</a></li>'
     var statsContent = $('<div class="tabs-content" data-tabs-content="m-vehicle-stats"><div class="tabs-panel is-active" id="m-expenses"></div><div class="tabs-panel" id="m-maintenances"></div><div class="tabs-panel" id="m-performance"></div></div>');
     var mStatsTabs = $('<ul class="tabs" data-tabs id="m-vehicle-stats"></ul>');
+
     var vehicleExpenses = $('#expenses');
     var vehicleMaintenance = $('#maintenance');
     var vehiclePerformance = $('#performance');
@@ -452,36 +431,23 @@ if(windowSize <= sm){
         $('#m-maintenances').append(vehicleMaintenance);
         $('#m-performance').append(vehiclePerformance);
 
-        if(userSignedUp == true){
 
-
-            // logInBtn.remove()
-
-
-        }else if(userSignedUp == false){
-
-          // userSttgBtn.remove();
-
-        }
 
   if(filename !== '/sign-up' & filename !== '/login' ){
 
-
-      // menuChild.appendChild(signUpBtn);
       header.appendChild(miscButtons);
       document.querySelector('.top-bar-right').remove();
       body.insertBefore(menuDropDown, header.nextSibling);
 
-      if(userSignedUp == true){
+      if(isUserSignedIn == true){
 
             header.appendChild(userSttgBtn)
 
 
-      }else if(userSignedUp == false){
+      }else if(isUserSignedIn == false){
+          var logInBtn = document.querySelector('ul[data-misc] li:nth-child(3)');
 
-        var logInBtn = document.querySelector('ul[data-misc] li:nth-child(3)');
-        menuDropDownList.appendChild(logInBtn)
-        // menuChild.appendChild(logInBtn);
+          menuDropDownList.appendChild(logInBtn)
 
       }
 

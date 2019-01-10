@@ -1,0 +1,215 @@
+$breakpoints: (
+	xs: 512px,
+	sm: 768px,
+	md: 896px,
+	lg: 1152px,
+	xl: 1280px
+);
+
+// min-width: unset;
+//
+// height: 42px;
+//
+// display: block !important;
+//
+// width: 42px;
+//
+// padding: 0.7rem 0.5rem;
+
+@mixin breakpoint( $breakpoint ) {
+    @if map-has-key( $breakpoints, $breakpoint ) {
+        @media ( min-width: #{ map-get( $breakpoints, $breakpoint ) } ) {
+            @content;
+        }
+    } @else if type_of( $breakpoint ) == number and unit( $breakpoint ) == px or unit( $breakpoint ) == em or unit( $breakpoint ) == rem {
+        @media (min-width: $breakpoint ) {
+            @content;
+        }
+    } @else {
+        @warn "No value could be retrieved from `#{$breakpoint}`. "
+               + "It is either not defined in the `$breakpoints` map, or it is an invalid number of px, em, or rem.";
+    }
+}
+
+@mixin max-breakpoint( $breakpoint ) {
+    @if map-has-key( $breakpoints, $breakpoint ) {
+        @media ( max-width: #{ map-get( $breakpoints, $breakpoint ) } ) {
+            @content;
+        }
+    } @else if type_of( $breakpoint ) == number and unit( $breakpoint ) == px or unit( $breakpoint ) == em or unit( $breakpoint ) == rem {
+        @media (max-width: $breakpoint ) {
+            @content;
+        }
+    } @else {
+        @warn "No value could be retrieved from `#{$breakpoint}`. "
+               + "It is either not defined in the `$breakpoints` map, or it is an invalid number of px, em, or rem.";
+    }
+}
+
+
+@mixin main_font{
+font-family: $main-font;
+font-weight: 400
+}
+
+
+@mixin body_text{
+font-weight: 400;
+font-size: 1em;
+}
+
+@mixin primary_text_color{
+	color:$primary-color;
+
+}
+
+
+@mixin bold{
+font-weight: 600;
+}
+
+@mixin shadow{
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.2), 0px 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+@mixin border{
+border: 1px solid $grey-hint;
+}
+
+@mixin border-radius{
+	  border-radius:4px;
+
+}
+@mixin hollowfication{
+	font-family: $main-font;
+	@include bold;
+	padding:  0 8px;
+  color: $primary-color;
+	line-height: 28px;
+	@include border-highlight;
+	text-align: center;
+	display: inline-block;
+	height: 32px;
+	background:none;
+}
+
+
+@mixin border_grey{
+  border: 2px solid $grey;
+}
+
+@mixin border-highlight{
+  border: 2px solid $grey-hint;
+	border-radius: 4px;
+}
+
+@mixin border-none{
+	border:none;
+}
+
+@mixin label{
+	border-radius:50px;
+}
+
+@mixin margin-top-medium{
+	margin-top:24px;
+}
+
+@mixin margin-top-reg{
+	margin-top:32px;
+}
+
+@mixin margin-bottom-large{
+	margin-bottom:42px;
+}
+
+
+@mixin margin-bottom-medium{
+	margin-bottom:24px;
+}
+
+@mixin margin-bottom-reg{
+	margin-bottom:32px;
+}
+
+@mixin flex_center{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+@mixin flex_align($f_type){
+    display: flex;
+    justify-content: $f_type;
+}
+
+@mixin space_between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin red-btn{
+background: $red;
+@include bold_font;
+border-radius: 4px;
+text-align: center;
+}
+
+@mixin clear-bg{
+	background: none;
+}
+
+@mixin border-bottom{
+		border-bottom: 1px solid $grey-hint;
+}
+
+@mixin border-right{
+		border-right: 1px solid $grey-hint;
+}
+
+@mixin card{
+	border: 1px solid $grey-hint;
+	background: $white;
+	padding:  24px 16px;
+	border-radius:0;
+	margin: 16px 8px;
+	flex-grow: initial;
+	position: relative;
+	@include breakpoint(sm){
+		padding: 24px;
+	}
+}
+
+
+@mixin clear-card{
+	border:none!important;
+	background: none!important;
+}
+
+
+@mixin stats{
+	@include main_font;
+	color: $primary-color;
+	font-size: 1.71rem;
+	text-align: left
+}
+
+@mixin iconset{
+	font-family: "ft-icons";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+
+  display: inline-block;
+  text-decoration: inherit;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.42rem;
+}

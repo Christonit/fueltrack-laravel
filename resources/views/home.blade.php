@@ -22,51 +22,39 @@ about your vehicle</h2>
     </div>
 
 
-  <form action="" class="medium-8 large-7 float-center">
-    <div id='vehicle-search' class="grid-x grid-padding-x">
-          <div class="large-3 medium-3 cell">
-            <label>Maker</label>
+      <form action="" class="medium-8 large-7 float-center">
+          <div id='vehicle-search' class="grid-x grid-padding-x">
+              <div class="large-3 medium-3 cell">
+                  <label>Maker</label>
 
-            <select name="maker" id="">
-              <option value="">Acura</option>
-              <option value="">BMW</option>
-              <option value="">Honda</option>
-              <option value="">Kia</option>
-              <option value="">Mazda</option>
-            </select>
+                  <select name="maker" id="">
+
+                  </select>
+              </div>
+              <div class="large-3 medium-3 cell">
+                  <label>Model</label>
+                  <select name="model" id="">
+                  </select>
+
+              </div>
+              <div class="large-3 medium-3 cell">
+                  <label>Year</label>
+                  <select name="year" id="">
+
+                  </select>
+              </div>
+              <div class="large-3 medium-3 cell">
+                  <label>&#160;</label>
+
+                  <button type="button" class="button expanded alternative flex-middle">
+                      <span>Search </span>
+                      <i class="material-icons">search</i>
+                  </button>
+
+              </div>
           </div>
-          <div class="large-3 medium-3 cell">
-            <label>Model</label>
-            <select name="model" id="">
-              <option value="">Acura</option>
-              <option value="">BMW</option>
-              <option value="">Honda</option>
-              <option value="">Kia</option>
-              <option value="">Mazda</option>
-            </select>
+      </form>
 
-          </div>
-          <div class="large-3 medium-3 cell">
-            <label>Year</label>
-            <select name="year" id="">
-              <option value="">2018</option>
-              <option value="">2017</option>
-              <option value="">2016</option>
-              <option value="">2015</option>
-              <option value="">2014</option>
-            </select>
-          </div>
-      <div class="large-3 medium-3 cell">
-                        <label>&#160;</label>
-
-      <button type="button" class="button expanded alternative flex-middle">
-          <span>Search </span>
-          <i class="material-icons">search</i>
-      </button>
-
-      </div>
-        </div>
-  </form>
 
 </div>
 
