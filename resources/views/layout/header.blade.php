@@ -59,6 +59,7 @@
 
       @if (Route::has('login'))
               @auth
+              <li><a href="#" data-type-action='add-expense'  data-open= "add-expense" class="button alternative hide-for-small-only">+ Add expense</a></li>
 
               @else
 
@@ -100,6 +101,9 @@
 
                               <ul class="menu">
                                   <li>
+                                      <a class="dropdown-item" href="/add-vehicle">
+                                         Add new vehicle
+                                      </a>
                                       <a class="dropdown-item" href="{{ route('logout') }}"
                                          onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">

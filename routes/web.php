@@ -33,3 +33,15 @@ Route::get('/loggedin', 'pageController@index')->name('loggedin');
 //Route::get('/login', 'pageController@login');
 
 Route::get('/my-car', 'pageController@myCar');
+
+
+Route::get('/no-car-found', function(){
+         return view('utilities.no-car-found-callout');
+
+});
+
+
+Route::get('/no-model-found', function(){
+    return view('utilities.no-car-model-callout');
+
+});

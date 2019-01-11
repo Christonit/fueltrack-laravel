@@ -67,3 +67,8 @@ about your vehicle</h2>
 </div>
 
 @endsection
+
+@section('specific-scripts')
+    <script src="{{asset('js/fuelgov.js')}}"></script>
+@endsection
+

@@ -18,10 +18,7 @@
             @endauth
     @endif
 
-</script>
-<script src="{{asset('js/app.js')}}"></script>
-<script src="{{asset('js/fuelgov.js')}}"></script>
 
-<script>
-    $(document).foundation();
 </script>
+<script src="{{asset('js/app.js')}}" ></script>
+

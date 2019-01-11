@@ -31,9 +31,12 @@
 
 
 
-    @yield('content');
+    @yield('content')
 
       @auth
+        @include('utilities.add-expense')
+        @include('utilities.add-service')
+
         @include('utilities.floating-action-btn')
       @endauth
 
@@ -43,8 +46,12 @@
 
     @include('layout.scripts')
 
+    @yield('specific-scripts')
+
 <!-- Compressed CSS -->
 
-
+    <script>
+        $(document).foundation();
+    </script>
 </body>
 </html>
