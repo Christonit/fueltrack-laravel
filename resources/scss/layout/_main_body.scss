@@ -159,6 +159,7 @@ canvas {
 #login-form{
 	position: relative;
   min-height: 100vh;
+  overflow-y: scroll;
 
 	@include breakpoint(sm) {
 		height: 100vh;

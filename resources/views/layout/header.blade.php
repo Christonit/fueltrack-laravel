@@ -59,7 +59,7 @@
 
       @if (Route::has('login'))
               @auth
-              <li><a href="#" data-type-action='add-expense'  data-open= "add-expense" class="button alternative hide-for-small-only">+ Add expense</a></li>
+              <li><button data-type-action='add-expense'  data-open= "add-expense" class="button alternative hide-for-small-only">+ Add expense</button></li>
 
               @else
 

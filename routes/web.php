@@ -32,7 +32,9 @@ Route::get('/loggedin', 'pageController@index')->name('loggedin');
 
 //Route::get('/login', 'pageController@login');
 
-Route::get('/my-car', 'pageController@myCar');
+//Route::get('/my-car', 'pageController@myCar');
+
+Route::get('/my-car', 'VehicleController@show');
 
 
 Route::get('/no-car-found', function(){
@@ -45,3 +47,8 @@ Route::get('/no-model-found', function(){
     return view('utilities.no-car-model-callout');
 
 });
+
+
+Route::get('/add-vehicle', 'pageController@addVehicle');
+
+Route::post('/add-vehicle','VehicleController@store');

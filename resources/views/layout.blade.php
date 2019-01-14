@@ -30,19 +30,21 @@
     @include('layout.header')
 
 
+    @auth
+      @include('utilities.add-expense')
+      @include('utilities.add-service')
+
+    @endauth
 
     @yield('content')
 
-      @auth
-        @include('utilities.add-expense')
-        @include('utilities.add-service')
-
-        @include('utilities.floating-action-btn')
-      @endauth
 
 
     @include('layout.footer')
 
+    @auth
+      @include('utilities.floating-action-btn')
+    @endauth
 
     @include('layout.scripts')
 

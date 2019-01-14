@@ -9,11 +9,6 @@ class pageController extends Controller
 {
     //
     public function home(){
-      // $task =[
-      //      'Hola',
-      //      'Mundo',
-      //      'Att: Chris'
-      //    ];
 
          return view('home') ;
     }
@@ -47,7 +42,8 @@ class pageController extends Controller
     }
 
     public function  addVehicle(){
-      return view('forms.sign-up-vehicle');
+
+      return view('vehicle.add-vehicle');
 
     }
 

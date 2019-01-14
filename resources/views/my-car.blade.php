@@ -12,7 +12,9 @@
         <!-- Overview section header -->
         <div id="section-header" class="grid-x grid-padding-x">
             <div class="small-12 medium-7 cell">
-                <h3>Mercedes-Benz  Clase GLS 400 2018</h3>
+
+                <h3> {{$user_vehicle[0]->maker}} {{$user_vehicle[0]->model}} {{$user_vehicle[0]->year}}  </h3>
+
             </div>
 
             <div class="small-12 medium-5 cell clearfix">
@@ -379,7 +381,7 @@
 
                     <div class="clearfix">
                         <h5 class="float-left">Maintenances</h5>
-                        <a href="#" class="hollow  button float-right alternative" data-open="add-service-1">+ Add service</a>
+                        <button class="hollow  button float-right alternative" data-open="add-service">+ Add service</button>
                     </div>
                     <span id='maintenance-resume-total' class="text-center">
 

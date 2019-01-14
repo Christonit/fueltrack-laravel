@@ -1,5 +1,5 @@
 <!-- This is the first modal -->
-<div class="reveal " id="add-service-1" data-reveal>
+<div class="reveal " id="add-service" data-reveal>
     <h3 class="text-center">Add service</h3>
 
     <fieldset class="grid-x">

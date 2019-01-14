@@ -26,63 +26,107 @@
 
                         <div id="form-container" class="">
                             <h3 class="text-center">
-                                <b>Create your account</b>
+                                <b>Account created</b>
                             </h3>
                             <ul class="tabs" data-tabs id="sign-up-tabs">
-                                <li class="tabs-title is-active"><b>Your details</b></a>
+                                <li class="tabs-title "><b>Your details</b></a>
                                 </li>
-                                <li class="tabs-title"><b>Your vehicle info</b></a>
+                                <li class="tabs-title is-active"><b>Your vehicle info</b></a>
                                 </li>
                             </ul>
-                            <form class="float-center" method="POST" action="{{ route('register') }}">
+                            <form class="float-center" method="POST" action="/add-vehicle">
 
                                 @csrf
 
-                                <div id="signup-user-details" class="">
+                                <div id="signup-vehicle-info-basic"  class=''>
 
+                                    <h4 class="text-center">Your basic vehicle info</h4>
 
-                                    <label>Username
-                                        <input id="username" type="text" class="{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-
-                                        @if ($errors->has('username'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                        @endif
-
-                                    </label>
-                                    <label>Email
-                                        <input id="email" type="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                        @if ($errors->has('email'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                        @endif
+                                    <label>Maker
+                                        <select class="" name="maker">
+                                            <option value="BMW">BMW</option>
+                                            <option value="MAZDA">Mazda</option>
+                                        </select>
                                     </label>
 
-                                    <label>Password
-                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                    <label>Model
+                                        <select class="" name="model">
+                                            <option value="M3">M3</option>
+                                            <option value="6">6</option>
 
-                                        @if ($errors->has('password'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                        @endif
+                                        </select>
                                     </label>
 
-                                    <label>Confirm password
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-
+                                    <label>Year
+                                        <select class="" name="year">
+                                            <option value="2018">2018</option>
+                                            <option value="2017">2017</option>
+                                        </select>
                                     </label>
 
-                                    <button type="submit" class="button expanded success">
-                                        {{ __('Register') }}
-                                    </button>
+
+                                    <button class="button success" type="submit" >Continue</button>
+
+                                    <div class="expanded button-group ">
+                                        <a href="#" class="hollow button previews">Back</a>
+
+                                        <a class="button success" href="#" data-add-vehicle='continue-usage'>Continue</a>
+                                    </div>
+
+
+                                    <hr>
+
+                                    <a href="#" class="hollow button secondary expanded" data-user-info='submit-user-info'>Finish for now & fill vehicle info later</a>
+
+                                </div>
+
+                                <div id="signup-vehicle-info-usage" class="hide">
+
+                                    <h4>One last thing before you go...</h4>
+                                    <label>Usage years
+                                        <input type="number" name="usageYear" value="">
+                                    </label>
+
+                                    <label>Acquisition date
+                                        <input type="date" name="AcquisitionDate">
+                                    </label>
+
+                                    <label>Acumulated distance - Mileage
+                                        <input type="number" name="totalDistance">
+                                    </label>
 
 
 
-                                    {{--<a class="button expanded success" href="#">Continue</a>--}}
+                                    <div class="expanded button-group ">
+                                        <a href="#" class="hollow button previews">Back</a>
+                                        <a class="button success" href="#" data-add-vehicle='continue-misc'>Continue</a>
+                                    </div>
+
+                                </div>
+
+                                <div id="signup-vehicle-info-misc" class="hide">
+
+                                    <h4 class="text-center">Miscellaneous but useful information.</h4>
+                                    <label>Fuel type
+                                        <select class="" name="">
+                                            <option value="Gasoline">Gasoline</option>
+                                        </select>
+                                    </label>
+
+                                    <label>Prefered distance measurement unit
+                                        <select class="" name="">
+                                            <option value="KM">Km</option>
+                                            <option value="MILES">Miles</option>
+                                        </select>
+                                    </label>
+
+
+
+                                    <a class="button expanded" href="#" data-add-vehicle='submit'>Start voyage</a>
+
+                                    <hr>
+
+                                    <a href="#" class="hollow button secondary expanded" data-add-vehicle='review'>Review before submit</a>
 
                                 </div>
 

@@ -14,7 +14,8 @@
 
 
 
-    @yield('content')
+
+         @yield('content')
 
 
     @include('layout.scripts')
