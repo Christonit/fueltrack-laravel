@@ -6,7 +6,7 @@ var mIndex;
 var moIndex;
 var yIndex;
 
-class vehiclePopulation{
+class vehicleFuelEconomy{
 
     constructor(){
 
@@ -49,8 +49,9 @@ class vehiclePopulation{
 
 
     getMakers(){
-
-        fetch('https://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year=2012')
+        let currentYear = new Date();
+        currentYear = currentYear.getFullYear();
+        fetch('https://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year='+currentYear+'')
             .then(function (response) {
                 return response.text();
             })
@@ -114,10 +115,130 @@ class vehiclePopulation{
     }
 
 
+    // getVehicleStats(){
+    //     maker = document.querySelector('select[name="maker"]');
+    //     mIndex = maker.selectedIndex;
+    //     maker =  maker.options[mIndex].value;
+    //
+    //     let vehicleStats = Object.create(null);
+    //
+    //     if (/\s/.test(maker)) {
+    //         maker = maker.replace(' ','%20');
+    //     }
+    //     model = document.querySelector('select[name="model"]');
+    //     moIndex = model.selectedIndex;
+    //     model =  model.options[moIndex].value;
+    //
+    //     if (/\s/.test(model)) {
+    //         model = model.replace(' ','%20');
+    //     }
+    //
+    //     year = document.querySelector('select[name="year"]');
+    //     yIndex = year.selectedIndex;
+    //     year =  year.options[yIndex].value;
+    //
+    //     var fuelgov = "https://www.fueleconomy.gov/ws/rest/ympg/shared/vehicles?make="+maker+"&model="+model+"";
+    //
+    //     fetch(fuelgov)
+    //         .then(function (response) {
+    //
+    //             return response.text();
+    //
+    //         })
+    //         .then(function (data) {
+    //
+    //             var modelList = $(data).find('vehicle').length;
+    //             var i = 0;
+    //
+    //
+    //             if(modelList == 0 ){
+    //
+    //                 console.log('No tenemos informacion de ningun modelo de este fabricante, intenta otro modelo.');
+    //
+    //             }else {
+    //
+    //                 var fgYear = $('year',data).each(function(){
+    //
+    //                     i++
+    //
+    //                     if (this.innerHTML == year) {
+    //                         var vehicle = this.parentElement.childNodes;
+    //
+    //                         // console.log(fuelgov);
+    //
+    //                         // Combinned unrounded MPG for highway and city
+    //                         vehicleStats.combMPG = vehicle[20].innerHTML;
+    //                         // console.log(vehicleStats.combMPG);
+    //
+    //                         // Unrounded MPG for city -- cityA08U
+    //
+    //                         vehicleStats.cityMPG = vehicle[9].innerHTML;
+    //
+    //                         // console.log(vehicleStats.cityMPG);
+    //
+    //
+    //                         // Unrounded MPG for highway -- highway08U
+    //                         vehicleStats.highwayMPG = vehicle[42].innerHTML;
+    //
+    //
+    //                         // console.log(vehicle);
+    //                         if ($('#fetched-results').length == 1 ) {
+    //
+    //                             $('#fetched-results').remove();
+    //
+    //                         }
+    //
+    //                         // console.log(vehicle[43].nodeName);
+    //                         return false;
+    //                     }else {
+    //                         if(i == modelList){
+    //
+    //                             if ($('#fetched-results').length == 1 ) {
+    //                                 //  $('#fetched-results').remove();
+    //                                 return false;
+    //
+    //                             }else {
+    //                                 var callout = $('<div id="fetched-results" class="grid-container fluid clearfix"></div>');
+    //                                 $('#vehicle-search').append(callout);
+    //
+    //                                 $(callout).load("no-models.html");
+    //                             }
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //                             return false;
+    //
+    //                         }
+    //
+    //
+    //                     }
+    //
+    //
+    //
+    //
+    //                 });
+    //             }
+    //             return vehicleStats;
+    //         })
+    //         .catch(error => console.error('Error:', error));
+    //
+    //
+    //
+    //     return vehicleStats;
+    //
+    //
+    // }
+
+
     getVehicleStats(){
         maker = document.querySelector('select[name="maker"]');
         mIndex = maker.selectedIndex;
         maker =  maker.options[mIndex].value;
+
 
         if (/\s/.test(maker)) {
             maker = maker.replace(' ','%20');
@@ -133,6 +254,10 @@ class vehiclePopulation{
         year = document.querySelector('select[name="year"]');
         yIndex = year.selectedIndex;
         year =  year.options[yIndex].value;
+
+        let vehicleStats = new Array()
+        // let vehicleStats = new Object();
+
 
         var fuelgov = "https://www.fueleconomy.gov/ws/rest/ympg/shared/vehicles?make="+maker+"&model="+model+"";
 
@@ -150,19 +275,7 @@ class vehiclePopulation{
 
                 if(modelList == 0 ){
 
-                    if ($('#fetched-results').length == 1 ) {
-
-                        $('#fetched-results').remove();
-                        // return false;
-
-                    }else {
-                        var callout = $('<div id="fetched-results" class="grid-container fluid clearfix"></div>');
-                        $('#vehicle-search').append(callout);
-
-                        $(callout).load('/no-model-found');
-                    }
-
-                    console.log('');
+                    console.log('No tenemos informacion de ningun modelo de este fabricante, intenta otro modelo.');
 
                 }else {
 
@@ -172,47 +285,37 @@ class vehiclePopulation{
 
                         if (this.innerHTML == year) {
                             var vehicle = this.parentElement.childNodes;
+                            vehicleStats.push(vehicle[20].innerHTML);
 
-                            console.log(fuelgov);
+                            vehicleStats.push(vehicle[9].innerHTML);
 
-                            // Combinned unrounded MPG for highway and city
-                            console.log(vehicle[20].innerHTML);
+                            vehicleStats.push(vehicle[42].innerHTML);
 
-                            // Unrounded MPG for city -- cityA08U
-                            console.log(vehicle[9].innerHTML);
-
-
-                            // Unrounded MPG for highway -- highway08U
-                            console.log(vehicle[42].innerHTML);
-
-                            // console.log(vehicle);
                             if ($('#fetched-results').length == 1 ) {
 
                                 $('#fetched-results').remove();
 
                             }
 
-                            // console.log(vehicle[43].nodeName);
                             return false;
-
                         }else {
-
                             if(i == modelList){
 
                                 if ($('#fetched-results').length == 1 ) {
-                                    // $('#fetched-results').remove();
-
                                     return false;
 
                                 }else {
-                                    $('#fetched-results').remove();
-
-                                    console.log(data)
                                     var callout = $('<div id="fetched-results" class="grid-container fluid clearfix"></div>');
                                     $('#vehicle-search').append(callout);
 
-                                    $(callout).load('/no-car-found');
+                                    $(callout).load("no-models.html");
                                 }
+
+
+
+
+
+
 
                                 return false;
 
@@ -226,10 +329,36 @@ class vehiclePopulation{
 
                     });
                 }
-                return false;
+
+
+
+
+
+                if(vehicleStats.length == 3)
+                {
+
+                    // console.log('1 '+ vehicleStats[1]);
+
+                    return vehicleStats;
+                }
+
+
             })
             .catch(error => console.error('Error:', error));
 
+        let end = setInterval( ()=>{
+
+            if(vehicleStats.length == 3){
+                clearInterval(end);
+                // console.log('2 '+ vehicleStats[2] + ' hola');
+
+                return vehicleStats;
+            }
+
+        },50);
+
+
+        return vehicleStats;
 
     }
 
@@ -237,17 +366,18 @@ class vehiclePopulation{
 }
 
 
-var popular = new vehiclePopulation;
-popular.create();
+var browseVehicles = new vehicleFuelEconomy;
 
-let vBrands = document.querySelector('#vehicle-search select[name="maker"]');
+browseVehicles.create();
+
+let vBrands = document.querySelector(' select[name="maker"]');
 vBrands.onchange = function(){
-    popular.getModels();
+    browseVehicles.getModels();
 };
 
-$('#vehicle-search button[type="button"]').click(popular.getVehicleStats);
+$('#vehicle-search button[type="button"]').click(browseVehicles.getVehicleStats);
 
-let vYear = document.querySelector('#vehicle-search select[name="year"]');
+let vYear = document.querySelector('select[name="year"]');
 vYear.onchange = function(){
-    popular.getModels();
+    browseVehicles.getModels();
 };

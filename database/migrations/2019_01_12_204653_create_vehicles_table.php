@@ -18,16 +18,16 @@ class CreateVehiclesTable extends Migration
 
             $table->unsignedInteger('user');
             $table->foreign('user')->references('id')->on('users')->onDelete('cascade');
-
             $table->string('maker');
             $table->string('model');
             $table->unsignedInteger('year');
             $table->unsignedInteger('usage_years')->nullable();
             $table->string('fueltype')->nullable();
+            $table->date('acquisition_date')->nullable();
             $table->unsignedInteger('init_miles')->nullable();
             $table->unsignedInteger('current_miles')->nullable();
+            $table->string('meassurement_unit')->nullable();
             $table->boolean('user_vehicle_performance')->nullable();
-
             $table->timestamps();
 
 

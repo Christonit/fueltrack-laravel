@@ -20,5 +20,8 @@
 
     @include('layout.scripts')
 
+    @yield('specific-scripts')
+
+
 </body>
 </html>

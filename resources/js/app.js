@@ -98,7 +98,7 @@ function vehicleValidation(e){
         vehicleInfoBasic.classList.add('hide');
         vehicleInfoUsage.classList.remove('hide');
 
-        continueBTN = document.querySelector(addVehicleForms[2] + ' a.success').onclick = vehicleUsageValidation;
+        continueBTN = document.querySelector(addVehicleForms[1] + ' a.success').onclick = vehicleUsageValidation;
 
 
       }
@@ -109,9 +109,9 @@ function vehicleValidation(e){
 
 function vehicleUsageValidation(e){
 
-    var  usageYears = document.querySelector('input[name="usageYear"]');
-    var  acquisitionDate = document.querySelector('input[name="AcquisitionDate"]');
-    var  totalDistance = document.querySelector('input[name="totalDistance"]');
+    var  usageYears = document.querySelector('input[name="usage_years"]');
+    var  acquisitionDate = document.querySelector('input[name="acquisition_date"]');
+    var  totalDistance = document.querySelector('input[name="init_miles"]');
 
       if ( usageYears.value == '' && acquisitionDate.value == '' && totalDistance.value == '') {
 

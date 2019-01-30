@@ -13,7 +13,9 @@
         <div id="section-header" class="grid-x grid-padding-x">
             <div class="small-12 medium-7 cell">
 
-                <h3> {{$user_vehicle[0]->maker}} {{$user_vehicle[0]->model}} {{$user_vehicle[0]->year}}  </h3>
+                <? $user_id = auth()->id() ?>
+
+                <h3> {{ $vehicle->first()->maker }} {{ $vehicle->first()->model }} {{ $vehicle->first()->year }} </h3>
 
             </div>
 
@@ -102,6 +104,8 @@
 
                     <h5 >Performance</h5>
 
+                    @foreach($vehicle_p as $performance)
+
                     <div class="performance-section">
 
                         <div class="performance-stat">
@@ -110,7 +114,7 @@
 
                             <p class="performance-category-title float-center">Highway</p>
 
-                            <p class="hollow-label float-right">999 Km</p>
+                            <p class="hollow-label float-right">{{round($performance->Highway_MPG,1)}} mpg</p>
 
                         </div>
 
@@ -120,7 +124,7 @@
 
                             <p class="performance-category-title float-center">City</p>
 
-                            <p class="hollow-label float-right">999 Km</p>
+                            <p class="hollow-label float-right">{{ round($performance->City_MPG,1)}} mpg</p>
 
                         </div>
 
@@ -130,7 +134,7 @@
 
                             <p class="performance-category-title float-center">Average C/H</p>
 
-                            <p class="hollow-label float-right">999 Km</p>
+                            <p class="hollow-label float-right">{{round($performance->Avg_MPG,1)}} mpg</p>
 
 
 
@@ -179,6 +183,8 @@
 
 
                     </div>
+
+                        @endforeach
 
 
 

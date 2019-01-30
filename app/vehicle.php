@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class vehicle extends Model
 {
     //
-    protected  $fillable = ['user','maker','model','year','usage_years','fueltype','init_miles','current_miles'];
+    protected  $fillable = ['user','maker','model','year','meassurement_unit','fueltype','acquisition_date','init_miles','usage_years'];
 
     protected  $guarded = [];
 

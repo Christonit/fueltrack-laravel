@@ -70,7 +70,6 @@
 
                       <li><a href="{{ route('register') }}" data-type-action='signup' class="button">Sign Up</a></li>
 
-
                   @endif
               @endauth
       @endif

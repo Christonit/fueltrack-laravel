@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\vehicle;
 use App\User;
+use App\vehicle_performance;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -44,21 +45,83 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
 
+//        $new_vehicle = request()->validate([
+//            'maker'=>['required','min:3'],
+//            'model'=>['required'],
+//            'year'=>['required','min:4','max:4'],
+//
+//        ]);
+
         $new_vehicle = request()->validate([
             'maker'=>['required','min:3'],
             'model'=>['required'],
-            'year'=>['required','min:4','max:4']
+            'year'=>['required','min:4','max:4'],
+            'usage_years'=>['required'],
+            'acquisition_date'=>['required'],
+            'init_miles'=>['required'],
+            'meassurement_unit'=>['required'],
+            'fueltype'=>['required'],
+
 
         ]);
 
 
-        $new_vehicle['user'] = auth()->id();
 
-        $username = User::find(auth()->id())->username;
+        $logged_user_id = auth()->id();
 
-        Vehicle::create($new_vehicle);
+        $logged_user = auth()->user()->username;
 
-        return view('/my-car');
+
+        //Id of Vehicle of the logged user
+
+
+
+        $vehicle_performance = request()->validate(['City_MPG'=>'required',
+                                                    'Avg_MPG'=>'required',
+                                                    'Highway_MPG'=>'required']);
+
+
+
+
+
+//        $add_performance  = $request->input('name');
+
+
+
+
+//        $new_vehicle = $request->all();
+
+
+        $new_vehicle['user'] = $logged_user_id;
+
+
+        vehicle::create($new_vehicle);
+
+
+
+        $vehicle_id = vehicle::
+        where('user',$logged_user_id)
+            ->value('id');
+
+        $vehicle_performance['vehicle'] = $vehicle_id;
+
+
+
+//        return $new_vehicle;
+
+        vehicle_performance::create($vehicle_performance);
+
+
+
+//        return [$vehicle_performance,$new_vehicle];
+
+
+
+
+
+        return redirect('/'.$logged_user.'/my-car');
+//        return false;
+
 
     }
 
@@ -68,16 +131,40 @@ class VehicleController extends Controller
      * @param  \App\vehicle  $vehicle
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(User $user)
     {
+
+//        return 'hola';
 
         if(Auth::check()){
 
-            $user_vehicle = Vehicle::where('user',auth()->id())->get();
 
-//            return  $user_vehicle;
+            $logged_user_id = auth()->id();
 
-            return view('/my-car',compact('user_vehicle'));
+            $vehicle = vehicle::
+                where('user',$logged_user_id)
+                ->get();
+
+
+
+
+            $vehicle_id = vehicle::
+            where('user',$logged_user_id)
+                ->value('id');
+
+
+
+            $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
+
+
+
+//            return $vehicle;
+
+
+
+//          return $vehicle_performance;
+
+            return view('/my-car', compact(['vehicle','vehicle_p']) );
 
         }else{
 
@@ -124,4 +211,6 @@ class VehicleController extends Controller
     {
         //
     }
+
+
 }

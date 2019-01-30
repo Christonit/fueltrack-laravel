@@ -34,7 +34,7 @@ Route::get('/loggedin', 'pageController@index')->name('loggedin');
 
 //Route::get('/my-car', 'pageController@myCar');
 
-Route::get('/my-car', 'VehicleController@show');
+Route::get('{username}/my-car/', 'VehicleController@show');
 
 
 Route::get('/no-car-found', function(){
@@ -52,3 +52,5 @@ Route::get('/no-model-found', function(){
 Route::get('/add-vehicle', 'pageController@addVehicle');
 
 Route::post('/add-vehicle','VehicleController@store');
+
+Route::post('/add-vehicle/performance','VehicleController@store');

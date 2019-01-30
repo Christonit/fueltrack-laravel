@@ -34,7 +34,7 @@
                                 <li class="tabs-title is-active"><b>Your vehicle info</b></a>
                                 </li>
                             </ul>
-                            <form class="float-center" method="POST" action="/add-vehicle">
+                            <form id="add-vehicle" class="float-center" method="POST" action="/add-vehicle">
 
                                 @csrf
 
@@ -44,28 +44,25 @@
 
                                     <label>Maker
                                         <select class="" name="maker">
-                                            <option value="BMW">BMW</option>
-                                            <option value="MAZDA">Mazda</option>
+
                                         </select>
                                     </label>
 
                                     <label>Model
                                         <select class="" name="model">
-                                            <option value="M3">M3</option>
-                                            <option value="6">6</option>
+
 
                                         </select>
                                     </label>
 
                                     <label>Year
                                         <select class="" name="year">
-                                            <option value="2018">2018</option>
-                                            <option value="2017">2017</option>
+
                                         </select>
                                     </label>
 
 
-                                    <button class="button success" type="submit" >Continue</button>
+                                    {{--<button class="button success" type="submit" >Continue</button>--}}
 
                                     <div class="expanded button-group ">
                                         <a href="#" class="hollow button previews">Back</a>
@@ -82,17 +79,17 @@
 
                                 <div id="signup-vehicle-info-usage" class="hide">
 
-                                    <h4>One last thing before you go...</h4>
+                                    <h4 class="text-center">One last thing before you go...</h4>
                                     <label>Usage years
-                                        <input type="number" name="usageYear" value="">
+                                        <input type="number" name="usage_years" value="">
                                     </label>
 
                                     <label>Acquisition date
-                                        <input type="date" name="AcquisitionDate">
+                                        <input type="date" name="acquisition_date">
                                     </label>
 
                                     <label>Acumulated distance - Mileage
-                                        <input type="number" name="totalDistance">
+                                        <input type="number" name="init_miles">
                                     </label>
 
 
@@ -108,21 +105,29 @@
 
                                     <h4 class="text-center">Miscellaneous but useful information.</h4>
                                     <label>Fuel type
-                                        <select class="" name="">
+                                        <select class="" name="fueltype">
                                             <option value="Gasoline">Gasoline</option>
+                                            <option value="LPG">LPG - Liquefied petroleum gas</option>
+
                                         </select>
                                     </label>
 
                                     <label>Prefered distance measurement unit
-                                        <select class="" name="">
+                                        <select class="" name="meassurement_unit">
                                             <option value="KM">Km</option>
                                             <option value="MILES">Miles</option>
                                         </select>
                                     </label>
 
 
+                                        <input type="hidden" name="Avg_MPG" value="">
+                                        <input type="hidden" name="City_MPG" value="">
 
-                                    <a class="button expanded" href="#" data-add-vehicle='submit'>Start voyage</a>
+                                        <input type="hidden" name="Highway_MPG" value="">
+
+
+
+                                    <button class="button expanded" type="submit" data-add-vehicle='submit'>Start voyage</button>
 
                                     <hr>
 
@@ -131,6 +136,8 @@
                                 </div>
 
                             </form>
+
+
 
 
                         </div>
@@ -155,78 +162,119 @@
 
 
     </div>
-    {{----}}
-{{--<div class="container">--}}
-    {{--<div class="row justify-content-center">--}}
-        {{--<div class="col-md-8">--}}
-            {{--<div class="card">--}}
-                {{--<div class="card-header">{{ __('Register') }}</div>--}}
 
-                {{--<div class="card-body">--}}
-                    {{--<form method="POST" action="{{ route('register') }}">--}}
-                        {{--<!-- @csrf -->--}}
 
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="username" class="col-md-4 col-form-label text-md-right">{{ __('username') }}</label>--}}
 
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>--}}
+@endsection
 
-                                {{--@if ($errors->has('username'))--}}
-                                    {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('username') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
 
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>--}}
 
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>--}}
+@section('specific-scripts')
+    <script src="{{asset('js/fuelgov.js')}}"></script>
 
-                                {{--@if ($errors->has('email'))--}}
-                                    {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('email') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+    <script>
 
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>--}}
+        let vehicleBTN = document.querySelectorAll('a[data-add-vehicle]');
 
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>--}}
+        vehicleBTN[0].addEventListener('click', (e) =>{
+            vehicleValidation();
+            console.log(e)
+        });
 
-                                {{--@if ($errors->has('password'))--}}
-                                    {{--<span class="invalid-feedback" role="alert">--}}
-                                        {{--<strong>{{ $errors->first('password') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+        vehicleBTN[1].addEventListener('click', (e) =>{
+            vehicleUsageValidation(e);
+        });
 
-                        {{--<div class="form-group row">--}}
-                            {{--<label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>--}}
+        previewBtn.addEventListener('click', (e) => {
 
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+            vehicleInfoMisc.classList.add('hide');
+            vehicleInfoBasic.classList.remove('hide');
 
-                        {{--<div class="form-group row mb-0">--}}
-                            {{--<div class="col-md-6 offset-md-4">--}}
-                                {{--<button type="submit" class="btn btn-primary">--}}
-                                    {{--{{ __('Register') }}--}}
-                                {{--</button>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</form>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}
+        });
+
+        backBTN1.onclick = previewsTab;
+        backBTN2.onclick = previewsTab;
+        //
+        let submitBtn = document.querySelector("a[data-add-vehicle='continue-usage']");
+        //
+        let city_mpg = $('input[name="City_MPG"]');
+        let avg_mpg = $('input[name="Avg_MPG"]');
+        let highway_mpg =  $(' input[name="Highway_MPG"]');
+
+        submitBtn.addEventListener('click',()=>{
+           let vehicle =  document.querySelector('form[name="vehicle-stats"]');
+
+            // let performance = browseVehicles.getVehicleStats();
+
+            let vehicleMPG = [];
+
+            new Promise((resolve, reject) =>{
+                vehicleMPG.push(browseVehicles.getVehicleStats());
+
+                let x  = setInterval( () =>{
+                    // console.log(browseVehicles.getVehicleStats());
+                    // console.log(hola[0][1]);
+
+
+                    if (vehicleMPG[0].length == 3 ){
+
+
+
+                        clearInterval(x);
+
+
+                        console.log('1:' + vehicleMPG[0][0] + ', 2: '+ vehicleMPG[0][1] +', 3: '+ vehicleMPG[0][2]);
+
+
+                        resolve();
+
+
+
+                    }
+
+                },100);
+
+
+
+
+
+            }).then(()=>{
+
+
+                console.log(city_mpg);
+                city_mpg.attr('value', vehicleMPG[0][0] );
+                avg_mpg.attr('value', vehicleMPG[0][1] );
+                highway_mpg.attr('value', vehicleMPG[0][2] );
+
+                return
+
+
+            });
+
+            // .then( ()=>{
+            //     fetch('/add-vehicle/performance', {
+            //         method: 'post',
+            //         // mode: 'no-cors',
+            //         body: new FormData(vehicle)
+            //
+            //     }).then(function(response){
+            //         if(response.ok){
+            //             console.log('envio exitoso');
+            //
+            //             return
+            //
+            //         }
+            //         else {
+            //             throw "Error en la llamada Ajax";
+            //         }
+            //     }).catch(function(error){
+            //         console.log(error);
+            //
+            //     });
+            // });
+
+        });
+
+
+    </script>
 @endsection
