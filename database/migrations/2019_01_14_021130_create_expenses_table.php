@@ -13,9 +13,17 @@ class CreateExpensesTable extends Migration
      */
     public function up()
     {
-        Schema::create('expenses', function (Blueprint $table) {
+        Schema::create('user_expenses', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('vehicle');
+//            $table->float('Amount');
+            $table->float('Galons');
+            $table->string('FuelType');
+            $table->float('Current_fuel_price');
+            $table->date('Date');
             $table->timestamps();
+
+
         });
     }
 
@@ -26,6 +34,6 @@ class CreateExpensesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('expenses');
+        Schema::dropIfExists('user_expenses');
     }
 }

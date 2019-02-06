@@ -44,6 +44,7 @@
 
     @auth
       @include('utilities.floating-action-btn')
+
     @endauth
 
     @include('layout.scripts')
@@ -55,5 +56,6 @@
     <script>
         $(document).foundation();
     </script>
+
 </body>
 </html>

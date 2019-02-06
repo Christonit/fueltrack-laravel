@@ -134,16 +134,17 @@ class VehicleController extends Controller
     public function show(User $user)
     {
 
-//        return 'hola';
 
-        if(Auth::check()){
+        $logged_user_id = auth()->id();
 
 
-            $logged_user_id = auth()->id();
+        $vehicle = vehicle::
+        where('user',$logged_user_id)->get();
 
-            $vehicle = vehicle::
-                where('user',$logged_user_id)
-                ->get();
+
+        if(Auth::check() && count($vehicle) !== 0 ){
+
+
 
 
 
@@ -158,18 +159,18 @@ class VehicleController extends Controller
 
 
 
-//            return $vehicle;
 
 
 
-//          return $vehicle_performance;
 
             return view('/my-car', compact(['vehicle','vehicle_p']) );
+
+
 
         }else{
 
 
-            return view('/');
+            return redirect('/');
 
         }
 

@@ -204,26 +204,17 @@
         submitBtn.addEventListener('click',()=>{
            let vehicle =  document.querySelector('form[name="vehicle-stats"]');
 
-            // let performance = browseVehicles.getVehicleStats();
-
             let vehicleMPG = [];
 
             new Promise((resolve, reject) =>{
                 vehicleMPG.push(browseVehicles.getVehicleStats());
 
                 let x  = setInterval( () =>{
-                    // console.log(browseVehicles.getVehicleStats());
-                    // console.log(hola[0][1]);
 
 
                     if (vehicleMPG[0].length == 3 ){
 
-
-
                         clearInterval(x);
-
-
-                        console.log('1:' + vehicleMPG[0][0] + ', 2: '+ vehicleMPG[0][1] +', 3: '+ vehicleMPG[0][2]);
 
 
                         resolve();
@@ -240,8 +231,6 @@
 
             }).then(()=>{
 
-
-                console.log(city_mpg);
                 city_mpg.attr('value', vehicleMPG[0][0] );
                 avg_mpg.attr('value', vehicleMPG[0][1] );
                 highway_mpg.attr('value', vehicleMPG[0][2] );
@@ -251,27 +240,6 @@
 
             });
 
-            // .then( ()=>{
-            //     fetch('/add-vehicle/performance', {
-            //         method: 'post',
-            //         // mode: 'no-cors',
-            //         body: new FormData(vehicle)
-            //
-            //     }).then(function(response){
-            //         if(response.ok){
-            //             console.log('envio exitoso');
-            //
-            //             return
-            //
-            //         }
-            //         else {
-            //             throw "Error en la llamada Ajax";
-            //         }
-            //     }).catch(function(error){
-            //         console.log(error);
-            //
-            //     });
-            // });
 
         });
 

@@ -11,14 +11,51 @@
                 var isUserSignedIn = true;
 
 
+
+                document.querySelector('form[name="add-expense"] a.success').addEventListener('click',function () {
+
+                    // console.log('envio exitoso');
+
+                    fetch('/add-expense', {
+                        method: 'post',
+                        // mode: 'no-cors',
+                        body: new FormData(document.querySelector('form[name="add-expense"]'))
+
+                    }).then(function(response){
+                        if(response.ok){
+
+                            console.log('envio exitoso');
+
+                            return
+
+                        }
+                        else {
+                            throw "Error en la llamada Ajax";
+                        }
+                    }).catch(function(error){
+                        console.log(error);
+
+                    });
+
+
+
+
+                });
+
+
+
+
             @else
 
                 var isUserSignedIn = false;
 
             @endauth
-    @endif
+
 
 
 </script>
+    @endif
+
+
 <script src="{{asset('js/app.js')}}" ></script>
 

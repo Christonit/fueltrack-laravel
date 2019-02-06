@@ -3,17 +3,18 @@
     <button class="close-button" aria-label="Close alert" type="button">
         <span aria-hidden="true">&times;</span>
     </button>
-    <form>
+    <form name="add-expense">
+        @csrf
         <div >
             <fieldset class="grid-x">
                 <div class="small-3 cell">
                     <label for="middle-label" class="text-left middle">Fuel type</label>
                 </div>
                 <div class="small-9 cell">
-                    <select name="fuelType" id="">
-                        <option value="GasolinaPremium">Gasolina Premium</option>
-                        <option value="GasolinaRegular">Gasolina Regular</option>
-                        <option value="GasNaturl">Gas Natural</option>
+                    <select name="FuelType" id="">
+                        <option value="Gasolina Premium">Gasolina Premium</option>
+                        <option value="Gasolina Regular">Gasolina Regular</option>
+                        <option value="Gas Natural">Gas Natural</option>
                         <option value="GLP">Gas GLP</option>
                     </select>
                 </div>
@@ -24,7 +25,7 @@
                     <label for="middle-label" class="text-left middle">Date</label>
                 </div>
                 <div class="small-12 medium-9 cell">
-                    <input type="date" id="middle-label" placeholder="Right- and middle-aligned text input">
+                    <input type="date" id="middle-label" name="Date" placeholder="Right- and middle-aligned text input">
                 </div>
 
             </fieldset>
@@ -35,7 +36,7 @@
                     <label for="middle-label" class="text-left middle">Cost</label>
                 </div>
                 <div class="small-12 medium-9 cell">
-                    <input type="number" id="middle-label" placeholder="Right- and middle-aligned text input">
+                    <input type="number" id="middle-label" name="Current_fuel_price" placeholder="Right- and middle-aligned text input">
                 </div>
             </fieldset>
 
@@ -46,14 +47,14 @@
                     <label for="middle-label" class="text-left middle">Galons</label>
                 </div>
                 <div class="small-12 medium-2  cell">
-                    <input type="number" id="middle-label" placeholder="Right- and middle-aligned text input">
+                    <input type="number" id="middle-label" name="Galons" placeholder="Right- and middle-aligned text input">
                 </div>
 
                 <div class="small-12 medium-2 medium-offset-2 cell">
                     <label for="middle-label" class="text-left middle">Distance</label>
                 </div>
                 <div class="small-12 medium-3 cell">
-                    <input type="number" id="middle-label" placeholder="Right- and middle-aligned text input">
+                    {{--<input type="number" id="middle-label" name='' placeholder="Right- and middle-aligned text input">--}}
                 </div>
             </fieldset>
 

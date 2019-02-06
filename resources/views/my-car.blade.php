@@ -9,7 +9,8 @@
 
     <div class="grid-container fluid">
 
-        <!-- Overview section header -->
+
+    <!-- Overview section header -->
         <div id="section-header" class="grid-x grid-padding-x">
             <div class="small-12 medium-7 cell">
 
@@ -106,85 +107,91 @@
 
                     @foreach($vehicle_p as $performance)
 
-                    <div class="performance-section">
+                            <div class="performance-section">
 
-                        <div class="performance-stat">
+                                <div class="performance-stat">
 
-                            <i class="ft-icon i-performance icon-highway">&#xe902;</i>
+                                    <i class="ft-icon i-performance icon-highway">&#xe902;</i>
 
-                            <p class="performance-category-title float-center">Highway</p>
+                                    <p class="performance-category-title float-center">Highway</p>
 
-                            <p class="hollow-label float-right">{{round($performance->Highway_MPG,1)}} mpg</p>
+                                    <p class="hollow-label float-right">{{round($performance->Highway_MPG,1)}} mpg</p>
 
-                        </div>
+                                </div>
 
-                        <div class="performance-stat">
+                                <div class="performance-stat">
 
-                            <i class="ft-icon i-performance icon-city">&#xe907;</i>
+                                    <i class="ft-icon i-performance icon-city">&#xe907;</i>
 
-                            <p class="performance-category-title float-center">City</p>
+                                    <p class="performance-category-title float-center">City</p>
 
-                            <p class="hollow-label float-right">{{ round($performance->City_MPG,1)}} mpg</p>
+                                    <p class="hollow-label float-right">{{ round($performance->City_MPG,1)}} mpg</p>
 
-                        </div>
+                                </div>
 
-                        <div class="performance-stat">
+                                <div class="performance-stat">
 
-                            <i class="ft-icon i-performance icon-average">&#xe905;</i>
+                                    <i class="ft-icon i-performance icon-average">&#xe905;</i>
 
-                            <p class="performance-category-title float-center">Average C/H</p>
+                                    <p class="performance-category-title float-center">Average C/H</p>
 
-                            <p class="hollow-label float-right">{{round($performance->Avg_MPG,1)}} mpg</p>
-
-
-
-                        </div>
-
-                        <div class="performance-stat">
-
-                            <i class="ft-icon i-performance icon-tank">&#xe908;</i>
-
-                            <p class="performance-category-title float-center">Tank size</p>
-
-                            <p class="hollow-label float-right">999 Km</p>
+                                    <p class="hollow-label float-right">{{round($performance->Avg_MPG,1)}} mpg</p>
 
 
 
-                        </div>
+                                </div>
 
+                                <div class="performance-stat">
 
-                        <div class="performance-stat">
+                                    <i class="ft-icon i-performance icon-tank">&#xe908;</i>
 
-                            <i class="ft-icon i-performance icon-distance">&#xe906;</i>
+                                    <p class="performance-category-title float-center">Tank size</p>
 
-                            <p class="performance-category-title float-center">Drivable distance</p>
-
-                            <p class="hollow-label float-right">999 Km</p>
-
-
-
-                        </div>
-
-                        <div class="performance-stat">
-
-                            <i class="ft-icon i-performance icon-cost">&#xe900;</i>
-
-                            <p class="performance-category-title float-center">Cost to fill up</p>
-
-                            <p class="hollow-label float-right">9,999 Km</p>
+                                    <p class="hollow-label float-right">999 Km</p>
 
 
 
-                        </div>
+                                </div>
 
 
+                                <div class="performance-stat">
+
+                                    <i class="ft-icon i-performance icon-distance">&#xe906;</i>
+
+                                    <p class="performance-category-title float-center">Drivable distance</p>
+
+                                    <p class="hollow-label float-right">999 Km</p>
+
+
+
+                                </div>
+
+                                <div class="performance-stat">
+
+                                    <i class="ft-icon i-performance icon-cost">&#xe900;</i>
+
+                                    <p class="performance-category-title float-center">Cost to fill up</p>
+
+                                    <p class="hollow-label float-right">9,999 Km</p>
+
+
+
+                                </div>
 
 
 
 
-                    </div>
 
-                        @endforeach
+
+                            </div>
+
+
+
+                            <span>Currently no values.</span>
+
+
+
+                            @endforeach
 
 
 
@@ -457,7 +464,6 @@
                 </div>
             </section>
         </section>
-
 
 
     </div>

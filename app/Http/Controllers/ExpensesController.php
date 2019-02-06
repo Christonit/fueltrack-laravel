@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\expenses;
+use App\vehicle;
 use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
@@ -35,7 +36,22 @@ class ExpensesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $logged_user_id = auth()->id();
+
+        $vehicle_id = vehicle::
+        where('user',$logged_user_id)
+            ->value('id');
+
+
+        $expenses =  request()->all();
+
+        $expenses['vehicle'] = $vehicle_id;
+
+
+        expenses::create($expenses);
+
+        return;
     }
 
     /**
