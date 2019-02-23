@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+
 use App\expenses;
 use App\vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+
 
 class ExpensesController extends Controller
 {
@@ -63,6 +67,26 @@ class ExpensesController extends Controller
     public function show(expenses $expenses)
     {
         //
+
+    }
+
+
+    public function latest()
+    {
+        //
+
+        $logged_user_id = auth()->id();
+
+        $vehicle_id = vehicle::
+        where('user',$logged_user_id)
+            ->value('id');
+
+
+        $latestExpense = expenses::where('vehicle',$vehicle_id)->get()->sortBy('Created_at')->last();
+
+        return view('vehicle.latest-expense',compact('latestExpense'));
+
+
     }
 
     /**

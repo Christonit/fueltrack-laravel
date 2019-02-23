@@ -25,8 +25,12 @@
 
          @if (Route::has('login'))
              @auth
+                 <?php
+                 $user =  Auth()->user()->username;
+                  ?>
 
-                 <li><a href="/my-car" class="active">My vehicle</a></li>
+                 <li><a href="{{$user}}/my-car" class="active">My vehicle</a></li>
+
              @endauth
          @endif
 

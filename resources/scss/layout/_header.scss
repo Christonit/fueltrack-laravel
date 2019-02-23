@@ -10,8 +10,8 @@ header.top-bar.grid-x{
 
   @include breakpoint(sm) {
     justify-content: normal;
-    position: unset;
-    top: unset;
+    //position: unset;
+    //top: unset;
   }
 
 }

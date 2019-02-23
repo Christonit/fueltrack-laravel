@@ -62,13 +62,13 @@
             <div class="small-12 medium-12">
                 <ul class="stats-list">
                     <li><span class="stats-list-label"><b>This week</b> 15-23 Oct</span>
-                        <span class="stat">RD$ 9,999</span> <i class="material-icons">
+                        <span class="stat">$9,999</span> <i class="material-icons">
                             arrow_upward
                         </i> 20%
                     </li>
                     <li class="stats-list-positive">
                         <span class="stats-list-label"><b>Monthly expense  </b></span>
-                        <span class="stat">RD$ 89,000</span>
+                        <span class="stat">$89,000</span>
                     </li>
                     <li class="stats-list-negative">
                         <span class="stats-list-label"><b>Tracked this week</b></span>
@@ -82,7 +82,7 @@
 
                     <li class="stats-list-negative">
                         <span class="stats-list-label"><b>Maintenance cost</b></span>
-                        <span class="stat">RD$ 289,000</span> Yearly
+                        <span class="stat">$289,000</span> Yearly
                     </li>
 
                     <li class="stats-list-negative">
@@ -296,32 +296,10 @@
                                 </tr>
                                 </thead>
 
-                                <tr>
-                                    <td>
+                                <tbody>
 
-                                        <h6 class="dashboard-table-text">July 25, 18</h6>
-                                        <span class="dashboard-table-timestamp">10:00 PM</span>
 
-                                        <!-- <div class="flex-container align-justify align-top">
-
-                                          <div class="flex-child-grow">
-
-                                          </div>
-                                        </div> -->
-                                    </td>
-
-                                    <td class='text-center'>
-                                        <h6>
-                                            9.6 Gal
-                                        </h6>
-                                        <span class="dashboard-table-timestamp">256Km Est. Drivable Distance </span>
-                                    </td>
-                                    <td class='text-right'>
-                                        <h6 class="dashboard-table-text">RD$ 7000</h6>
-                                        <span class="dashboard-table-timestamp">246.7 Oil Price</span>
-                                    </td>
-
-                                </tr>
+                                @include('vehicle.expenses-history')
 
                                 </tbody>
                             </table>
@@ -340,7 +318,7 @@
                                             <tr>
                                                 <td><i class="material-icons">attachment </i></td>
                                                 <td><p><b>Engine check</b></p>At 50,000 miles   |  July 25, 18</td>
-                                                <td class="text-right"><span class="hollow-label-large">RD$ 7000</span></td>
+                                                <td class="text-right"><span class="hollow-label-large">$7000</span></td>
                                                 <td class="hide-for-small-only">
                                                     <a href="#" class=" button  hollow-label-large flex-middle secondary"><i class="material-icons">attachment </i> <span>Details</span></a>
                                                 </td>
@@ -473,3 +451,9 @@
 
 
 @endsection
+
+
+@push('scripts')
+    <script src="{{asset('js/graph.js')}}"></script>
+@endpush
+

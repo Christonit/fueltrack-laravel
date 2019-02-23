@@ -48,6 +48,7 @@ Route::get('/no-model-found', function(){
 
 });
 
+Route::post('/add-service','VehicleMaintenanceController@store');
 
 Route::get('/add-vehicle', 'pageController@addVehicle');
 
@@ -56,3 +57,6 @@ Route::post('/add-vehicle','VehicleController@store');
 Route::post('/add-vehicle/performance','VehicleController@store');
 
 Route::post('/add-expense','ExpensesController@store');
+
+
+Route::get('/latest-expense','ExpensesController@latest');

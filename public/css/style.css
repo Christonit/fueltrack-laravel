@@ -142,8 +142,6 @@ header.top-bar.grid-x {
 @media (min-width: 768px) {
   header.top-bar.grid-x {
     justify-content: normal;
-    position: unset;
-    top: unset;
   }
 }
 
@@ -1380,7 +1378,11 @@ ul[data-misc] li:nth-child(3) a.button {
 @media (min-width: 1360px) {
   .stats-list {
     justify-content: space-between !important;
-    overflow-x: hidden !important;
+    overflow-x: scroll;
+    scrollbar-color: #AFB2C1 rgba(255, 255, 255, 0);
+    scrollbar-width: thin;
+    -webkit-scrollbar-color: #AFB2C1 rgba(255, 255, 255, 0);
+    -webkit-scrollbar-width: thin;
   }
 }
 
@@ -1413,6 +1415,8 @@ ul[data-misc] li:nth-child(3) a.button {
   .stats-list > li {
     padding: 0 24px;
     min-width: 248px;
+    width: 100%;
+    max-width: 288px;
   }
 }
 
@@ -1631,6 +1635,10 @@ ul[data-misc] li:nth-child(3) a.button {
 }
 
 .dashboard-table tr {
+  border-bottom: 1px solid #F4F5F7;
+}
+
+.dashboard-table tbody tr:nth-child(2n) {
   border-bottom: 1px solid #F4F5F7;
 }
 

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 
 class LoginController extends Controller
 {
@@ -24,7 +27,14 @@ class LoginController extends Controller
      * Where to redirect users after login.
      *
      * @var string
+     *
+     *
      */
+//    public function __construct()
+//    {
+//        $this->middleware('guest')->except('logout');
+//    }
+
     protected $redirectTo = '/my-car';
 
     /**
@@ -32,6 +42,18 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+    protected function redirectTo()
+    {
+
+        $user =  Auth()->user()->username;
+
+        return '/'.$user.'/my-car';
+
+
+
+    }
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

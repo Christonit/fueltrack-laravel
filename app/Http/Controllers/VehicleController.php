@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\vehicle;
 use App\User;
 use App\vehicle_performance;
+use App\vehicle_maintenance;
+use App\expenses;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class VehicleController extends Controller
 {
@@ -138,34 +141,23 @@ class VehicleController extends Controller
         $logged_user_id = auth()->id();
 
 
+
+
         $vehicle = vehicle::
         where('user',$logged_user_id)->get();
 
 
         if(Auth::check() && count($vehicle) !== 0 ){
 
-
-
-
-
-
             $vehicle_id = vehicle::
             where('user',$logged_user_id)
                 ->value('id');
 
-
-
             $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
 
+            $expenses = expenses::where('vehicle',$vehicle_id)->get();
 
-
-
-
-
-
-            return view('/my-car', compact(['vehicle','vehicle_p']) );
-
-
+            return view('/my-car', compact(['vehicle','vehicle_p','expenses']) );
 
         }else{
 

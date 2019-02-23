@@ -178,7 +178,11 @@
 
 	@include breakpoint(xxl){
 		justify-content: space-between !important;
-		overflow-x: hidden !important;
+		overflow-x: scroll;
+		scrollbar-color: $grey rgba(255,255,255,0);
+		scrollbar-width: thin;
+		-webkit-scrollbar-color: $grey rgba(255,255,255,0);
+		-webkit-scrollbar-width: thin;
 	}
 
   .stats-list-positive {
@@ -210,6 +214,8 @@
 		@include breakpoint(xl){
 			padding: 0 24px;
 			min-width: 248px;
+			width:100%;
+			max-width: 288px;
 
 		}
 
@@ -418,6 +424,11 @@
 		tr{
 			@include border-bottom;
 		}
+
+	tbody tr:nth-child(2n){
+		@include border-bottom;
+
+	}
   td {
     // border-bottom: 1px dashed lighten($medium-gray, 5%);
 		vertical-align: sub
@@ -460,6 +471,7 @@
       &:nth-child(even) {
         background: none;
       }
+
     }
   }
   tr:last-child td {

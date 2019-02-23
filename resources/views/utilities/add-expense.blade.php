@@ -1,6 +1,6 @@
 <div class="reveal " id="add-expense" data-reveal>
     <h3 class="text-center">Add fuel expense</h3>
-    <button class="close-button" aria-label="Close alert" type="button">
+    <button class="close-button" data-close aria-label="Close modal">
         <span aria-hidden="true">&times;</span>
     </button>
     <form name="add-expense">

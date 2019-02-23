@@ -1,6 +1,7 @@
 <!-- This is the first modal -->
 <div class="reveal " id="add-service" data-reveal>
     <h3 class="text-center">Add service</h3>
+    <form action="" name="add-service">
 
     <fieldset class="grid-x">
 
@@ -9,7 +10,7 @@
         </div>
 
         <div class="small-12 medium-9 cell">
-            <input type="text" id="middle-label" placeholder="Right- and middle-aligned text input">
+            <input type="text" id="middle-label" placeholder="" name="title">
         </div>
 
     </fieldset>
@@ -22,7 +23,7 @@
         </div>
 
         <div class="small-12 medium-9 cell">
-            <select name="Category" id="">
+            <select name="service_type" id="">
                 <option value="Part change">Part change</option>
                 <option value="Scheduled maintenance">Scheduled maintenance</option>
                 <option value="Quick fix">Quick fix</option>
@@ -35,9 +36,9 @@
 
         <div class="small-12 medium-12">
             <legend>Due moment</legend>
-            <input type="radio" name="pokemon" value="Red" id="pokemonRed" required><label for="pokemonRed">Specific distance</label>
-            <input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Inmediate</label>
-            <input type="radio" name="pokemon" value="Yellow" id="pokemonYellow"><label for="pokemonYellow">Date</label>
+            <input type="radio" name="due_moment" value="Specific distance" ><label for="Specific distance">Specific distance</label>
+            <input type="radio" name="due_moment" value="Inmediate" ><label for="Inmediate">Inmediate</label>
+            <input type="radio" name="due_moment" value="Specific date" ><label for="Specific date">Date</label>
         </div>
 
     </fieldset>
@@ -49,7 +50,7 @@
         </div>
 
         <div class="small-12 medium-8 cell">
-            <input type="number" id="middle-label" placeholder="Right- and middle-aligned text input">
+            <input type="number" id="middle-label" name="tracked_distance" placeholder="Right- and middle-aligned text input">
         </div>
 
     </fieldset>
@@ -62,5 +63,8 @@
     <button class="close-button" data-close aria-label="Close reveal" type="button">
         <span aria-hidden="true">&times;</span>
     </button>
+
+    </form>
+
 
 </div>
