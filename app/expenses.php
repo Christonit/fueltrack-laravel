@@ -27,16 +27,14 @@ class expenses extends Model
     }
 
 
-    protected  function galonsSinceDate($date){
+    protected  function galonsSinceDate($date,$id){
 
-       return $this->whereDate('created_at','>=', $date)->select('Galons')->get();
+       return $this->whereDate('created_at','>=', date($date))
+                    ->where('vehicle','=',$id)
+                    ->pluck('Galons')->sum();
+//        SELECT * FROM `user_expenses` WHERE `vehicle` = '1' AND `created_at` >= date('2019-02-02 00:00:00')
 
     }
 
-    protected function  getLoggedUserExpense($test){
-
-
-        return 'Esto es una prueba '.$test;
-    }
 
 }

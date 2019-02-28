@@ -12,4 +12,22 @@ class vehicle extends Model
     protected  $guarded = [];
 
     protected $table = 'user_vehicles';
+
+    protected function maintenances(){
+
+        return $this->hasMany('App\vehicle_maintenance', 'vehicle')
+                    ->where('status','=','1');
+//                    ->where('due_moment', '=','Specific distance');
+
+    }
+
+    protected function fuelExpenses(){
+        return $this->hasMany('App\expenses','vehicle');
+    }
+
+
+
+    protected function fuelExpensesSince($date){
+        return $this->whereDate('created_at','>=',$date);
+    }
 }

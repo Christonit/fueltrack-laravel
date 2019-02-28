@@ -137,11 +137,7 @@ class VehicleController extends Controller
     public function show(User $user)
     {
 
-
         $logged_user_id = auth()->id();
-
-
-
 
         $vehicle = vehicle::
         where('user',$logged_user_id)->get();
@@ -149,15 +145,68 @@ class VehicleController extends Controller
 
         if(Auth::check() && count($vehicle) !== 0 ){
 
+
+//
+
+
+//        $fuel_expenses = vehicle::find(1)->fuelExpensesSince('2017-01-01');
+
             $vehicle_id = vehicle::
             where('user',$logged_user_id)
                 ->value('id');
 
             $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
 
+            $maintenance =  vehicle::find($vehicle_id)->maintenances;
+//            $maintenance =  vehicle::find($vehicle_id)->maintenances;
+
+
+            //1. Gets totals of galons following a given date greater or equal than the date when a maintenance was added as active.
+
+            $fuel_expenses = expenses::galonsSinceDate('2017-02-1',$vehicle_id);
+
+
+//            $prueba = $maintenance->toArray();
+//            return if();
+
+
+
+
+            $avg_performance = $vehicle_p[0]['Avg_MPG'];
+
+
+            foreach($maintenance as $maintenances){
+
+                if($maintenances->due_moment == 'Specific distance'){
+
+                    $galons = expenses::galonsSinceDate($maintenances->created_at,$vehicle_id);
+
+
+                    vehicle_maintenance::where('vehicle','=',$vehicle_id)
+                        ->where('id', '=',$maintenances->id)
+                        ->where('due_moment', '=','Specific distance')
+                        ->where('status','=','1')
+                        ->update(['current_distance' => ($avg_performance * $galons) ]);
+
+
+                }
+
+
+            }
+
+
+
+
+
+
+
+
+
             $expenses = expenses::where('vehicle',$vehicle_id)->get();
 
-            return view('/my-car', compact(['vehicle','vehicle_p','expenses']) );
+
+
+            return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance']) );
 
         }else{
 

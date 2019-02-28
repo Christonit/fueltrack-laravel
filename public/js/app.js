@@ -394,7 +394,7 @@ $('[data-open-details]').click(function (e) {
 if(windowSize <= sm){
 
   // creates Floating Action Button
-    if(filename == '/my-car' & isUserSignedIn == true){
+    if(isUserSignedIn == true){
       var fActionButton = document.querySelector('.fab');
 
           fActionButton.addEventListener('touchstart', function(e){
