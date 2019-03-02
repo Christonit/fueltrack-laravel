@@ -15,9 +15,6 @@
 //     return view('welcome');
 // });
 
-
-Auth::routes();
-
 // Route::get('/', 'HomeController@welcome');
 //
 // Route::get('/home', 'HomeController@index')->name('home');
@@ -34,7 +31,7 @@ Route::get('/loggedin', 'pageController@index')->name('loggedin');
 
 //Route::get('/my-car', 'pageController@myCar');
 
-Route::get('{username}/my-car/', 'VehicleController@show');
+//Route::get('{username}/my-car/', 'VehicleController@show');
 
 
 Route::get('/no-car-found', function(){
@@ -60,3 +57,10 @@ Route::post('/add-expense','ExpensesController@store');
 
 
 Route::get('/latest-expense','ExpensesController@latest');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/{username}/my-car', 'VehicleController@show');

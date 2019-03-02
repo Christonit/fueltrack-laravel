@@ -1,10 +1,12 @@
-php artisan make<?php
+<?php
 
 use Illuminate\Database\Seeder;
 
 use App\User;
 use App\vehicle;
 use App\vehicle_performance;
+use App\expenses;
+use App\vehicle_maintenance;
 use Illuminate\Support\Facades\Hash;
 //use Illuminate\Support\Facades\Validator;
 
@@ -52,6 +54,119 @@ class DatabaseSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_At'=> date("Y-m-d H:i:s"),
 
+        ]);
+
+        vehicle_maintenance::insert([
+            "vehicle" => "1",
+            "service_type" => "Part change",
+            "title" => "Wheel change",
+            "due_moment" => "Specific distance",
+            "status" => "1",
+            "tracked_distance" => "5000",
+            "current_distance" => "337",
+            'created_at' => "2019-01-01 00:00:00",
+            'updated_At'=> "2019-02-27 22:51:19",
+        ]);
+
+
+        vehicle_maintenance::insert([
+            "vehicle" => "1",
+            "service_type" => "Paint job",
+            "title" => "Bumper painting",
+            "due_moment" => "Inmediate",
+            "status" => "1",
+            'created_at' => "2019-02-28 00:00:00",
+            'updated_At'=> "2019-02-27 21:18:13",
+        ]);
+
+        vehicle_maintenance::insert([
+            "vehicle" => "1",
+            "service_type" => "Maintenance",
+            "title" => "Scheduled maintenanc",
+            "due_moment" => "Specific distance",
+            "status" => "1",
+            "tracked_distance" => "5000",
+            "current_distance" => "571",
+            'created_at' => "2017-01-01 04:00:56",
+            'updated_At'=> "2019-02-27 22:51:19",
+        ]);
+
+
+        vehicle_maintenance::insert([
+            "vehicle" => "1",
+            "service_type" => "Maintenance",
+            "title" => "Horn check",
+            "due_moment" => "Specific date",
+            "status" => "1",
+            "final_date" => "2019-03-31",
+            "tracked_distance" => "5000",
+            "current_distance" => "571",
+            'created_at' => "2019-02-27 21:18:13",
+            'updated_At'=> "2019-02-27 21:18:13",
+        ]);
+
+        expenses::insert([
+            "vehicle"=>"1",
+            "Galons"=>"2",
+            "FuelType"=>"Gasolina Premium",
+            "Current_fuel_price"=>"225.30",
+            "Date"=>"2018-02-17",
+            "created_at"=>"2018-02-17 04:00:56",
+            "updated_at"=>"2018-02-17 04:00:56",
+        ]);
+
+
+        expenses::insert([
+            "vehicle"=>"1",
+            "Galons"=>"2",
+            "FuelType"=>"Gasolina Premium",
+            "Current_fuel_price"=>"230.10",
+            "Date"=>"2018-11-15",
+            "created_at"=>"2018-11-15 04:00:56",
+            "updated_at"=>"2018-11-15 04:00:56",
+        ]);
+
+
+        expenses::insert([
+            "vehicle"=>"1",
+            "Galons"=>"1",
+            "FuelType"=>"Gasolina Premium",
+            "Current_fuel_price"=>"208.40",
+            "Date"=>"2019-01-15",
+            "created_at"=>"2019-01-15 04:00:56",
+            "updated_at"=>"2019-01-15 04:00:56",
+        ]);
+
+
+        expenses::insert([
+            "vehicle"=>"1",
+            "Galons"=>"3",
+            "FuelType"=>"Gasolina Premium",
+            "Current_fuel_price"=>"214.40",
+            "Date"=>"2019-01-22",
+            "created_at"=>"2019-01-22 04:00:56",
+            "updated_at"=>"2019-01-22 04:00:56"
+        ]);
+
+        expenses::insert([
+            "vehicle"=>"1",
+            "Galons"=>"4",
+            "FuelType"=>"Gasolina Premium",
+            "Current_fuel_price"=>"214.40",
+            "Date"=>"2019-02-01",
+            "created_at"=>"2019-02-01 04:00:56",
+            "updated_at"=>"2019-02-01 04:00:56",
+        ]);
+
+
+        expenses::insert([
+            "vehicle"=>"1",
+            "Galons"=>"5",
+            "FuelType"=>"Gasolina Premium",
+            "Current_fuel_price"=>"214.40",
+            "Date"=>"2019-02-07",
+            "created_at"=>"2019-02-07 04:00:56",
+            "updated_at"=>"2019-02-07 04:00:56",
         ]);
 
     }

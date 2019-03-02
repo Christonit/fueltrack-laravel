@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Auth;
-
 use App\expenses;
 use App\vehicle;
 use Illuminate\Http\Request;

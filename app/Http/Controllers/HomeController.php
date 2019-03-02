@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 
 class HomeController extends Controller
 {
@@ -14,8 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-
-
+        $this->middleware('auth');
     }
 
     /**
@@ -23,27 +21,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-
-     public function welcome()
-     {
-
-         return view('/welcome');
-     }
-
     public function index()
     {
-
-      $usuarios = User::where('id',auth()->id())->get();
-
-      return view('/home',compact('usuarios'));
+        return view('home');
     }
-
-    public function welcome2(User $usuarios)
-    {
-
-
-        return view('/welcome2',compact('usuarios'));
-    }
-
-
 }
