@@ -382,5 +382,6 @@
 
 @push('scripts')
     <script src="{{asset('js/graph.js')}}"></script>
+    <script src="{{asset('js/form-handlers.js')}}"></script>
 @endpush
 

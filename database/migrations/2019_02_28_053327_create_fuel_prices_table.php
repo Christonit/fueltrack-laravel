@@ -15,16 +15,16 @@ class CreateFuelPricesTable extends Migration
     {
         Schema::create('fuel_prices', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('gasolina_premium');
-            $table->unsignedInteger('gasolina_regular');
-            $table->unsignedInteger('gasoil_optimo');
-            $table->unsignedInteger('gasoil_regular');
-            $table->unsignedInteger('kerosene');
-            $table->unsignedInteger('glp');
-            $table->unsignedInteger('gnv');
+            $table->float('gasolina_premium');
+            $table->float('gasolina_regular');
+            $table->float('gasoil_optimo');
+            $table->float('gasoil_regular');
+            $table->float('kerosene');
+            $table->float('glp');
+            $table->float('gnv');
             $table->date('start_of_week');
             $table->date('end_of_week');
-            $table->date('country');
+            $table->string('country');
             $table->timestamps();
         });
     }

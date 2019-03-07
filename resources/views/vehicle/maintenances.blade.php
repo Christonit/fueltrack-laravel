@@ -39,7 +39,7 @@
 			  </span>
 
                         <h6 class="scheduled-maintenance-title float-center">
-                            {{$maintenances->title}}
+                            {{$maintenances->maintenance_service}}
                         </h6>
 
 
@@ -58,6 +58,15 @@
                             </li>
 
                         </ul>
+
+                        @if($maintenances->due_moment == 'Inmediate' || $maintenances->due_moment == 'Specific distance' && $maintenances->current_distance > $maintenances->tracked_distance || $maintenances->due_moment == 'Specific date' &&  date("Y-m-d") > $maintenances->final_date )
+
+                            <span data-maintenance-id='{{$maintenances->id}}' class="faux-checkbox" data-open="done-service">
+                                     <span class="dot"></span>
+                            </span>
+
+                        @endif
+
 
                     </div>
                     <div class="status-progress">
@@ -157,3 +166,9 @@
 
     </div>
 </section>
+
+
+@auth
+    @include('utilities.done-service')
+
+@endauth

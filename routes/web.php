@@ -47,6 +47,7 @@ Route::get('/no-model-found', function(){
 
 Route::post('/add-service','VehicleMaintenanceController@store');
 
+
 Route::get('/add-vehicle', 'pageController@addVehicle');
 
 Route::post('/add-vehicle','VehicleController@store');
@@ -63,4 +64,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+
 Route::get('/{username}/my-car', 'VehicleController@show');
+
+
+//Mark as maintenance finished
+
+Route::post('/mark-as-performed/{id}/','VehicleMaintenanceController@markAsPerformed');
+

@@ -17,9 +17,11 @@ class CreateVehicleMaintenancesTable extends Migration
             $table->increments('id');
 
             $table->unsignedInteger('vehicle')->references('id')->on('user_vehicles')->onDelete('cascade');
-            $table->string('service_type');
-            $table->string('title');
-            $table->unsignedInteger('cost')->nullable();
+            $table->string('maintenance_service');
+//            $table->string('service_category');
+//            $table->string('service_type');
+//            $table->string('title');
+//            $table->unsignedInteger('cost')->nullable();
             $table->string('due_moment');
             $table->boolean('status');
             $table->date('final_date')->nullable();

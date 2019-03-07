@@ -48,13 +48,6 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
 
-//        $new_vehicle = request()->validate([
-//            'maker'=>['required','min:3'],
-//            'model'=>['required'],
-//            'year'=>['required','min:4','max:4'],
-//
-//        ]);
-
         $new_vehicle = request()->validate([
             'maker'=>['required','min:3'],
             'model'=>['required'],
@@ -68,39 +61,17 @@ class VehicleController extends Controller
 
         ]);
 
-
-
         $logged_user_id = auth()->id();
 
         $logged_user = auth()->user()->username;
-
-
-        //Id of Vehicle of the logged user
-
-
 
         $vehicle_performance = request()->validate(['City_MPG'=>'required',
                                                     'Avg_MPG'=>'required',
                                                     'Highway_MPG'=>'required']);
 
-
-
-
-
-//        $add_performance  = $request->input('name');
-
-
-
-
-//        $new_vehicle = $request->all();
-
-
         $new_vehicle['user'] = $logged_user_id;
 
-
         vehicle::create($new_vehicle);
-
-
 
         $vehicle_id = vehicle::
         where('user',$logged_user_id)
@@ -108,23 +79,9 @@ class VehicleController extends Controller
 
         $vehicle_performance['vehicle'] = $vehicle_id;
 
-
-
-//        return $new_vehicle;
-
         vehicle_performance::create($vehicle_performance);
 
-
-
-//        return [$vehicle_performance,$new_vehicle];
-
-
-
-
-
         return redirect('/'.$logged_user.'/my-car');
-//        return false;
-
 
     }
 
@@ -145,12 +102,6 @@ class VehicleController extends Controller
 
         if(Auth::check() && count($vehicle) !== 0 ){
 
-
-//
-
-
-//        $fuel_expenses = vehicle::find(1)->fuelExpensesSince('2017-01-01');
-
             $vehicle_id = vehicle::
             where('user',$logged_user_id)
                 ->value('id');
@@ -158,19 +109,10 @@ class VehicleController extends Controller
             $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
 
             $maintenance =  vehicle::find($vehicle_id)->maintenances;
-//            $maintenance =  vehicle::find($vehicle_id)->maintenances;
-
 
             //1. Gets totals of galons following a given date greater or equal than the date when a maintenance was added as active.
 
             $fuel_expenses = expenses::galonsSinceDate('2017-02-1',$vehicle_id);
-
-
-//            $prueba = $maintenance->toArray();
-//            return if();
-
-
-
 
             $avg_performance = $vehicle_p[0]['Avg_MPG'];
 
@@ -195,16 +137,7 @@ class VehicleController extends Controller
             }
 
 
-
-
-
-
-
-
-
             $expenses = expenses::where('vehicle',$vehicle_id)->get();
-
-
 
             return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance']) );
 

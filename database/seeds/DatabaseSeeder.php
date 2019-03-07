@@ -58,8 +58,7 @@ class DatabaseSeeder extends Seeder
 
         vehicle_maintenance::insert([
             "vehicle" => "1",
-            "service_type" => "Part change",
-            "title" => "Wheel change",
+            "maintenance_service" => "Wheel change",
             "due_moment" => "Specific distance",
             "status" => "1",
             "tracked_distance" => "5000",
@@ -71,8 +70,7 @@ class DatabaseSeeder extends Seeder
 
         vehicle_maintenance::insert([
             "vehicle" => "1",
-            "service_type" => "Paint job",
-            "title" => "Bumper painting",
+            "maintenance_service" => "Paint job",
             "due_moment" => "Inmediate",
             "status" => "1",
             'created_at' => "2019-02-28 00:00:00",
@@ -81,8 +79,7 @@ class DatabaseSeeder extends Seeder
 
         vehicle_maintenance::insert([
             "vehicle" => "1",
-            "service_type" => "Maintenance",
-            "title" => "Scheduled maintenanc",
+            "maintenance_service" => "Scheduled maintenance",
             "due_moment" => "Specific distance",
             "status" => "1",
             "tracked_distance" => "5000",
@@ -94,11 +91,10 @@ class DatabaseSeeder extends Seeder
 
         vehicle_maintenance::insert([
             "vehicle" => "1",
-            "service_type" => "Maintenance",
-            "title" => "Horn check",
+            "maintenance_service" => "Horn check",
             "due_moment" => "Specific date",
             "status" => "1",
-            "final_date" => "2019-03-31",
+            "final_date" => "2019-03-01",
             "tracked_distance" => "5000",
             "current_distance" => "571",
             'created_at' => "2019-02-27 21:18:13",

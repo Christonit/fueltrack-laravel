@@ -671,7 +671,16 @@ width: auto;
 }
 
 // Pending maintenances
+
+#scheduled-maintenance{
+	@include breakpoint(lg){
+		padding-top: 0;
+	}
+}
+
 .scheduled-maintenance{
+
+
 	  &-detail{
 	    display: flex;
 	    align-items: center;
@@ -693,6 +702,7 @@ width: auto;
 	  }
 	&-card{
 	  border-bottom: 1px solid $grey-hint;
+		padding-top: 16px;
 	  padding-bottom: 24px;
 		.dropdown.menu > li.is-dropdown-submenu-parent > a{
 			padding-right: 0;

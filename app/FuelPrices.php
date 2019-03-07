@@ -4,23 +4,41 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use \Carbon\Carbon;
+use Goutte;
+use \DateTimeZone;
+
 
 class FuelPrices extends Model
 {
     //
 
+    protected  $fillable = [
+        'gasolina_premium',
+        'gasolina_regular',
+        'gasoil_optimo',
+        'gasoil_regular',
+        'kerosene',
+        'glp',
+        'gnv',
+        'start_of_week',
+        'end_of_week',
+        'country'];
+
+    protected  $guarded = [];
+
+
     protected function getCurrentWeek(){
 
-        $en = Carbon::now('America/New_York')->locale('en_US');
+        $en = Carbon::now();
+//        $actual = $en->format('Y-m-d H:i:s');
 
         $start = $en->startOfWeek(Carbon::SATURDAY)->format('Y-m-d H:i');
         $end = $en->endOfWeek(Carbon::FRIDAY)->format('Y-m-d H:i');
 
         $week= array();
 
-        $week['actual']= $en;
-        $week['start']= $start;
-        $week['end']= $end;
+        $week['start_of_week']= $start;
+        $week['end_of_week']= $end;
 
         return $week;
 
@@ -61,13 +79,26 @@ class FuelPrices extends Model
 
         $fuelList = array();
 
-        $fuelList['Gasolina Regular'] = substr($regularGas[0],4);
-        $fuelList['Gasolina Premium'] = substr($premiumGas[0],4);
-        $fuelList['Gasoil Optimo'] = substr($gasoilOpt[0],4);
-        $fuelList['Gasoil Regular'] = substr($gasoilReg[0],4);
-        $fuelList['Kerosene'] = substr($kerosene[0],4);
-        $fuelList['Gas Licuado de Petróleo (GLP)'] = substr($glp[0],4);
-        $fuelList['Gas Natural Vehicular (GNV)'] = substr($gnv[0],4);
+        //Gasolina Regular
+        $fuelList['gasolina_regular'] = substr($regularGas[0],4);
+
+        //Gasolina Premium
+        $fuelList['gasolina_premium'] = substr($premiumGas[0],4);
+
+        //Gasoil Optimo
+        $fuelList['gasoil_optimo'] = substr($gasoilOpt[0],4);
+
+        //Gasoil Regular
+        $fuelList['gasoil_regular'] = substr($gasoilReg[0],4);
+
+        //Kerosene
+        $fuelList['kerosene'] = substr($kerosene[0],4);
+
+        //Gas Licuado de Petróleo (GLP)
+        $fuelList['glp'] = substr($glp[0],4);
+
+        //Gas Natural Vehicular (GNV)
+        $fuelList['gnv'] = substr($gnv[0],4);
 
         return $fuelList;
     }

@@ -28,8 +28,6 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-//        dd( "Hola");
-
 
         $user =  Auth()->user()->username;
 

@@ -5,6 +5,7 @@ use App\vehicle;
 use App\User;
 use App\vehicle_performance;
 use App\vehicle_maintenance;
+use App\MaintenancesServicesPerformed;
 use App\expenses;
 use Auth;
 
@@ -118,6 +119,27 @@ class VehicleMaintenanceController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+
+
+    public function markAsPerformed(Request $request, $id)
+    {
+
+        $maintenance_details = $request->all();
+
+        $maintenance = vehicle_maintenance::find($id);
+
+        $maintenance['status'] = false;
+
+        $maintenance_details['vehicle'] = $maintenance->vehicle;
+
+        $maintenance->save();
+
+        MaintenancesServicesPerformed::create($maintenance_details);
+
+        return;
+
     }
 
     /**

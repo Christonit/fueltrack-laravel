@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\FuelPrices;
 use Illuminate\Http\Request;
 
-class FuelPricesController extends Controller
+class MaintenancesServicesPerformedController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //
+
     public function index()
     {
         //
@@ -88,4 +84,5 @@ class FuelPricesController extends Controller
     {
         //
     }
+
 }
