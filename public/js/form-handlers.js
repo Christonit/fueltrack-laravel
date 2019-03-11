@@ -1,3 +1,6 @@
+
+console.log(age);
+
 let servicePerformedCheck = $('span[data-open="done-service"]');
 
 let maintenanceServiceButton = $('form[name="service-performed"] a[data-form-action="continue"]');
@@ -6,10 +9,16 @@ let maintenanceInput = $('form[name="service-performed"] input[name="maintenance
 
 let maintenanceServiceCategory = $('form[name="service-performed"] select[name="service_category"]');
 
-let onCategoryChange =() =>{
-
-    return maintenanceServiceCategory.val();
+let onCategoryChange =(e) =>{
+    return e.target.value;
 };
+
+
+let fetchSelfServiceOptions =  fetch('/self-service-options').then( (response)=>{
+        return response.text();
+    }).then( (data)=>{
+        return data;
+    });
 
 
 let addMaintenanceServiceId = (e) =>{
@@ -63,4 +72,31 @@ maintenanceServiceButton.click((e)=>{
 })
 
 
-maintenanceServiceCategory.onchange = onCategoryChange();
+maintenanceServiceCategory.on('change', (e) =>{
+    let category = onCategoryChange(e);
+
+    if(category == 'accesory install' || category == 'miscellaneous'){
+
+        fetch('/self-service-options').then( (response)=>{
+            return response.text();
+        }).then( (data)=>{
+            $('#warranty-options').after(data);
+            $('#warranty-options').remove();
+            return;
+        });
+
+
+    }else{
+        fetch('/only-warranty-options').then( (response)=>{
+            return response.text();
+        }).then( (data)=>{
+
+            $('#service-options').before(data);
+            $('#service-options').remove();
+
+
+            return;
+        });
+    }
+
+});

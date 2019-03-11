@@ -32,6 +32,15 @@ class vehicle_maintenance extends Model
 
     }
 
+    protected function getPerformedMaintenance($vehicleID){
+
+        return $this->select('vehicle_maintenance.id','vehicle_maintenance.maintenance_service','maintenances_services_performed.cost')
+                ->join('maintenances_services_performed', 'vehicle_maintenance.id','=', 'maintenances_services_performed.maintenance_service')
+                ->where('vehicle_maintenance.vehicle','=',$vehicleID)
+                ->where('vehicle_maintenance.status','=','0')
+                ->get();
+    }
+
 //    protected function user(){
 //        return $this->belongsTo('App\vehicle','vehicle');
 //    }

@@ -1,3 +1,9 @@
+let colorsArray = ['#f1635b','#0544c7','#2c1fe6','#dbfb41','#f20fd9','#4ee566','#dd48dc','#4f1f48','#e47a6e','#08e8ab','#b8740a','#f4508d','#e43e36','#ff6a1a']
+
+let shuffle = (o) => {
+    for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+};
 
 if (windowSize <= sm) {
     var overviewGraph = document.querySelector('#overview-graph');
@@ -109,13 +115,13 @@ new Chart(maintenanceChart, {
 
     data: {
 
-        labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+        labels: m_s_category,
 
         datasets: [
             {
                 label: "Population (millions)",
-                backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                data: [2478,5267,734,784,433]        }
+                backgroundColor: shuffle(colorsArray),
+                data: m_s_total_cost       }
         ]
 
     },

@@ -15,13 +15,8 @@ class CreateVehicleMaintenancesTable extends Migration
     {
         Schema::create('vehicle_maintenance', function (Blueprint $table) {
             $table->increments('id');
-
             $table->unsignedInteger('vehicle')->references('id')->on('user_vehicles')->onDelete('cascade');
             $table->string('maintenance_service');
-//            $table->string('service_category');
-//            $table->string('service_type');
-//            $table->string('title');
-//            $table->unsignedInteger('cost')->nullable();
             $table->string('due_moment');
             $table->boolean('status');
             $table->date('final_date')->nullable();
@@ -29,7 +24,7 @@ class CreateVehicleMaintenancesTable extends Migration
             $table->unsignedInteger('tracked_distance')->nullable();
             $table->unsignedInteger('current_distance')->nullable();
             $table->unsignedInteger('overdue_distance')->nullable();
-
+            $table->unsignedInteger('days_overdue')->nullable();
             $table->timestamps();
         });
     }

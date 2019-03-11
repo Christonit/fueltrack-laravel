@@ -72,3 +72,13 @@ Route::get('/{username}/my-car', 'VehicleController@show');
 
 Route::post('/mark-as-performed/{id}/','VehicleMaintenanceController@markAsPerformed');
 
+
+
+
+//Ajax fetch routes
+
+Route::get('/self-service-options', 'ComponentsIncludeController@selfServiceOptions');
+Route::get('/only-warranty-options', 'ComponentsIncludeController@warrantyOptions');
+//Route::get('/full-options', 'ComponentsIncludeController@fullOptions');
+
+

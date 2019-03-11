@@ -9,7 +9,7 @@
         <span id='maintenance-resume-total' class="text-center">
 
 
-				<span class="stat">89,000</span>
+				<span class="stat">{{ number_format($total_m_s_expenses) }}</span>
 
 				<br>
 
@@ -20,7 +20,7 @@
 			  </span>
 
 
-        <canvas id="maintenance-chart" height="60vh" width="80vw">
+        <canvas id="maintenance-chart" height="75vh" width="85vw">
 
         </canvas>
 

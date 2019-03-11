@@ -186,11 +186,6 @@
                             </div>
 
 
-
-                            <span>Currently no values.</span>
-
-
-
                             @endforeach
 
 

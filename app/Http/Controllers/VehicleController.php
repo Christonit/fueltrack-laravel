@@ -8,6 +8,7 @@ use App\vehicle_performance;
 use App\vehicle_maintenance;
 use App\expenses;
 use Auth;
+use JavaScript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -61,6 +62,7 @@ class VehicleController extends Controller
 
         ]);
 
+
         $logged_user_id = auth()->id();
 
         $logged_user = auth()->user()->username;
@@ -89,7 +91,7 @@ class VehicleController extends Controller
      * Display the specified resource.
      *
      * @param  \App\vehicle  $vehicle
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responwww . way back machine . org / web /20180618212328 / http: // ocean of pdf. com/se
      */
     public function show(User $user)
     {
@@ -100,11 +102,34 @@ class VehicleController extends Controller
         where('user',$logged_user_id)->get();
 
 
+
+
         if(Auth::check() && count($vehicle) !== 0 ){
 
             $vehicle_id = vehicle::
             where('user',$logged_user_id)
                 ->value('id');
+
+            $m_s_performed = vehicle_maintenance::getPerformedMaintenance($vehicle_id);
+
+            //Lists all services performed in a maintenance.
+            $m_s_list = $m_s_performed->pluck('maintenance_service')->unique()->values();
+
+
+
+            //Sum all cost for a given service category done in a vehicle.
+            foreach ($m_s_list as $i){
+
+                $maintenance_expenses[] = $m_s_performed->where('maintenance_service', $i)->sum('cost');
+            }
+
+
+            Javascript::put([
+                'm_s_category' => $m_s_list,
+                'm_s_total_cost' =>  $maintenance_expenses
+                ]);
+
+            $total_m_s_expenses = array_sum($maintenance_expenses);
 
             $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
 
@@ -139,7 +164,13 @@ class VehicleController extends Controller
 
             $expenses = expenses::where('vehicle',$vehicle_id)->get();
 
-            return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance']) );
+            JavaScript::put([
+                'foo' => 'bar',
+                'user' => User::first(),
+                'age' => 29
+            ]);
+
+            return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses']) );
 
         }else{
 

@@ -80,28 +80,13 @@
     <h3 class="text-center">Service performed</h3>
 
 
-    <fieldset class="grid-x">
         {{--For Part change and maintenance--}}
-        <div class="small-12 medium-5 cell">
-            <label for="middle-label" class="text-left middle">Warranty/Insurance</label>
-        </div>
-        <div class="small-12 medium-7 cell">
 
-                <input type="radio" name="warranty_insurance" class='middle' value="1"/><label  class='middle'  for="warranty_insurance">Yes</label>
-                <input type="radio" name="warranty_insurance" class='middle' value="0"/><label class='middle'   for="warranty_insurance">No</label>
-
-        </div>
+        @include('utilities.components.warranty-input')
 
         {{--For accesory install--}}
-        {{--<div class="small-12 medium-5 cell">--}}
-            {{--<label for="middle-label" class="text-left middle">Self service</label>--}}
-        {{--</div>--}}
-        {{--<div class="small-12 medium-7 cell">--}}
 
-                {{--<input type="radio" name="warranty_insurance" value="true"><label for="warranty_insurance">Yes</label>--}}
-                {{--<input type="radio" name="warranty_insurance" value="false"><label for="warranty_insurance">No</label>--}}
-
-        {{--</div>--}}
+    <fieldset class="grid-x">
 
         <div class="small-12 medium-5 cell">
             <label for="middle-label" class="text-left middle">Workshop name</label>
@@ -112,7 +97,13 @@
 
     </fieldset>
 
+
     <fieldset class="grid-x">
+
+
+
+
+
         <div class="small-12 medium-5 cell">
             <label for="middle-label" class="text-left middle">Details</label>
         </div>
@@ -130,7 +121,7 @@
 
     <div class="expanded button-group ">
         <a href="#" class="hollow button secondary cancel" data-open="done-service">Previews</a>
-        <a href='#'  data-form-action='continue' class="button success" >Continue</a>
+        <a href='#'  data-form-action='continue' data-close aria-label="Close reveal" class="button success" >Continue</a>
     </div>
 
     <button class="close-button" data-close aria-label="Close reveal" type="button">
