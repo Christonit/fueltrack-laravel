@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-  My car
+    My car
 @endsection
 
 
@@ -10,7 +10,7 @@
     <div class="grid-container fluid">
 
 
-    <!-- Overview section header -->
+        <!-- Overview section header -->
         <div id="section-header" class="grid-x grid-padding-x">
             <div class="small-12 medium-7 cell">
 
@@ -107,86 +107,86 @@
 
                     @foreach($vehicle_p as $performance)
 
-                            <div class="performance-section">
+                        <div class="performance-section">
 
-                                <div class="performance-stat">
+                            <div class="performance-stat">
 
-                                    <i class="ft-icon i-performance icon-highway">&#xe902;</i>
+                                <i class="ft-icon i-performance icon-highway">&#xe902;</i>
 
-                                    <p class="performance-category-title float-center">Highway</p>
+                                <p class="performance-category-title float-center">Highway</p>
 
-                                    <p class="hollow-label float-right">{{round($performance->Highway_MPG,1)}} mpg</p>
+                                <p class="hollow-label float-right">{{round($performance->Highway_MPG,1)}} mpg</p>
 
-                                </div>
+                            </div>
 
-                                <div class="performance-stat">
+                            <div class="performance-stat">
 
-                                    <i class="ft-icon i-performance icon-city">&#xe907;</i>
+                                <i class="ft-icon i-performance icon-city">&#xe907;</i>
 
-                                    <p class="performance-category-title float-center">City</p>
+                                <p class="performance-category-title float-center">City</p>
 
-                                    <p class="hollow-label float-right">{{ round($performance->City_MPG,1)}} mpg</p>
+                                <p class="hollow-label float-right">{{ round($performance->City_MPG,1)}} mpg</p>
 
-                                </div>
+                            </div>
 
-                                <div class="performance-stat">
+                            <div class="performance-stat">
 
-                                    <i class="ft-icon i-performance icon-average">&#xe905;</i>
+                                <i class="ft-icon i-performance icon-average">&#xe905;</i>
 
-                                    <p class="performance-category-title float-center">Average C/H</p>
+                                <p class="performance-category-title float-center">Average C/H</p>
 
-                                    <p class="hollow-label float-right">{{round($performance->Avg_MPG,1)}} mpg</p>
-
-
-
-                                </div>
-
-                                <div class="performance-stat">
-
-                                    <i class="ft-icon i-performance icon-tank">&#xe908;</i>
-
-                                    <p class="performance-category-title float-center">Tank size</p>
-
-                                    <p class="hollow-label float-right">999 Km</p>
+                                <p class="hollow-label float-right">{{round($performance->Avg_MPG,1)}} mpg</p>
 
 
 
-                                </div>
+                            </div>
 
+                            <div class="performance-stat">
 
-                                <div class="performance-stat">
+                                <i class="ft-icon i-performance icon-tank">&#xe908;</i>
 
-                                    <i class="ft-icon i-performance icon-distance">&#xe906;</i>
+                                <p class="performance-category-title float-center">Tank size</p>
 
-                                    <p class="performance-category-title float-center">Drivable distance</p>
-
-                                    <p class="hollow-label float-right">999 Km</p>
-
-
-
-                                </div>
-
-                                <div class="performance-stat">
-
-                                    <i class="ft-icon i-performance icon-cost">&#xe900;</i>
-
-                                    <p class="performance-category-title float-center">Cost to fill up</p>
-
-                                    <p class="hollow-label float-right">9,999 Km</p>
-
-
-
-                                </div>
-
-
-
+                                <p class="hollow-label float-right">999 Km</p>
 
 
 
                             </div>
 
 
-                            @endforeach
+                            <div class="performance-stat">
+
+                                <i class="ft-icon i-performance icon-distance">&#xe906;</i>
+
+                                <p class="performance-category-title float-center">Drivable distance</p>
+
+                                <p class="hollow-label float-right">999 Km</p>
+
+
+
+                            </div>
+
+                            <div class="performance-stat">
+
+                                <i class="ft-icon i-performance icon-cost">&#xe900;</i>
+
+                                <p class="performance-category-title float-center">Cost to fill up</p>
+
+                                <p class="hollow-label float-right">9,999 Km</p>
+
+
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+
+
+                    @endforeach
 
 
 
@@ -274,74 +274,23 @@
 
                     <div class="tabs-content" data-tabs-content="deeplinked-tabs">
 
-                        <div class="tabs-panel is-active" id="fuel-expenses-logs">
-                            <table class="dashboard-table">
-
-                                <colgroup>
-
-
-                                </colgroup>
-
-                                <thead>
-                                <tr>
-                                    <th class='text-left'><a href="#">Date <i class="fa fa-caret-down"></i></a></th>
-                                    <th class='text-center'><a href="#">Quantity <i class="fa fa-caret-down"></i></a></th>
-                                    <th class='text-right'><a href="#">Cost <i class="fa fa-caret-down"></i></a></th>
-
-                                </tr>
-                                </thead>
-
-                                <tbody>
-
-
-                                @include('vehicle.expenses-history')
-
-                                </tbody>
-                            </table>
 
 
 
-                        </div>
+                        @include('vehicle.expenses-history')
+
+
 
                         <div class="tabs-panel" id="maintenance-logs">
                             <table class="table-expand">
 
                                 <tbody>
-                                <tr class="table-expand-row" data-open-details>
-                                    <td class="maintenance-logs-resume">
-                                        <table id="maintenance-logs-resume">
-                                            <tr>
-                                                <td><i class="material-icons">attachment </i></td>
-                                                <td><p><b>Engine check</b></p>At 50,000 miles   |  July 25, 18</td>
-                                                <td class="text-right"><span class="hollow-label-large">$7000</span></td>
-                                                <td class="hide-for-small-only">
-                                                    <a href="#" class=" button  hollow-label-large flex-middle secondary"><i class="material-icons">attachment </i> <span>Details</span></a>
-                                                </td>
-                                                <td><i class="material-icons">
-                                                        more_vert
-                                                    </i></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
 
-                                <tr class="table-expand-row-content">
-                                    <td colspan="8" class="table-expand-row-nested">
-                                        <div class="grid-x">
-
-                                            <p class="small-6"><b>Tracked miles</b> 50,500</p>
-                                            <p class="small-6"><b>Miles overdue</b> 500</p>
-
-                                            <p class="small-6"><b>Brand</b> 50,500</p>
-                                            <p class="small-6"><b>Workshop</b> 500</p>
+                                @include('vehicle.maintenances-history')
 
 
-                                            <p class="small-12"><b>Details</b><br> ipsum dolor sit amet, consectetur adipisicing elit. Eaque unde quaerat reprehenderit ipsa ipsam, adipisci facere repellendus impedit at, quisquam dicta optio veniam quia nesciunt, inventore quod in neque magni?</p>
 
-                                        </div>
 
-                                    </td>
-                                </tr>
 
 
 

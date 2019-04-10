@@ -51,6 +51,10 @@ h5 {
   font-weight: 600;
 }
 
+select {
+  font-size: 1em;
+}
+
 /* CSS Document */
 
 .clear-card {
@@ -1115,6 +1119,48 @@ ul[data-misc] li:nth-child(3) a.button {
   opacity: 0.5;
 }
 
+.maintenance-options-btn:hover {
+  background-color: #F4F5F7;
+  transition: background-color 0.5s ease;
+  color: #2F80ED;
+  border-radius: 4px;
+}
+
+.maintenance-options-btn:hover .button-hover-reveal {
+  display: block;
+  position: absolute;
+  background: white;
+  right: 0;
+}
+
+.maintenance-options-btn:hover label {
+  display: none;
+}
+
+.maintenance-options-btn .button-hover-reveal {
+  display: none;
+  color: #ffffff;
+  z-index: 1;
+  width: 100%;
+  min-width: 144px;
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.2), 0px 4px 12px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+}
+
+.maintenance-options-btn .button-hover-reveal a {
+  padding: 16px;
+  color: #AFB2C1;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
+  display: inline-block;
+  text-align: right;
+}
+
+.maintenance-options-btn .button-hover-reveal a:hover {
+  color: #2F80ED;
+}
+
 .ft-icon {
   font-family: "ft-icons";
   font-style: normal;
@@ -1260,16 +1306,27 @@ ul[data-misc] li:nth-child(3) a.button {
   }
 }
 
+header a {
+  font-size: 1rem;
+}
+
 @media (max-width: 768px) {
   [data-expense-filter] {
     padding: 0;
     text-align: left !important;
     float: left !important;
   }
+}
 
-  [data-expense-filter] label {
-    float: left !important;
+@media (min-width: 768px) {
+  [data-expense-filter] select {
+    margin-bottom: 0 !important;
+  }
+
+  [data-expense-filter] .input-group-label {
     padding: 0;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -1578,7 +1635,6 @@ ul[data-misc] li:nth-child(3) a.button {
 .tabs-panel th,
 .tabs-panel td {
   padding: 16px 24px;
-  width: 33.3%;
 }
 
 .tabs-panel th:first-child,
@@ -1749,6 +1805,82 @@ ul[data-misc] li:nth-child(3) a.button {
   max-width: none;
 }
 
+#maintenance-logs table {
+  margin-bottom: 0;
+}
+
+#maintenance-logs .table-expand-row td:hover {
+  background: #F4F5F7;
+}
+
+.maintenance-logs-resume {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+
+.maintenance-service {
+  width: 100%;
+  margin-left: 0;
+  color: #424242;
+}
+
+@media (min-width: 768px) {
+  .maintenance-service {
+    margin-left: 1rem;
+  }
+}
+
+.maintenance-service p {
+  color: #AFB2C1;
+  font-size: 0.9rem;
+}
+
+.maintenance-category {
+  width: 32px;
+  margin-right: 8px;
+  height: 32px;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .maintenance-category {
+    display: block;
+  }
+}
+
+.maintenance-category i {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.maintenance-cost {
+  max-width: 96px;
+  margin-left: 0;
+  width: 100%;
+  display: block;
+  min-width: unset;
+}
+
+@media (min-width: 768px) {
+  .maintenance-cost {
+    max-width: 144px;
+    margin-left: 1rem;
+  }
+}
+
+.maintenance-options-btn {
+  padding: 0 0.6rem;
+  position: relative;
+  margin-left: 8px;
+}
+
+.maintenance-options-btn i {
+  line-height: 1.5;
+}
+
 .maintenance-logs-resume {
   padding: 16px 0 16px 0 !important;
 }
@@ -1766,6 +1898,7 @@ ul[data-misc] li:nth-child(3) a.button {
 .maintenance-logs-resume > table td i {
   font-size: 1.5rem;
   color: #AFB2C1;
+  line-height: 1.4;
 }
 
 @media (min-width: 768px) {
@@ -1798,6 +1931,8 @@ ul[data-misc] li:nth-child(3) a.button {
 @media (min-width: 768px) {
   .maintenance-logs-resume > table td:last-child {
     padding: 16px 24px;
+    max-width: 11rem;
+    text-align: right;
   }
 }
 
@@ -1831,6 +1966,7 @@ ul[data-misc] li:nth-child(3) a.button {
           animation-fill-mode: both;
   -webkit-animation-duration: 0.5s;
           animation-duration: 0.5s;
+  font-size: 1rem;
 }
 
 .table-expand-row-nested {

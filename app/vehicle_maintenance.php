@@ -34,7 +34,19 @@ class vehicle_maintenance extends Model
 
     protected function getPerformedMaintenance($vehicleID){
 
-        return $this->select('vehicle_maintenance.id','vehicle_maintenance.maintenance_service','maintenances_services_performed.cost')
+        return $this->select('vehicle_maintenance.id',
+            'vehicle_maintenance.maintenance_service',
+            'vehicle_maintenance.due_moment',
+            'maintenances_services_performed.service_category',
+            'maintenances_services_performed.cost',
+            'maintenances_services_performed.details',
+            'maintenances_services_performed.workshop',
+            'maintenances_services_performed.date_performed',
+            'maintenances_services_performed.warranty_insurance',
+            'maintenances_services_performed.original_rep',
+            'vehicle_maintenance.tracked_distance',
+            'vehicle_maintenance.overdue_distance',
+            'maintenances_services_performed.self_service')
                 ->join('maintenances_services_performed', 'vehicle_maintenance.id','=', 'maintenances_services_performed.maintenance_service')
                 ->where('vehicle_maintenance.vehicle','=',$vehicleID)
                 ->where('vehicle_maintenance.status','=','0')

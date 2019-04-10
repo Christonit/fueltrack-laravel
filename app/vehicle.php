@@ -16,7 +16,7 @@ class vehicle extends Model
     protected function maintenances(){
 
         return $this->hasMany('App\vehicle_maintenance', 'vehicle')
-                    ->where('status','=','1');
+            ->where('status','=','1');
 //                    ->where('due_moment', '=','Specific distance');
 
     }

@@ -8,6 +8,7 @@ use App\vehicle_performance;
 use App\expenses;
 use App\vehicle_maintenance;
 use Illuminate\Support\Facades\Hash;
+use App\FuelPrices;
 //use Illuminate\Support\Facades\Validator;
 
 class DatabaseSeeder extends Seeder
@@ -163,6 +164,20 @@ class DatabaseSeeder extends Seeder
             "Date"=>"2019-02-07",
             "created_at"=>"2019-02-07 04:00:56",
             "updated_at"=>"2019-02-07 04:00:56",
+        ]);
+
+
+        FuelPrices::insert([
+            'gasolina_premium'=>'	238.40	',
+            'gasolina_regular'=>'223.00	',
+            'gasoil_optimo'=>'194.50',
+            'gasoil_regular'=>'180.20',
+            'kerosene'=>'169.60',
+            'glp'=>'103.10',
+            'gnv'=>'28.97',
+            'start_of_week'=>'2019-03-30',
+            'end_of_week'=>'2019-04-05',
+            'country'=>'DR'
         ]);
 
     }

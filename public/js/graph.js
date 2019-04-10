@@ -105,6 +105,9 @@ var bar_chart = new Chart(bar_ctx, {
 
 // Dough nut chart
 
+if( typeof m_s_category !== 'undefined'){
+
+
 var maintenanceChart = document.getElementById("maintenance-chart").getContext('2d');
 
 
@@ -139,3 +142,6 @@ new Chart(maintenanceChart, {
 
     }
 });
+
+
+}

@@ -1,6 +1,4 @@
 
-console.log(age);
-
 let servicePerformedCheck = $('span[data-open="done-service"]');
 
 let maintenanceServiceButton = $('form[name="service-performed"] a[data-form-action="continue"]');

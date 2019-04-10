@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FuelPrices;
 use App\vehicle;
 use App\User;
 use App\vehicle_performance;
@@ -68,8 +69,8 @@ class VehicleController extends Controller
         $logged_user = auth()->user()->username;
 
         $vehicle_performance = request()->validate(['City_MPG'=>'required',
-                                                    'Avg_MPG'=>'required',
-                                                    'Highway_MPG'=>'required']);
+            'Avg_MPG'=>'required',
+            'Highway_MPG'=>'required']);
 
         $new_vehicle['user'] = $logged_user_id;
 
@@ -116,20 +117,28 @@ class VehicleController extends Controller
             $m_s_list = $m_s_performed->pluck('maintenance_service')->unique()->values();
 
 
-
             //Sum all cost for a given service category done in a vehicle.
-            foreach ($m_s_list as $i){
+            foreach ($m_s_list as $i) {
 
                 $maintenance_expenses[] = $m_s_performed->where('maintenance_service', $i)->sum('cost');
             }
 
+            if( $m_s_performed->count() != 0) {
 
-            Javascript::put([
-                'm_s_category' => $m_s_list,
-                'm_s_total_cost' =>  $maintenance_expenses
+                Javascript::put([
+                    'm_s_category' => $m_s_list,
+                    'm_s_total_cost' => $maintenance_expenses
                 ]);
 
-            $total_m_s_expenses = array_sum($maintenance_expenses);
+
+
+                $total_m_s_expenses = array_sum($maintenance_expenses);
+
+            }else{
+                $total_m_s_expenses = 0;
+
+            }
+
 
             $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
 
@@ -163,14 +172,8 @@ class VehicleController extends Controller
 
 
             $expenses = expenses::where('vehicle',$vehicle_id)->get();
-
-            JavaScript::put([
-                'foo' => 'bar',
-                'user' => User::first(),
-                'age' => 29
-            ]);
-
-            return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses']) );
+//            return $m_s_performed;
+            return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed']) );
 
         }else{
 

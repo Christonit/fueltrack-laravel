@@ -4,9 +4,12 @@
 
         <div class="clearfix">
             <h5 class="float-left">Maintenances</h5>
-            <button class="hollow  button float-right alternative" data-open="add-service">+ Add service</button>
+            <button class="hollow  button float-right alternative" data-open="add-service">Add service</button>
         </div>
-        <span id='maintenance-resume-total' class="text-center">
+
+        @if($total_m_s_expenses !== 0)
+
+            <span id='maintenance-resume-total' class="text-center">
 
 
 				<span class="stat">{{ number_format($total_m_s_expenses) }}</span>
@@ -20,9 +23,27 @@
 			  </span>
 
 
-        <canvas id="maintenance-chart" height="75vh" width="85vw">
+            <canvas id="maintenance-chart" height="75vh" width="85vw">
 
-        </canvas>
+            </canvas>
+
+
+        @else
+
+            <div class="callout secondary">
+
+                <h4 class="text-center">
+                    Currently there are no maintenances expenses.
+                </h4>
+
+            </div>
+
+
+
+
+        @endif
+
+
 
 
     </div>
@@ -71,25 +92,25 @@
                     </div>
                     <div class="status-progress">
 
-                    @if($maintenances->due_moment == 'Specific distance')
+                        @if($maintenances->due_moment == 'Specific distance')
 
-										<span class="status-current">
+                            <span class="status-current">
 												<b>Current</b><br>
 
                                             @if($maintenances->current_distance > $maintenances->tracked_distance )
 
 
 
-                                                {{($maintenances->current_distance - $maintenances->tracked_distance)."miles overdue" }}
+                                    {{($maintenances->current_distance - $maintenances->tracked_distance)."miles overdue" }}
 
 
-                                            @else
+                                @else
 
 
-                                                {{$maintenances->current_distance}}
+                                    {{$maintenances->current_distance}}
 
 
-                                            @endif
+                                @endif
 
 										</span>
 
@@ -103,43 +124,43 @@
                             <progress max="100" value="{{ ( ($maintenances->current_distance / $maintenances->tracked_distance)*100 ) }}"></progress>
 
 
-                    @elseif($maintenances->due_moment == 'Specific date')
+                        @elseif($maintenances->due_moment == 'Specific date')
 
 
 
-									  <span class="status-current">
+                            <span class="status-current">
 
 										<?php
-                                          $fDate = date_create($maintenances->final_date);
+                                $fDate = date_create($maintenances->final_date);
 
-                                          $cDate = date_create( date("Y-m-d") );
+                                $cDate = date_create( date("Y-m-d") );
 
-                                          $createdDate = date_create(  $maintenances->created_at  );
+                                $createdDate = date_create(  $maintenances->created_at  );
 
-                                          $totalDaysToWait = date_diff($createdDate,$fDate)->format("%a");
+                                $totalDaysToWait = date_diff($createdDate,$fDate)->format("%a");
 
-                                          //Total days to maintenance since created maintenance
-                                          $maintenance_date = date_diff($cDate,$fDate)->format("%R%a");
+                                //Total days to maintenance since created maintenance
+                                $maintenance_date = date_diff($cDate,$fDate)->format("%R%a");
 
-                                          $daysPercentage = round((($totalDaysToWait - $maintenance_date)/$totalDaysToWait)*100);
+                                $daysPercentage = round((($totalDaysToWait - $maintenance_date)/$totalDaysToWait)*100);
 
-                                          ?>
+                                ?>
 
-                                          @if($maintenance_date > 0)
+                                @if($maintenance_date > 0)
 
-                                              <b>Days left</b><br>
+                                    <b>Days left</b><br>
 
-                                              <?= substr($maintenance_date,1);?>
+                                    <?= substr($maintenance_date,1);?>
 
-                                          @endif
+                                @endif
 
-                                          @if($maintenance_date < 0)
+                                @if($maintenance_date < 0)
 
-                                              <b></b><br>
+                                    <b></b><br>
 
-                                              <?= substr($maintenance_date,1)." days overdue"?>
+                                    <?= substr($maintenance_date,1)." days overdue"?>
 
-                                          @endif
+                                @endif
 									  </span>
 
                             <span class="status-current text-right">
@@ -150,18 +171,32 @@
                             <progress max="100" value="<?= ($daysPercentage < 100 ? $daysPercentage : '100') ?>"></progress>
 
 
-                    @elseif($maintenances->due_moment == 'Inmediate')
-									  <span class="status-current">
+                        @elseif($maintenances->due_moment == 'Inmediate')
+                            <span class="status-current">
                                               <b>Urgency</b><br>
                                                 Inmediate
 									  </span>
                             <span class="status-current text-right"></span>
                             <progress max="100" value="100"></progress>
-                    @endif
+                        @endif
                     </div>
 
                 </div>
             @endforeach
+
+        @else
+
+            <div class="scheduled-maintenance-card clearfix">
+                <div class="scheduled-maintenance-detail callout secondary">
+
+                    <h4 class="text-center">
+                        Currently there are no maintenances pending.
+                    </h4>
+
+                </div>
+
+            </div>
+
         @endif
 
     </div>

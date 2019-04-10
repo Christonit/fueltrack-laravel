@@ -63,6 +63,9 @@ h5{
   font-weight: 600
 }
 
+select{
+    font-size: 1em;
+}
 
 @mixin social-button($brand-color, $brand-icon) {
   background: $brand-color;
