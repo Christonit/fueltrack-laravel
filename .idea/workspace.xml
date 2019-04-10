@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95c97ce1-d115-4e24-802a-857655f7e98a" name="Default Changelist" comment="&#10;- Still pending working on warranty or original part or self service depending on which service category is selected.">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/vehicle/maintenances-history.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VehicleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VehicleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/vehicle.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/vehicle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/vehicle_maintenance.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/vehicle_maintenance.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/form-handlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/form-handlers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/graph.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/graph.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/form-handlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/form-handlers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/graph.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/graph.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/scss/base/_base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/scss/base/_base.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/scss/module/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/scss/module/_buttons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/scss/module/_components.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/scss/module/_components.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/my-car.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/my-car.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vehicle/expenses-history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vehicle/expenses-history.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/vehicle/maintenances.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vehicle/maintenances.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="95c97ce1-d115-4e24-802a-857655f7e98a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/vendor/beyondcode/laravel-dump-server/" />
     <ignored path="$PROJECT_DIR$/vendor/composer/" />
     <ignored path="$PROJECT_DIR$/vendor/dnoegel/php-xdg-base-dir/" />
@@ -584,7 +562,7 @@
       <workItem from="1554162863092" duration="2627000" />
       <workItem from="1554178091670" duration="3283000" />
       <workItem from="1554247433940" duration="3187000" />
-      <workItem from="1554339621656" duration="19359000" />
+      <workItem from="1554339621656" duration="19641000" />
     </task>
     <task id="LOCAL-00001" summary="Added improvements to search vehicle data class, conditioned messages to show when we dont find vehicle because there is no data from that year and when we dont have info of any  of that given model by year. &#10;&#10;- Pending to fix popup modals.&#10;- Improve vehicle select.">
       <created>1547181697809</created>
@@ -628,11 +606,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551934839059</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="&#10;- Worked on maintenance log table mapping and options buttons styles.">
+      <created>1554869139565</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1554869139565</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="329840000" />
+    <option name="totallyTimeSpent" value="330122000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1920" y="23" width="1920" height="977" extended-state="0" />
@@ -753,7 +738,8 @@
     <MESSAGE value="Completed add service form, still fetch all active services and track by date and distance." />
     <MESSAGE value="Installed Carbon for Date handling related to Maintenances and fuel prices and created basic fuel scrapping with Goatte." />
     <MESSAGE value="Finished working on mark as performed services for due services to do. &#10;&#10;- Still pending working on warranty or original part or self service depending on which service category is selected." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished working on mark as performed services for due services to do. &#10;&#10;- Still pending working on warranty or original part or self service depending on which service category is selected." />
+    <MESSAGE value="&#10;- Worked on maintenance log table mapping and options buttons styles." />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;- Worked on maintenance log table mapping and options buttons styles." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
