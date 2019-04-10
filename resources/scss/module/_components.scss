@@ -505,9 +505,7 @@ header a{
 .dashboard-table-timestamp {
     color: $grey;
     font-size: 0.75rem;
-
     font-weight: 400;
-
     @include breakpoint(sm){
         font-size: 0.9rem;
     }
@@ -519,7 +517,6 @@ header a{
     margin-top: 0.6rem;
     max-width: none;
 }
-
 
 // maintenance table expanded
 #maintenance-logs{
