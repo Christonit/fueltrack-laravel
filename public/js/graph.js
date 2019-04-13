@@ -53,13 +53,22 @@ var purple_orange_gradient = bar_ctx.createLinearGradient(0, 0, 0, 600);
 purple_orange_gradient.addColorStop(0, 'rgba(235,87,87,0.7)');
 purple_orange_gradient.addColorStop(1, 'rgba(255,255,255,0)');
 
+let weekly_expenses = new Array();
+
+for(expenses of  weekly_cost){
+    expenses = expenses.replace(',',' ');
+
+    weekly_expenses.push(parseFloat(expenses));
+
+}
+
 var bar_chart = new Chart(bar_ctx, {
     type: 'line',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: weekly_range,
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 8, 14, 5],
+            label: 'Total spent',
+            data: weekly_expenses,
             backgroundColor: purple_orange_gradient,
             hoverBackgroundColor: purple_orange_gradient,
             borderWidth: 3,
@@ -84,10 +93,10 @@ var bar_chart = new Chart(bar_ctx, {
         legend:{
             display:false,
             labels:{
-                display:false
+                display:false,
                 // fontColor: "#000",
                 // boxWidth: 20,
-                // padding: 20
+                padding: 20
             },
         },
         scales: {

@@ -107,6 +107,7 @@ class VehicleController extends Controller
 
         if(Auth::check() && count($vehicle) !== 0 ){
 
+
             $vehicle_id = vehicle::
             where('user',$logged_user_id)
                 ->value('id');
@@ -172,7 +173,17 @@ class VehicleController extends Controller
 
 
             $expenses = expenses::where('vehicle',$vehicle_id)->get();
-//            return $m_s_performed;
+
+            $weekly_expenses = expenses::totalExpensesByWeek();
+//            return $weekly_expenses;
+
+            Javascript::put([
+                'weekly_range' => $weekly_expenses['weeks'],
+                'weekly_cost' => $weekly_expenses['expense']
+            ]);
+
+//            return $weekly_expenses;
+
             return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed']) );
 
         }else{
