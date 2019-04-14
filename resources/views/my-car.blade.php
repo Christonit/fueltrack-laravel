@@ -239,8 +239,8 @@
                         <div class="mobile-app-toggle small-12 medium-7" data-mobile-app-toggle data-expense-filter='date-format'>
                             <label class="input-group-label float-right">
                                 <span>Date format</span>
-                                <button class="button is-active">Daily</button>
-                                <button class="button">Weekly</button>
+                                <button class="button">Daily</button>
+                                <button class="button is-active">Weekly</button>
                                 <button class="button">Monthly</button>
                             </label>
                         </div>

@@ -1,4 +1,4 @@
-let colorsArray = ['#f1635b','#0544c7','#2c1fe6','#dbfb41','#f20fd9','#4ee566','#dd48dc','#4f1f48','#e47a6e','#08e8ab','#b8740a','#f4508d','#e43e36','#ff6a1a']
+let colorsArray = ['#f1635b','#0544c7','#2c1fe6','#dbfb41','#f20fd9','#4ee566','#dd48dc','#4f1f48','#e47a6e','#08e8ab','#b8740a','#f4508d','#e43e36','#ff6a1a'];
 
 let shuffle = (o) => {
     for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
@@ -10,7 +10,6 @@ if (windowSize <= sm) {
 
     var filters = [].slice.call(document.querySelectorAll('[data-expense-filter]'));
     var filtersBtn = document.createElement('a');
-    // filtersBtn.setAttribute('class','accordion-title');
     filtersBtn.setAttribute('href','#');
     var overviewFilters = document.createElement('div');
 
@@ -25,21 +24,10 @@ if (windowSize <= sm) {
 
     };
 
-    // overviewFilters.style.height = accHeight + 'px';
-
-
-    // overviewFilters.innerHTML = ' <li class="accordion-item is-active" data-accordion-item></li>';
     filtersBtn.innerText = 'Filters';
     expenses.insertBefore(overviewFilters, overviewGraph);
-    // var accordionContent = document.createElement('div');
-    //     accordionContent.classList.add = 'accordion-content';
-    //     accordionContent.setAttribute('data-tab-content','');
-    // var accordionContent = document.createElement('div');
 
-
-    // // overviewFilters = overviewFilters.children;
     overviewFilters.appendChild(filtersBtn);
-    // overviewFilters.appendChild(accordionContent);
     for (var r in filters) {
         overviewFilters.appendChild(filters[r]);
     }
@@ -67,7 +55,6 @@ var bar_chart = new Chart(bar_ctx, {
     data: {
         labels: weekly_range,
         datasets: [{
-            label: 'Total spent',
             data: weekly_expenses,
             backgroundColor: purple_orange_gradient,
             hoverBackgroundColor: purple_orange_gradient,
@@ -90,12 +77,20 @@ var bar_chart = new Chart(bar_ctx, {
     options: {
         title:{
         },
+        tooltips:{
+            position:'average',
+            bodySpacing:8,
+            xPadding:8,
+            yPadding:8,
+            custom: function(tooltip) {
+                if (!tooltip) return;
+                tooltip.displayColors = false;
+            }
+        },
         legend:{
             display:false,
             labels:{
                 display:false,
-                // fontColor: "#000",
-                // boxWidth: 20,
                 padding: 20
             },
         },

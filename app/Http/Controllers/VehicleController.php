@@ -174,8 +174,7 @@ class VehicleController extends Controller
 
             $expenses = expenses::where('vehicle',$vehicle_id)->get();
 
-            $weekly_expenses = expenses::totalExpensesByWeek();
-//            return $weekly_expenses;
+            $weekly_expenses = expenses::totalExpensesByWeek('gasolina_premium');
 
             Javascript::put([
                 'weekly_range' => $weekly_expenses['weeks'],
