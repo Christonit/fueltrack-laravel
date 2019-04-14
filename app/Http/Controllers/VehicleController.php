@@ -147,8 +147,6 @@ class VehicleController extends Controller
 
             //1. Gets totals of galons following a given date greater or equal than the date when a maintenance was added as active.
 
-            $fuel_expenses = expenses::galonsSinceDate('2017-02-1',$vehicle_id);
-
             $avg_performance = $vehicle_p[0]['Avg_MPG'];
 
 
@@ -172,7 +170,7 @@ class VehicleController extends Controller
             }
 
 
-            $expenses = expenses::where('vehicle',$vehicle_id)->get();
+            $expenses = expenses::where('vehicle',$vehicle_id)->get()->reverse();
 
             $weekly_expenses = expenses::totalExpensesByWeek('gasolina_premium');
 
