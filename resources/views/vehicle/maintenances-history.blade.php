@@ -4,7 +4,87 @@
 
             <td>
                 <div class="maintenance-logs-resume">
-                    <span class="maintenance-category"><i class="material-icons">attachment </i></span>
+                    <span class="maintenance-category">
+                        <i class="service-icon">
+                            @switch($performed->maintenance_service)
+                                @case('wheel change')
+                                &#xe800;
+                                @break
+
+                                @case('alignment')
+                                &#xe801;
+                                @break
+
+                                @case('battery change')
+                                &#xe802;
+                                @break
+
+                                @case('body fix')
+                                &#xe803;
+                                @break
+
+                                @case('brake check')
+                                &#xe804;
+                                @break
+
+                                @case('cleaning')
+                                &#xe805;
+                                @break
+
+                                @case('coolant fill')
+                                &#xe806;
+                                @break
+
+                                @case('electricity check')
+                                &#xe807;
+                                @break
+
+                                @case('engine check')
+                                &#xe808;
+                                @break
+
+                                @case('filter change')
+                                &#xe809;
+                                @break
+
+                                @case('tire change')
+                                &#xe810;
+                                @break
+
+                                @case('transmission check')
+                                &#xe811;
+                                @break
+
+                                @case('inmediate check')
+                                &#xe80a;
+                                @break
+
+                                @case('oil change')
+                                &#xe80b;
+                                @break
+
+                                @case('paint job')
+                                &#xe80c;
+                                @break
+
+                                @case('part change')
+                                &#xe80d;
+                                @break
+
+                                @case('preassure check')
+                                &#xe80e;
+                                @break
+
+
+                                @case('scheduled maintenance')
+                                &#xe80f;
+                                @break
+
+                                @default
+                                &#xe80f;
+
+                            @endswitch
+                        </i></span>
 
                     <span class="maintenance-service">
                             <b>{{ $performed->maintenance_service }}</b>

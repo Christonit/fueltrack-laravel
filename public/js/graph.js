@@ -1,3 +1,4 @@
+
 let colorsArray = ['#f1635b','#0544c7','#2c1fe6','#dbfb41','#f20fd9','#4ee566','#dd48dc','#4f1f48','#e47a6e','#08e8ab','#b8740a','#f4508d','#e43e36','#ff6a1a'];
 
 let shuffle = (o) => {
@@ -112,40 +113,41 @@ var bar_chart = new Chart(bar_ctx, {
 if( typeof m_s_category !== 'undefined'){
 
 
-var maintenanceChart = document.getElementById("maintenance-chart").getContext('2d');
+    var maintenanceChart = document.getElementById("maintenance-chart").getContext('2d');
 
 
 
-new Chart(maintenanceChart, {
+    new Chart(maintenanceChart, {
 
-    type: 'doughnut',
+        type: 'doughnut',
 
-    data: {
+        data: {
 
-        labels: m_s_category,
+            labels: m_s_category,
 
-        datasets: [
-            {
-                label: "Population (millions)",
-                backgroundColor: shuffle(colorsArray),
-                data: m_s_total_cost       }
-        ]
+            datasets: [
+                {
+                    label: "Population (millions)",
+                    backgroundColor: shuffle(colorsArray),
+                    data: m_s_total_cost       }
+            ]
 
-    },
-    options: {
+        },
+        options: {
 
-        cutoutPercentage:80,
+            cutoutPercentage:80,
 
-        legend:{
-            labels:{
-                fontFamily:'Work sans',
-                fontColor:'#393C40',
-            },
-            position:'bottom'
+            legend:{
+                labels:{
+                    fontFamily:'Work sans',
+                    fontColor:'#393C40',
+                },
+                position:'bottom'
+            }
+
         }
-
-    }
-});
+    });
 
 
 }
+

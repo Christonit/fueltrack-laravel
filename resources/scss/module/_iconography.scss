@@ -1,63 +1,71 @@
 
 .ft-icon
 {
-  @include iconset;
+    @include iconset;
 
 }
 
+
+.service-icon{
+    @include service-iconset;
+    color: $blue;
+
+}
+
+
 .i-performance{
-  width: 32px;
-  box-sizing: content-box;
-  text-align: center;
-  height: 32px;
-  vertical-align: middle;
-  line-height: 32px;
-  color:$blue;
-  @include border-highlight;
+    width: 32px;
+    box-sizing: content-box;
+    text-align: center;
+    height: 32px;
+    vertical-align: middle;
+    line-height: 32px;
+    color:$blue;
+    @include border-highlight;
 }
 
 
 .i-alt {
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-  display: inline-block;
-  text-decoration: inherit;
-  margin-right: .2em;
-  text-align: center;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1em;
-  margin-left: .2em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 1.42rem;
-  width: 32px;
-  font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.42rem;
+    width: 32px;
+    font-size: 20px;
 
 
 }
 
 .i{
 
-  &-notif{
-    width: 42px;
-    height: 42px;
-    line-height: 175%;
-    font-size: 24px;
-  }
+    &-notif{
+        width: 42px;
+        height: 42px;
+        line-height: 175%;
+        font-size: 24px;
+    }
 
-  &-pencil{
-    font-size: 16px;
-    color:$green;
-    margin-left: -4px;
-  }
+    &-pencil{
+        font-size: 16px;
+        color:$green;
+        margin-left: -4px;
+    }
 
-  &-pump{
-    font-size: 20px;
-    color: $red;
-    margin-left: -4px;
-  }
+    &-pump{
+        font-size: 20px;
+        color: $red;
+        margin-left: -4px;
+    }
 
 
 
@@ -79,40 +87,40 @@ $social-brand-twitter: #55acee;
 
 
 .rounded-social-buttons {
-  text-align: center;
+    text-align: center;
 
-  .social-button {
+    .social-button {
 
-    &.facebook {
-      @include social-button($social-brand-facebook, "\f09a")
+        &.facebook {
+            @include social-button($social-brand-facebook, "\f09a")
+        }
+
+        &.twitter {
+            @include social-button($social-brand-twitter, "\f099")
+        }
+
+
+        display: inline-block;
+        position: relative;
+        background: $white!important;
+        @include border-radius;
+        @include border_grey;
+        box-sizing: border-box;
+        color:  $grey ;
+        font-size: 24px;
+        height: 32px;
+        width: 32px;
+        line-height: 32px;
+        margin: 0 8px;
+
+        &:hover,
+        &:focus {
+            border-color:$blue !important;
+            color: $blue !important;
+        }
+
+
     }
-
-    &.twitter {
-      @include social-button($social-brand-twitter, "\f099")
-    }
-
-
-    display: inline-block;
-    position: relative;
-    background: $white!important;
-    @include border-radius;
-    @include border_grey;
-    box-sizing: border-box;
-    color:  $grey ;
-    font-size: 24px;
-    height: 32px;
-    width: 32px;
-    line-height: 32px;
-    margin: 0 8px;
-
-    &:hover,
-    &:focus {
-        border-color:$blue !important;
-        color: $blue !important;
-    }
-
-
-  }
 }
 
 
@@ -122,3 +130,92 @@ $social-brand-twitter: #55acee;
 
 
 // Social Icons
+
+.icon{
+
+    &-air-resuply{
+        background: black;
+        &::after{
+            content: '&#xe810';
+        }
+    }
+
+
+    &-alignment{
+        content: '&#xe801;';
+    }
+
+
+    &-battery-change{
+        content: '&#xe802;';
+    }
+
+    &-body-fix{
+        content: '&#xe803;';
+    }
+
+    &-brake-check{
+        content: '&#xe804;';
+    }
+
+
+    &-cleaning{
+        content: '&#xe805;';
+    }
+
+
+    &-coolant-fill{
+        content: '&#xe806;';
+    }
+
+    &-electricity-check{
+        content: '&#xe807;';
+    }
+
+    &-engine-check{
+        content: '&#xe808;';
+    }
+
+
+    &-filter-change{
+        content: '&#xe809;';
+    }
+
+    &-inmediate-check{
+        content: '&#xe80a;';
+    }
+
+
+    &-oil-change{
+        content: '&#xe80b;';
+    }
+
+    &-paint-job{
+        content: '&#xe80c;';
+    }
+
+    &-part-change{
+        content: '&#xe80d;';
+    }
+
+
+    &-preassure-check{
+        content: '&#xe80e;';
+    }
+
+    &-scheduled-maintenance{
+        content: '&#xe80f;';
+    }
+
+    &-tire-change{
+        content: '&#xe810;';
+    }
+
+
+    &-transmission-check{
+        content: '&#xe811;';
+    }
+
+
+}
+

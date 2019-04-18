@@ -224,3 +224,24 @@ text-align: center;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.42rem;
 }
+
+
+@mixin service-iconset{
+    font-family: "ft-service-icons";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+
+    display: inline-block;
+    text-decoration: inherit;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 1.42rem;
+}
+

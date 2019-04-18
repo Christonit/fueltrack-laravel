@@ -8,6 +8,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "ft-service-icons";
+  src: url(/fonts/service-icons.woff?23bd4176a34a01988ed81dc34dec5252) format("woff"), url(/fonts/service-icons.ttf?9b1032df6646e3978b16f44c64d3110f) format("truetype"), url(/fonts/service-icons.svg?22722695a844d1071d006c0d28ee21e8) format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .menu > li > a {
   display: inherit;
   padding: inherit;
@@ -22,6 +29,7 @@ body {
   background: #FAFAFA;
   font-size: 14px;
   font-size: 14px;
+  overflow-x: hidden;
 }
 
 p {
@@ -209,7 +217,6 @@ a[data-responsive-toggle=main-menu] i {
     padding: initial;
     box-shadow: none;
     width: 100%;
-    margin-top: 8px;
   }
 }
 
@@ -236,12 +243,19 @@ a[data-responsive-toggle=main-menu] i {
 }
 
 .top-bar-right {
-  padding: 8px;
-  margin: 0 8px 0 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin: 0;
+}
+
+.top-bar .is-signed-in {
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-right: 8px;
 }
 
 @media (min-width: 768px) {
-  .top-bar-right {
+  .top-bar .is-signed-in {
     margin: 0 16px 0 0;
     border-right: 1px solid #F4F5F7;
   }
@@ -336,9 +350,20 @@ div[data-responsive-toggle=main-menu] {
   border: none;
 }
 
+#login-form header img {
+  max-width: unset;
+}
+
 #login-form .top-bar-right {
   margin-right: 0;
   border-right: none;
+}
+
+@media (min-width: 768px) {
+  #login-form .top-bar-right {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
 .dropdown.menu > li.opens-left > .is-dropdown-submenu {
@@ -622,7 +647,8 @@ canvas {
 
 @media (min-width: 512px) {
   .social-footer {
-    position: absolute;
+    position: fixed;
+    width: 49%;
   }
 }
 
@@ -687,6 +713,7 @@ fieldset {
 
 #form-container {
   margin-top: 52px;
+  margin-bottom: 8em;
 }
 
 @media (min-width: 768px) {
@@ -722,6 +749,10 @@ fieldset {
   #form-container input[type=text] {
     margin-bottom: 44px;
   }
+}
+
+#form-container input[type=password] {
+  margin-bottom: 22px !important;
 }
 
 @media (min-width: 768px) {
@@ -1161,6 +1192,10 @@ ul[data-misc] li:nth-child(3) a.button {
   color: #2F80ED;
 }
 
+.button-group-container button {
+  margin: 1.25em 0 1em;
+}
+
 .ft-icon {
   font-family: "ft-icons";
   font-style: normal;
@@ -1177,6 +1212,25 @@ ul[data-misc] li:nth-child(3) a.button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.42rem;
+}
+
+.service-icon {
+  font-family: "ft-service-icons";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  margin-right: 0.2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: 0.2em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.42rem;
+  color: #2F80ED;
 }
 
 .i-performance {
@@ -1284,6 +1338,82 @@ ul[data-misc] li:nth-child(3) a.button {
 .rounded-social-buttons .social-button:focus {
   border-color: #2F80ED !important;
   color: #2F80ED !important;
+}
+
+.icon-air-resuply {
+  background: black;
+}
+
+.icon-air-resuply::after {
+  content: "&#xe810";
+}
+
+.icon-alignment {
+  content: "&#xe801;";
+}
+
+.icon-battery-change {
+  content: "&#xe802;";
+}
+
+.icon-body-fix {
+  content: "&#xe803;";
+}
+
+.icon-brake-check {
+  content: "&#xe804;";
+}
+
+.icon-cleaning {
+  content: "&#xe805;";
+}
+
+.icon-coolant-fill {
+  content: "&#xe806;";
+}
+
+.icon-electricity-check {
+  content: "&#xe807;";
+}
+
+.icon-engine-check {
+  content: "&#xe808;";
+}
+
+.icon-filter-change {
+  content: "&#xe809;";
+}
+
+.icon-inmediate-check {
+  content: "&#xe80a;";
+}
+
+.icon-oil-change {
+  content: "&#xe80b;";
+}
+
+.icon-paint-job {
+  content: "&#xe80c;";
+}
+
+.icon-part-change {
+  content: "&#xe80d;";
+}
+
+.icon-preassure-check {
+  content: "&#xe80e;";
+}
+
+.icon-scheduled-maintenance {
+  content: "&#xe80f;";
+}
+
+.icon-tire-change {
+  content: "&#xe810;";
+}
+
+.icon-transmission-check {
+  content: "&#xe811;";
 }
 
 .material-icons {

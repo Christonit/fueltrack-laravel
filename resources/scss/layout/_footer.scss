@@ -4,69 +4,70 @@ $highlight: #000;
 $dark-gray: #CECECE;
 
 .responsive-blog-footer {
-  background: darken($dark-gray, 25%);
-  padding: 3rem 3rem;
-  color: white;
+    background: darken($dark-gray, 25%);
+    padding: 3rem 3rem;
+    color: white;
 
-  h4 {
-    @media screen and (max-width: 39.9375em) {
-      font-size: 1.5rem;
+    h4 {
+        @media screen and (max-width: 39.9375em) {
+            font-size: 1.5rem;
+        }
     }
-  }
 
-  p {
-    color: $dark-gray;
-  }
-
-  .mailing-list {
-    margin-bottom: 1.5rem;
-  }
-  .mailing-container {
-    margin-bottom: 2rem;
-  }
-
-  .about-section, .tag-section {
-    margin-bottom: 2rem;
-
-    a {
-      color: $highlight;
+    p {
+        color: $dark-gray;
     }
-  }
 
-  .subscribe-button {
-    background-color:$highlight;
-
-    &:hover {
-     background-color: darken($highlight, 5%);
-     transition: color 0.3s ease-in;
+    .mailing-list {
+        margin-bottom: 1.5rem;
     }
-  }
-
-  .fa-chevron-circle-up {
-    font-size: 3rem;
-    color: $dark-gray;
-
-     &:hover {
-     color: lighten($dark-gray, 15%);
-     transition: color 0.3s ease-in;
+    .mailing-container {
+        margin-bottom: 2rem;
     }
-  }
+
+    .about-section, .tag-section {
+        margin-bottom: 2rem;
+
+        a {
+            color: $highlight;
+        }
+    }
+
+    .subscribe-button {
+        background-color:$highlight;
+
+        &:hover {
+            background-color: darken($highlight, 5%);
+            transition: color 0.3s ease-in;
+        }
+    }
+
+    .fa-chevron-circle-up {
+        font-size: 3rem;
+        color: $dark-gray;
+
+        &:hover {
+            color: lighten($dark-gray, 15%);
+            transition: color 0.3s ease-in;
+        }
+    }
 }
 
 
 
 .social-footer {
 
-  padding-top: 32px;
-	display: block;
-	width: 100%;
-	text-align: center;
-  background-color: $white;
-  bottom: 0;
+    padding-top: 32px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: $white;
+    bottom: 0;
 
-  @include breakpoint(xs) {
-  position: absolute;
-  }
+    @include breakpoint(xs) {
+        position: fixed;
+        width: 49%;
+    }
 
 
 }

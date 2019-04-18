@@ -43,7 +43,7 @@
  </div>
 
 
-<div class=" top-bar-right">
+<div class=" top-bar-right {{Auth::check() ? 'is-signed-in' : ''}}">
 
   <ul class=" menu" data-misc>
 
@@ -57,7 +57,7 @@
     <li >
       <a href="#" class="hollow button secondary flex-middle">
         <i class="ft-icon i-alt i-pump">&#xe901;</i>
-        <span class='hide-for-small-only'>Fuel prices</span>
+        <span class='hide-for-small-only'>Fuel prices </span>
       </a>
     </li>
 

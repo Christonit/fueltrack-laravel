@@ -17,6 +17,7 @@ header.top-bar.grid-x{
 }
 
 header{
+
   & div:first-child{
 
     display: flex;
@@ -75,7 +76,7 @@ a[data-responsive-toggle="main-menu"] {
     padding: initial;
     box-shadow: none;
     width: 100%;
-    margin-top: 8px;
+    //margin-top: 8px;
 
   }
 
@@ -107,14 +108,23 @@ a[data-responsive-toggle="main-menu"] {
 }
 .top-bar{
   &-right{
-    padding: 8px;
-    margin: 0 8px 0 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 0;
 
-    @include breakpoint(sm){
-      margin: 0 16px 0 0;
-      @include border-right;
-    }
+
   }
+
+    .is-signed-in{
+        padding-left: 8px;
+        padding-right: 8px;
+        margin-right: 8px;
+        @include breakpoint(sm){
+            margin: 0 16px 0 0;
+            @include border-right;
+        }
+    }
+
   &-left{
     padding: 8px;
   }
@@ -229,12 +239,25 @@ div[data-responsive-toggle="main-menu"]{
   background: $white;
   header{
     border:none;
+
+      img{
+          max-width: unset;
+
+      }
   }
+
 
   .top-bar-right {
     margin-right: 0;
     border-right: none;
+
+      @include breakpoint(sm){
+          padding-top: 12px;
+          padding-bottom: 12px;
+      }
+
   }
+
 }
 
 

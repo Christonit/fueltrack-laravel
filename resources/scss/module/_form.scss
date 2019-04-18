@@ -52,6 +52,7 @@ fieldset{
 #form-container{
 
 	margin-top: 52px;
+    margin-bottom: 8em;
 
 	@include breakpoint(sm){
 		margin-top: 76px;
@@ -78,6 +79,10 @@ fieldset{
 		margin-bottom: 44px;
 	}
 	input{
+        //&:last-child{
+        //    margin-bottom: 22px!important;
+        //}
+        //
 		&[type='text']{
       @include breakpoint(sm){
 				margin-bottom: 44px;
@@ -89,7 +94,9 @@ fieldset{
       // @include breakpoint(sm){
 			// 	margin-bottom: 44px;
 			// }
-		}
+            margin-bottom: 22px!important;
+
+    }
 
     &[type='email']{
       @include breakpoint(sm){
@@ -118,6 +125,9 @@ fieldset{
 			}
 
 		}
+
+
+
 
 	}
 
