@@ -1,32 +1,38 @@
 <!-- This is the first modal -->
 <div class="reveal " id="add-service" data-reveal>
     <h3 class="text-center">Add service</h3>
+
     <form action="" name="add-service">
 
-    <fieldset class="grid-x">
-
-        <div class="small-12 medium-3 cell">
-            <label for="middle-label" class="text-left middle">Title</label>
-        </div>
-
-        <div class="small-12 medium-9 cell">
-            <input type="text" id="middle-label" placeholder="" name="title">
-        </div>
-
-    </fieldset>
+        @csrf
 
     <fieldset class="grid-x">
 
         <div class="small-12 medium-3 cell">
-            <label for="middle-label" class="text-left middle">Category</label>
+            <label for="middle-label" class="text-left middle">Service</label>
 
         </div>
 
         <div class="small-12 medium-9 cell">
-            <select name="service_type" id="">
-                <option value="Part change">Part change</option>
-                <option value="Scheduled maintenance">Scheduled maintenance</option>
-                <option value="Quick fix">Quick fix</option>
+            <select name="maintenance_service" id="">
+                <option value="wheel change">Wheel change</option>
+                <option value="body fix">Body fix</option>
+                <option value="brake check">Brake check</option>
+                <option value="alignment">Alignment</option>
+                <option value="battery change">Battery change</option>
+                <option value="cleaning">Cleaning</option>
+                <option value="coolant fill">Coolant fill</option>
+                <option value="electricity check">Electricity check</option>
+                <option value="engine check">Engine check</option>
+                <option value="filter change">Filter change</option>
+                <option value="tire change">Tire change</option>
+                <option value="transmission check">Transmission check</option>
+                <option value="urgent check">Urgent check</option>
+                <option value="part change">Part change</option>
+                <option value="oil change">Oil change</option>
+                <option value="paint job">Paint job</option>
+                <option value="preassure check">Preassure check</option>
+                <option value="scheduled maintenance">Scheduled maintenance</option>
             </select>
         </div>
 

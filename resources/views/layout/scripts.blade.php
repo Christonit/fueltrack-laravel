@@ -25,7 +25,7 @@
 
                             console.log('envio exitoso');
 
-                            return
+                            return $('#add-expense').foundation('close');
 
                         }
                         else {
@@ -92,7 +92,7 @@
 
                             console.log('envio exitoso');
 
-                            return
+                            return $('#add-service').foundation('close');
 
                         }
                         else {

@@ -1,12 +1,12 @@
 
 // Window size parameters.
 
-var windowSize = screen.width;
-var xs = 512;
-var sm = 768;
-var md = 896;
-var lg = 1152;
-var xl = 1280;
+const windowSize = screen.width;
+const xs = 512;
+const sm = 768;
+const md = 896;
+const lg = 1152;
+const xl = 1280;
 
 
 
@@ -289,86 +289,6 @@ if(filename == '/my-car'){
 
     }
 
-  var bar_ctx = document.getElementById('bar-chart').getContext('2d');
-
-  var purple_orange_gradient = bar_ctx.createLinearGradient(0, 0, 0, 600);
-  purple_orange_gradient.addColorStop(0, 'orange');
-  purple_orange_gradient.addColorStop(1, 'purple');
-
-  var bar_chart = new Chart(bar_ctx, {
-      type: 'bar',
-      data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-          datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 8, 14, 5],
-  						backgroundColor: purple_orange_gradient,
-  						hoverBackgroundColor: purple_orange_gradient,
-  						hoverBorderWidth: 2,
-  						hoverBorderColor: 'purple'
-          }]
-      },
-      options: {
-        title:{
-        },
-          legend:{
-            display:false,
-            labels:{
-              display:false
-              // fontColor: "#000",
-              // boxWidth: 20,
-              // padding: 20
-            },
-          },
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero:true
-                  }
-              }]
-          }
-      }
-  });
-
-
-
-
-  // Dough nut chart
-
-  var maintenanceChart = document.getElementById("maintenance-chart").getContext('2d');
-
-
-
-  new Chart(maintenanceChart, {
-
-      type: 'doughnut',
-
-      data: {
-
-        labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-
-        datasets: [
-          {
-            label: "Population (millions)",
-            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-            data: [2478,5267,734,784,433]        }
-        ]
-
-      },
-      options: {
-
-        cutoutPercentage:80,
-
-        legend:{
-          labels:{
-            fontFamily:'Work sans',
-            fontColor:'#393C40',
-          },
-          position:'bottom'
-        }
-
-      }
-  });
 
 
 

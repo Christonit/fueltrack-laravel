@@ -87,7 +87,7 @@
                         </i></span>
 
                     <span class="maintenance-service">
-                            <b>{{ $performed->maintenance_service }}</b>
+                            <b>{{ ucwords($performed->maintenance_service) }}</b>
 
                                 @if($performed->due_moment == "Specific distance" )
                             <p>

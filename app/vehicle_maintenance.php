@@ -8,9 +8,7 @@ class vehicle_maintenance extends Model
 {
     //
     protected  $fillable =   ['vehicle',
-                            'service_type',
-                            'title',
-                            'cost',
+                            'maintenance_service',
                             'due_moment',
                             'tracked_distance',
                             'status'

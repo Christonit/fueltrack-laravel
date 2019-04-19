@@ -55,8 +55,8 @@
 
                 <div class="scheduled-maintenance-card clearfix">
                     <div class="scheduled-maintenance-detail">
-			  <span class="scheduled-maintenance-category float-left">
-                <i class="service-icon">
+			  {{--<span class="scheduled-maintenance-category float-left">--}}
+                <i class="service-icon scheduled-maintenance-category float-left">
                             @switch($maintenances->maintenance_service)
                         @case('wheel change')
                         &#xe800;
@@ -136,10 +136,10 @@
 
                     @endswitch
                         </i>
-			  </span>
+			  {{--</span>--}}
 
                         <h6 class="scheduled-maintenance-title float-center">
-                            {{$maintenances->maintenance_service}}
+                            {{ ucwords($maintenances->maintenance_service)}}
                         </h6>
 
 

@@ -11,28 +11,11 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/', 'HomeController@welcome');
-//
-// Route::get('/home', 'HomeController@index')->name('home');
-//
-//
-// Route::get('/welcome2/{usuarios}', 'HomeController@welcome2');
 
 
 Route::get('/', 'pageController@home');
 
 Route::get('/loggedin', 'pageController@index')->name('loggedin');
-
-//Route::get('/login', 'pageController@login');
-
-//Route::get('/my-car', 'pageController@myCar');
-
-//Route::get('{username}/my-car/', 'VehicleController@show');
-
 
 Route::get('/no-car-found', function(){
          return view('utilities.no-car-found-callout');
@@ -44,6 +27,14 @@ Route::get('/no-model-found', function(){
     return view('utilities.no-car-model-callout');
 
 });
+
+Route::get('/test-service', function(){
+    return view('utilities.test-service');
+
+});
+
+
+
 
 Route::post('/add-service','VehicleMaintenanceController@store');
 
@@ -64,16 +55,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-
 Route::get('/{username}/my-car', 'VehicleController@show');
 
 
 //Mark as maintenance finished
 
 Route::post('/mark-as-performed/{id}/','VehicleMaintenanceController@markAsPerformed');
-
-
-
 
 //Ajax fetch routes
 

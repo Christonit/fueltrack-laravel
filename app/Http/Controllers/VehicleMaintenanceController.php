@@ -42,13 +42,17 @@ class VehicleMaintenanceController extends Controller
     public function store(Request $request)
     {
 
+//        return request()->all();
+
+
 //        $vehicle_maintenance = new vehicle_maintenance();
 
         $service = request()->validate([
-            'title'=>['required','min:3'],
-            'service_type'=>['required'],
+            'maintenance_service'=>['required'],
             'due_moment'=>['required']
         ]);
+
+
 
 
         $service['vehicle'] = vehicle::
@@ -67,6 +71,7 @@ class VehicleMaintenanceController extends Controller
         $service['status'] = true;
 
 //        $status = true;
+
 
          vehicle_maintenance::create($service);
 

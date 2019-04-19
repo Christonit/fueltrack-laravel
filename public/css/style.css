@@ -1218,18 +1218,14 @@ ul[data-misc] li:nth-child(3) a.button {
   font-family: "ft-service-icons";
   font-style: normal;
   font-weight: normal;
-  speak: none;
   display: inline-block;
   text-decoration: inherit;
-  margin-right: 0.2em;
   text-align: center;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1em;
-  margin-left: 0.2em;
+  line-height: 1.4;
+  line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 1.42rem;
+  font-size: 1.71rem;
   color: #2F80ED;
 }
 
@@ -1338,82 +1334,6 @@ ul[data-misc] li:nth-child(3) a.button {
 .rounded-social-buttons .social-button:focus {
   border-color: #2F80ED !important;
   color: #2F80ED !important;
-}
-
-.icon-air-resuply {
-  background: black;
-}
-
-.icon-air-resuply::after {
-  content: "&#xe810";
-}
-
-.icon-alignment {
-  content: "&#xe801;";
-}
-
-.icon-battery-change {
-  content: "&#xe802;";
-}
-
-.icon-body-fix {
-  content: "&#xe803;";
-}
-
-.icon-brake-check {
-  content: "&#xe804;";
-}
-
-.icon-cleaning {
-  content: "&#xe805;";
-}
-
-.icon-coolant-fill {
-  content: "&#xe806;";
-}
-
-.icon-electricity-check {
-  content: "&#xe807;";
-}
-
-.icon-engine-check {
-  content: "&#xe808;";
-}
-
-.icon-filter-change {
-  content: "&#xe809;";
-}
-
-.icon-inmediate-check {
-  content: "&#xe80a;";
-}
-
-.icon-oil-change {
-  content: "&#xe80b;";
-}
-
-.icon-paint-job {
-  content: "&#xe80c;";
-}
-
-.icon-part-change {
-  content: "&#xe80d;";
-}
-
-.icon-preassure-check {
-  content: "&#xe80e;";
-}
-
-.icon-scheduled-maintenance {
-  content: "&#xe80f;";
-}
-
-.icon-tire-change {
-  content: "&#xe810;";
-}
-
-.icon-transmission-check {
-  content: "&#xe811;";
 }
 
 .material-icons {
@@ -1978,12 +1898,6 @@ header a {
   .maintenance-category {
     display: block;
   }
-}
-
-.maintenance-category i {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  text-align: center;
 }
 
 .maintenance-cost {
