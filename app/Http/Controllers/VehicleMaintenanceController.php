@@ -9,6 +9,7 @@ use App\MaintenancesServicesPerformed;
 use App\expenses;
 use Auth;
 
+use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
 
 class VehicleMaintenanceController extends Controller
@@ -112,6 +113,15 @@ class VehicleMaintenanceController extends Controller
     public function edit($id)
     {
         //
+//return $id;
+
+        $maintenance = MaintenancesServicesPerformed::where('maintenance_service',$id)->get();
+
+         $maintenance[0]['title'] =  vehicle_maintenance::find($id)->value('maintenance_service');
+
+
+        return view('utilities.edit.maintenance',compact('maintenance'));
+
     }
 
     /**
@@ -123,7 +133,24 @@ class VehicleMaintenanceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $maintenance = request()->validate([
+            'cost'=>['min:3'],
+            'service_category'=>['required','min:8'],
+            'date_performed'=>['required'],
+            'workshop'=>['string','min:4'],
+            'warranty_insurance'=>['boolean'],
+            'self-service'=>['boolean'],
+            'original_rep'=>['boolean'],
+            'details'=>['string'],
+        ]);
+//        return $maintenance;
+
+        $maintenance = MaintenancesServicesPerformed::find($id)->fill($maintenance)->save();
+
+        return redirect('/'.auth()->user()->username.'/my-car');
+
+
     }
 
 
@@ -153,8 +180,36 @@ class VehicleMaintenanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function delete($id)
+    {
+        //
+//return $id;
+
+        $maintenance = MaintenancesServicesPerformed::where('maintenance_service',$id)->get();
+
+        $maintenance[0]['title'] =  vehicle_maintenance::find($id)->value('maintenance_service');
+
+
+        return view('utilities.delete-maintenance',compact('maintenance'));
+
+    }
+
     public function destroy($id)
     {
         //
+
+
+        $maintenance = MaintenancesServicesPerformed::findOrFail($id);
+//        ->delete();
+        $vehicle_maintenance = vehicle_maintenance::find($maintenance->maintenance_service)->delete();
+
+        $maintenance->delete();
+
+        return redirect('/'.auth()->user()->username.'/my-car');
+
+
+
+
     }
 }

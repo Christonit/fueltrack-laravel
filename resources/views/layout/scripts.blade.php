@@ -7,118 +7,167 @@
 <script src="{{asset( 'js/c3.min.js' )}}"></script>
 
 <script>
-    @if (Route::has('login'))
-            @auth
-                var isUserSignedIn = true;
+        @if (Route::has('login'))
+
+        @auth
+
+
+    let isUserSignedIn = true;
 
 
 
-                document.querySelector('form[name="add-expense"] a.success').addEventListener('click',function (e) {
+        document.querySelector('form[name="add-expense"] a.success').addEventListener('click',function (e) {
 
-                    fetch('/add-expense', {
-                        method: 'post',
-                        // mode: 'no-cors',
-                        body: new FormData(document.querySelector('form[name="add-expense"]'))
+            fetch('/add-expense', {
+                method: 'post',
+                // mode: 'no-cors',
+                body: new FormData(document.querySelector('form[name="add-expense"]'))
 
-                    }).then(function(response){
-                        if(response.ok){
+            }).then(function(response){
+                if(response.ok){
 
-                            console.log('envio exitoso');
+                    console.log('envio exitoso');
 
-                            return $('#add-expense').foundation('close');
+                    return $('#add-expense').foundation('close');
 
-                        }
-                        else {
-                            throw "Error en la llamada Ajax";
-                        }
-                    }).then(function () {
-                        if(filename.includes('my-car')){
-
-
-                            //Ajaxy addes the latest record from database
-
-                            fetch('/latest-expense')
-                                .then(response =>{
-
-                                    // console.log(response);
-
-                                    return response.text();
-
-                                }).then(data =>{
+                }
+                else {
+                    throw "Error en la llamada Ajax";
+                }
+            }).then(function () {
+                if(filename.includes('my-car')){
 
 
+                    //Ajaxy addes the latest record from database
 
-                                let ExpenseLogBody =  document.querySelector('#fuel-expenses-logs tbody');
+                    fetch('/latest-expense')
+                        .then(response =>{
 
+                            // console.log(response);
 
-                                let ExpenselogFirstC = ExpenseLogBody.firstChild.nextSibling;
+                            return response.text();
 
-                                let child = document.createElement('tr');
-
-                                ExpenseLogBody.insertBefore(child, ExpenselogFirstC);
-
-                                ExpenselogFirstC.innerHTML = data;
-
-                                return;
+                        }).then(data =>{
 
 
-                            }).catch(function(error){
-                                console.log(error);
 
-                            });
-                        }
+                        let ExpenseLogBody =  document.querySelector('#fuel-expenses-logs tbody');
+
+
+                        let ExpenselogFirstC = ExpenseLogBody.firstChild.nextSibling;
+
+                        let child = document.createElement('tr');
+
+                        ExpenseLogBody.insertBefore(child, ExpenselogFirstC);
+
+                        ExpenselogFirstC.innerHTML = data;
 
                         return;
-                    }).catch(function(error){
 
+
+                    }).catch(function(error){
                         console.log(error);
 
                     });
+                }
 
-                    e.preventDefault();
+                return;
+            }).catch(function(error){
 
-                });
+                console.log(error);
 
+            });
 
-                document.querySelector('form[name="add-service"] a.success').addEventListener('click',function (e) {
+            e.preventDefault();
 
-                    fetch('/add-service', {
-                        method: 'post',
-                        // mode: 'no-cors',
-                        body: new FormData(document.querySelector('form[name="add-service"]'))
-
-                    }).then(function(response){
-                        if(response.ok){
-
-                            console.log('envio exitoso');
-
-                            return $('#add-service').foundation('close');
-
-                        }
-                        else {
-                            throw "Error en la llamada Ajax";
-                        }
-                    }).catch(function(error){
-
-                        console.log(error);
-
-                    });
+        });
 
 
-                });
+        document.querySelector('form[name="add-service"] a.success').addEventListener('click',function (e) {
+
+            fetch('/add-service', {
+                method: 'post',
+                // mode: 'no-cors',
+                body: new FormData(document.querySelector('form[name="add-service"]'))
+
+            }).then(function(response){
+                if(response.ok){
+
+                    console.log('envio exitoso');
+
+                    return $('#add-service').foundation('close');
+
+                }
+                else {
+                    throw "Error en la llamada Ajax";
+                }
+            }).catch(function(error){
+
+                console.log(error);
+
+            });
+
+
+        });
+
+        let due_moment_btn = $('input[name="due_moment"]');
+        let add_expense_btn = $('button[data-open="add-service"]');
+        let tracked_distance_details = $('#tracked-distance-details');
+        let due_date_details =  $('#due-date-details');
+
+        let dueMomentCheck = (x)=>{
+            switch(x){
+                case'Specific distance':
+                    tracked_distance_details.addClass('show').removeClass('hide');
+
+                    due_date_details.is('.show') ? due_date_details.addClass('hide').removeClass('show') : '';
+
+                    break;
+
+                case'Specific date':
+
+                    due_date_details.removeClass('hide').addClass('show');
+
+                    tracked_distance_details.is('.show') ? tracked_distance_details.addClass('hide').removeClass('show') : '';
+
+                    break;
+
+                case'Inmediate':
+
+
+                    if(tracked_distance_details.is('.show') || due_date_details.is('.show')){
+                        due_date_details.removeClass('show').addClass('hide');
+                        tracked_distance_details.removeClass('show').addClass('hide');
+                    }
+
+                    break;
+
+
+            }
+        }
+
+
+        add_expense_btn.on('click',dueMomentCheck($('input[name="due_moment"]:checked').val()) );
+        due_moment_btn.on('click',(e)=>{
+
+            dueMomentCheck(e.target.value );
+
+        });
+
+
 
 
 
             @else
 
-                var isUserSignedIn = false;
+        let isUserSignedIn = false;
 
-            @endauth
+    @endauth
 
 
 
 </script>
-    @endif
+@endif
 
 
 
@@ -130,10 +179,3 @@
 
 
 @stack('scripts')
-
-{{--@if(url()->current()->is('*/my-car/'))--}}
-
-    {{----}}
-
-
-{{--@endif--}}

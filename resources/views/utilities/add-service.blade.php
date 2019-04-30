@@ -42,24 +42,36 @@
 
         <div class="small-12 medium-12">
             <legend>Due moment</legend>
-            <input type="radio" name="due_moment" value="Specific distance" ><label for="Specific distance">Specific distance</label>
+            <input type="radio" name="due_moment" value="Specific distance" checked><label for="Specific distance">Specific distance</label>
             <input type="radio" name="due_moment" value="Inmediate" ><label for="Inmediate">Inmediate</label>
             <input type="radio" name="due_moment" value="Specific date" ><label for="Specific date">Date</label>
         </div>
 
     </fieldset>
 
-    <fieldset class="grid-x">
+        <fieldset id="tracked-distance-details" class="grid-x show">
 
-        <div class="small-12 medium-4 cell">
-            <label for="middle-label" class="text-left middle">Tracked distance</label>
-        </div>
+            <div class="small-12 medium-4 cell">
+                <label for="middle-label" class="text-left middle">Tracked distance</label>
+            </div>
 
-        <div class="small-12 medium-8 cell">
-            <input type="number" id="middle-label" name="tracked_distance" placeholder="Right- and middle-aligned text input">
-        </div>
+            <div class="small-12 medium-8 cell">
+                <input type="number" id="middle-label" name="tracked_distance" placeholder="Right- and middle-aligned text input">
+            </div>
 
-    </fieldset>
+        </fieldset>
+
+        <fieldset id="due-date-details" class="grid-x hide">
+
+            <div class="small-12 medium-4 cell">
+                <label for="middle-label" class="text-left middle">Tracked date</label>
+            </div>
+
+            <div class="small-12 medium-8 cell">
+                <input type="date" id="middle-label" name="final_date" placeholder="Right- and middle-aligned text input">
+            </div>
+
+        </fieldset>
 
     <div class="expanded button-group ">
         <a href="#" class="hollow button secondary cancel">Cancel</a>

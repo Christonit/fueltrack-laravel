@@ -106,10 +106,10 @@
                     <div class="maintenance-options-btn "><i class="material-icons">
                             more_vert
                         </i>
-                        <span class="button-hover-reveal">
-                            <a href="#" class="">Edit</a>
-                            <a href="#" >Delete</a>
-                        </span>
+                        <div class="button-hover-reveal">
+                            <a href="/my-maintenance/{{$performed->id}}/edit" class="">Edit</a>
+                            <a href="/my-maintenance/{{$performed->id}}/delete" >Delete</a>
+                        </div>
 
 
                     </div>

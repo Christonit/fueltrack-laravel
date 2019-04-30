@@ -28,15 +28,24 @@ Route::get('/no-model-found', function(){
 
 });
 
-Route::get('/test-service', function(){
-    return view('utilities.test-service');
+//
+//Route::get('/test', function(){
+//    return view('utilities.test-service');
+//
+//});
 
-});
 
-
+Route::get('/test','VehicleController@test');
 
 
 Route::post('/add-service','VehicleMaintenanceController@store');
+
+Route::get('/my-maintenance/{id}/edit', 'VehicleMaintenanceController@edit');
+Route::patch('/my-maintenance/{id}/edit','VehicleMaintenanceController@update');
+Route::get('/my-maintenance/{id}/delete','VehicleMaintenanceController@delete');
+Route::delete('/my-maintenance/{id}/delete','VehicleMaintenanceController@destroy');
+
+
 
 
 Route::get('/add-vehicle', 'pageController@addVehicle');
@@ -58,6 +67,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/{username}/my-car', 'VehicleController@show');
 
 
+
 //Mark as maintenance finished
 
 Route::post('/mark-as-performed/{id}/','VehicleMaintenanceController@markAsPerformed');
@@ -66,6 +76,9 @@ Route::post('/mark-as-performed/{id}/','VehicleMaintenanceController@markAsPerfo
 
 Route::get('/self-service-options', 'ComponentsIncludeController@selfServiceOptions');
 Route::get('/only-warranty-options', 'ComponentsIncludeController@warrantyOptions');
+
+
+
 //Route::get('/full-options', 'ComponentsIncludeController@fullOptions');
 
 

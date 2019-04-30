@@ -29,7 +29,7 @@
                  $user =  Auth()->user()->username;
                   ?>
 
-                 <li><a href="{{$user}}/my-car" class="active">My vehicle</a></li>
+                 <li><a href="/{{$user}}/my-car" class="active">My vehicle</a></li>
 
              @endauth
          @endif

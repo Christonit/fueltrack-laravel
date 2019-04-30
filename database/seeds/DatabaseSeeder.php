@@ -104,55 +104,36 @@ class DatabaseSeeder extends Seeder
 
         expenses::insert([
             "vehicle"=>"1",
-            "Galons"=>"2",
-            "FuelType"=>"Gasolina Premium",
-            "Current_fuel_price"=>"225.30",
-            "Date"=>"2018-02-17",
-            "created_at"=>"2018-02-17 04:00:56",
-            "updated_at"=>"2018-02-17 04:00:56",
-        ]);
-
-
-        expenses::insert([
-            "vehicle"=>"1",
-            "Galons"=>"2",
-            "FuelType"=>"Gasolina Premium",
-            "Current_fuel_price"=>"230.10",
-            "Date"=>"2018-11-15",
-            "created_at"=>"2018-11-15 04:00:56",
-            "updated_at"=>"2018-11-15 04:00:56",
-        ]);
-
-
-        expenses::insert([
-            "vehicle"=>"1",
-            "Galons"=>"1",
-            "FuelType"=>"Gasolina Premium",
-            "Current_fuel_price"=>"208.40",
-            "Date"=>"2019-01-15",
-            "created_at"=>"2019-01-15 04:00:56",
-            "updated_at"=>"2019-01-15 04:00:56",
-        ]);
-
-
-        expenses::insert([
-            "vehicle"=>"1",
-            "Galons"=>"3",
-            "FuelType"=>"Gasolina Premium",
-            "Current_fuel_price"=>"214.40",
-            "Date"=>"2019-01-22",
-            "created_at"=>"2019-01-22 04:00:56",
-            "updated_at"=>"2019-01-22 04:00:56"
-        ]);
-
-        expenses::insert([
-            "vehicle"=>"1",
             "Galons"=>"4",
             "FuelType"=>"Gasolina Premium",
-            "Current_fuel_price"=>"214.40",
-            "Date"=>"2019-02-01",
-            "created_at"=>"2019-02-01 04:00:56",
-            "updated_at"=>"2019-02-01 04:00:56",
+            "Current_fuel_price"=>"230.80",
+            "Date"=>"2018-03-18",
+            "created_at"=>"2019-03-18 04:00:56",
+            "updated_at"=>"2019-03-18 04:00:56",
+        ]);
+
+
+        expenses::insert([
+            "vehicle"=>"1",
+            "Galons"=>"8",
+            "FuelType"=>"Gasolina Premium",
+            "Current_fuel_price"=>"235.30",
+            "Date"=>"2019-03-25",
+            "created_at"=>"2019-03-25 04:00:56",
+            "updated_at"=>"2019-03-25 04:00:56",
+        ]);
+
+
+
+
+        expenses::insert([
+            "vehicle"=>"1",
+            "Galons"=>"5",
+            "FuelType"=>"Gasolina Premium",
+            "Current_fuel_price"=>"239.00",
+            "Date"=>"2019-04-09",
+            "created_at"=>"2019-04-09 04:00:56",
+            "updated_at"=>"2019-04-09 04:00:56",
         ]);
 
 
@@ -160,11 +141,23 @@ class DatabaseSeeder extends Seeder
             "vehicle"=>"1",
             "Galons"=>"5",
             "FuelType"=>"Gasolina Premium",
-            "Current_fuel_price"=>"214.40",
-            "Date"=>"2019-02-07",
-            "created_at"=>"2019-02-07 04:00:56",
-            "updated_at"=>"2019-02-07 04:00:56",
+            "Current_fuel_price"=>"239.00",
+            "Date"=>"2019-04-19",
+            "created_at"=>"2019-04-19 04:00:56",
+            "updated_at"=>"2019-04-19 04:00:56",
         ]);
+
+
+        expenses::insert([
+            "vehicle"=>"1",
+            "Galons"=>"5",
+            "FuelType"=>"Gasolina Premium",
+            "Current_fuel_price"=>"239.00",
+            "Date"=>"2019-04-25",
+            "created_at"=>"2019-04-25 04:00:56",
+            "updated_at"=>"2019-04-25 04:00:56",
+        ]);
+
 
 
         FuelPrices::insert([
@@ -179,6 +172,8 @@ class DatabaseSeeder extends Seeder
             'end_of_week'=>'2019-04-05',
             'country'=>'DR'
         ]);
+
+
 
     }
 }

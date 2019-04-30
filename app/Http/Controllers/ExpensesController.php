@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\FuelPrices;
 use Auth;
 use App\expenses;
 use App\vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+
 
 
 class ExpensesController extends Controller
@@ -39,6 +41,7 @@ class ExpensesController extends Controller
      */
     public function store(Request $request)
     {
+        $fueltype = null;
 
         $logged_user_id = auth()->id();
 
@@ -48,13 +51,35 @@ class ExpensesController extends Controller
 
 
         $expenses =  request()->all();
+        $date =  $request->input('Date');
 
         $expenses['vehicle'] = $vehicle_id;
 
 
+        $getStarWeekDate = expenses::getStartofTheWeek(expenses::DateToWeekNumber($date),0)->format('Y-m-d');
+
+        if (request()->input('FuelType') == 'Gasolina Premium'){
+            $fueltype =   'gasolina_premium';
+        }elseif (request()->input('FuelType') == 'Gasolina Regular'){
+            $fueltype =   'gasolina_regular';
+
+        }elseif (request()->input('FuelType') == 'GLP'){
+            $fueltype =   'glp';
+
+        }elseif (request()->input('FuelType') == 'Gas Natural'){
+            $fueltype =   'gnv';
+
+        }
+
+        $fuelprice = FuelPrices::whereDate('start_of_week','=',$getStarWeekDate)->value($fueltype);
+
+        $expenses['Current_fuel_price'] = $fuelprice;
+        $expenses['Galons'] = (request()->input('budget')/$fuelprice);
+
+//        return [$fueltype,$expenses];
         expenses::create($expenses);
 
-        return;
+        return 'Expense logged succesful.';
     }
 
     /**

@@ -298,10 +298,10 @@ if(filename == '/my-car'){
 
 
 
-$('[data-open-details]').click(function (e) {
+$('.maintenance-service').click(function (e) {
   e.preventDefault();
-  $(this).next().toggleClass('is-active');
-  $(this).toggleClass('is-active');
+  $(this).parent().parent().parent().next().toggleClass('is-active');
+  $(this).parent().parent().toggleClass('is-active');
 });
 
 

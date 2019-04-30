@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FuelPrices;
+use App\MaintenancesServicesPerformed;
 use App\vehicle;
 use App\User;
 use App\vehicle_performance;
@@ -12,6 +13,10 @@ use Auth;
 use JavaScript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+
+use \Carbon\Carbon;
+use DateTime;
+
 
 class VehicleController extends Controller
 {
@@ -107,6 +112,8 @@ class VehicleController extends Controller
 
         if(Auth::check() && count($vehicle) !== 0 ){
 
+            $curent_week_number = expenses::getVar('weekOfTheYear');
+            $curent_week_date = expenses::getStartofTheWeek($curent_week_number,0)->format('y-m-d');
 
             $vehicle_id = vehicle::
             where('user',$logged_user_id)
@@ -174,13 +181,77 @@ class VehicleController extends Controller
 
             $weekly_expenses = expenses::totalExpensesByWeek('gasolina_premium');
 
+
+
+            /**/
+            /**/
+
+            //Vehicle averages
+
+            //This week's expenses
+            $vehicle_averages['current_week'] =  collect($weekly_expenses['expense'])->last();
+
+            //Tracked distance this week
+            $vehicle_averages['tracked_current_week'] = round(expenses::galonsSinceDate($curent_week_date,$vehicle_id) * $avg_performance);
+
+            //Monthly fuel ups avg
+            $vehicle_averages['fuelups_current_month'] = expenses::where('vehicle',$vehicle_id)
+                                                                   ->where('Date','>=',expenses::getMonthDates('current'))
+                                                                   ->count();
+
+            $vehicle_averages['fuelups_current_year'] = expenses::where('vehicle',$vehicle_id)
+                                                                    ->where('Date','>=',date('Y').'-01-01')
+                                                                    ->count();
+
+            //Last month fuel ups
+            $vehicle_averages['fuelups_last_month'] = expenses::where('vehicle',$vehicle_id)
+                                                                ->where('Date','>=',expenses::getMonthDates('start'))
+                                                                ->where('Date','<=',expenses::getMonthDates('last'))
+                                                                ->count();
+
+            //Last week expenses
+            $vehicle_averages['last_week'] = collect($weekly_expenses['expense'][3])->sum();
+
+            //Monthly expenses avg
+            $vehicle_averages['last_month'] = expenses::totalExpensesByMonth('last month');
+
+
+            //All time mileage
+            $vehicle_averages['total_distance'] =   vehicle::where('user',$logged_user_id)->value('init_miles') +
+                                                    (vehicle_performance::where('vehicle',$vehicle_id)->value('Avg_MPG')) *
+                                                    (expenses::where('vehicle',$vehicle_id)
+                                                                ->whereYear('Date',date('Y'))->pluck('Galons')->sum());
+            //All time maintenance costs
+            $vehicle_averages['total_maintenance_expenses'] = MaintenancesServicesPerformed::where('vehicle',$vehicle_id)
+                                                                                             ->whereYear('date_performed',date('Y'))
+                                                                                             ->pluck('cost')->sum();
+
+            /**/
+            /**/
+
+//            $averages[] = $vehicle_averages;
+
+
+
+
+            $new = $vehicle_averages['current_week'];
+
+            $original = $vehicle_averages['last_week'];
+
+            $vehicle_averages['increase_decrease_percentage'] = (($new - $original) / $original * 100);
+
+//            dd($vehicle_averages);
+
+
             Javascript::put([
                 'weekly_range' => $weekly_expenses['weeks'],
                 'weekly_cost' => $weekly_expenses['expense']
             ]);
 
 
-            return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed']) );
+
+//            return $averages;
+            return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed','vehicle_averages','weekly_expenses']) );
 
         }else{
 
@@ -226,6 +297,22 @@ class VehicleController extends Controller
     public function destroy(vehicle $vehicle)
     {
         //
+    }
+
+
+    public function test(){
+
+        $logged_user_id = auth()->id();
+
+        $vehicle_id = vehicle::
+        where('user',$logged_user_id)
+            ->value('id');
+
+
+
+
+        return (expenses::totalGalonsGlobal($vehicle_id) * vehicle_performance::where('vehicle',$vehicle_id)->value('Avg_MPG'));
+
     }
 
 
