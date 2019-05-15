@@ -55,7 +55,7 @@
     </li>
 
     <li >
-      <a href="#" class="hollow button secondary flex-middle">
+      <a href="#" class="hollow button secondary flex-middle fuelprices-btn">
         <i class="ft-icon i-alt i-pump">&#xe901;</i>
         <span class='hide-for-small-only'>Fuel prices </span>
       </a>

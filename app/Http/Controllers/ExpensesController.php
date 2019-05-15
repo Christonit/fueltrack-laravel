@@ -6,6 +6,7 @@ use App\FuelPrices;
 use Auth;
 use App\expenses;
 use App\vehicle;
+use App\vehicle_performance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -97,18 +98,13 @@ class ExpensesController extends Controller
 
     public function latest()
     {
-        //
 
-        $logged_user_id = auth()->id();
+        $vehicle_id = vehicle::userVehicle();
 
-        $vehicle_id = vehicle::
-        where('user',$logged_user_id)
-            ->value('id');
+        $expense = expenses::where('vehicle',$vehicle_id)->get()->sortBy('Created_at')->last();
+        $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
 
-
-        $latestExpense = expenses::where('vehicle',$vehicle_id)->get()->sortBy('Created_at')->last();
-
-        return view('vehicle.latest-expense',compact('latestExpense'));
+        return view('vehicle.expense-template',compact(['expense','vehicle_p']));
 
 
     }

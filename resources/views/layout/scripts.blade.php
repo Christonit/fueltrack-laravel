@@ -43,32 +43,17 @@
                     fetch('/latest-expense')
                         .then(response =>{
 
-                            // console.log(response);
-
                             return response.text();
 
                         }).then(data =>{
 
-
-
-                        let ExpenseLogBody =  document.querySelector('#fuel-expenses-logs tbody');
-
-
-                        let ExpenselogFirstC = ExpenseLogBody.firstChild.nextSibling;
-
-                        let child = document.createElement('tr');
-
-                        ExpenseLogBody.insertBefore(child, ExpenselogFirstC);
-
-                        ExpenselogFirstC.innerHTML = data;
-
-                        return;
-
+                        return $('#fuel-expenses-logs tbody').prepend(data);
 
                     }).catch(function(error){
                         console.log(error);
 
                     });
+
                 }
 
                 return;
@@ -163,6 +148,25 @@
         let isUserSignedIn = false;
 
     @endauth
+
+
+    // $('.fuelprices-btn').click( ()=>{
+    //
+    //     fetch('/latest-expense')
+    //         .then(response =>{
+    //
+    //             return response.text();
+    //
+    //         }).then(data =>{
+    //
+    //         return $('#fuel-expenses-logs tbody').prepend(data);
+    //
+    //     }).catch(function(error){
+    //         console.log(error);
+    //
+    //     });
+    //
+    // });
 
 
 

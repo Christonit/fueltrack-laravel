@@ -57,7 +57,6 @@ Route::post('/add-vehicle/performance','VehicleController@store');
 Route::post('/add-expense','ExpensesController@store');
 
 
-Route::get('/latest-expense','ExpensesController@latest');
 
 Auth::routes();
 
@@ -76,6 +75,20 @@ Route::post('/mark-as-performed/{id}/','VehicleMaintenanceController@markAsPerfo
 
 Route::get('/self-service-options', 'ComponentsIncludeController@selfServiceOptions');
 Route::get('/only-warranty-options', 'ComponentsIncludeController@warrantyOptions');
+
+
+Route::get('/latest-expense','ExpensesController@latest');
+Route::get('/latest-maintenance','VehicleMaintenanceController@latestPerformed');
+
+
+//Route::get('/latest-expense', function (){
+//
+//
+//    return 'hola';
+//});
+
+
+
 
 
 

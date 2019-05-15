@@ -56,22 +56,21 @@ class VehicleMaintenanceController extends Controller
 
 
 
-        $service['vehicle'] = vehicle::
-        where('user',auth()->id())
-            ->value('id');
+        $service['vehicle'] = vehicle::userVehicle();
 
 
         if( $service['due_moment'] == 'Specific distance'){
 
             $tracked_distance = request()->validate(['tracked_distance' => ['required','numeric']]);
             $service = array_merge($service,$tracked_distance);
+        }elseif ( $service['due_moment'] == 'Specific date'){
+            $date = request()->validate(['final_date' => ['required','date']]);
+            $service = array_merge($service,$date);
         }
 
 
 
         $service['status'] = true;
-
-//        $status = true;
 
 
          vehicle_maintenance::create($service);
@@ -86,7 +85,7 @@ class VehicleMaintenanceController extends Controller
 
 
 
-        return $service;
+        return;
 
 
 
@@ -151,6 +150,14 @@ class VehicleMaintenanceController extends Controller
         return redirect('/'.auth()->user()->username.'/my-car');
 
 
+    }
+
+    public  function latestPerformed(){
+
+        $vehicle = vehicle::userVehicle();
+        $performed = vehicle_maintenance::latestMaintenanceAdded($vehicle);
+
+        return view('vehicle.maintenance-history-template',compact('performed'));
     }
 
 

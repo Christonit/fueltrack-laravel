@@ -91,7 +91,7 @@
 
                     <li class="stats-list-negative">
                         <span class="stats-list-label"><b>Total Distance Tracked</b></span>
-                        <span class="stat">{{$vehicle_averages['total_distance'] }}</span> miles
+                        <span class="stat">{{round($vehicle_averages['total_distance']) }}</span> miles
                     </li>
 
                     <li class="stats-list-negative">
@@ -314,6 +314,8 @@
                                 <tbody>
 
                                 @include('vehicle.maintenances-history')
+
+
 
 
 

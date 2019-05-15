@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
+
 
 class vehicle extends Model
 {
@@ -29,5 +31,11 @@ class vehicle extends Model
 
     protected function fuelExpensesSince($date){
         return $this->whereDate('created_at','>=',$date);
+    }
+
+    protected  function userVehicle(){
+
+        return $this->where('user',auth()->id())
+            ->value('id');
     }
 }

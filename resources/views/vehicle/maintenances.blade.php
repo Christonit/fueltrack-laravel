@@ -209,7 +209,7 @@
 
                             <span class="status-current">
 
-										<?php
+                                <?php
                                 $fDate = date_create($maintenances->final_date);
 
                                 $cDate = date_create( date("Y-m-d") );
@@ -221,40 +221,41 @@
                                 //Total days to maintenance since created maintenance
                                 $maintenance_date = date_diff($cDate,$fDate)->format("%R%a");
 
+//                                $daysPercentage = 3;
                                 $daysPercentage = round((($totalDaysToWait - $maintenance_date)/$totalDaysToWait)*100);
 
                                 ?>
 
                                 @if($maintenance_date > 0)
 
-                                    <b>Days left</b><br>
+                                        <b>Days left</b><br>
 
-                                    <?= substr($maintenance_date,1);?>
+                                        <?= substr($maintenance_date,1);?>
 
-                                @endif
+                                    @endif
 
-                                @if($maintenance_date < 0)
+                                    @if($maintenance_date < 0)
 
-                                    <b></b><br>
+                                        <b></b><br>
 
-                                    <?= substr($maintenance_date,1)." days overdue"?>
+                                        <?= substr($maintenance_date,1)." days overdue"?>
 
-                                @endif
-									  </span>
+                                    @endif
+                            </span>
 
                             <span class="status-current text-right">
-											<b>Target date</b><br>
+                                <b>Target date</b><br>
                                 {{$maintenances->final_date}}
-									  </span>
+                            </span>
 
                             <progress max="100" value="<?= ($daysPercentage < 100 ? $daysPercentage : '100') ?>"></progress>
 
 
                         @elseif($maintenances->due_moment == 'Inmediate')
                             <span class="status-current">
-                                              <b>Urgency</b><br>
-                                                Inmediate
-									  </span>
+                                <b>Urgency</b><br>
+                                Inmediate
+                            </span>
                             <span class="status-current text-right"></span>
                             <progress max="100" value="100"></progress>
                         @endif

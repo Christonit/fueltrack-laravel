@@ -25,4 +25,5 @@ class MaintenancesServicesPerformed extends Model
 
 
     protected $table = 'maintenances_services_performed';
+
 }

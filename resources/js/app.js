@@ -375,3 +375,8 @@ if(windowSize <= sm){
 
 
   }
+
+
+$('a.success').click( (e)=>{
+   e.preventDefault()
+});

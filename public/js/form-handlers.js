@@ -31,43 +31,91 @@ let addMaintenanceServiceId = (e) =>{
 
 
 
+// let fetchLastMaintenance = () => {
+//
+//     fetch('/latest-maintenance')
+//         .then(response => {
+//                 return response.text();
+//
+//         }).then(data => {
+//
+//             console.log(data);
+//         return data;
+//
+//     }).catch(function (error) {
+//         console.log(error);
+//     });
+// }
+
+
+$('.fuelprices-btn').click( ()=>{
+
+    console.log(fetchLastMaintenance());
+
+});
 
 let sendMaintenanceServiceData = (e) =>{
 
-      maintenanceID = maintenanceInput[0].getAttribute('value');
-      // console.log('/mark-as-performed/'+ maintenanceID +'/');
-      fetch('/mark-as-performed/'+ maintenanceID +'/', {
-            method: 'post',
-            body: new FormData(document.querySelector('form[name="service-performed"]'))
+    maintenanceID = maintenanceInput[0].getAttribute('value');
+    // console.log('/mark-as-performed/'+ maintenanceID +'/');
 
-        }).then(function(response){
-            if(response.ok){
+    fetch('/mark-as-performed/'+ maintenanceID +'/', {
+        method: 'post',
+        body: new FormData(document.querySelector('form[name="service-performed"]'))
 
-                console.log('envio exitoso');
+    }).then(function(response){
+        if(response.ok){
 
-                return;
+            // console.log('envio exitoso');
 
-            }
-            else {
-                throw "Error en la llamada Ajax";
-            }
-        }).catch(function(error){
-            console.log(error);
-        });
+
+            return;
+        }
+        else {
+            throw "Error en la llamada Ajax";
+        }
+    }).then().catch(function(error){
+        console.log(error);
+    });
 
 };
 
 servicePerformedCheck.click((e)=>{
     addMaintenanceServiceId(e);
+
     e.preventDefault();
 });
 
 
 maintenanceServiceButton.click((e)=>{
+
+    let maintance_id = $('#done-service input[name="maintenance_service"]').val();
+
+
     sendMaintenanceServiceData(e);
+
+            fetch('/latest-maintenance')
+            .then(response => {
+                return response.text();
+
+            }).then(data => {
+
+                $('[data-maintenance-id="'+maintance_id+'"]').parent().parent().remove();
+
+                return $('#maintenance-logs tbody').prepend(data);
+
+
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+
+
+
+    // console.log(e.targets.parent().parent());
     e.preventDefault();
 
-})
+});
 
 
 maintenanceServiceCategory.on('change', (e) =>{

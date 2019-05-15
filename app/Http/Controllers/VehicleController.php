@@ -107,6 +107,8 @@ class VehicleController extends Controller
         $vehicle = vehicle::
         where('user',$logged_user_id)->get();
 
+        $vehicle_id = vehicle::userVehicle();
+
 
 
 
@@ -115,9 +117,7 @@ class VehicleController extends Controller
             $curent_week_number = expenses::getVar('weekOfTheYear');
             $curent_week_date = expenses::getStartofTheWeek($curent_week_number,0)->format('y-m-d');
 
-            $vehicle_id = vehicle::
-            where('user',$logged_user_id)
-                ->value('id');
+
 
             $m_s_performed = vehicle_maintenance::getPerformedMaintenance($vehicle_id);
 
@@ -150,7 +150,11 @@ class VehicleController extends Controller
 
             $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
 
-            $maintenance =  vehicle::find($vehicle_id)->maintenances;
+            $maintenance =  vehicle::find($vehicle_id)->maintenances->sortBy('status');
+
+
+
+
 
             //1. Gets totals of galons following a given date greater or equal than the date when a maintenance was added as active.
 
@@ -169,6 +173,45 @@ class VehicleController extends Controller
                         ->where('due_moment', '=','Specific distance')
                         ->where('status','=','1')
                         ->update(['current_distance' => ($avg_performance * $galons) ]);
+
+
+                }elseif($maintenances->due_moment == 'Specific date'){
+
+                    //Final date for maintenance
+                    $fDate = date_create($maintenances->final_date);
+
+                    //Current date
+                    $cDate = date_create( date("Y-m-d") );
+
+//                    $createdDate = date_create(  $maintenances->created_at  );
+
+//                    $totalDaysToWait = date_diff($createdDate,$fDate)->format("%a");
+
+                    //Total days to maintenance since created maintenance
+//                    $maintenance_date = date_diff($cDate,$fDate)->format("%R%a");
+
+                    $days_overdue = date_diff($cDate,$fDate)->format("%R%a");
+
+                    if($days_overdue<0){
+
+                        $days_overdue = ($days_overdue * -1);
+
+                        vehicle_maintenance::where('vehicle','=',$vehicle_id)
+                            ->where('id', '=',$maintenances->id)
+                            ->where('due_moment', '=','Specific date')
+                            ->where('status','=','1')
+                            ->update(['days_overdue' => $days_overdue]);
+
+                    }else{
+
+                        $maintenances['days_left'] = $days_overdue;
+                    }
+
+//                                $daysPercentage = 3;
+//                    $daysPercentage = round((($totalDaysToWait - $maintenance_date)/$totalDaysToWait)*100);
+
+
+//                    return [$maintenances,$days_overdue];
 
 
                 }
@@ -226,31 +269,28 @@ class VehicleController extends Controller
                                                                                              ->whereYear('date_performed',date('Y'))
                                                                                              ->pluck('cost')->sum();
 
-            /**/
-            /**/
-
-//            $averages[] = $vehicle_averages;
-
-
 
 
             $new = $vehicle_averages['current_week'];
 
             $original = $vehicle_averages['last_week'];
 
-            $vehicle_averages['increase_decrease_percentage'] = (($new - $original) / $original * 100);
 
-//            dd($vehicle_averages);
+            if($new == 0 || $original == 0){
 
+                $vehicle_averages['increase_decrease_percentage'] = 0;
+
+            }else{
+
+                $vehicle_averages['increase_decrease_percentage'] = (($new - $original) / $original * 100);
+
+            }
 
             Javascript::put([
                 'weekly_range' => $weekly_expenses['weeks'],
                 'weekly_cost' => $weekly_expenses['expense']
             ]);
 
-
-
-//            return $averages;
             return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed','vehicle_averages','weekly_expenses']) );
 
         }else{
