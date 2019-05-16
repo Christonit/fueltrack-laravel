@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\vehicle;
+use Auth;
+
 
 class vehicle_maintenance extends Model
 {
@@ -30,10 +33,11 @@ class vehicle_maintenance extends Model
 
     }
 
-    protected function  latestMaintenanceAdded($id){
+    protected function  latestMaintenancePerformed(){
 
 
-
+        $vehicle = vehicle::
+        where('user',auth()->id())->value('id');
 
        return $this->select('vehicle_maintenance.id',
            'vehicle_maintenance.maintenance_service',
@@ -50,8 +54,22 @@ class vehicle_maintenance extends Model
            'vehicle_maintenance.overdue_distance',
            'maintenances_services_performed.self_service')
            ->join('maintenances_services_performed', 'vehicle_maintenance.id','=', 'maintenances_services_performed.maintenance_service')
-                   ->where('vehicle_maintenance.vehicle',$id)
-                   ->where('vehicle_maintenance.status','false')->latest()->first();
+                   ->where('vehicle_maintenance.vehicle',$vehicle)
+                   ->where('vehicle_maintenance.status',0)->latest()->first();
+
+    }
+
+
+    protected function  latestMaintenanceAdded(){
+
+
+        $vehicle = vehicle::
+        where('user',auth()->id())->value('id');
+
+
+
+        return $this->where('vehicle',$vehicle)
+            ->where('status',1)->latest()->first();
 
     }
 

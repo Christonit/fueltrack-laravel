@@ -98,6 +98,14 @@
 
                             miles   | {{ $performed->date_performed }}
                             </p>
+                                    @elseif($performed->due_moment == "Specific date" OR $performed->due_moment == "Inmediate")
+
+                            <p>
+                                performed in
+
+                            {{ $performed->date_performed}}
+
+                            </p>
                         @endif
                         </span>
 

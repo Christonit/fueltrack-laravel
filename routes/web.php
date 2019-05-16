@@ -79,6 +79,7 @@ Route::get('/only-warranty-options', 'ComponentsIncludeController@warrantyOption
 
 Route::get('/latest-expense','ExpensesController@latest');
 Route::get('/latest-maintenance','VehicleMaintenanceController@latestPerformed');
+Route::get('/recent-maintenance-added','VehicleMaintenanceController@latestAdded');
 
 
 //Route::get('/latest-expense', function (){

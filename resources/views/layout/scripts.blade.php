@@ -80,6 +80,21 @@
 
                     console.log('envio exitoso');
 
+                    fetch('/recent-maintenance-added').then(response =>{
+
+                        return response.text();
+
+                    }).then(data =>{
+
+                        return $('#scheduled-maintenance').prepend(data);
+
+                    }).catch(function(error){
+                        console.log(error);
+
+                    });
+
+
+
                     return $('#add-service').foundation('close');
 
                 }
@@ -87,6 +102,7 @@
                     throw "Error en la llamada Ajax";
                 }
             }).catch(function(error){
+
 
                 console.log(error);
 

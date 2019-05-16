@@ -154,10 +154,17 @@ class VehicleMaintenanceController extends Controller
 
     public  function latestPerformed(){
 
-        $vehicle = vehicle::userVehicle();
-        $performed = vehicle_maintenance::latestMaintenanceAdded($vehicle);
+        $performed = vehicle_maintenance::latestMaintenancePerformed();
 
         return view('vehicle.maintenance-history-template',compact('performed'));
+    }
+
+
+    public  function latestAdded(){
+
+        $maintenances = vehicle_maintenance::latestMaintenanceAdded();
+
+        return view('vehicle.maintenance-template',compact('maintenances'));
     }
 
 

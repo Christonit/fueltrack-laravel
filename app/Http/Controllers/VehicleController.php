@@ -113,6 +113,8 @@ class VehicleController extends Controller
 
 
         if(Auth::check() && count($vehicle) !== 0 ){
+            $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
+
 
             $curent_week_number = expenses::getVar('weekOfTheYear');
             $curent_week_date = expenses::getStartofTheWeek($curent_week_number,0)->format('y-m-d');
@@ -148,9 +150,6 @@ class VehicleController extends Controller
             }
 
 
-            $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
-
-            $maintenance =  vehicle::find($vehicle_id)->maintenances->sortBy('status');
 
 
 
@@ -159,6 +158,57 @@ class VehicleController extends Controller
             //1. Gets totals of galons following a given date greater or equal than the date when a maintenance was added as active.
 
             $avg_performance = $vehicle_p[0]['Avg_MPG'];
+
+
+
+
+
+
+
+
+//            $pending =  vehicle_maintenance::where([['vehicle',$vehicle_id],['status',1]])
+//                ->where('due_moment', 'Specific distance')
+//                ->orWhere('due_moment', 'Specific date')
+//                ->whereNull('overdue_distance')
+//                ->whereNull('days_overdue')->orderBy('created_at','DESC')
+//                ->get();
+            $date_pending =  vehicle_maintenance::where([
+                    ['vehicle',$vehicle_id],
+                    ['status',1],
+                    ['due_moment', 'Specific date']
+                ])
+                ->whereNull('days_overdue')
+                ->orderBy('created_at','DESC')
+                ->get();
+
+
+            $distance_pending =  vehicle_maintenance::where([
+                ['vehicle',$vehicle_id],
+                ['status',1],
+                ['due_moment', 'Specific distance']
+                ])
+                ->whereNull('overdue_distance')
+                ->orderBy('created_at','DESC')
+                ->get();
+
+
+            $distance_date_overdue = vehicle_maintenance::where([['vehicle',$vehicle_id],['status',1]])
+                ->whereIn('due_moment',['Specific distance','Specific date'])
+                ->whereNotNull('days_overdue')
+                ->orWhereNotNull('overdue_distance')->orderBy('created_at','DESC')
+                ->get();
+
+
+
+            $due_inmediate = vehicle_maintenance::where([['vehicle',$vehicle_id],['status',1]])->where('due_moment','Inmediate')->orderBy('created_at','DESC')->get();
+
+            $maintenance = collect();
+
+            $maintenance = $maintenance->concat($due_inmediate)->concat($distance_date_overdue)->concat($date_pending)->concat($distance_pending);
+
+
+
+
 
 
             foreach($maintenance as $maintenances){
@@ -219,10 +269,71 @@ class VehicleController extends Controller
 
             }
 
-
             $expenses = expenses::where('vehicle',$vehicle_id)->get()->reverse();
 
             $weekly_expenses = expenses::totalExpensesByWeek('gasolina_premium');
+
+
+/*
+            $pending =  vehicle_maintenance::where('vehicle',$vehicle_id)->where('status','1')
+                ->where('due_moment', 'Specific distance')
+                ->orWhere('due_moment', 'Specific date')
+                ->whereNull('overdue_distance')
+                ->whereNull('days_overdue')->orderBy('created_at','DESC')
+                ->get();
+
+            $distance_date_overdue = vehicle_maintenance::where('vehicle',$vehicle_id)->where('status','1')
+                ->whereIn('due_moment',['Specific distance','Specific date'])
+                ->whereNotNull('days_overdue')
+                ->orWhereNotNull('overdue_distance')->orderBy('created_at','DESC')
+                ->get();
+
+            $due_inmediate = vehicle_maintenance::where('vehicle',$vehicle_id)->where('status','1')->where('due_moment','Inmediate')->orderBy('created_at','DESC')->get();
+
+            $maintenance = collect();
+
+            $maintenance = $maintenance->concat($due_inmediate)->concat($distance_date_overdue)->concat($pending);*/
+
+
+            /*Query due moment pending maintenances
+
+            $pending =  vehicle_maintenance::where('vehicle','1')
+                ->where('due_moment', 'Specific distance')
+                ->orWhere('due_moment', 'Specific date')
+                ->whereNull('overdue_distance')
+                ->whereNull('days_overdue')
+                ->get();
+
+            $distance_date_overdue = vehicle_maintenance::where('vehicle','1')
+                                                        ->whereIn('due_moment',['Specific distance','Specific date'])
+                                                        ->whereNotNull('days_overdue')
+                                                        ->orWhereNotNull('overdue_distance')
+                                                        ->get();
+
+            $due_inmediate = vehicle_maintenance::where('vehicle','1')->where('due_moment','Inmediate')->get();
+
+
+            $maintenance = array_merge($due_inmediate,$distance_date_overdue,$pending);
+
+            return $maintenance;
+
+*/
+
+
+
+
+
+
+
+
+
+/*            Query to fetch overdue or due dates overdue maintenances
+
+            return vehicle_maintenance::where('vehicle','1')->where('due_moment','Specific distance')->whereNotNull('overdue_distance')->get();
+            return vehicle_maintenance::where('vehicle','1')->where('due_moment','Specific date')->whereNotNull('days_overdue')->get();
+            return vehicle_maintenance::where('vehicle','1')->where('due_moment','Inmediate')->get();
+*/
+
 
 
 
@@ -294,7 +405,6 @@ class VehicleController extends Controller
             return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed','vehicle_averages','weekly_expenses']) );
 
         }else{
-
 
             return redirect('/');
 
