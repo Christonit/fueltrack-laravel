@@ -20,13 +20,13 @@
       margin-bottom: 24px;
       @include breakpoint(sm){
         margin-bottom: 0;
-        border-radius: 0;
-        border-right: none;
+        //border-radius: 0;
+        //border-right: none;
       }
       &[name='maker']{
 
       @include breakpoint(sm){
-        border-radius: 4px 0 0 4px;
+        //border-radius: 4px 0 0 4px;
 
       }
 
@@ -36,7 +36,7 @@
   button{
 
     @include breakpoint(sm){
-      border-radius: 0 4px 4px 0;
+      //border-radius: 0 4px 4px 0;
     }
   }
 

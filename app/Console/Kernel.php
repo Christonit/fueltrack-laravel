@@ -31,14 +31,25 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
 
         //Update fuel prices every friday at 12 pm.
-        $schedule->call(function(){
+//        $schedule->call(function(){
+//
+//            $FuelPrices = array();
+//            $FuelPrices = array_merge( FuelPrices::getCurrentWeek(), FuelPrices::getFuelPrices());
+//            $FuelPrices['country'] = 'DO';
+//            FuelPrices::create($FuelPrices);
+//
+//        })->weeklyOn(5, '12:00');
+//
 
+
+        //Run command manually as currently there is no server.
+        $schedule->call(function(){
             $FuelPrices = array();
             $FuelPrices = array_merge( FuelPrices::getCurrentWeek(), FuelPrices::getFuelPrices());
             $FuelPrices['country'] = 'DO';
             FuelPrices::create($FuelPrices);
 
-        })->weeklyOn(5, '12:00');
+        })->everyMinute();
 
 
     }

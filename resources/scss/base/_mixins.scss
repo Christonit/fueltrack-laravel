@@ -83,6 +83,10 @@ font-weight: 600;
 border: 1px solid $grey-hint;
 }
 
+@mixin border-color($color){
+    border: 1px solid $color;
+}
+
 @mixin border-radius{
 	  border-radius:4px;
 
@@ -169,6 +173,11 @@ text-align: center;
 
 @mixin border-bottom{
 		border-bottom: 1px solid $grey-hint;
+}
+
+
+@mixin border-bottom-color($color){
+    border-bottom: 1px solid $color;
 }
 
 @mixin border-top{

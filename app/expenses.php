@@ -171,15 +171,30 @@ class expenses extends Model
     protected function totalExpensesByMonth($date){
         $month = $date;
 
-        if($month = 'last month'){
+//        $test = $this->where('vehicle','1')->get();
+
+
+        $month = 'last month';
+        if($month == 'last month'){
             $expenses = $this->whereMonth('Date',($this->getDate->month - 1))->select('Current_fuel_price','Galons')->get();
         }
+//dd(count($expenses));
+//        if (empty($expenses)){
 
-        foreach ($expenses as $expense){
-            $monthlyExpense[] = $expense['Current_fuel_price'] * $expense['Galons'];
-        }
+            foreach ($expenses as $expense){
+                $monthlyExpense[] = $expense['Current_fuel_price'] * $expense['Galons'];
 
-        return round(collect($monthlyExpense)->sum());
+            }
+
+            return round(collect($monthlyExpense)->sum());
+
+//        }else{
+//
+//            return 0;
+//        }
+
+
+
 
     }
 

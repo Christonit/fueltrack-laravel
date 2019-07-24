@@ -27,7 +27,6 @@
 
 @import "variables.scss";
 @import "mixins.scss";
-
 @import "defaults.scss";
 
 html{
@@ -98,5 +97,5 @@ select{
 
 
 
-@import "utilities.scss";
+@import "../utilities/utilities";
 @import "alignment.scss";

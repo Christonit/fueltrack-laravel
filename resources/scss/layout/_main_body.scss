@@ -24,6 +24,43 @@ background: $body;
 }
 
 
+.row{
+    padding:1rem 1.5rem;
+}
+
+.stats-table {
+    @include border-color($grey);
+    @include border-radius;
+    overflow: hidden;
+
+
+
+    .row:not(.header){
+        &:nth-child(odd) {
+            background: $grey-hint;
+        }
+    }
+
+    .row{
+        &:hover:not(.header){
+            background: $blue;
+            color: $white;
+            @include bold;
+            cursor:pointer;
+
+        }
+    }
+
+    .row.header {
+        color: $grey;
+        @include border-bottom-color($grey);
+        background: $white;
+    }
+}
+
+.row.cell{
+    font-size: 0.875rem;
+}
 #hero-image {
 	background: $hero-image-bg  no-repeat  center;
 	background-size: contain;
@@ -139,10 +176,7 @@ background: $body;
   }
 }
 
-#vehicle-search{
-	margin-left: 1.2rem;
-	margin-right: 1.2rem;
-}
+
 canvas {
 	display: block;
 	max-width: 100%;

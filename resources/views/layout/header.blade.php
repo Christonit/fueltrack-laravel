@@ -2,7 +2,7 @@
 
 
   <div class="cell small-4 medium-2">
-    <a id='logo' href="/"><img src="https://www.svgshare.com/i/8Zq.svg"/></a>
+    <a id='logo' href="/"><img src="/images/logo.svg"/></a>
 
     <a href="#"class="show-for-small-only" data-responsive-toggle="main-menu" data-hide-for="medium">
       <i class="material-icons" data-toggle="main-menu">menu</i>

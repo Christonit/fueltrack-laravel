@@ -49,13 +49,13 @@
 
     @include('layout.scripts')
 
-    @yield('specific-scripts')
 
 <!-- Compressed CSS -->
 
-    <script>
-        $(document).foundation();
-    </script>
 
-</body>
+
+    @yield('specific-scripts')
+
+
+  </body>
 </html>

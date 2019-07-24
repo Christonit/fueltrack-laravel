@@ -1,0 +1,14 @@
+.border-horizontal-clear{
+    border-left: 0;
+    border-right: 0;
+
+}
+
+.border-horizontal-clear-sm{
+
+    @include breakpoint(sm){
+        border-left: unset;
+        border-right: unset;
+    }
+
+}

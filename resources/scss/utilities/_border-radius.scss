@@ -1,0 +1,52 @@
+.border-radius-clear{
+    border-radius: unset;
+}
+
+.br-top-left{
+    border-top-left-radius: $border-radius-sm;
+}
+
+.br-top-right{
+    border-top-left-radius: $border-radius-sm;
+}
+
+.br-bottom-left{
+    border-bottom-left-radius: $border-radius-sm;
+}
+
+.br-bottom-right{
+    border-bottom-right-radius: $border-radius-sm;
+}
+
+
+.br-top-left-sm{
+
+    @include breakpoint(sm){
+        border-top-left-radius: $border-radius-sm;
+    }
+
+}
+
+.br-top-right-sm{
+
+    @include breakpoint(sm){
+        border-top-right-radius: $border-radius-sm;
+    }
+
+}
+
+.br-bottom-left-sm{
+
+    @include breakpoint(sm){
+        border-bottom-left-radius: $border-radius-sm;
+    }
+
+}
+
+.br-bottom-right-sm{
+
+    @include breakpoint(sm){
+        border-bottom-right-radius: $border-radius-sm;
+    }
+
+}

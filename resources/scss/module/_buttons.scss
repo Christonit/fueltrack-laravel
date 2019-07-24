@@ -405,3 +405,17 @@ padding: 0 8px!important;
 }
 
 
+
+.switch{
+    margin-bottom: 0;
+
+}
+
+.switch-paddle {
+    border-radius: 1rem;
+    font-size: 0.65rem;
+}
+
+.switch-paddle::after{
+    border-radius: 100%;
+}

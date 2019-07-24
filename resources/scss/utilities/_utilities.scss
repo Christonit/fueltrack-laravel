@@ -1,4 +1,24 @@
 /* CSS Document */
+
+@import "margin";
+@import "border-radius";
+@import "border";
+@import "padding";
+@import "flex";
+
+
+.label{
+    color: $grey;
+}
+
+.label-primary-text{
+    color: $primary-color;
+}
+
+.label-secondary-text{
+    color: $grey;
+}
+
 .clear-card{
 	@include clear-card;
 }
@@ -21,14 +41,6 @@
 
 }
 
-.no-m-top{
-	margin-top: 0 !important;
-
-}
-
-.no-m-bottom{
-	margin-bottom: 0 !important;
-}
 
 
 .cancel{
@@ -55,3 +67,4 @@
 	font-weight: inherit;
 	color: $blue;
 }
+

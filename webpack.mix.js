@@ -11,5 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.copy('resources/js/', 'public/js')
-    .styles(['resources/css/foundation.min.css'],'public/css/foundation.min.css').sass('resources/scss/style.scss', 'public/css');
+mix.scripts([
+    'node_modules/jquery/dist/jquery.js',
+    'node_modules/foundation-sites/dist/js/foundation.js'
+], 'public/js/vendor.js').js('resources/js/app.js', 'public/js/')
+    .styles(['resources/css/foundation.min.css'],'public/css/foundation.min.css').copy('resources/images','public/images').sass('resources/scss/style.scss', 'public/css');
