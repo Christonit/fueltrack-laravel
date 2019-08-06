@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'add-vehicle';
+    protected $redirectTo = 'vehicle/add-vehicle';
 
     /**
      * Create a new controller instance.
@@ -71,4 +71,5 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
 }

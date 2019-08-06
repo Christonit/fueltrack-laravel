@@ -68,3 +68,19 @@
 	color: $blue;
 }
 
+
+.callout{
+    &.error{
+        position: relative;
+        margin: -1rem 0 0.5rem;
+        padding: 0.25rem 1rem;
+        border: 1px solid rgba(10,10,10,.10);
+        border-radius: 4px;
+        background-color: $red-fade;
+        color: $red;
+        top: -1.25rem;
+        width: 100%;
+        display: block;
+        letter-spacing: -0.1px;
+    }
+}

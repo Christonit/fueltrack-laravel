@@ -37,6 +37,7 @@ class pageController extends Controller
 
     public function sign_up(){
 
+
          return view('forms.sign-up');
     }
 

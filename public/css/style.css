@@ -480,6 +480,20 @@ select {
   color: #2F80ED;
 }
 
+.callout.error {
+  position: relative;
+  margin: -1rem 0 0.5rem;
+  padding: 0.25rem 1rem;
+  border: 1px solid rgba(10, 10, 10, 0.1);
+  border-radius: 4px;
+  background-color: #FAD1D1;
+  color: #EB5757;
+  top: -1.25rem;
+  width: 100%;
+  display: block;
+  letter-spacing: -0.1px;
+}
+
 .left {
   float: left;
 }
@@ -3049,5 +3063,19 @@ ul#m-vehicle-stats .tabs-title > a {
 .highlight {
   font-weight: inherit;
   color: #2F80ED;
+}
+
+.callout.error {
+  position: relative;
+  margin: -1rem 0 0.5rem;
+  padding: 0.25rem 1rem;
+  border: 1px solid rgba(10, 10, 10, 0.1);
+  border-radius: 4px;
+  background-color: #FAD1D1;
+  color: #EB5757;
+  top: -1.25rem;
+  width: 100%;
+  display: block;
+  letter-spacing: -0.1px;
 }
 

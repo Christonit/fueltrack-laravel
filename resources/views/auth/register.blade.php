@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="grid-container fluid">
+    <div id="app" class="grid-container fluid">
 
 
         <!-- Overview section header -->
@@ -34,59 +34,15 @@
                                 <li class="tabs-title"><b>Your vehicle info</b></a>
                                 </li>
                             </ul>
-                            <form class="float-center" method="POST" action="{{ route('register') }}">
 
-                                @csrf
-
-                                <div id="signup-user-details" class="">
-
-
-                                    <label>Username
-                                        <input id="username" type="text" class="{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-
-                                        @if ($errors->has('username'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                                        @endif
-
-                                    </label>
-                                    <label>Email
-                                        <input id="email" type="email" class="{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                        @if ($errors->has('email'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                        @endif
-                                    </label>
-
-                                    <label>Password
-                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                        @if ($errors->has('password'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                        @endif
-                                    </label>
-
-                                    <label>Confirm password
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-
-                                    </label>
-
-                                    <button type="submit" class="button expanded success">
-                                        {{ __('Register') }}
-                                    </button>
+                            <register-users-form>
+                                <template #csrf>
+                                    @csrf
+                                </template>
 
 
 
-                                    {{--<a class="button expanded success" href="#">Continue</a>--}}
-
-                                </div>
-
-                            </form>
+                            </register-users-form>
 
 
                         </div>

@@ -1,4 +1,6 @@
 import StatsTable from './modules/fuelgov/stats-table.vue';
+import RegisterUsersForm from './components/forms/register-users.vue';
+
 
 window.Vue = require('vue');
 
@@ -89,31 +91,16 @@ const app = new Vue({
         vehicle:{}
     },
     components:{
-        StatsTable
+        StatsTable,
+        RegisterUsersForm
+
     },
     created(){
 
 
-        // this.makers =  this.getMakers()
-        // this.years =  this.getYears()
-
-        //
-        // new Promise(function (resolve, reject) {
-        //
-        //
-        //     if (hasMakers.length > 0 ) {
-        //         return resolve();
-        //     }
-        // }).then( (hasMakers) =>{
-        //     console.log(hasMakers.length)
-        //
-        //     return getModels;
-        // });
-
     },
     mounted(){
-        // if (this.makers.length > 0 ){
-        // }
+
     },
 
     computed:{

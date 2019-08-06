@@ -169,25 +169,6 @@
     @endauth
 
 
-    // $('.fuelprices-btn').click( ()=>{
-    //
-    //     fetch('/latest-expense')
-    //         .then(response =>{
-    //
-    //             return response.text();
-    //
-    //         }).then(data =>{
-    //
-    //         return $('#fuel-expenses-logs tbody').prepend(data);
-    //
-    //     }).catch(function(error){
-    //         console.log(error);
-    //
-    //     });
-    //
-    // });
-
-
 
 </script>
 @endif
