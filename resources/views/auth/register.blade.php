@@ -35,7 +35,7 @@
                                 </li>
                             </ul>
 
-                            <register-users-form>
+                            <register-users-form action="{{ route('register') }}">
                                 <template #csrf>
                                     @csrf
                                 </template>

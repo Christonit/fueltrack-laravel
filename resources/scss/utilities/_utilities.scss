@@ -47,6 +47,11 @@
 	color:$red;
 }
 
+.disabled{
+    pointer-events: none!important;;
+    cursor: default!important;
+}
+
 
 .red{
 

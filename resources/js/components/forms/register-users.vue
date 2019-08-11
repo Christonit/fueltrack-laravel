@@ -1,5 +1,5 @@
 <template>
-    <form class="float-center" method="POST" action="/register-user" name="new-user" ref='new-user'>
+    <form class="float-center" method="POST"  name="new-user" ref='new-user'>
 
         <!--@csrf-->
 
@@ -118,7 +118,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

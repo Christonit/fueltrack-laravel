@@ -465,6 +465,11 @@ select {
   color: #EB5757;
 }
 
+.disabled {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
 .overlay {
   display: block;
   position: fixed;
@@ -3048,6 +3053,11 @@ ul#m-vehicle-stats .tabs-title > a {
 
 .cancel {
   color: #EB5757;
+}
+
+.disabled {
+  pointer-events: none !important;
+  cursor: default !important;
 }
 
 .overlay {

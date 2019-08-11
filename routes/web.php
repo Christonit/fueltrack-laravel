@@ -52,7 +52,8 @@ Route::get('/add-vehicle', 'pageController@addVehicle');
 
 Route::post('/add-vehicle','VehicleController@store');
 
-Route::post('/add-vehicle/performance','VehicleController@store');
+
+//Route::post('/add-vehicle/performance','VehicleController@store');
 
 Route::post('/add-expense','ExpensesController@store');
 

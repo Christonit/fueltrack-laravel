@@ -69,6 +69,7 @@ class VehicleController extends Controller
         ]);
 
 
+
         $logged_user_id = auth()->id();
 
         $logged_user = auth()->user()->username;

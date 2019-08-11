@@ -1,8 +1,13 @@
+
+import Vue from 'vue'
+
+window.Vue = require('Vue');
+
+import store from './store/index.js';
+
 import StatsTable from './modules/fuelgov/stats-table.vue';
 import RegisterUsersForm from './components/forms/register-users.vue';
-
-
-window.Vue = require('vue');
+import AddVehicleForm from './components/forms/add-vehicle-form.vue';
 
 
 // Vue.component('stats-table', require('./modules/fuelgov/stats-table.vue').default);
@@ -80,6 +85,7 @@ var previewBtn = document.querySelector('[data-add-vehicle="review"]');
 
 const app = new Vue({
     el: '#app',
+    store,
     data:{
         message:'hola mundo',
         makers:'',
@@ -92,7 +98,8 @@ const app = new Vue({
     },
     components:{
         StatsTable,
-        RegisterUsersForm
+        RegisterUsersForm,
+        AddVehicleForm
 
     },
     created(){
@@ -105,10 +112,14 @@ const app = new Vue({
 
     computed:{
 
+        testStore(){
+            return this.$store.state.test;
+        }
+
     },
     methods:{
         selectMaker(e){
-            this.models = this.getModels(e.target.value, this.$refs.selectedYear .value)
+            this.models = this.getModels(e.target.value, this.$refs.selectedYear.value)
 
         },
         xmlToDoc(dataToParse){
@@ -136,7 +147,6 @@ const app = new Vue({
                     for(let i = 0; i < yearsList.childElementCount; i++) {
 
                         years.push( yearsList.childNodes[i].childNodes[1].textContent);
-
 
                     };
 

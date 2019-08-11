@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
+
 
 class pageController extends Controller
 {
@@ -43,7 +45,14 @@ class pageController extends Controller
 
     public function  addVehicle(){
 
-      return view('vehicle.add-vehicle');
+        if(Auth::check() ){
+            return view('vehicle.add-vehicle');
+
+        }else{
+
+            return redirect('/');
+
+        }
 
     }
 
