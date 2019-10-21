@@ -9,6 +9,8 @@ use App\expenses;
 use App\vehicle_maintenance;
 use Illuminate\Support\Facades\Hash;
 use App\FuelPrices;
+use Laravel\Passport\HasApiTokens;
+
 //use Illuminate\Support\Facades\Validator;
 
 class DatabaseSeeder extends Seeder
@@ -28,8 +30,7 @@ class DatabaseSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_At'=> date("Y-m-d H:i:s"),
 
-        ]);
-
+        ]);         
 
         vehicle::insert([
             'user' => '1',

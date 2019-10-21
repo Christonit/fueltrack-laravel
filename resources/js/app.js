@@ -5,7 +5,9 @@ window.Vue = require('Vue');
 
 import store from './store/index.js';
 
-import StatsTable from './modules/fuelgov/stats-table.vue';
+// import StatsTable from './modules/fuelgov/stats-table.vue';
+import StatsTable from './components/utilities/stats-table.vue';
+import ExpensesHistoric from './components/my-car/expenses-historic.vue';
 import RegisterUsersForm from './components/forms/register-users.vue';
 import AddVehicleForm from './components/forms/add-vehicle-form.vue';
 
@@ -99,7 +101,8 @@ const app = new Vue({
     components:{
         StatsTable,
         RegisterUsersForm,
-        AddVehicleForm
+        AddVehicleForm,
+        ExpensesHistoric
 
     },
     created(){

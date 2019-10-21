@@ -12,6 +12,13 @@
 */
 
 
+Route::post('/user/check-username','ValidationsController@username');
+Route::post('/user/check-password','ValidationsController@password');
+Route::post('/user/check-email','ValidationsController@email');
+
+// Route::get('/expenses/historic', function(Request $request){
+//     return 'hola';
+// });
 
 Route::get('/', 'pageController@home');
 
@@ -61,7 +68,7 @@ Route::post('/add-expense','ExpensesController@store');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('/{username}/my-car', 'VehicleController@show');
@@ -74,8 +81,8 @@ Route::post('/mark-as-performed/{id}/','VehicleMaintenanceController@markAsPerfo
 
 //Ajax fetch routes
 
-Route::get('/self-service-options', 'ComponentsIncludeController@selfServiceOptions');
-Route::get('/only-warranty-options', 'ComponentsIncludeController@warrantyOptions');
+// Route::get('/self-service-options', 'ComponentsIncludeController@selfServiceOptions');
+// Route::get('/only-warranty-options', 'ComponentsIncludeController@warrantyOptions');
 
 
 Route::get('/latest-expense','ExpensesController@latest');

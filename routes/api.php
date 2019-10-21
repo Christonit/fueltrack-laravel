@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\RegisterController;
+use App\User;
+use App\vehicle;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +22,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::middleware('auth:api')->get('/expenses/historic', function(Request $request){
+    // return $request->user();
+    return User::where('id',3)->get();
+});
+
+/*
 
 Route::post('/user/check-username','ValidationsController@username');
 Route::post('/user/check-password','ValidationsController@password');
 Route::post('/user/check-email','ValidationsController@email');
+*/

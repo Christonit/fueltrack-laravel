@@ -25,10 +25,10 @@
 
 	</head>
 
-  <body>
+  <body >
     <!-- This demo uses float grid but you can use flex grid too -->
 
-
+<div id="app">
     @include('layout.header')
 
 
@@ -49,14 +49,15 @@
 
     @endauth
 
-    @include('layout.scripts')
 
 
 <!-- Compressed CSS -->
 
 
-
-    @yield('specific-scripts')
+</div>
+   
+@include('layout.scripts')
+@yield('specific-scripts')
 
 
   </body>

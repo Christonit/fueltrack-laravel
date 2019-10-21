@@ -8763,7 +8763,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var form = document.querySelector('form[name="new-user"]');
       setTimeout(function () {
-        fetch('/api/user/check-username', {
+        fetch('/user/check-username', {
           method: 'POST',
           body: new FormData(form)
         }).then(function (response) {
@@ -8779,7 +8779,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var form = document.querySelector('form[name="new-user"]');
       setTimeout(function () {
-        fetch('/api/user/check-password', {
+        fetch('/user/check-password', {
           method: 'POST',
           body: new FormData(form)
         }).then(function (response) {
@@ -8794,7 +8794,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var form = document.querySelector('form[name="new-user"]');
       setTimeout(function () {
-        fetch('/api/user/check-email', {
+        fetch('/user/check-email', {
           method: 'POST',
           body: new FormData(form)
         }).then(function (response) {
@@ -8919,10 +8919,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/fuelgov/stats-table.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/fuelgov/stats-table.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-historic.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/expenses-historic.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "expenses-historic",
+  data: function data() {
+    return {};
+  },
+  created: function created() {
+    fetch('/api/expenses/historic?api_token=04e05d12ddf962c9e3c371baaf527f9f9469a0b5590792d003032823883d0cc13cfcdd439853cc9c').then(function (response) {
+      return console.log(response);
+    });
+  },
+  methods: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/utilities/stats-table.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/utilities/stats-table.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -9964,10 +10047,98 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/fuelgov/stats-table.vue?vue&type=template&id=bd256ada&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/modules/fuelgov/stats-table.vue?vue&type=template&id=bd256ada&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-historic.vue?vue&type=template&id=489d0680&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/expenses-historic.vue?vue&type=template&id=489d0680& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "tabs-panel is-active",
+        attrs: { id: "fuel-expenses-logs" }
+      },
+      [
+        _c("table", { staticClass: "dashboard-table" }, [
+          _c("colgroup"),
+          _vm._v(
+            "\n\n\n\n        @if($expenses->count() !== 0)\n\n            "
+          ),
+          _c("thead", [
+            _c("tr", [
+              _c("th", { staticClass: "text-left" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v("Date "),
+                  _c("i", { staticClass: "fa fa-caret-down" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("th", { staticClass: "text-center" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v("Quantity "),
+                  _c("i", { staticClass: "fa fa-caret-down" })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("th", { staticClass: "text-right" }, [
+                _c("a", { attrs: { href: "#" } }, [
+                  _vm._v("Cost "),
+                  _c("i", { staticClass: "fa fa-caret-down" })
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tbody", [
+            _vm._v(
+              "\n\n\n            @foreach($expenses as $expense)\n\n\n                @include('vehicle.expense-template')\n\n            @endforeach\n\n\n\n            "
+            )
+          ]),
+          _vm._v("\n\n        @else\n\n            "),
+          _c("tr", [
+            _c("td", { attrs: { colspan: "3" } }, [
+              _c("div", { staticClass: "callout secondary" }, [
+                _c("h4", { staticClass: "text-center" }, [
+                  _vm._v(
+                    "\n                            You have no fuel expenses to show.\n                        "
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v("\n        @endif\n    ")
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/utilities/stats-table.vue?vue&type=template&id=e7aa6240&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/utilities/stats-table.vue?vue&type=template&id=e7aa6240&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -23294,9 +23465,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/index.js */ "./resources/js/store/index.js");
-/* harmony import */ var _modules_fuelgov_stats_table_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/fuelgov/stats-table.vue */ "./resources/js/modules/fuelgov/stats-table.vue");
-/* harmony import */ var _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/forms/register-users.vue */ "./resources/js/components/forms/register-users.vue");
-/* harmony import */ var _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/forms/add-vehicle-form.vue */ "./resources/js/components/forms/add-vehicle-form.vue");
+/* harmony import */ var _components_utilities_stats_table_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/utilities/stats-table.vue */ "./resources/js/components/utilities/stats-table.vue");
+/* harmony import */ var _components_my_car_expenses_historic_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/my-car/expenses-historic.vue */ "./resources/js/components/my-car/expenses-historic.vue");
+/* harmony import */ var _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/forms/register-users.vue */ "./resources/js/components/forms/register-users.vue");
+/* harmony import */ var _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/forms/add-vehicle-form.vue */ "./resources/js/components/forms/add-vehicle-form.vue");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -23307,6 +23479,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 
 window.Vue = __webpack_require__(/*! Vue */ "./node_modules/Vue/dist/vue.runtime.esm.js");
+ // import StatsTable from './modules/fuelgov/stats-table.vue';
+
 
 
 
@@ -23367,9 +23541,10 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     vehicle: {}
   },
   components: {
-    StatsTable: _modules_fuelgov_stats_table_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    RegisterUsersForm: _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    AddVehicleForm: _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    StatsTable: _components_utilities_stats_table_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    RegisterUsersForm: _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    AddVehicleForm: _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    ExpensesHistoric: _components_my_car_expenses_historic_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   created: function created() {},
   mounted: function mounted() {},
@@ -24073,17 +24248,86 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/modules/fuelgov/stats-table.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/modules/fuelgov/stats-table.vue ***!
-  \******************************************************/
+/***/ "./resources/js/components/my-car/expenses-historic.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/my-car/expenses-historic.vue ***!
+  \**************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _stats_table_vue_vue_type_template_id_bd256ada_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stats-table.vue?vue&type=template&id=bd256ada&scoped=true& */ "./resources/js/modules/fuelgov/stats-table.vue?vue&type=template&id=bd256ada&scoped=true&");
-/* harmony import */ var _stats_table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stats-table.vue?vue&type=script&lang=js& */ "./resources/js/modules/fuelgov/stats-table.vue?vue&type=script&lang=js&");
+/* harmony import */ var _expenses_historic_vue_vue_type_template_id_489d0680___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./expenses-historic.vue?vue&type=template&id=489d0680& */ "./resources/js/components/my-car/expenses-historic.vue?vue&type=template&id=489d0680&");
+/* harmony import */ var _expenses_historic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./expenses-historic.vue?vue&type=script&lang=js& */ "./resources/js/components/my-car/expenses-historic.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _expenses_historic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _expenses_historic_vue_vue_type_template_id_489d0680___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _expenses_historic_vue_vue_type_template_id_489d0680___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/my-car/expenses-historic.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/expenses-historic.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/my-car/expenses-historic.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_historic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./expenses-historic.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-historic.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_historic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/expenses-historic.vue?vue&type=template&id=489d0680&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/my-car/expenses-historic.vue?vue&type=template&id=489d0680& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_historic_vue_vue_type_template_id_489d0680___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./expenses-historic.vue?vue&type=template&id=489d0680& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-historic.vue?vue&type=template&id=489d0680&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_historic_vue_vue_type_template_id_489d0680___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_historic_vue_vue_type_template_id_489d0680___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/utilities/stats-table.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/utilities/stats-table.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _stats_table_vue_vue_type_template_id_e7aa6240_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./stats-table.vue?vue&type=template&id=e7aa6240&scoped=true& */ "./resources/js/components/utilities/stats-table.vue?vue&type=template&id=e7aa6240&scoped=true&");
+/* harmony import */ var _stats_table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./stats-table.vue?vue&type=script&lang=js& */ "./resources/js/components/utilities/stats-table.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -24094,49 +24338,49 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _stats_table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _stats_table_vue_vue_type_template_id_bd256ada_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _stats_table_vue_vue_type_template_id_bd256ada_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _stats_table_vue_vue_type_template_id_e7aa6240_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _stats_table_vue_vue_type_template_id_e7aa6240_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "bd256ada",
+  "e7aa6240",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/modules/fuelgov/stats-table.vue"
+component.options.__file = "resources/js/components/utilities/stats-table.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/modules/fuelgov/stats-table.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/modules/fuelgov/stats-table.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
+/***/ "./resources/js/components/utilities/stats-table.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/utilities/stats-table.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_stats_table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./stats-table.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/fuelgov/stats-table.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_stats_table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./stats-table.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/utilities/stats-table.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_stats_table_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/modules/fuelgov/stats-table.vue?vue&type=template&id=bd256ada&scoped=true&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/modules/fuelgov/stats-table.vue?vue&type=template&id=bd256ada&scoped=true& ***!
-  \*************************************************************************************************/
+/***/ "./resources/js/components/utilities/stats-table.vue?vue&type=template&id=e7aa6240&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/utilities/stats-table.vue?vue&type=template&id=e7aa6240&scoped=true& ***!
+  \******************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_stats_table_vue_vue_type_template_id_bd256ada_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./stats-table.vue?vue&type=template&id=bd256ada&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/modules/fuelgov/stats-table.vue?vue&type=template&id=bd256ada&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_stats_table_vue_vue_type_template_id_bd256ada_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_stats_table_vue_vue_type_template_id_e7aa6240_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./stats-table.vue?vue&type=template&id=e7aa6240&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/utilities/stats-table.vue?vue&type=template&id=e7aa6240&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_stats_table_vue_vue_type_template_id_e7aa6240_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_stats_table_vue_vue_type_template_id_bd256ada_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_stats_table_vue_vue_type_template_id_e7aa6240_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -24357,8 +24601,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/christonit/Documents/Personal Projects/fueltrack-laravel/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/christonit/Documents/Personal Projects/fueltrack-laravel/resources/scss/style.scss */"./resources/scss/style.scss");
+__webpack_require__(/*! C:\xampp\htdocs\fueltrack-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\fueltrack-laravel\resources\scss\style.scss */"./resources/scss/style.scss");
 
 
 /***/ })

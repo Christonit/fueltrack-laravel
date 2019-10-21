@@ -233,13 +233,6 @@ class VehicleController extends Controller
                     //Current date
                     $cDate = date_create( date("Y-m-d") );
 
-//                    $createdDate = date_create(  $maintenances->created_at  );
-
-//                    $totalDaysToWait = date_diff($createdDate,$fDate)->format("%a");
-
-                    //Total days to maintenance since created maintenance
-//                    $maintenance_date = date_diff($cDate,$fDate)->format("%R%a");
-
                     $days_overdue = date_diff($cDate,$fDate)->format("%R%a");
 
                     if($days_overdue<0){
@@ -256,13 +249,6 @@ class VehicleController extends Controller
 
                         $maintenances['days_left'] = $days_overdue;
                     }
-
-//                                $daysPercentage = 3;
-//                    $daysPercentage = round((($totalDaysToWait - $maintenance_date)/$totalDaysToWait)*100);
-
-
-//                    return [$maintenances,$days_overdue];
-
 
                 }
 
@@ -308,7 +294,6 @@ class VehicleController extends Controller
 
             //Monthly expenses avg
             $vehicle_averages['last_month'] = expenses::totalExpensesByMonth('last month');
-
 
             //All time mileage
             $vehicle_averages['total_distance'] =   vehicle::where('user',$logged_user_id)->value('init_miles') +

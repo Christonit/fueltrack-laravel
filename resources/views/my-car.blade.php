@@ -9,7 +9,11 @@
 
     <div class="grid-container fluid">
 
-
+        <div id="section-header" class="grid-x grid-padding-x">
+            <div class="small-12">
+                <expenses-historic></expenses-historic>
+            </div>
+        </div>
         <!-- Overview section header -->
         <div id="section-header" class="grid-x grid-padding-x">
             <div class="small-12 medium-7 cell">
