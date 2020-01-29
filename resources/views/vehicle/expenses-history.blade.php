@@ -1,4 +1,5 @@
 <div class="tabs-panel is-active" id="fuel-expenses-logs">
+
     <table class="dashboard-table">
 
         <colgroup>

@@ -98,9 +98,19 @@ class VehicleMaintenanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
         //
+
+        if(Auth::check()){
+            $vehicle_id = vehicle::userVehicle();
+            $m_s_performed = vehicle_maintenance::getPerformedMaintenance($vehicle_id);
+            return $m_s_performed;
+    
+        }else{
+            return 'Not autorized to see this information.';
+        }
+       
     }
 
     /**

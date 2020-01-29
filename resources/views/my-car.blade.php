@@ -9,16 +9,10 @@
 
     <div class="grid-container fluid">
 
-        <div id="section-header" class="grid-x grid-padding-x">
-            <div class="small-12">
-                <expenses-historic></expenses-historic>
-            </div>
-        </div>
+       
         <!-- Overview section header -->
         <div id="section-header" class="grid-x grid-padding-x">
             <div class="small-12 medium-7 cell">
-
-                <? $user_id = auth()->id() ?>
 
                 <h3> {{ $vehicle->first()->maker }} {{ $vehicle->first()->model }} {{ $vehicle->first()->year }} </h3>
 
@@ -240,33 +234,11 @@
                     <div class="tabs-content" data-tabs-content="deeplinked-tabs">
 
 
-
-
-                        @include('vehicle.expenses-history')
-
-
-
-                        <div class="tabs-panel" id="maintenance-logs">
-                            <table class="table-expand">
-
-                                <tbody>
-
-                                @include('vehicle.maintenances-history')
+                        <expenses-historic ></expenses-historic>
+                        <maintenances-historic class="is-active"></maintenances-historic>
 
 
 
-
-
-
-
-
-
-                                </tbody>
-                            </table>
-
-
-
-                        </div>
 
                     </div>
 

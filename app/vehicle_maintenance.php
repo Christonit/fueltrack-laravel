@@ -55,7 +55,8 @@ class vehicle_maintenance extends Model
            'maintenances_services_performed.self_service')
            ->join('maintenances_services_performed', 'vehicle_maintenance.id','=', 'maintenances_services_performed.maintenance_service')
                    ->where('vehicle_maintenance.vehicle',$vehicle)
-                   ->where('vehicle_maintenance.status',0)->latest()->first();
+                   ->where('vehicle_maintenance.status',0)->paginate(15);
+                //    ->where('vehicle_maintenance.status',0)->latest()->first();
 
     }
 

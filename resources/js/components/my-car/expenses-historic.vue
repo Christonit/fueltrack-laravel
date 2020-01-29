@@ -1,16 +1,8 @@
 <template>
-    <div class="tabs-panel is-active" id="fuel-expenses-logs">
+    <div class="tabs-panel" id="fuel-expenses-logs">
     <table class="dashboard-table">
 
-        <colgroup>
-
-
-        </colgroup>
-
-
-
-        @if($expenses->count() !== 0)
-
+      
             <thead>
 
             <tr>
@@ -23,32 +15,46 @@
 
             <tbody>
 
+                
+                <template v-if="hasExpenses">
+                    <tr  v-for="expense in expenses">
+                            <td>
+                                <h6 class="dashboard-table-text">{{expense.Date}}</h6>
+                                <span class="dashboard-table-timestamp">10:00 PM</span>
+                            </td>
+                    
 
-            @foreach($expenses as $expense)
+                            <td class='text-center'>
+                                <h6>
+                                    {{expense.Galons}}
+                                    Gal
+                                </h6>
+                                    <span class="dashboard-table-timestamp">{{Math.round(expense.Galons * performance.Avg_MPG ) }} Km Est. Drivable Distance </span>
+                            </td>
 
+                            <td class='text-right'>
+                                <h6 class="dashboard-table-text">RD$ {{(expense.Galons * expense.Current_fuel_price)}}</h6>
+                                <span class="dashboard-table-timestamp">RD$ {{expense.Current_fuel_price}} Fuel Price</span>
+                            </td>
+                    </tr>
+                </template>
 
-                @include('vehicle.expense-template')
+                <tr v-else>
+                    <td colspan="3">
+                        <div class="callout secondary">
 
-            @endforeach
+                            <h4 class="text-center">
+                                You have no fuel expenses to show.
+                            </h4>
 
-
-
+                        </div>
+                    </td>
+                </tr>
+                    
             </tbody>
 
-        @else
 
-            <tr>
-                <td colspan="3">
-                    <div class="callout secondary">
-
-                        <h4 class="text-center">
-                            You have no fuel expenses to show.
-                        </h4>
-
-                    </div>
-                </td>
-            </tr>
-        @endif
+            
     </table>
 
 
@@ -62,11 +68,27 @@ export default {
         name: "expenses-historic",
         data(){
             return {
-                
+                expenses : '',
+                performance:0,
+                hasExpenses:false
             }
         },
         created(){
-            fetch('/api/expenses/historic?api_token=04e05d12ddf962c9e3c371baaf527f9f9469a0b5590792d003032823883d0cc13cfcdd439853cc9c').then( response => console.log(response)  )
+
+            // Candidato a irse a State Management.
+            fetch('/expenses/historic').then( response => response.text()).then( data => {
+
+                let res = JSON.parse(data)
+                this.performance = res.vehicle_p[0]
+                this.expenses = res.expense.data;
+
+                    if(!this.expenses == ''){
+                        return this.hasExpenses = true;
+                    }else{
+                        return false
+                    }
+
+                })
         },
 
         methods:{

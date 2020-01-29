@@ -1,5 +1,6 @@
 
 let colorsArray = ['#f1635b','#0544c7','#2c1fe6','#dbfb41','#f20fd9','#4ee566','#dd48dc','#4f1f48','#e47a6e','#08e8ab','#b8740a','#f4508d','#e43e36','#ff6a1a'];
+const windowSize = screen.width;
 
 let shuffle = (o) => {
     for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);

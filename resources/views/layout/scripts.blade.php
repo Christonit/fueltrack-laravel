@@ -1,6 +1,4 @@
-{{--<script src="https://code.jquery.com/jquery-latest.min.js" ></script>--}}
 
-{{--<script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js" ></script>--}}
 <script src="{{asset('js/vendor.js')}}" ></script>
 <script src="{{asset('js/app.js')}}" ></script>
 
