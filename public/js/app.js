@@ -9025,10 +9025,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-historic.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-historic.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -9093,6 +9093,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "maintenances-historic-row",
+  props: {
+    dueMoment: String,
+    serviceId: Number,
+    overdueDistance: Number,
+    trackedDistance: Number,
+    datePerformed: String
+  },
+  data: function data() {
+    return {};
+  },
+  created: function created() {},
+  methods: {
+    tableIsActive: function tableIsActive(e) {
+      //    let tableToExpande =  e.target.nextElementSibling;
+      //    this.$refs.nextElementSibling.classList.add = 'is-active'; 
+      var tableToExpand = this.$refs.maintenance_table.lastElementChild;
+      console.log(tableToExpand.classList.contains('.is-active'));
+      tableToExpand.classList.contains('is-active') ? tableToExpand.classList.remove('is-active') : tableToExpand.classList.add('is-active');
+      console.log(tableToExpand.classList.contains('.is-active'));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-historic.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-historic.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _maintenances_historic_row_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./maintenances-historic-row.vue */ "./resources/js/components/my-car/maintenances-historic-row.vue");
 //
 //
 //
@@ -9138,82 +9175,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "maintenances-historic",
+  components: {
+    MaintenancesHistoricRow: _maintenances_historic_row_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       maintentance_services_list: '',
@@ -9231,7 +9198,91 @@ __webpack_require__.r(__webpack_exports__);
       _this.maintentance_services_list = JSON.parse(data);
     });
   },
-  methods: {}
+  methods: {
+    printServiceCategoryIcon: function printServiceCategoryIcon(maintenance_service) {
+      switch (maintenance_service.toLowerCase()) {
+        case 'wheel change':
+          return '&#xe800';
+          break;
+
+        case 'alignment':
+          return '&#xe801';
+          break;
+
+        case 'battery change':
+          return '&#xe802';
+          break;
+
+        case 'body fix':
+          return '&#xe803';
+          break;
+
+        case 'brake check':
+          return '&#xe804';
+          break;
+
+        case 'cleaning':
+          return '&#xe805';
+          break;
+
+        case 'coolant fill':
+          return '&#xe806';
+          break;
+
+        case 'electricity check':
+          return '&#xe807';
+          break;
+
+        case 'engine check':
+          return '&#xe808';
+          break;
+
+        case 'filter change':
+          return '&#xe809';
+          break;
+
+        case 'tire change':
+          return '&#xe810';
+          break;
+
+        case 'transmission check':
+          return '&#xe811';
+          break;
+
+        case 'inmediate check':
+          return '&#xe80a';
+          break;
+
+        case 'oil change':
+          return '&#xe80b';
+          break;
+
+        case 'paint job':
+          return '&#xe80c';
+          break;
+
+        case 'part change':
+          return '&#xe80d';
+          break;
+
+        case 'preassure check':
+          return '&#xe80e';
+          break;
+
+        case 'scheduled maintenance':
+          return '&#xe80f';
+          break;
+
+        default:
+          return '&#xe80f';
+      }
+    },
+    tableIsActive: function tableIsActive(e) {
+      var tableToExpande = e.target.nextElementSibling; //    this.$refs.nextElementSibling.classList.add = 'is-active'; 
+
+      console.log(this.$ref.maintenance_table);
+    }
+  }
 });
 
 /***/ }),
@@ -10414,6 +10465,160 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=template&id=ced15170&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=template&id=ced15170& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { ref: "maintenance_table", on: { click: _vm.tableIsActive } },
+    [
+      _c(
+        "div",
+        { staticClass: "table-expand-row", attrs: { "data-open-details": "" } },
+        [
+          _c("div", [
+            _c("div", { staticClass: "maintenance-logs-resume" }, [
+              _c("span", { staticClass: "maintenance-category" }, [
+                _c(
+                  "i",
+                  { staticClass: "service-icon" },
+                  [_vm._t("service-icon")],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "maintenance-service" }, [
+                _c("b", [_vm._t("maintenance-service")], 2),
+                _vm._v(" "),
+                _vm.dueMoment == "Specific distance"
+                  ? _c("p", [
+                      _vm._v(
+                        "\n                            At " +
+                          _vm._s(_vm.overdueDistance + _vm.trackedDistance) +
+                          "  miles | " +
+                          _vm._s(_vm.datePerformed) +
+                          "\n                            "
+                      )
+                    ])
+                  : _vm.dueMoment == "Specific date" ||
+                    _vm.dueMoment == "Inmediate"
+                  ? _c("p", [
+                      _vm._v(
+                        "\n                            performed in " +
+                          _vm._s(_vm.datePerformed) +
+                          "\n\n                            "
+                      )
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "hollow-label-large text-right maintenance-cost"
+                },
+                [_vm._t("cost")],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "maintenance-options-btn " }, [
+                _c("i", { staticClass: "material-icons" }, [
+                  _vm._v(
+                    "\n                        more_vert\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "button-hover-reveal" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/my-maintenance/" + _vm.serviceId + "/edit"
+                      }
+                    },
+                    [_vm._v("Edit")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: "/my-maintenance/" + _vm.serviceId + "/delete"
+                      }
+                    },
+                    [_vm._v("Delete")]
+                  )
+                ])
+              ])
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "table-expand-row-content" }, [
+        _c(
+          "div",
+          { staticClass: "table-expand-row-nested", attrs: { colspan: "8" } },
+          [
+            _c("div", { staticClass: "grid-x" }, [
+              _c("p", { staticClass: "small-6" }, [
+                _c("b", [_vm._v("Tracked miles")]),
+                _vm._v(" " + _vm._s(_vm.trackedDistance))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "small-6" }, [
+                _c("b", [_vm._v("Miles overdue")]),
+                _vm._v(" " + _vm._s(_vm.overdueDistance))
+              ]),
+              _vm._v(" "),
+              _c(
+                "p",
+                { staticClass: "small-12" },
+                [
+                  _c("b", [_vm._v("Workshop")]),
+                  _vm._v(" "),
+                  _vm._t("workshop")
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "p",
+                { staticClass: "small-12" },
+                [
+                  _c("b", [_vm._v("Details")]),
+                  _c("br"),
+                  _vm._v(" "),
+                  _vm._t("details")
+                ],
+                2
+              )
+            ])
+          ]
+        )
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-historic.vue?vue&type=template&id=bb21fe8a&":
 /*!*******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-historic.vue?vue&type=template&id=bb21fe8a& ***!
@@ -10438,15 +10643,109 @@ var render = function() {
         { staticClass: "table-expand" },
         [
           _vm.maintentance_services_list.length > 0
-            ? [_vm._v("\r\n         It works\r\n    ")]
-            : _vm._e()
+            ? _vm._l(_vm.maintentance_services_list, function(service) {
+                return _c(
+                  "tr",
+                  [
+                    _c("maintenances-historic-row", {
+                      attrs: {
+                        "due-moment": service.due_moment,
+                        "service-id": service.id,
+                        "overdue-distance": service.overdue_distance,
+                        "tracked-distance": service.tracked_distance,
+                        "date-performed": service.date_performed
+                      },
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "service-icon",
+                            fn: function() {
+                              return [
+                                _vm._v(
+                                  " " +
+                                    _vm._s(
+                                      _vm.printServiceCategoryIcon(
+                                        service.maintenance_service
+                                      )
+                                    ) +
+                                    " "
+                                )
+                              ]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "maintenance-service",
+                            fn: function() {
+                              return [
+                                _vm._v(
+                                  " " +
+                                    _vm._s(service.maintenance_service) +
+                                    " "
+                                )
+                              ]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "cost",
+                            fn: function() {
+                              return [_vm._v(" " + _vm._s(service.cost) + " ")]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "workshop",
+                            fn: function() {
+                              return [
+                                _vm._v(" " + _vm._s(service.workshop) + " ")
+                              ]
+                            },
+                            proxy: true
+                          },
+                          {
+                            key: "details",
+                            fn: function() {
+                              return [
+                                _vm._v(" " + _vm._s(service.details) + " ")
+                              ]
+                            },
+                            proxy: true
+                          }
+                        ],
+                        null,
+                        true
+                      )
+                    })
+                  ],
+                  1
+                )
+              })
+            : [_vm._m(0)]
         ],
         2
       )
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", [
+        _c("div", { staticClass: "callout secondary" }, [
+          _c("h4", { staticClass: "text-center" }, [
+            _vm._v(
+              "\r\n                    You dont have performed any service yet.\r\n                    "
+            )
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -24671,6 +24970,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_historic_vue_vue_type_template_id_489d0680___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_historic_vue_vue_type_template_id_489d0680___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/maintenances-historic-row.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-historic-row.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _maintenances_historic_row_vue_vue_type_template_id_ced15170___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./maintenances-historic-row.vue?vue&type=template&id=ced15170& */ "./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=template&id=ced15170&");
+/* harmony import */ var _maintenances_historic_row_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./maintenances-historic-row.vue?vue&type=script&lang=js& */ "./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _maintenances_historic_row_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _maintenances_historic_row_vue_vue_type_template_id_ced15170___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _maintenances_historic_row_vue_vue_type_template_id_ced15170___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/my-car/maintenances-historic-row.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_historic_row_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./maintenances-historic-row.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_historic_row_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=template&id=ced15170&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=template&id=ced15170& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_historic_row_vue_vue_type_template_id_ced15170___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./maintenances-historic-row.vue?vue&type=template&id=ced15170& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-historic-row.vue?vue&type=template&id=ced15170&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_historic_row_vue_vue_type_template_id_ced15170___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_historic_row_vue_vue_type_template_id_ced15170___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
