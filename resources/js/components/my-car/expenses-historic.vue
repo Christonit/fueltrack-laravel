@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-panel" id="fuel-expenses-logs">
+    <div class="tabs-panel">
     <table class="dashboard-table">
 
       

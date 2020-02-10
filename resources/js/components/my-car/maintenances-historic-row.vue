@@ -77,15 +77,8 @@
 
             methods:{
                 tableIsActive(e){
-
-                    
-                //    let tableToExpande =  e.target.nextElementSibling;
-                    //    this.$refs.nextElementSibling.classList.add = 'is-active'; 
-                   let tableToExpand = this.$refs.maintenance_table.lastElementChild;
-                   console.log(tableToExpand.classList.contains('.is-active'))
-                  tableToExpand.classList.contains('is-active') ? tableToExpand.classList.remove('is-active') : tableToExpand.classList.add('is-active')
-                    console.log(tableToExpand.classList.contains('.is-active'))
-
+                    let tableToExpand = this.$refs.maintenance_table.lastElementChild;
+                    tableToExpand.classList.contains('is-active') ? tableToExpand.classList.remove('is-active') : tableToExpand.classList.add('is-active')
                 }
             }
     }

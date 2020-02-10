@@ -92,6 +92,7 @@ Route::get('/recent-maintenance-added','VehicleMaintenanceController@latestAdded
 
 
 Route::get('/expenses/historic','ExpensesController@show');
+Route::get('/vehicle/user/performance','VehicleController@vehicleInfo');
 
 
 

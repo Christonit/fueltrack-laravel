@@ -414,15 +414,16 @@ header a{
 .tabs-title{
     border-right: 2px solid $grey-hint;
 }
-.tabs-title > a:focus, .tabs-title > a[aria-selected="true"] {
+.tabs-title > button:focus, .tabs-title > button[aria-selected="true"] {
     background: #fff;
     color: $blue;
 }
-.tabs-title > a {
+.tabs-title > button {
     font-size:1rem;
     color: $primary-color;
     margin:0 24px;
     padding:1.5rem 0;
+    cursor: pointer;
 }
 
 

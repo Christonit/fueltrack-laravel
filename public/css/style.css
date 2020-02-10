@@ -2159,17 +2159,18 @@ header a {
   border-right: 2px solid #F4F5F7;
 }
 
-.tabs-title > a:focus,
-.tabs-title > a[aria-selected=true] {
+.tabs-title > button:focus,
+.tabs-title > button[aria-selected=true] {
   background: #fff;
   color: #2F80ED;
 }
 
-.tabs-title > a {
+.tabs-title > button {
   font-size: 1rem;
   color: #393C40;
   margin: 0 24px;
   padding: 1.5rem 0;
+  cursor: pointer;
 }
 
 .dashboard-table {

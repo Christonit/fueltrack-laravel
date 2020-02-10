@@ -58,126 +58,8 @@
         @include('my-car.resume')
 
         <section class="grid-x">
-            <section id="performance" class=" small-12 medium-3 ">
 
-                <div id="performance" class="card">
-
-                    <h5 >Performance</h5>
-
-                    @foreach($vehicle_p as $performance)
-
-                        <div class="performance-section">
-
-                            <div class="performance-stat">
-
-                                <i class="ft-icon i-performance icon-highway">&#xe902;</i>
-
-                                <p class="performance-category-title float-center">Highway</p>
-
-                                <p class="hollow-label float-right">{{round($performance->Highway_MPG,1)}} mpg</p>
-
-                            </div>
-
-                            <div class="performance-stat">
-
-                                <i class="ft-icon i-performance icon-city">&#xe907;</i>
-
-                                <p class="performance-category-title float-center">City</p>
-
-                                <p class="hollow-label float-right">{{ round($performance->City_MPG,1)}} mpg</p>
-
-                            </div>
-
-                            <div class="performance-stat">
-
-                                <i class="ft-icon i-performance icon-average">&#xe905;</i>
-
-                                <p class="performance-category-title float-center">Average C/H</p>
-
-                                <p class="hollow-label float-right">{{round($performance->Avg_MPG,1)}} mpg</p>
-
-
-
-                            </div>
-
-                            <div class="performance-stat">
-
-                                <i class="ft-icon i-performance icon-tank">&#xe908;</i>
-
-                                <p class="performance-category-title float-center">Tank size</p>
-
-                                <p class="hollow-label float-right">999 Km</p>
-
-
-
-                            </div>
-
-
-                            <div class="performance-stat">
-
-                                <i class="ft-icon i-performance icon-distance">&#xe906;</i>
-
-                                <p class="performance-category-title float-center">Drivable distance</p>
-
-                                <p class="hollow-label float-right">999 Km</p>
-
-
-
-                            </div>
-
-                            <div class="performance-stat">
-
-                                <i class="ft-icon i-performance icon-cost">&#xe900;</i>
-
-                                <p class="performance-category-title float-center">Cost to fill up</p>
-
-                                <p class="hollow-label float-right">9,999 Km</p>
-
-
-
-                            </div>
-
-
-
-
-
-
-                        </div>
-
-
-                    @endforeach
-
-
-
-                </div>
-                <div class="share-info card">
-
-                    <h6 class='text-center'>Share with pals</h6>
-
-                    <div class="rounded-social-buttons">
-                        <a class="social-button facebook" href="#"></a>
-                        <a class="social-button twitter" href="#"></a>
-                        <a class="social-button" href="#"> <i class="material-icons">attachment </i> </a>
-                        <a class="social-button" href="#"> <i class="material-icons">email </i> </a>
-
-                    </div>
-
-
-
-                </div>
-
-
-
-
-
-            </section>
-
-
-
-
-
-
-
+            <performance-sheet id="performance" class=" small-12 medium-3 "></performance-sheet>
 
             <section id="expenses" class="small-12 medium-6">
 
@@ -224,27 +106,7 @@
 
                 <!-- Expenses logs  -->
 
-                <div class="small-12 medium-12" id="expenses-logs">
-
-                    <ul class="tabs" data-deep-link="true" data-update-history="true" data-deep-link-smudge="true" data-deep-link-smudge-delay="500" data-tabs id="deeplinked-tabs">
-                        <li class="tabs-title is-active"><a href="#fuel-expenses-logs" aria-selected="true">Fuel ups</a></li>
-                        <li class="tabs-title"><a href="#maintenance-logs">Services</a></li>
-                    </ul>
-
-                    <div class="tabs-content" data-tabs-content="deeplinked-tabs">
-
-
-                        <expenses-historic ></expenses-historic>
-                        <maintenances-historic class="is-active"></maintenances-historic>
-
-
-
-
-                    </div>
-
-
-                </div>
-
+                <expenses-logs class="small-12 medium-12" id="expenses-logs"></expenses-logs>
 
             </section>
 

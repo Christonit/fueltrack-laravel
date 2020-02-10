@@ -14,6 +14,7 @@ use JavaScript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
+
 use \Carbon\Carbon;
 use DateTime;
 
@@ -387,6 +388,15 @@ class VehicleController extends Controller
 
         return (expenses::totalGalonsGlobal($vehicle_id) * vehicle_performance::where('vehicle',$vehicle_id)->value('Avg_MPG'));
 
+    }
+
+    public function vehicleInfo(){
+        
+        $vehicle_id = vehicle::userVehicle();
+        $vehicle_performance = vehicle_performance::where('vehicle',$vehicle_id)->get()->toArray();
+        $vehicle_data = vehicle::userVehicleInfo()->toArray();
+
+        return collect([$vehicle_data[0],$vehicle_performance[0]])->collapse()->except(['id','user','vehicle']);
     }
 
 

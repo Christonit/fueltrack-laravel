@@ -38,4 +38,8 @@ class vehicle extends Model
         return $this->where('user',auth()->id())
             ->value('id');
     }
+    protected  function userVehicleInfo(){
+
+        return $this->where('user',auth()->id())->get();
+    }
 }

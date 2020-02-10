@@ -1,5 +1,5 @@
 <template>
-<div class="tabs-panel" id="maintenance-logs">
+<div class="tabs-panel" >
 
                
 
