@@ -160,19 +160,6 @@ class VehicleController extends Controller
 
             $avg_performance = $vehicle_p[0]['Avg_MPG'];
 
-
-
-
-
-
-
-
-//            $pending =  vehicle_maintenance::where([['vehicle',$vehicle_id],['status',1]])
-//                ->where('due_moment', 'Specific distance')
-//                ->orWhere('due_moment', 'Specific date')
-//                ->whereNull('overdue_distance')
-//                ->whereNull('days_overdue')->orderBy('created_at','DESC')
-//                ->get();
             $date_pending =  vehicle_maintenance::where([
                     ['vehicle',$vehicle_id],
                     ['status',1],
@@ -327,7 +314,8 @@ class VehicleController extends Controller
                 'weekly_cost' => $weekly_expenses['expense']
             ]);
 
-            return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed','vehicle_averages','weekly_expenses']) );
+            return compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed','vehicle_averages','weekly_expenses']);
+            // return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed','vehicle_averages','weekly_expenses']) );
 
         }else{
 

@@ -56,7 +56,7 @@
         </div>
 
         @include('my-car.resume')
-
+        <expenses-resume></expenses-resume>
         <section class="grid-x">
 
             <performance-sheet id="performance" class=" small-12 medium-3 "></performance-sheet>

@@ -236,4 +236,86 @@ class VehicleMaintenanceController extends Controller
 
 
     }
+
+    public function activeMaintenances(){
+        $date_pending =  vehicle_maintenance::where([
+            ['vehicle',$vehicle_id],
+            ['status',1],
+            ['due_moment', 'Specific date']
+        ])
+        ->whereNull('days_overdue')
+        ->orderBy('created_at','DESC')
+        ->get();
+
+
+        $distance_pending =  vehicle_maintenance::where([
+            ['vehicle',$vehicle_id],
+            ['status',1],
+            ['due_moment', 'Specific distance']
+            ])
+            ->whereNull('overdue_distance')
+            ->orderBy('created_at','DESC')
+            ->get();
+
+
+        $distance_date_overdue = vehicle_maintenance::where([['vehicle',$vehicle_id],['status',1]])
+            ->whereIn('due_moment',['Specific distance','Specific date'])
+            ->whereNotNull('days_overdue')
+            ->orWhereNotNull('overdue_distance')->orderBy('created_at','DESC')
+            ->get();
+
+
+
+        $due_inmediate = vehicle_maintenance::where([['vehicle',$vehicle_id],['status',1]])->where('due_moment','Inmediate')->orderBy('created_at','DESC')->get();
+
+        $maintenance = collect();
+
+        $maintenance = $maintenance->concat($due_inmediate)->concat($distance_date_overdue)->concat($date_pending)->concat($distance_pending);
+
+    }
+    public function dueMomentCalculator(){
+        foreach($maintenance as $maintenances){
+
+            if($maintenances->due_moment == 'Specific distance'){
+
+                $galons = expenses::galonsSinceDate($maintenances->created_at,$vehicle_id);
+
+
+                vehicle_maintenance::where('vehicle','=',$vehicle_id)
+                    ->where('id', '=',$maintenances->id)
+                    ->where('due_moment', '=','Specific distance')
+                    ->where('status','=','1')
+                    ->update(['current_distance' => ($avg_performance * $galons) ]);
+
+
+            }elseif($maintenances->due_moment == 'Specific date'){
+
+                //Final date for maintenance
+                $fDate = date_create($maintenances->final_date);
+
+                //Current date
+                $cDate = date_create( date("Y-m-d") );
+
+                $days_overdue = date_diff($cDate,$fDate)->format("%R%a");
+
+                if($days_overdue<0){
+
+                    $days_overdue = ($days_overdue * -1);
+
+                    vehicle_maintenance::where('vehicle','=',$vehicle_id)
+                        ->where('id', '=',$maintenances->id)
+                        ->where('due_moment', '=','Specific date')
+                        ->where('status','=','1')
+                        ->update(['days_overdue' => $days_overdue]);
+
+                }else{
+
+                    $maintenances['days_left'] = $days_overdue;
+                }
+
+            }
+
+
+        }
+    }
 }

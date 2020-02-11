@@ -9,12 +9,12 @@ import store from './store/index.js';
 import StatsTable from './components/utilities/stats-table.vue';
 import ExpensesLogs from './components/my-car/expenses-logs.vue';
 import PerformanceSheet from './components/my-car/performance-sheet.vue';
+import ExpensesResume from './components/my-car/expenses-resume.vue';
 import RegisterUsersForm from './components/forms/register-users.vue';
 import AddVehicleForm from './components/forms/add-vehicle-form.vue';
 
 
 // Vue.component('stats-table', require('./modules/fuelgov/stats-table.vue').default);
-
 
 
 $(document).foundation();
@@ -25,7 +25,6 @@ const sm = 768;
 const md = 896;
 const lg = 1152;
 const xl = 1280;
-
 
 
 // URL and view validator
@@ -104,7 +103,8 @@ const app = new Vue({
         RegisterUsersForm,
         AddVehicleForm,
         PerformanceSheet,
-        ExpensesLogs
+        ExpensesLogs,
+        ExpensesResume
 
     },
     created(){
