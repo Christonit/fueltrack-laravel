@@ -67,50 +67,51 @@
 
         });
 
+        // function addMaintenanceToLogsView(e) {
 
-        document.querySelector('form[name="add-service"] a.success').addEventListener('click',function (e) {
+        //         fetch('/add-service', {
+        //             method: 'post',
+        //             // mode: 'no-cors',
+        //             body: new FormData(document.querySelector('form[name="add-service"]'))
 
-            fetch('/add-service', {
-                method: 'post',
-                // mode: 'no-cors',
-                body: new FormData(document.querySelector('form[name="add-service"]'))
+        //         }).then(function(response){
+        //             if(response.ok){
 
-            }).then(function(response){
-                if(response.ok){
+        //                 console.log('envio exitoso');
 
-                    console.log('envio exitoso');
+        //                 fetch('/recent-maintenance-added').then(response =>{
 
-                    fetch('/recent-maintenance-added').then(response =>{
+        //                     return response.text();
 
-                        return response.text();
+        //                 }).then(data =>{
 
-                    }).then(data =>{
+        //                     return $('#scheduled-maintenance').prepend(data);
 
-                        return $('#scheduled-maintenance').prepend(data);
+        //                 }).catch(function(error){
+        //                     console.log(error);
 
-                    }).catch(function(error){
-                        console.log(error);
-
-                    });
-
+        //                 });
 
 
-                    return $('#add-service').foundation('close');
 
-                }
-                else {
-                    throw "Error en la llamada Ajax";
-                }
-            }).catch(function(error){
+        //                 return $('#add-service').foundation('close');
 
-
-                console.log(error);
-
-            });
+        //             }
+        //             else {
+        //                 throw "Error en la llamada Ajax";
+        //             }
+        //         }).catch(function(error){
 
 
-        });
+        //             console.log(error);
 
+        //         });
+        //     }
+
+        
+        // if(document.querySelector('form[name="add-service"] a.success') !== null){
+        // document.querySelector('form[name="add-service"] a.success').addEventListener('click',addMaintenanceToLogsView);
+        // }
         let due_moment_btn = $('input[name="due_moment"]');
         let add_expense_btn = $('button[data-open="add-service"]');
         let tracked_distance_details = $('#tracked-distance-details');

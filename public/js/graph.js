@@ -214,31 +214,31 @@ var bar_chart = new Chart(bar_ctx, {
     }
   }
 }); // Dough nut chart
-
-if (typeof m_s_category !== 'undefined') {
-  var maintenanceChart = document.getElementById("maintenance-chart").getContext('2d');
-  new Chart(maintenanceChart, {
-    type: 'doughnut',
-    data: {
-      labels: m_s_category,
-      datasets: [{
-        label: "Population (millions)",
-        backgroundColor: shuffle(colorsArray),
-        data: m_s_total_cost
-      }]
-    },
-    options: {
-      cutoutPercentage: 80,
-      legend: {
-        labels: {
-          fontFamily: 'Work sans',
-          fontColor: '#393C40'
-        },
-        position: 'bottom'
-      }
-    }
-  });
-}
+// if( typeof m_s_category !== 'undefined'){
+//     var maintenanceChart = document.getElementById("maintenance-chart").getContext('2d');
+//     new Chart(maintenanceChart, {
+//         type: 'doughnut',
+//         data: {
+//             labels: m_s_category,
+//             datasets: [
+//                 {
+//                     label: "Population (millions)",
+//                     backgroundColor: shuffle(colorsArray),
+//                     data: m_s_total_cost       }
+//             ]
+//         },
+//         options: {
+//             cutoutPercentage:80,
+//             legend:{
+//                 labels:{
+//                     fontFamily:'Work sans',
+//                     fontColor:'#393C40',
+//                 },
+//                 position:'bottom'
+//             }
+//         }
+//     });
+// }
 
 /***/ }),
 

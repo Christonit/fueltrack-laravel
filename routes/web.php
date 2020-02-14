@@ -88,12 +88,13 @@ Route::post('/mark-as-performed/{id}/','VehicleMaintenanceController@markAsPerfo
 Route::get('/latest-expense','ExpensesController@latest');
 Route::get('/latest-maintenance','VehicleMaintenanceController@latestPerformed');
 Route::get('/maintenances/all-maintenances','VehicleMaintenanceController@show');
-Route::get('/recent-maintenance-added','VehicleMaintenanceController@latestAdded');
+// Route::get('/recent-maintenance-added','VehicleMaintenanceController@latestAdded');
 
 
 Route::get('/expenses/historic','ExpensesController@show');
 Route::get('/expenses/maintenances-total','ExpensesController@maintancesPerformedExpenses');
 Route::get('/vehicle/user/performance','VehicleController@vehicleInfo');
+Route::get('/maintenances/user/active-mainetances','VehicleMaintenanceController@activeMaintenances');
 
 
 

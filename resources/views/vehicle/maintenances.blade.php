@@ -53,7 +53,7 @@
         @if(count($maintenance) > 0)
             @foreach($maintenance as $maintenances)
 
-                @include('vehicle.maintenance-template')
+                <!-- @include('vehicle.maintenance-template') -->
 
             @endforeach
 

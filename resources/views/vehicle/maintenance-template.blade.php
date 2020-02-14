@@ -1,6 +1,5 @@
 <div class="scheduled-maintenance-card clearfix">
     <div class="scheduled-maintenance-detail">
-        {{--<span class="scheduled-maintenance-category float-left">--}}
         <i class="service-icon scheduled-maintenance-category float-left">
             @switch($maintenances->maintenance_service)
                 @case('wheel change')
@@ -97,7 +96,6 @@
                 </a>
                 <ul class="menu">
                     <li><a href="#">Item 1A</a></li>
-                    <!-- ... -->
                 </ul>
 
             </li>

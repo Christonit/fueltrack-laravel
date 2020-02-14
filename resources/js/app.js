@@ -10,6 +10,7 @@ import StatsTable from './components/utilities/stats-table.vue';
 import ExpensesLogs from './components/my-car/expenses-logs.vue';
 import PerformanceSheet from './components/my-car/performance-sheet.vue';
 import ExpensesResume from './components/my-car/expenses-resume.vue';
+import UserVehicleMaintenances from './components/my-car/maintenances-sheet.vue';
 import RegisterUsersForm from './components/forms/register-users.vue';
 import AddVehicleForm from './components/forms/add-vehicle-form.vue';
 
@@ -104,7 +105,9 @@ const app = new Vue({
         AddVehicleForm,
         PerformanceSheet,
         ExpensesLogs,
-        ExpensesResume
+        ExpensesResume,
+        // MaintenancesSheet
+        UserVehicleMaintenances
 
     },
     created(){
@@ -661,20 +664,20 @@ if(windowSize <= sm){
         });
     }
 
-    var statsViewsAnchors = '<li class="tabs-title is-active"><a href="#m-expenses"  aria-selected="true">Expenses</a></li><li class="tabs-title"><a data-tabs-target="m-maintenances" href="#m-maintenances">Maintenances</a></li><li class="tabs-title "><a href="#m-performance"  data-tabs-target="m-performance" >Performance</a></li>'
-    var statsContent = $('<div class="tabs-content" data-tabs-content="m-vehicle-stats"><div class="tabs-panel is-active" id="m-expenses"></div><div class="tabs-panel" id="m-maintenances"></div><div class="tabs-panel" id="m-performance"></div></div>');
-    var mStatsTabs = $('<ul class="tabs" data-tabs id="m-vehicle-stats"></ul>');
+    // var statsViewsAnchors = '<li class="tabs-title is-active"><a href="#m-expenses"  aria-selected="true">Expenses</a></li><li class="tabs-title"><a data-tabs-target="m-maintenances" href="#m-maintenances">Maintenances</a></li><li class="tabs-title "><a href="#m-performance"  data-tabs-target="m-performance" >Performance</a></li>'
+    // var statsContent = $('<div class="tabs-content" data-tabs-content="m-vehicle-stats"><div class="tabs-panel is-active" id="m-expenses"></div><div class="tabs-panel" id="m-maintenances"></div><div class="tabs-panel" id="m-performance"></div></div>');
+    // var mStatsTabs = $('<ul class="tabs" data-tabs id="m-vehicle-stats"></ul>');
 
-    var vehicleExpenses = $('#expenses');
-    var vehicleMaintenance = $('#maintenance');
-    var vehiclePerformance = $('#performance');
+    // var vehicleExpenses = $('#expenses');
+    // var vehicleMaintenance = $('#maintenance');
+    // var vehiclePerformance = $('#performance');
 
-    $('#expenses-resume').after(statsContent);
-    $('#expenses-resume').after(mStatsTabs);
-    $('#m-vehicle-stats').append(statsViewsAnchors);
-    $('#m-expenses').append(vehicleExpenses);
-    $('#m-maintenances').append(vehicleMaintenance);
-    $('#m-performance').append(vehiclePerformance);
+    // $('#expenses-resume').after(statsContent);
+    // $('#expenses-resume').after(mStatsTabs);
+    // $('#m-vehicle-stats').append(statsViewsAnchors);
+    // $('#m-expenses').append(vehicleExpenses);
+    // $('#m-maintenances').append(vehicleMaintenance);
+    // $('#m-performance').append(vehiclePerformance);
 
 
 

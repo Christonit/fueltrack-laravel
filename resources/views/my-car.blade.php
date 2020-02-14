@@ -46,17 +46,13 @@
                 </div>
 
 
-
-
-
-
             </div>
 
 
         </div>
 
         @include('my-car.resume')
-        <expenses-resume></expenses-resume>
+        <!-- <expenses-resume></expenses-resume> -->
         <section class="grid-x">
 
             <performance-sheet id="performance" class=" small-12 medium-3 "></performance-sheet>
@@ -109,9 +105,10 @@
                 <expenses-logs class="small-12 medium-12" id="expenses-logs"></expenses-logs>
 
             </section>
+            <user-vehicle-maintenances class="small-12 medium-3"></user-vehicle-maintenances>
 
 
-            @include('vehicle.maintenances')
+
 
         </section>
 

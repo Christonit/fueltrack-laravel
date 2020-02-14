@@ -166,7 +166,7 @@ class VehicleMaintenanceController extends Controller
 
         $performed = vehicle_maintenance::latestMaintenancePerformed();
 
-        return view('vehicle.maintenance-history-template',compact('performed'));
+        // return view('vehicle.maintenance-history-template',compact('performed'));
     }
 
 
@@ -174,7 +174,8 @@ class VehicleMaintenanceController extends Controller
 
         $maintenances = vehicle_maintenance::latestMaintenanceAdded();
 
-        return view('vehicle.maintenance-template',compact('maintenances'));
+        // return view('vehicle.maintenance-template',compact('maintenances'));
+        return $maintenances;
     }
 
 
@@ -238,6 +239,8 @@ class VehicleMaintenanceController extends Controller
     }
 
     public function activeMaintenances(){
+
+        $vehicle_id = vehicle::userVehicle();
         $date_pending =  vehicle_maintenance::where([
             ['vehicle',$vehicle_id],
             ['status',1],
@@ -271,8 +274,11 @@ class VehicleMaintenanceController extends Controller
         $maintenance = collect();
 
         $maintenance = $maintenance->concat($due_inmediate)->concat($distance_date_overdue)->concat($date_pending)->concat($distance_pending);
+        
+        return $maintenance;
 
     }
+    
     public function dueMomentCalculator(){
         foreach($maintenance as $maintenances){
 

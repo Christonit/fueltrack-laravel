@@ -314,8 +314,8 @@ class VehicleController extends Controller
                 'weekly_cost' => $weekly_expenses['expense']
             ]);
 
-            return compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed','vehicle_averages','weekly_expenses']);
-            // return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed','vehicle_averages','weekly_expenses']) );
+            // return compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed','vehicle_averages','weekly_expenses']);
+            return view('/my-car', compact(['vehicle','vehicle_p','expenses','maintenance','total_m_s_expenses','m_s_performed','vehicle_averages','weekly_expenses']) );
 
         }else{
 

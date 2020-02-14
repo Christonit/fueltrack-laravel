@@ -9380,6 +9380,180 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-sheet.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-sheet.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "user-vehicle-maintenances",
+  components: {},
+  data: function data() {
+    return {
+      maintenance_list: '',
+      today: null
+    };
+  },
+  computed: {},
+  created: function created() {
+    var _this = this;
+
+    var currentDate = new Date();
+    this.today = "".concat(currentDate.getFullYear(), "-").concat(currentDate.getMonth() + 1, "-").concat(currentDate.getDate()); // Candidato a irse a State Management.
+
+    fetch('/maintenances/user/active-mainetances').then(function (response) {
+      return response.text();
+    }).then(function (data) {
+      return _this.maintenance_list = JSON.parse(data);
+    });
+  },
+  methods: {
+    daysBetween: function daysBetween(targetDate) {
+      var target = new Date(targetDate);
+      var today = new Date(this.today);
+      var Difference_In_Time = target.getTime() - today.getTime();
+      return Difference_In_Time / (1000 * 3600 * 24);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/performance-sheet.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/performance-sheet.vue?vue&type=script&lang=js& ***!
@@ -45080,6 +45254,331 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-sheet.vue?vue&type=template&id=ae80f49a&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-sheet.vue?vue&type=template&id=ae80f49a& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    { staticClass: "small-12 medium-3", attrs: { id: "maintenance" } },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "card no-m-top",
+          attrs: { id: "scheduled-maintenance" }
+        },
+        [
+          _vm.maintenance_list.length > 0
+            ? _vm._l(_vm.maintenance_list, function(maintenance) {
+                return _c(
+                  "div",
+                  { staticClass: "scheduled-maintenance-card clearfix" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "scheduled-maintenance-detail" },
+                      [
+                        _c("i", {
+                          staticClass:
+                            "service-icon scheduled-maintenance-category float-left"
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "h6",
+                          {
+                            staticClass:
+                              "scheduled-maintenance-title float-center"
+                          },
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(maintenance.maintenance_service) +
+                                "\n                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(1, true),
+                        _vm._v(" "),
+                        maintenance.due_moment == "Inmediate" ||
+                        (maintenance.due_moment == "Specific distance" &&
+                          maintenance.maintenance_current_distance >
+                            maintenance.tracked_distance) ||
+                        (maintenance.due_moment == "Specific date" &&
+                          _vm.today > maintenance.final_date)
+                          ? [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "faux-checkbox",
+                                  attrs: {
+                                    "data-maintenance-id": maintenance.id,
+                                    "data-open": "done-service"
+                                  }
+                                },
+                                [_c("span", { staticClass: "dot" })]
+                              )
+                            ]
+                          : _vm._e()
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "status-progress" },
+                      [
+                        maintenance.due_moment == "Specific distance"
+                          ? [
+                              _c(
+                                "span",
+                                { staticClass: "status-current" },
+                                [
+                                  _c("b", [_vm._v("Current")]),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  maintenance.current_distance >
+                                  maintenance.tracked_distance
+                                    ? [
+                                        _vm._v(
+                                          "\n                            " +
+                                            _vm._s(
+                                              _vm.maintenances
+                                                .current_distance -
+                                                maintenance.tracked_distance +
+                                                " miles overdue"
+                                            ) +
+                                            "\n                        "
+                                        )
+                                      ]
+                                    : [
+                                        _vm._v(
+                                          "\n                            " +
+                                            _vm._s(
+                                              maintenance.current_distance
+                                            ) +
+                                            "\n                        "
+                                        )
+                                      ]
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                { staticClass: "status-current text-right" },
+                                [
+                                  _c("b", [_vm._v("Tracked")]),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(maintenance.tracked_distance) +
+                                      "\n                    "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("progress", {
+                                attrs: { max: "100" },
+                                domProps: {
+                                  value:
+                                    (maintenance.current_distance /
+                                      maintenance.tracked_distance) *
+                                    100
+                                }
+                              })
+                            ]
+                          : _vm._e(),
+                        _vm._v(" "),
+                        maintenance.due_moment == "Specific date"
+                          ? [
+                              _vm.daysBetween(maintenance.final_date) > 0
+                                ? _c(
+                                    "span",
+                                    { staticClass: "status-current" },
+                                    [
+                                      _c("b", [_vm._v("Days left")]),
+                                      _c("br"),
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            _vm.daysBetween(
+                                              maintenance.final_date
+                                            )
+                                          ) +
+                                          "\n                    "
+                                      )
+                                    ]
+                                  )
+                                : _c(
+                                    "span",
+                                    { staticClass: "status-current" },
+                                    [
+                                      _c("b", [_vm._v("Days overdue")]),
+                                      _c("br"),
+                                      _vm._v(
+                                        "\n                        " +
+                                          _vm._s(
+                                            " " +
+                                              -1 *
+                                                _vm.daysBetween(
+                                                  maintenance.final_date
+                                                )
+                                          ) +
+                                          "\n                    "
+                                      )
+                                    ]
+                                  ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                { staticClass: "status-current text-right" },
+                                [
+                                  _c("b", [_vm._v("Target date")]),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(maintenance.final_date) +
+                                      "\n                    "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("progress", {
+                                attrs: { max: "100", value: "90" }
+                              })
+                            ]
+                          : _vm._e(),
+                        _vm._v(" "),
+                        maintenance.due_moment == "Inmediate"
+                          ? [
+                              _vm._m(2, true),
+                              _vm._v(" "),
+                              _c("span", {
+                                staticClass: "status-current text-right"
+                              }),
+                              _vm._v(" "),
+                              _c("progress", {
+                                attrs: { max: "100", value: "100" }
+                              })
+                            ]
+                          : _vm._e()
+                      ],
+                      2
+                    )
+                  ]
+                )
+              })
+            : _c(
+                "div",
+                { staticClass: "scheduled-maintenance-card clearfix" },
+                [_vm._m(3)]
+              )
+        ],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "card no-m-bottom", attrs: { id: "maintenance-resume" } },
+      [
+        _c("div", { staticClass: "clearfix" }, [
+          _c("h5", { staticClass: "float-left" }, [_vm._v("Maintenances")]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "hollow  button float-right alternative",
+              attrs: { "data-open": "add-service" }
+            },
+            [_vm._v("Add service")]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ul",
+      {
+        staticClass: "dropdown menu more-options float-right",
+        attrs: { "data-dropdown-menu": "" }
+      },
+      [
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _c("i", { staticClass: "material-icons" }, [
+              _vm._v(
+                "\n                                    more_vert\n                                "
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("ul", { staticClass: "menu" }, [
+            _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Item 1A")])])
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "status-current" }, [
+      _c("b", [_vm._v("Urgency")]),
+      _c("br"),
+      _vm._v("\n                        Inmediate\n                    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "scheduled-maintenance-detail callout secondary" },
+      [
+        _c("h4", { staticClass: "text-center" }, [
+          _vm._v(
+            "\n                        Currently there are no maintenances pending.\n                    "
+          )
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/performance-sheet.vue?vue&type=template&id=19a61ef1&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/performance-sheet.vue?vue&type=template&id=19a61ef1& ***!
@@ -58640,8 +59139,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_my_car_expenses_logs_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/my-car/expenses-logs.vue */ "./resources/js/components/my-car/expenses-logs.vue");
 /* harmony import */ var _components_my_car_performance_sheet_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/my-car/performance-sheet.vue */ "./resources/js/components/my-car/performance-sheet.vue");
 /* harmony import */ var _components_my_car_expenses_resume_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/my-car/expenses-resume.vue */ "./resources/js/components/my-car/expenses-resume.vue");
-/* harmony import */ var _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/forms/register-users.vue */ "./resources/js/components/forms/register-users.vue");
-/* harmony import */ var _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/forms/add-vehicle-form.vue */ "./resources/js/components/forms/add-vehicle-form.vue");
+/* harmony import */ var _components_my_car_maintenances_sheet_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/my-car/maintenances-sheet.vue */ "./resources/js/components/my-car/maintenances-sheet.vue");
+/* harmony import */ var _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/forms/register-users.vue */ "./resources/js/components/forms/register-users.vue");
+/* harmony import */ var _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/forms/add-vehicle-form.vue */ "./resources/js/components/forms/add-vehicle-form.vue");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -58653,6 +59153,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 window.Vue = __webpack_require__(/*! Vue */ "./node_modules/Vue/dist/vue.runtime.esm.js");
  // import StatsTable from './modules/fuelgov/stats-table.vue';
+
 
 
 
@@ -58717,11 +59218,13 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   },
   components: {
     StatsTable: _components_utilities_stats_table_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    RegisterUsersForm: _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    AddVehicleForm: _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    RegisterUsersForm: _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    AddVehicleForm: _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     PerformanceSheet: _components_my_car_performance_sheet_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     ExpensesLogs: _components_my_car_expenses_logs_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ExpensesResume: _components_my_car_expenses_resume_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    ExpensesResume: _components_my_car_expenses_resume_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    // MaintenancesSheet
+    UserVehicleMaintenances: _components_my_car_maintenances_sheet_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
   created: function created() {},
   mounted: function mounted() {},
@@ -59113,20 +59616,19 @@ if (windowSize <= sm) {
         p.closeOverlay();
       }
     });
-  }
+  } // var statsViewsAnchors = '<li class="tabs-title is-active"><a href="#m-expenses"  aria-selected="true">Expenses</a></li><li class="tabs-title"><a data-tabs-target="m-maintenances" href="#m-maintenances">Maintenances</a></li><li class="tabs-title "><a href="#m-performance"  data-tabs-target="m-performance" >Performance</a></li>'
+  // var statsContent = $('<div class="tabs-content" data-tabs-content="m-vehicle-stats"><div class="tabs-panel is-active" id="m-expenses"></div><div class="tabs-panel" id="m-maintenances"></div><div class="tabs-panel" id="m-performance"></div></div>');
+  // var mStatsTabs = $('<ul class="tabs" data-tabs id="m-vehicle-stats"></ul>');
+  // var vehicleExpenses = $('#expenses');
+  // var vehicleMaintenance = $('#maintenance');
+  // var vehiclePerformance = $('#performance');
+  // $('#expenses-resume').after(statsContent);
+  // $('#expenses-resume').after(mStatsTabs);
+  // $('#m-vehicle-stats').append(statsViewsAnchors);
+  // $('#m-expenses').append(vehicleExpenses);
+  // $('#m-maintenances').append(vehicleMaintenance);
+  // $('#m-performance').append(vehiclePerformance);
 
-  var statsViewsAnchors = '<li class="tabs-title is-active"><a href="#m-expenses"  aria-selected="true">Expenses</a></li><li class="tabs-title"><a data-tabs-target="m-maintenances" href="#m-maintenances">Maintenances</a></li><li class="tabs-title "><a href="#m-performance"  data-tabs-target="m-performance" >Performance</a></li>';
-  var statsContent = $('<div class="tabs-content" data-tabs-content="m-vehicle-stats"><div class="tabs-panel is-active" id="m-expenses"></div><div class="tabs-panel" id="m-maintenances"></div><div class="tabs-panel" id="m-performance"></div></div>');
-  var mStatsTabs = $('<ul class="tabs" data-tabs id="m-vehicle-stats"></ul>');
-  var vehicleExpenses = $('#expenses');
-  var vehicleMaintenance = $('#maintenance');
-  var vehiclePerformance = $('#performance');
-  $('#expenses-resume').after(statsContent);
-  $('#expenses-resume').after(mStatsTabs);
-  $('#m-vehicle-stats').append(statsViewsAnchors);
-  $('#m-expenses').append(vehicleExpenses);
-  $('#m-maintenances').append(vehicleMaintenance);
-  $('#m-performance').append(vehiclePerformance);
 
   if (filename !== '/sign-up' & filename !== '/login') {
     header.appendChild(miscButtons);
@@ -59745,6 +60247,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_historic_vue_vue_type_template_id_bb21fe8a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_historic_vue_vue_type_template_id_bb21fe8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/maintenances-sheet.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-sheet.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _maintenances_sheet_vue_vue_type_template_id_ae80f49a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./maintenances-sheet.vue?vue&type=template&id=ae80f49a& */ "./resources/js/components/my-car/maintenances-sheet.vue?vue&type=template&id=ae80f49a&");
+/* harmony import */ var _maintenances_sheet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./maintenances-sheet.vue?vue&type=script&lang=js& */ "./resources/js/components/my-car/maintenances-sheet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _maintenances_sheet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _maintenances_sheet_vue_vue_type_template_id_ae80f49a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _maintenances_sheet_vue_vue_type_template_id_ae80f49a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/my-car/maintenances-sheet.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/maintenances-sheet.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-sheet.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_sheet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./maintenances-sheet.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-sheet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_sheet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/maintenances-sheet.vue?vue&type=template&id=ae80f49a&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-sheet.vue?vue&type=template&id=ae80f49a& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_sheet_vue_vue_type_template_id_ae80f49a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./maintenances-sheet.vue?vue&type=template&id=ae80f49a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-sheet.vue?vue&type=template&id=ae80f49a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_sheet_vue_vue_type_template_id_ae80f49a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_sheet_vue_vue_type_template_id_ae80f49a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
