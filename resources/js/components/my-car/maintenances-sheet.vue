@@ -10,6 +10,16 @@
             <button class="hollow  button float-right alternative" data-open="add-service">Add service</button>
         </div>
 
+        <span id='maintenance-resume-total' class="text-center">
+            <span class="stat">{{ totalExpenses }}</span>
+            <br>
+            <span class="stats-list-label">
+                Total expenses
+            </span>
+        </span>
+
+        <maintenances-doughnut  id="maintenance-chart" :chart-data="chartData"></maintenances-doughnut>
+
     </div>
 
     <div id="scheduled-maintenance" class="card no-m-top">
@@ -17,10 +27,11 @@
             <div class="scheduled-maintenance-card clearfix" v-for=" maintenance in maintenance_list ">
                 <div class="scheduled-maintenance-detail">
 
-                    <i class="service-icon scheduled-maintenance-category float-left">
+                    <i class="service-icon scheduled-maintenance-category float-left" 
+                        v-html="printIcon(maintenance.maintenance_service)">
                     </i>
 
-                     <h6 class="scheduled-maintenance-title float-center">
+                     <h6 class="scheduled-maintenance-title float-center" >
                         {{maintenance.maintenance_service}}
                     </h6>
 
@@ -117,32 +128,60 @@
                 </div>
 
             </div>
-       
-
-            
-
 
     </div>
-
 
 </section>
 
 </template>
 
 <script>
+import MaintenancesChart from './maintenances-chart.vue';
+import MaintenancesDoughnut from './maintenances-pie-chart.vue';
+
 export default {
             name: "user-vehicle-maintenances",
             components:{
-               
+               MaintenancesDoughnut
             },
             data(){
                 return {
                    maintenance_list:'',
-                   today: null 
+                   today: null ,
+                   maintenance_expenses:[],
+                   maintenance_services_performed:{}
                 }
             },
+            props:['printIcon'],
             computed:{
+
+                chartData(){
+                    return {
+                            labels:this.maintenanceExpenses.name,
+                            datasets: [{
+                                label: 'Data One',
+                                backgroundColor: '#f87979',
+                                data: this.maintenanceExpenses.cost }]
+                            
+                            }
+                         
+                },
+                totalExpenses(){
+                    let total = 0;
+                    this.maintenance_expenses.forEach( expense => total += expense.cost);
+                    return total;
+                },
+                maintenanceExpenses(){
+
+                //     let label;
+                //     let cost;
+
+                   let name = this.maintenance_expenses.map(maintenance =>  maintenance.maintenance_service )
+                   let cost = this.maintenance_expenses.map(maintenance =>  maintenance.cost )
+                   return {name,cost}
                 
+                }
+
             },
             created(){
                 let currentDate = new Date();
@@ -154,9 +193,20 @@ export default {
                         return this.maintenance_list = JSON.parse(data);
 
                 })
+
+                fetch('/maintenances/user/mainetances-expenses').then( response => response.text()).then( data => {
+
+                        return this.maintenance_expenses = JSON.parse(data);
+
+                })
             },
 
+            mounted(){
+
+            },
+            
             methods:{
+         
                daysBetween(targetDate){
 
                     let target = new Date(targetDate);
@@ -166,6 +216,7 @@ export default {
                      return (Difference_In_Time / (1000 * 3600 * 24));
                 }
             }
+            
     
 }
 </script>

@@ -10,7 +10,7 @@
 
 
             <expenses-historic  id="fuel-expenses-logs" ref="fuel-expenses-logs"></expenses-historic>
-            <maintenances-historic class="is-active" id="maintenance-logs" ref="maintenance-logs"></maintenances-historic>
+            <maintenances-historic class="is-active" id="maintenance-logs" ref="maintenance-logs" :print-icon="printIcon"></maintenances-historic>
 
 
 
@@ -32,6 +32,7 @@
                 ExpensesHistoric,
                 MaintenancesHistoric
             },
+            props:['printIcon'],
             data(){
                 return {
                    

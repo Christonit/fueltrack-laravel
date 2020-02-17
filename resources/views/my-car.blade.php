@@ -102,10 +102,10 @@
 
                 <!-- Expenses logs  -->
 
-                <expenses-logs class="small-12 medium-12" id="expenses-logs"></expenses-logs>
+                <expenses-logs class="small-12 medium-12" id="expenses-logs"  :print-icon="printServiceCategoryIcon"></expenses-logs>
 
             </section>
-            <user-vehicle-maintenances class="small-12 medium-3"></user-vehicle-maintenances>
+            <user-vehicle-maintenances class="small-12 medium-3" :print-icon="printServiceCategoryIcon"></user-vehicle-maintenances>
 
 
 
@@ -114,7 +114,6 @@
 
 
     </div>
-
 
 
 

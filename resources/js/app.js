@@ -11,6 +11,8 @@ import ExpensesLogs from './components/my-car/expenses-logs.vue';
 import PerformanceSheet from './components/my-car/performance-sheet.vue';
 import ExpensesResume from './components/my-car/expenses-resume.vue';
 import UserVehicleMaintenances from './components/my-car/maintenances-sheet.vue';
+import MaintenancesChart from './components/my-car/maintenances-chart.vue';
+import MaintenancesDoughnut from './components/my-car/maintenances-pie-chart.vue';
 import RegisterUsersForm from './components/forms/register-users.vue';
 import AddVehicleForm from './components/forms/add-vehicle-form.vue';
 
@@ -106,6 +108,8 @@ const app = new Vue({
         PerformanceSheet,
         ExpensesLogs,
         ExpensesResume,
+        MaintenancesChart,
+        MaintenancesDoughnut,
         // MaintenancesSheet
         UserVehicleMaintenances
 
@@ -126,6 +130,87 @@ const app = new Vue({
 
     },
     methods:{
+        
+        printServiceCategoryIcon(maintenance_service){
+            switch(maintenance_service.toLowerCase()){
+
+                case('wheel change'):
+                    return '&#xe800';
+                break;
+
+                case('alignment'):
+                    return '&#xe801';
+                break;
+
+                case('battery change'):
+                    return '&#xe802';
+                break;
+
+                case('body fix'):
+                    return '&#xe803';
+                break;
+
+                case('brake check'):
+                    return '&#xe804';
+                break;
+
+                case('cleaning'):
+                    return '&#xe805';
+                break;
+
+                case('coolant fill'):
+                    return '&#xe806';
+                break;
+
+                case('electricity check'):
+                    return '&#xe807';
+                break;
+
+                case('engine check'):
+                    return '&#xe808';
+                break;
+
+                case('filter change'):
+                    return '&#xe809';
+                break;
+
+                case('tire change'):
+                    return '&#xe810';
+                break;
+
+                case('transmission check'):
+                    return '&#xe811';
+                break;
+
+                case('inmediate check'):
+                    return '&#xe80a';
+                break;
+
+                case('oil change'):
+                    return '&#xe80b';
+                break;
+
+                case('paint job'):
+                    return '&#xe80c';
+                break;
+
+                case('part change'):
+                    return '&#xe80d';
+                break;
+
+                case('preassure check'):
+                    return '&#xe80e';
+                break;
+
+                case('scheduled maintenance'):
+                return '&#xe80f';
+                break;
+
+                default:
+                return '&#xe80f';
+
+            }
+        },
         selectMaker(e){
             this.models = this.getModels(e.target.value, this.$refs.selectedYear.value)
 

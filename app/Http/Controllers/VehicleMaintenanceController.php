@@ -279,7 +279,15 @@ class VehicleMaintenanceController extends Controller
 
     }
     
+    public function maintenancesExpenses(){
+
+        $vehicle_id = vehicle::userVehicle();
+        return MaintenancesServicesPerformed::getMaintenancesExpenses($vehicle_id);
+
+    }
     public function dueMomentCalculator(){
+
+    
         foreach($maintenance as $maintenances){
 
             if($maintenances->due_moment == 'Specific distance'){

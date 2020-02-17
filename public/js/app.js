@@ -9067,6 +9067,7 @@ __webpack_require__.r(__webpack_exports__);
     ExpensesHistoric: _expenses_historic_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     MaintenancesHistoric: _maintenances_historic_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  props: ['printIcon'],
   data: function data() {
     return {};
   },
@@ -9118,6 +9119,25 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.renderChart(this.chartdata, this.options);
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-chart.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-chart.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "maintenances-chart"
 });
 
 /***/ }),
@@ -9281,6 +9301,7 @@ __webpack_require__.r(__webpack_exports__);
       hasExpenses: false
     };
   },
+  props: ['printIcon'],
   created: function created() {
     var _this = this;
 
@@ -9292,89 +9313,60 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    printServiceCategoryIcon: function printServiceCategoryIcon(maintenance_service) {
-      switch (maintenance_service.toLowerCase()) {
-        case 'wheel change':
-          return '&#xe800';
-          break;
-
-        case 'alignment':
-          return '&#xe801';
-          break;
-
-        case 'battery change':
-          return '&#xe802';
-          break;
-
-        case 'body fix':
-          return '&#xe803';
-          break;
-
-        case 'brake check':
-          return '&#xe804';
-          break;
-
-        case 'cleaning':
-          return '&#xe805';
-          break;
-
-        case 'coolant fill':
-          return '&#xe806';
-          break;
-
-        case 'electricity check':
-          return '&#xe807';
-          break;
-
-        case 'engine check':
-          return '&#xe808';
-          break;
-
-        case 'filter change':
-          return '&#xe809';
-          break;
-
-        case 'tire change':
-          return '&#xe810';
-          break;
-
-        case 'transmission check':
-          return '&#xe811';
-          break;
-
-        case 'inmediate check':
-          return '&#xe80a';
-          break;
-
-        case 'oil change':
-          return '&#xe80b';
-          break;
-
-        case 'paint job':
-          return '&#xe80c';
-          break;
-
-        case 'part change':
-          return '&#xe80d';
-          break;
-
-        case 'preassure check':
-          return '&#xe80e';
-          break;
-
-        case 'scheduled maintenance':
-          return '&#xe80f';
-          break;
-
-        default:
-          return '&#xe80f';
-      }
-    },
     tableIsActive: function tableIsActive(e) {
       var tableToExpande = e.target.nextElementSibling; //    this.$refs.nextElementSibling.classList.add = 'is-active'; 
 
       console.log(this.$ref.maintenance_table);
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-pie-chart.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-pie-chart.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+
+var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["mixins"].reactiveProp;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "maintenances-doughnut",
+  mixins: [reactiveProp],
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Doughnut"],
+  data: function data() {
+    return {
+      options: {
+        layout: {
+          padding: {
+            left: 56,
+            right: 56,
+            top: 0,
+            bottom: 0
+          }
+        },
+        cutoutPercentage: 80,
+        legend: {
+          position: 'bottom'
+        },
+        responsive: true,
+        maintainAspectRatio: true
+      }
+    };
+  },
+  props: {
+    chartData: {
+      type: Object,
+      "default": null
+    }
+  },
+  mounted: function mounted() {
+    this.renderChart(this.chartData, this.options);
   }
 });
 
@@ -9389,6 +9381,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _maintenances_chart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./maintenances-chart.vue */ "./resources/js/components/my-car/maintenances-chart.vue");
+/* harmony import */ var _maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./maintenances-pie-chart.vue */ "./resources/js/components/my-car/maintenances-pie-chart.vue");
 //
 //
 //
@@ -9520,16 +9514,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "user-vehicle-maintenances",
-  components: {},
+  components: {
+    MaintenancesDoughnut: _maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
       maintenance_list: '',
-      today: null
+      today: null,
+      maintenance_expenses: [],
+      maintenance_services_performed: {}
     };
   },
-  computed: {},
+  props: ['printIcon'],
+  computed: {
+    chartData: function chartData() {
+      return {
+        labels: this.maintenanceExpenses.name,
+        datasets: [{
+          label: 'Data One',
+          backgroundColor: '#f87979',
+          data: this.maintenanceExpenses.cost
+        }]
+      };
+    },
+    totalExpenses: function totalExpenses() {
+      var total = 0;
+      this.maintenance_expenses.forEach(function (expense) {
+        return total += expense.cost;
+      });
+      return total;
+    },
+    maintenanceExpenses: function maintenanceExpenses() {
+      //     let label;
+      //     let cost;
+      var name = this.maintenance_expenses.map(function (maintenance) {
+        return maintenance.maintenance_service;
+      });
+      var cost = this.maintenance_expenses.map(function (maintenance) {
+        return maintenance.cost;
+      });
+      return {
+        name: name,
+        cost: cost
+      };
+    }
+  },
   created: function created() {
     var _this = this;
 
@@ -9541,7 +9580,13 @@ __webpack_require__.r(__webpack_exports__);
     }).then(function (data) {
       return _this.maintenance_list = JSON.parse(data);
     });
+    fetch('/maintenances/user/mainetances-expenses').then(function (response) {
+      return response.text();
+    }).then(function (data) {
+      return _this.maintenance_expenses = JSON.parse(data);
+    });
   },
+  mounted: function mounted() {},
   methods: {
     daysBetween: function daysBetween(targetDate) {
       var target = new Date(targetDate);
@@ -44961,12 +45006,36 @@ var render = function() {
         _c("maintenances-historic", {
           ref: "maintenance-logs",
           staticClass: "is-active",
-          attrs: { id: "maintenance-logs" }
+          attrs: { id: "maintenance-logs", "print-icon": _vm.printIcon }
         })
       ],
       1
     )
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-chart.vue?vue&type=template&id=b1e2ae9c&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-chart.vue?vue&type=template&id=b1e2ae9c& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("h1", [_vm._v("123")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -45171,9 +45240,7 @@ var render = function() {
                               _vm._v(
                                 " " +
                                   _vm._s(
-                                    _vm.printServiceCategoryIcon(
-                                      service.maintenance_service
-                                    )
+                                    _vm.printIcon(service.maintenance_service)
                                   ) +
                                   " "
                               )
@@ -45273,7 +45340,40 @@ var render = function() {
     "section",
     { staticClass: "small-12 medium-3", attrs: { id: "maintenance" } },
     [
-      _vm._m(0),
+      _c(
+        "div",
+        {
+          staticClass: "card no-m-bottom",
+          attrs: { id: "maintenance-resume" }
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "text-center",
+              attrs: { id: "maintenance-resume-total" }
+            },
+            [
+              _c("span", { staticClass: "stat" }, [
+                _vm._v(_vm._s(_vm.totalExpenses))
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("span", { staticClass: "stats-list-label" }, [
+                _vm._v("\n                Total expenses\n            ")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("maintenances-doughnut", {
+            attrs: { id: "maintenance-chart", "chart-data": _vm.chartData }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "div",
@@ -45294,7 +45394,12 @@ var render = function() {
                       [
                         _c("i", {
                           staticClass:
-                            "service-icon scheduled-maintenance-category float-left"
+                            "service-icon scheduled-maintenance-category float-left",
+                          domProps: {
+                            innerHTML: _vm._s(
+                              _vm.printIcon(maintenance.maintenance_service)
+                            )
+                          }
                         }),
                         _vm._v(" "),
                         _c(
@@ -45500,24 +45605,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "card no-m-bottom", attrs: { id: "maintenance-resume" } },
-      [
-        _c("div", { staticClass: "clearfix" }, [
-          _c("h5", { staticClass: "float-left" }, [_vm._v("Maintenances")]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "hollow  button float-right alternative",
-              attrs: { "data-open": "add-service" }
-            },
-            [_vm._v("Add service")]
-          )
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "clearfix" }, [
+      _c("h5", { staticClass: "float-left" }, [_vm._v("Maintenances")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "hollow  button float-right alternative",
+          attrs: { "data-open": "add-service" }
+        },
+        [_vm._v("Add service")]
+      )
+    ])
   },
   function() {
     var _vm = this
@@ -59140,8 +59239,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_my_car_performance_sheet_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/my-car/performance-sheet.vue */ "./resources/js/components/my-car/performance-sheet.vue");
 /* harmony import */ var _components_my_car_expenses_resume_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/my-car/expenses-resume.vue */ "./resources/js/components/my-car/expenses-resume.vue");
 /* harmony import */ var _components_my_car_maintenances_sheet_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/my-car/maintenances-sheet.vue */ "./resources/js/components/my-car/maintenances-sheet.vue");
-/* harmony import */ var _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/forms/register-users.vue */ "./resources/js/components/forms/register-users.vue");
-/* harmony import */ var _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/forms/add-vehicle-form.vue */ "./resources/js/components/forms/add-vehicle-form.vue");
+/* harmony import */ var _components_my_car_maintenances_chart_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/my-car/maintenances-chart.vue */ "./resources/js/components/my-car/maintenances-chart.vue");
+/* harmony import */ var _components_my_car_maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/my-car/maintenances-pie-chart.vue */ "./resources/js/components/my-car/maintenances-pie-chart.vue");
+/* harmony import */ var _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/forms/register-users.vue */ "./resources/js/components/forms/register-users.vue");
+/* harmony import */ var _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/forms/add-vehicle-form.vue */ "./resources/js/components/forms/add-vehicle-form.vue");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -59153,6 +59254,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 window.Vue = __webpack_require__(/*! Vue */ "./node_modules/Vue/dist/vue.runtime.esm.js");
  // import StatsTable from './modules/fuelgov/stats-table.vue';
+
+
 
 
 
@@ -59218,11 +59321,13 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   },
   components: {
     StatsTable: _components_utilities_stats_table_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    RegisterUsersForm: _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    AddVehicleForm: _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    RegisterUsersForm: _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    AddVehicleForm: _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
     PerformanceSheet: _components_my_car_performance_sheet_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     ExpensesLogs: _components_my_car_expenses_logs_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     ExpensesResume: _components_my_car_expenses_resume_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    MaintenancesChart: _components_my_car_maintenances_chart_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    MaintenancesDoughnut: _components_my_car_maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     // MaintenancesSheet
     UserVehicleMaintenances: _components_my_car_maintenances_sheet_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
@@ -59234,6 +59339,84 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     }
   },
   methods: {
+    printServiceCategoryIcon: function printServiceCategoryIcon(maintenance_service) {
+      switch (maintenance_service.toLowerCase()) {
+        case 'wheel change':
+          return '&#xe800';
+          break;
+
+        case 'alignment':
+          return '&#xe801';
+          break;
+
+        case 'battery change':
+          return '&#xe802';
+          break;
+
+        case 'body fix':
+          return '&#xe803';
+          break;
+
+        case 'brake check':
+          return '&#xe804';
+          break;
+
+        case 'cleaning':
+          return '&#xe805';
+          break;
+
+        case 'coolant fill':
+          return '&#xe806';
+          break;
+
+        case 'electricity check':
+          return '&#xe807';
+          break;
+
+        case 'engine check':
+          return '&#xe808';
+          break;
+
+        case 'filter change':
+          return '&#xe809';
+          break;
+
+        case 'tire change':
+          return '&#xe810';
+          break;
+
+        case 'transmission check':
+          return '&#xe811';
+          break;
+
+        case 'inmediate check':
+          return '&#xe80a';
+          break;
+
+        case 'oil change':
+          return '&#xe80b';
+          break;
+
+        case 'paint job':
+          return '&#xe80c';
+          break;
+
+        case 'part change':
+          return '&#xe80d';
+          break;
+
+        case 'preassure check':
+          return '&#xe80e';
+          break;
+
+        case 'scheduled maintenance':
+          return '&#xe80f';
+          break;
+
+        default:
+          return '&#xe80f';
+      }
+    },
     selectMaker: function selectMaker(e) {
       this.models = this.getModels(e.target.value, this.$refs.selectedYear.value);
     },
@@ -60114,6 +60297,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/my-car/maintenances-chart.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-chart.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _maintenances_chart_vue_vue_type_template_id_b1e2ae9c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./maintenances-chart.vue?vue&type=template&id=b1e2ae9c& */ "./resources/js/components/my-car/maintenances-chart.vue?vue&type=template&id=b1e2ae9c&");
+/* harmony import */ var _maintenances_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./maintenances-chart.vue?vue&type=script&lang=js& */ "./resources/js/components/my-car/maintenances-chart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _maintenances_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _maintenances_chart_vue_vue_type_template_id_b1e2ae9c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _maintenances_chart_vue_vue_type_template_id_b1e2ae9c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/my-car/maintenances-chart.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/maintenances-chart.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-chart.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./maintenances-chart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-chart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/maintenances-chart.vue?vue&type=template&id=b1e2ae9c&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-chart.vue?vue&type=template&id=b1e2ae9c& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_chart_vue_vue_type_template_id_b1e2ae9c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./maintenances-chart.vue?vue&type=template&id=b1e2ae9c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-chart.vue?vue&type=template&id=b1e2ae9c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_chart_vue_vue_type_template_id_b1e2ae9c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_chart_vue_vue_type_template_id_b1e2ae9c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/my-car/maintenances-historic-row.vue":
 /*!**********************************************************************!*\
   !*** ./resources/js/components/my-car/maintenances-historic-row.vue ***!
@@ -60249,6 +60501,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_historic_vue_vue_type_template_id_bb21fe8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/maintenances-pie-chart.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-pie-chart.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _maintenances_pie_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./maintenances-pie-chart.vue?vue&type=script&lang=js& */ "./resources/js/components/my-car/maintenances-pie-chart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _maintenances_pie_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/my-car/maintenances-pie-chart.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/maintenances-pie-chart.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/my-car/maintenances-pie-chart.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_pie_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./maintenances-pie-chart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-pie-chart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_pie_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

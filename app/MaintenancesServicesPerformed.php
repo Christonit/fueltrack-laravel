@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\vehicle_maintenance;
 
 class MaintenancesServicesPerformed extends Model
 {
@@ -25,5 +26,16 @@ class MaintenancesServicesPerformed extends Model
 
 
     protected $table = 'maintenances_services_performed';
+
+
+    protected function getMaintenancesExpenses($vehicleID){
+
+        return $this->select('vehicle_maintenance.maintenance_service',
+            'maintenances_services_performed.service_category',
+            'maintenances_services_performed.cost')
+                ->join('vehicle_maintenance', 'maintenances_services_performed.maintenance_service','=', 'vehicle_maintenance.id')
+                ->where('maintenances_services_performed.vehicle','=',$vehicleID)
+                ->get();
+    }
 
 }
