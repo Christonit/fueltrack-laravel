@@ -165,6 +165,53 @@ class expenses extends Model
         return $last30Days;
 
     }
+    protected function last5Weeks(){
+
+        $currentWeek = $this->weekOfTheYear;
+        $galons = array();
+        $expenses = [];
+
+        for($i = 0; $i < 5; $i++){
+
+            $startOfWeek = $this->getStartofTheWeek($currentWeek,$i);
+            $endOfWeek = $this->getEndOfTheWeek($currentWeek,$i);
+
+            $weeks[] = substr($startOfWeek->toFormattedDateString('m-d'), 0, -6).' - '.substr($endOfWeek->toFormattedDateString('m-d'),  0, -6);
+
+            $galons[]=  $this->where('vehicle',$this->getVehicleId())
+                            ->where('Date','>=',$startOfWeek->format('Y-m-d'))
+                            ->where('Date', '<=', $endOfWeek->format('Y-m-d'))
+                            ->get(['Galons','Current_fuel_price','Date']);
+            
+            // $fuelPrices =  FuelPrices::whereDate('start_of_week',$startOfWeek->format('Y-m-d'))
+            //                             ->pluck($fuelType)->first();
+
+            // $expenses[] = str_replace(',','',number_format($galons * $fuelPrices, 2));
+
+        }
+        // dd( sizeof($galons[1]) );
+        foreach($galons as $galon){
+
+            if(sizeof($galon) != 0){
+                $sum = null;
+                foreach($galon as $item){
+                    $sum += $item->Galons * $item->Current_fuel_price;
+                }
+
+                $expenses[]= $sum;
+
+            }else{
+                $expenses[]= 0;
+            }
+
+        }
+
+        $last5Weeks['Dates'] = $weeks;
+        $last5Weeks['Expenses'] = $expenses;
+
+        return $last5Weeks;
+
+    }
 
 
 //Get expenses by month

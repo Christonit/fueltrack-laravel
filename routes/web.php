@@ -92,6 +92,7 @@ Route::get('/maintenances/all-maintenances','VehicleMaintenanceController@show')
 
 
 Route::get('/expenses/historic','ExpensesController@show');
+Route::get('/expenses/weekly-basis','ExpensesController@lastWeeks');
 Route::get('/expenses/maintenances-total','ExpensesController@maintancesPerformedExpenses');
 Route::get('/vehicle/user/performance','VehicleController@vehicleInfo');
 Route::get('/maintenances/user/active-mainetances','VehicleMaintenanceController@activeMaintenances');
