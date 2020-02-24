@@ -50,64 +50,14 @@
 
 
         </div>
-
+        
         @include('my-car.resume')
         <!-- <expenses-resume></expenses-resume> -->
         <section class="grid-x">
 
             <performance-sheet id="performance" class=" small-12 medium-3 "></performance-sheet>
-
-            <section id="expenses" class="small-12 medium-6">
-
-                <!-- Overview chart -->
-                <div id="overview-graph" class="card clearfix">
-                    <label class="input-group-label float-right" data-expense-filter='cost-analysis'>
-                        <span>Cost analysis</span>
-                        <select class="">
-                            <option value="volvo">Last 30 days</option>
-                            <option value="saab">Last 3 months</option>
-                            <option value="mercedes">Last 6 months</option>
-                        </select>
-                    </label>
-
-                    <canvas id="bar-chart"></canvas>
-
-                    <div id='graph-filter' class="grid-x">
-                        <div class="mobile-app-toggle small-12 medium-7" data-mobile-app-toggle data-expense-filter='date-format'>
-                            <label class="input-group-label float-right">
-                                <span>Date format</span>
-                                <button class="button">Daily</button>
-                                <button class="button is-active">Weekly</button>
-                                <button class="button">Monthly</button>
-                            </label>
-                        </div>
-
-
-
-                        <div class="small-12 medium-5" data-expense-filter='show-by'>
-                            <label class="input-group-label float-right">
-                                <span>Show by </span>
-                                <select class="">
-                                    <option value="volvo">Expenses</option>
-                                    <option value="saab">Fuel ups</option>
-                                    <option value="mercedes">Trip distance</option>
-                                </select>
-                            </label>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Expenses logs  -->
-
-                <expenses-logs class="small-12 medium-12" id="expenses-logs"  :print-icon="printServiceCategoryIcon"></expenses-logs>
-
-            </section>
+            <expenses-resume-graph id="expenses" class="small-12 medium-6" :print-icon="printServiceCategoryIcon"></expenses-resume-graph>
             <user-vehicle-maintenances class="small-12 medium-3" :print-icon="printServiceCategoryIcon"></user-vehicle-maintenances>
-
-
 
 
         </section>

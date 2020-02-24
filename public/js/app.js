@@ -8919,6 +8919,56 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-chart.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/expenses-chart.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+
+var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["mixins"].reactiveProp;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Line"],
+  name: 'expenses-chart',
+  mixins: [reactiveProp],
+  data: function data() {
+    return {
+      gradient: null,
+      // chartData:{
+      //     labels:["Feb 22 - Feb 28","Feb 15 - Feb 21","Feb 8 - Feb 14","Feb 1 - Feb 7","Jan 25 - Jan 31"],
+      //     datasets:[{
+      //       label: '# of Votes',
+      //       data: [0,1350,0,1673,478],
+      //     }]
+      // },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true
+      }
+    };
+  },
+  props: {
+    chartData: {
+      type: Object,
+      "default": null
+    }
+  },
+  mounted: function mounted() {
+    this.renderChart(this.chartData, this.options);
+  },
+  watch: {// chartData () {
+    //   // this.$data._chart.update()
+    //       this.renderChart(this.chartdata, this.options)
+    // }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-historic.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/expenses-historic.vue?vue&type=script&lang=js& ***!
@@ -9085,39 +9135,115 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-resume.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/expenses-resume.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+/* harmony import */ var _expenses_chart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./expenses-chart.vue */ "./resources/js/components/my-car/expenses-chart.vue");
+/* harmony import */ var _expenses_logs_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./expenses-logs.vue */ "./resources/js/components/my-car/expenses-logs.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Bar"],
-  name: 'expenses-resume',
+  name: "expenses-resume-graph",
+  components: {
+    ExpensesChart: _expenses_chart_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ExpensesLogs: _expenses_logs_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
-      chartdata: {
-        labels: ['January', 'February'],
-        datasets: [{
-          label: 'Data One',
-          backgroundColor: '#f87979',
-          data: [40, 20]
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
+      fuelUps: '',
+      performance: 0,
+      hasExpenses: false,
+      loaded: false
     };
   },
-  mounted: function mounted() {
-    this.renderChart(this.chartdata, this.options);
+  props: ['printIcon'],
+  created: function created() {
+    var _this = this;
+
+    // Candidato a irse a State Management.
+    fetch('/expenses/weekly-basis').then(function (response) {
+      return response.text();
+    }).then(function (data) {
+      _this.fuelUps = JSON.parse(data);
+      _this.loaded = true;
+    });
+  },
+  mounted: function mounted() {},
+  computed: {
+    fuelUpsChartData: function fuelUpsChartData() {
+      return {
+        labels: this.fuelUps.Dates,
+        datasets: [{
+          label: '# of fuelups',
+          data: this.fuelUps.Expenses,
+          backgroundColor: 'rgba(235,87,87,0.07)',
+          hoverBackgroundColor: 'rgba(235,87,87,0.07)',
+          borderWidth: 3,
+          lineTension: 0,
+          borderColor: 'rgba(235,87,87,1)',
+          pointBorderColor: 'rgba(255,255,255,1)',
+          pointBorderWidth: 3,
+          pointBackgroundColor: 'rgba(235,87,87,1)',
+          pointHoverBackgroundColor: 'rgba(47,128,237,1)',
+          pointHoverBorderColor: 'rgba(255,255,255,1)',
+          pointRadius: 7,
+          pointHoverRadius: 7,
+          hoverBorderWidth: 3,
+          hoverBorderColor: 'rgba(235,87,87,1)',
+          pointHitRadius: 15
+        }]
+      };
+    }
+  },
+  methods: {
+    setGradient: function setGradient() {}
   }
 });
 
@@ -45020,6 +45146,135 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=template&id=796dcc0f&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=template&id=796dcc0f& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    [
+      _c(
+        "div",
+        { staticClass: "card clearfix", attrs: { id: "overview-graph" } },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("expenses-chart", {
+            ref: "canvas",
+            staticClass: "expenses-line-chart",
+            attrs: { height: 280, "chart-data": _vm.fuelUpsChartData }
+          }),
+          _vm._v(" "),
+          _vm._m(1)
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("expenses-logs", {
+        staticClass: "small-12 medium-12",
+        attrs: { id: "expenses-logs", "print-icon": _vm.printIcon }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "input-group-label float-right",
+        attrs: { "data-expense-filter": "cost-analysis" }
+      },
+      [
+        _c("span", [_vm._v("Cost analysis")]),
+        _vm._v(" "),
+        _c("select", {}, [
+          _c("option", { attrs: { value: "volvo" } }, [_vm._v("Last 30 days")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "saab" } }, [_vm._v("Last 3 months")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "mercedes" } }, [
+            _vm._v("Last 6 months")
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "grid-x", attrs: { id: "graph-filter" } }, [
+      _c(
+        "div",
+        {
+          staticClass: "mobile-app-toggle small-12 medium-7",
+          attrs: {
+            "data-mobile-app-toggle": "",
+            "data-expense-filter": "date-format"
+          }
+        },
+        [
+          _c("label", { staticClass: "input-group-label float-right" }, [
+            _c("span", [_vm._v("Date format")]),
+            _vm._v(" "),
+            _c("button", { staticClass: "button" }, [_vm._v("Daily")]),
+            _vm._v(" "),
+            _c("button", { staticClass: "button is-active" }, [
+              _vm._v("Weekly")
+            ]),
+            _vm._v(" "),
+            _c("button", { staticClass: "button" }, [_vm._v("Monthly")])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "small-12 medium-5",
+          attrs: { "data-expense-filter": "show-by" }
+        },
+        [
+          _c("label", { staticClass: "input-group-label float-right" }, [
+            _c("span", [_vm._v("Show by ")]),
+            _vm._v(" "),
+            _c("select", {}, [
+              _c("option", { attrs: { value: "volvo" } }, [_vm._v("Expenses")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "saab" } }, [_vm._v("Fuel ups")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "mercedes" } }, [
+                _vm._v("Trip distance")
+              ])
+            ])
+          ])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/maintenances-chart.vue?vue&type=template&id=b1e2ae9c&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/my-car/maintenances-chart.vue?vue&type=template&id=b1e2ae9c& ***!
@@ -59237,7 +59492,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_utilities_stats_table_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/utilities/stats-table.vue */ "./resources/js/components/utilities/stats-table.vue");
 /* harmony import */ var _components_my_car_expenses_logs_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/my-car/expenses-logs.vue */ "./resources/js/components/my-car/expenses-logs.vue");
 /* harmony import */ var _components_my_car_performance_sheet_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/my-car/performance-sheet.vue */ "./resources/js/components/my-car/performance-sheet.vue");
-/* harmony import */ var _components_my_car_expenses_resume_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/my-car/expenses-resume.vue */ "./resources/js/components/my-car/expenses-resume.vue");
+/* harmony import */ var _components_my_car_expenses_resume_graph_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/my-car/expenses-resume-graph.vue */ "./resources/js/components/my-car/expenses-resume-graph.vue");
 /* harmony import */ var _components_my_car_maintenances_sheet_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/my-car/maintenances-sheet.vue */ "./resources/js/components/my-car/maintenances-sheet.vue");
 /* harmony import */ var _components_my_car_maintenances_chart_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/my-car/maintenances-chart.vue */ "./resources/js/components/my-car/maintenances-chart.vue");
 /* harmony import */ var _components_my_car_maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/my-car/maintenances-pie-chart.vue */ "./resources/js/components/my-car/maintenances-pie-chart.vue");
@@ -59325,7 +59580,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     AddVehicleForm: _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
     PerformanceSheet: _components_my_car_performance_sheet_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     ExpensesLogs: _components_my_car_expenses_logs_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ExpensesResume: _components_my_car_expenses_resume_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    ExpensesResumeGraph: _components_my_car_expenses_resume_graph_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     MaintenancesChart: _components_my_car_maintenances_chart_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
     MaintenancesDoughnut: _components_my_car_maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     // MaintenancesSheet
@@ -60109,6 +60364,56 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/my-car/expenses-chart.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/my-car/expenses-chart.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _expenses_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./expenses-chart.vue?vue&type=script&lang=js& */ "./resources/js/components/my-car/expenses-chart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _expenses_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/my-car/expenses-chart.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/expenses-chart.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/my-car/expenses-chart.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./expenses-chart.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-chart.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_chart_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/my-car/expenses-historic.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/components/my-car/expenses-historic.vue ***!
@@ -60247,28 +60552,29 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/my-car/expenses-resume.vue":
-/*!************************************************************!*\
-  !*** ./resources/js/components/my-car/expenses-resume.vue ***!
-  \************************************************************/
+/***/ "./resources/js/components/my-car/expenses-resume-graph.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/my-car/expenses-resume-graph.vue ***!
+  \******************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _expenses_resume_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./expenses-resume.vue?vue&type=script&lang=js& */ "./resources/js/components/my-car/expenses-resume.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
+/* harmony import */ var _expenses_resume_graph_vue_vue_type_template_id_796dcc0f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./expenses-resume-graph.vue?vue&type=template&id=796dcc0f& */ "./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=template&id=796dcc0f&");
+/* harmony import */ var _expenses_resume_graph_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./expenses-resume-graph.vue?vue&type=script&lang=js& */ "./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  _expenses_resume_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"],
-  render,
-  staticRenderFns,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _expenses_resume_graph_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _expenses_resume_graph_vue_vue_type_template_id_796dcc0f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _expenses_resume_graph_vue_vue_type_template_id_796dcc0f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -60278,22 +60584,40 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/my-car/expenses-resume.vue"
+component.options.__file = "resources/js/components/my-car/expenses-resume-graph.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/my-car/expenses-resume.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/my-car/expenses-resume.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************/
+/***/ "./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_resume_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./expenses-resume.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-resume.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_resume_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_resume_graph_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./expenses-resume-graph.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_resume_graph_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=template&id=796dcc0f&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=template&id=796dcc0f& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_resume_graph_vue_vue_type_template_id_796dcc0f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./expenses-resume-graph.vue?vue&type=template&id=796dcc0f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/my-car/expenses-resume-graph.vue?vue&type=template&id=796dcc0f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_resume_graph_vue_vue_type_template_id_796dcc0f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_expenses_resume_graph_vue_vue_type_template_id_796dcc0f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
