@@ -10,6 +10,7 @@ import StatsTable from './components/utilities/stats-table.vue';
 import ExpensesLogs from './components/my-car/expenses-logs.vue';
 import PerformanceSheet from './components/my-car/performance-sheet.vue';
 import ExpensesResumeGraph from './components/my-car/expenses-resume-graph.vue';
+import MyCarResume from './components/my-car/my-car-resume.vue';
 import UserVehicleMaintenances from './components/my-car/maintenances-sheet.vue';
 import MaintenancesChart from './components/my-car/maintenances-chart.vue';
 import MaintenancesDoughnut from './components/my-car/maintenances-pie-chart.vue';
@@ -108,6 +109,7 @@ const app = new Vue({
         PerformanceSheet,
         ExpensesLogs,
         ExpensesResumeGraph,
+        MyCarResume,
         MaintenancesChart,
         MaintenancesDoughnut,
         // MaintenancesSheet

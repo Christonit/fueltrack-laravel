@@ -51,7 +51,8 @@
 
         </div>
         
-        @include('my-car.resume')
+
+        <my-car-resume></my-car-resume>
         <!-- <expenses-resume></expenses-resume> -->
         <section class="grid-x">
 
