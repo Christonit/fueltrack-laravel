@@ -1,6 +1,5 @@
 <header class="top-bar grid-x">
-
-
+  
   <div class="cell small-4 medium-2">
     <a id='logo' href="/"><img src="/images/logo.svg"/></a>
 
@@ -63,7 +62,11 @@
 
       @if (Route::has('login'))
               @auth
-              <li><button data-type-action='add-expense'  data-open= "add-expense" class="button alternative hide-for-small-only">+ Add expense</button></li>
+              <li><button 
+              data-type-action='add-expense'   
+              class="button alternative hide-for-small-only"
+              @click='showAddExpenseModal'>+ Add expense</button></li>
+              <!-- <li><button data-type-action='add-expense'  data-open= "add-expense" class="button alternative hide-for-small-only">+ Add expense</button></li> -->
 
               @else
 
@@ -132,3 +135,5 @@
 
 
    </header>
+
+<add-expense-form ref='addExpenseModal'></add-expense-form>

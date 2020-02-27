@@ -1,0 +1,18 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    z-index: -1;
+    // display:none;
+}
+
+.modal.show{
+    z-index: 999;
+    opacity: 1;
+}
+
+.modal.show .reveal{
+    display: block;
+}

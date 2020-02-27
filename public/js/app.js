@@ -8532,6 +8532,93 @@ if (inBrowser) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-expense.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/add-expense.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "add-expense-form",
+  data: function data() {
+    return {
+      loaded: false
+    };
+  },
+  mounted: function mounted() {},
+  computed: {},
+  methods: {
+    closeModal: function closeModal(e) {
+      var el = e.target.closest('.modal');
+      return el.classList.remove('show');
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-vehicle-form.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/add-vehicle-form.vue?vue&type=script&lang=js& ***!
@@ -44541,6 +44628,155 @@ var reactiveProp = {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-expense.vue?vue&type=template&id=44540491&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/add-expense.vue?vue&type=template&id=44540491& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "modal" }, [
+    _c("span", { staticClass: "overlay", on: { click: _vm.closeModal } }),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "reveal ",
+        attrs: { id: "add-expense", "data-reveal": "" }
+      },
+      [
+        _c("h3", { staticClass: "text-center" }, [_vm._v("Add fuel expense")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "close-button", on: { click: _vm.closeModal } },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", { attrs: { name: "add-expense" } }, [
+      _vm._v("\n            @csrf\n            "),
+      _c("div", [
+        _c("fieldset", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "small-3 cell" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-left middle",
+                attrs: { for: "middle-label" }
+              },
+              [_vm._v("Fuel type")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "small-9 cell" }, [
+            _c("select", { attrs: { name: "FuelType", id: "" } }, [
+              _c("option", { attrs: { value: "Gasolina Premium" } }, [
+                _vm._v("Premium gasoline")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Gasolina Regular" } }, [
+                _vm._v("Regular gasoline")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Gas Natural" } }, [
+                _vm._v("Natural gas")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "GLP" } }, [_vm._v("LPG")])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("fieldset", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "small-12 medium-3 cell" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-left middle",
+                attrs: { for: "middle-label" }
+              },
+              [_vm._v("Date")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "small-12 medium-9 cell" }, [
+            _c("input", {
+              attrs: {
+                type: "date",
+                id: "middle-label",
+                name: "Date",
+                placeholder: "Right- and middle-aligned text input"
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("fieldset", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "small-12 medium-3 cell" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-left middle",
+                attrs: { for: "middle-label" }
+              },
+              [_vm._v("Budget")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "small-12 medium-9 cell" }, [
+            _c("input", {
+              attrs: {
+                type: "number",
+                id: "middle-label",
+                name: "budget",
+                placeholder: "Right- and middle-aligned text input"
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "expanded button-group " }, [
+        _c(
+          "a",
+          {
+            staticClass: "hollow button secondary cancel",
+            attrs: { href: "#" }
+          },
+          [_vm._v("Cancel")]
+        ),
+        _vm._v(" "),
+        _c("a", { staticClass: "button success", attrs: { href: "#" } }, [
+          _vm._v("Add")
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-vehicle-form.vue?vue&type=template&id=7b27e9dc&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/add-vehicle-form.vue?vue&type=template&id=7b27e9dc&scoped=true& ***!
@@ -59808,6 +60044,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_my_car_maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/my-car/maintenances-pie-chart.vue */ "./resources/js/components/my-car/maintenances-pie-chart.vue");
 /* harmony import */ var _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/forms/register-users.vue */ "./resources/js/components/forms/register-users.vue");
 /* harmony import */ var _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/forms/add-vehicle-form.vue */ "./resources/js/components/forms/add-vehicle-form.vue");
+/* harmony import */ var _components_forms_add_expense_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/forms/add-expense.vue */ "./resources/js/components/forms/add-expense.vue");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -59819,6 +60056,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 window.Vue = __webpack_require__(/*! Vue */ "./node_modules/Vue/dist/vue.runtime.esm.js");
  // import StatsTable from './modules/fuelgov/stats-table.vue';
+
 
 
 
@@ -59886,6 +60124,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     vehicle: {}
   },
   components: {
+    AddExpenseForm: _components_forms_add_expense_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
     StatsTable: _components_utilities_stats_table_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     RegisterUsersForm: _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
     AddVehicleForm: _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
@@ -59906,6 +60145,9 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     }
   },
   methods: {
+    showAddExpenseModal: function showAddExpenseModal() {
+      return this.$refs.addExpenseModal.$el.classList.add('show');
+    },
     printServiceCategoryIcon: function printServiceCategoryIcon(maintenance_service) {
       switch (maintenance_service.toLowerCase()) {
         case 'wheel change':
@@ -60397,6 +60639,75 @@ if (windowSize <= sm) {
 $('a.success').click(function (e) {
   e.preventDefault();
 });
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/add-expense.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/forms/add-expense.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _add_expense_vue_vue_type_template_id_44540491___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add-expense.vue?vue&type=template&id=44540491& */ "./resources/js/components/forms/add-expense.vue?vue&type=template&id=44540491&");
+/* harmony import */ var _add_expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-expense.vue?vue&type=script&lang=js& */ "./resources/js/components/forms/add-expense.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _add_expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _add_expense_vue_vue_type_template_id_44540491___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _add_expense_vue_vue_type_template_id_44540491___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/forms/add-expense.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/add-expense.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/forms/add-expense.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_add_expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./add-expense.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-expense.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_add_expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/add-expense.vue?vue&type=template&id=44540491&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/forms/add-expense.vue?vue&type=template&id=44540491& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_expense_vue_vue_type_template_id_44540491___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./add-expense.vue?vue&type=template&id=44540491& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-expense.vue?vue&type=template&id=44540491&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_expense_vue_vue_type_template_id_44540491___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_expense_vue_vue_type_template_id_44540491___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

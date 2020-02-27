@@ -16,6 +16,7 @@ import MaintenancesChart from './components/my-car/maintenances-chart.vue';
 import MaintenancesDoughnut from './components/my-car/maintenances-pie-chart.vue';
 import RegisterUsersForm from './components/forms/register-users.vue';
 import AddVehicleForm from './components/forms/add-vehicle-form.vue';
+import AddExpenseForm from './components/forms/add-expense.vue';
 
 
 // Vue.component('stats-table', require('./modules/fuelgov/stats-table.vue').default);
@@ -92,17 +93,18 @@ var previewBtn = document.querySelector('[data-add-vehicle="review"]');
 const app = new Vue({
     el: '#app',
     store,
-    data:{
-        message:'hola mundo',
-        makers:'',
-        models:'',
-        years:'',
-        currentYear : new Date().getFullYear(),
-        compare:true,
-        hasVehicle:false,
-        vehicle:{}
+    data: {
+        message: 'hola mundo',
+        makers: '',
+        models: '',
+        years: '',
+        currentYear: new Date().getFullYear(),
+        compare: true,
+        hasVehicle: false,
+        vehicle: {}
     },
-    components:{
+    components: {
+        AddExpenseForm,
         StatsTable,
         RegisterUsersForm,
         AddVehicleForm,
@@ -116,113 +118,118 @@ const app = new Vue({
         UserVehicleMaintenances
 
     },
-    created(){
+    created() {
 
 
     },
-    mounted(){
+    mounted() {
 
     },
 
-    computed:{
+    computed: {
 
-        testStore(){
+        testStore() {
             return this.$store.state.test;
         }
 
+
+
     },
-    methods:{
-        
-        printServiceCategoryIcon(maintenance_service){
-            switch(maintenance_service.toLowerCase()){
+    methods: {
+        showAddExpenseModal(){
+            return this.$refs.addExpenseModal.$el.classList.add('show');
+        },
 
-                case('wheel change'):
+        printServiceCategoryIcon(maintenance_service) {
+            switch (maintenance_service.toLowerCase()) {
+
+                case ('wheel change'):
                     return '&#xe800';
-                break;
+                    break;
 
-                case('alignment'):
+                case ('alignment'):
                     return '&#xe801';
-                break;
+                    break;
 
-                case('battery change'):
+                case ('battery change'):
                     return '&#xe802';
-                break;
+                    break;
 
-                case('body fix'):
+                case ('body fix'):
                     return '&#xe803';
-                break;
+                    break;
 
-                case('brake check'):
+                case ('brake check'):
                     return '&#xe804';
-                break;
+                    break;
 
-                case('cleaning'):
+                case ('cleaning'):
                     return '&#xe805';
-                break;
+                    break;
 
-                case('coolant fill'):
+                case ('coolant fill'):
                     return '&#xe806';
-                break;
+                    break;
 
-                case('electricity check'):
+                case ('electricity check'):
                     return '&#xe807';
-                break;
+                    break;
 
-                case('engine check'):
+                case ('engine check'):
                     return '&#xe808';
-                break;
+                    break;
 
-                case('filter change'):
+                case ('filter change'):
                     return '&#xe809';
-                break;
+                    break;
 
-                case('tire change'):
+                case ('tire change'):
                     return '&#xe810';
-                break;
+                    break;
 
-                case('transmission check'):
+                case ('transmission check'):
                     return '&#xe811';
-                break;
+                    break;
 
-                case('inmediate check'):
+                case ('inmediate check'):
                     return '&#xe80a';
-                break;
+                    break;
 
-                case('oil change'):
+                case ('oil change'):
                     return '&#xe80b';
-                break;
+                    break;
 
-                case('paint job'):
+                case ('paint job'):
                     return '&#xe80c';
-                break;
+                    break;
 
-                case('part change'):
+                case ('part change'):
                     return '&#xe80d';
-                break;
+                    break;
 
-                case('preassure check'):
+                case ('preassure check'):
                     return '&#xe80e';
-                break;
+                    break;
 
-                case('scheduled maintenance'):
-                return '&#xe80f';
-                break;
+                case ('scheduled maintenance'):
+                    return '&#xe80f';
+                    break;
 
                 default:
-                return '&#xe80f';
+                    return '&#xe80f';
 
             }
         },
-        selectMaker(e){
+        selectMaker(e) {
             this.models = this.getModels(e.target.value, this.$refs.selectedYear.value)
 
         },
-        xmlToDoc(dataToParse){
+        xmlToDoc(dataToParse) {
             var parser = new DOMParser();
-            return parser.parseFromString(dataToParse,"text/xml");
+            return parser.parseFromString(dataToParse, "text/xml");
         },
 
-        getYears(){
+        getYears() {
 
             let xmlToDoc = this.xmlToDoc;
             let years = [];
@@ -239,9 +246,9 @@ const app = new Vue({
 
                     yearsList = yearsList.childNodes[0]
 
-                    for(let i = 0; i < yearsList.childElementCount; i++) {
+                    for (let i = 0; i < yearsList.childElementCount; i++) {
 
-                        years.push( yearsList.childNodes[i].childNodes[1].textContent);
+                        years.push(yearsList.childNodes[i].childNodes[1].textContent);
 
                     };
 
@@ -252,7 +259,7 @@ const app = new Vue({
             return years;
 
         },
-        getMakers(year = this.currentYear){
+        getMakers(year = this.currentYear) {
 
             var currentYear = year;
             // currentYear = year.getFullYear();
@@ -274,8 +281,8 @@ const app = new Vue({
                     // brandCount = brandList.childElementCount
 
                     // console.log(brandList.childElementCount)
-                    for(let i = 0; i < brandList.childElementCount; i++) {
-                        brands.push( brandList.childNodes[i].childNodes[1].textContent );
+                    for (let i = 0; i < brandList.childElementCount; i++) {
+                        brands.push(brandList.childNodes[i].childNodes[1].textContent);
 
                     };
 
@@ -286,7 +293,7 @@ const app = new Vue({
 
             return brands;
         },
-        getModels(maker = this.makers[0], year = this.currentYear){
+        getModels(maker = this.makers[0], year = this.currentYear) {
             let xmlToDoc = this.xmlToDoc;
             let models = [];
 
@@ -301,8 +308,8 @@ const app = new Vue({
 
                     let modelList = xmlDoc.childNodes[0];
 
-                    for(let i = 0; i < modelList.childElementCount; i++) {
-                        models.push( modelList.childNodes[i].childNodes[1].textContent );
+                    for (let i = 0; i < modelList.childElementCount; i++) {
+                        models.push(modelList.childNodes[i].childNodes[1].textContent);
                         // console.log(modelList.childNodes[i].childNodes[1].textContent);
 
 
@@ -313,7 +320,7 @@ const app = new Vue({
             return models;
 
         },
-        getVehicleStats(maker, model, year){
+        getVehicleStats(maker, model, year) {
             var maker = maker;
             var model = model;
             var year = year;
@@ -328,29 +335,29 @@ const app = new Vue({
             var fuelTypeSecondary = null;
             var message = null;
 
-            if (typeof maker === 'undefined' || typeof maker === 'object'){
+            if (typeof maker === 'undefined' || typeof maker === 'object') {
 
                 maker = this.$refs.selectedMaker.value;
 
-            } else if( typeof maker === 'function' || typeof maker === 'boolean' ){
+            } else if (typeof maker === 'function' || typeof maker === 'boolean') {
                 return 'Error: Insert correct value.'
             }
 
-            if (typeof model === 'undefined'){
+            if (typeof model === 'undefined') {
 
                 model = this.$refs.selectedModel.value;
 
-            }else if( typeof model === 'function' || typeof model === 'boolean' || typeof model === 'object' ){
+            } else if (typeof model === 'function' || typeof model === 'boolean' || typeof model === 'object') {
 
                 return 'Insert correct value.'
             }
 
 
-            if ( typeof year === 'undefined'    ){
+            if (typeof year === 'undefined') {
 
-                year = this.$refs.selectedYear .value;
+                year = this.$refs.selectedYear.value;
 
-            }else if( typeof year !== 'number' ){
+            } else if (typeof year !== 'number') {
                 return 'Insert correct value.'
 
             }
@@ -358,24 +365,24 @@ const app = new Vue({
 
             var fuelgov = `https://www.fueleconomy.gov/ws/rest/ympg/shared/vehicles?make=${maker}&model=${model}`;
             fetch(fuelgov)
-                .then( (response)  => {
+                .then((response) => {
 
                     return response.text();
 
                 })
-                .then( (data) =>  {
+                .then((data) => {
 
                     let xmlDoc = xmlToDoc(data);
 
                     let stats = xmlDoc.childNodes[0];
 
 
-                    for(let i = 0; i < stats.childElementCount; i++){
+                    for (let i = 0; i < stats.childElementCount; i++) {
 
                         console.log(`${maker} ${model}  ${year}`);
 
 
-                        if ( stats.childNodes[i].childNodes[80].textContent == year) {
+                        if (stats.childNodes[i].childNodes[80].textContent == year) {
 
 
                             //Unrounded highway miles
@@ -409,25 +416,25 @@ const app = new Vue({
                     highwayMpg = Number(parseFloat(highwayMpg).toFixed(2));
                     combinedMpg = Number(parseFloat(combinedMpg).toFixed(2));
 
-                    if( isNaN(highwayMpg) ){
+                    if (isNaN(highwayMpg)) {
 
                         // && highwayMpg == '' || highwayMpg == null && cityMpg == '' || cityMpg == null){
-                        highwayMpg='';
+                        highwayMpg = '';
 
                     }
 
 
-                    if(isNaN(cityMpg)){
+                    if (isNaN(cityMpg)) {
 
                         // && highwayMpg == '' || highwayMpg == null && cityMpg == '' || cityMpg == null){
-                        cityMpg ='';
+                        cityMpg = '';
 
                     }
 
 
-                    if ( isNaN(combinedMpg) || combinedMpg == null && cityMpg != '' && highwayMpg != '' ){
+                    if (isNaN(combinedMpg) || combinedMpg == null && cityMpg != '' && highwayMpg != '') {
 
-                        combinedMpg = Number( (highwayMpg * 0.45 )+ (cityMpg  * 0.55) );
+                        combinedMpg = Number((highwayMpg * 0.45) + (cityMpg * 0.55));
                         message = 'Platform calculated average.';
 
                     }
@@ -439,16 +446,16 @@ const app = new Vue({
                     this.hasVehicle = true;
 
                     return this.vehicle = {
-                        maker:maker,
-                        model:model,
-                        year:parseInt(year),
+                        maker: maker,
+                        model: model,
+                        year: parseInt(year),
                         highwayMpg: highwayMpg,
                         cityMpg: cityMpg,
                         combinedMpg: combinedMpg,
-                        fuelType:fuelType,
-                        fuelTypePrimary:fuelTypePrimary,
-                        fuelTypeSecondary:fuelTypeSecondary,
-                        message:message
+                        fuelType: fuelType,
+                        fuelTypePrimary: fuelTypePrimary,
+                        fuelTypeSecondary: fuelTypeSecondary,
+                        message: message
                     }
 
                 })
@@ -458,25 +465,25 @@ const app = new Vue({
 
 
     }
-// components:{
-//     ExampleComponent
+    // components:{
+    //     ExampleComponent
     // }
 });
 
-function previewsTab(e){
+function previewsTab(e) {
     var currentEl = this.parentElement.parentElement.getAttribute('id');
 
-    if(currentEl == 'signup-vehicle-info-misc'){
+    if (currentEl == 'signup-vehicle-info-misc') {
 
         console.log('esto funciona');
 
-    }else if (currentEl == 'signup-vehicle-info-usage') {
+    } else if (currentEl == 'signup-vehicle-info-usage') {
 
         vehicleInfoBasic.classList.remove('hide');
         vehicleInfoUsage.classList.add('hide');
 
 
-    }else if (currentEl == 'signup-vehicle-info-basic') {
+    } else if (currentEl == 'signup-vehicle-info-basic') {
 
         vehicleInfoBasic.classList.add('hide');
         userDetails.classList.remove('hide');
@@ -489,7 +496,7 @@ function previewsTab(e){
 
 }
 
-function reviewInfo(){
+function reviewInfo() {
 
 
 
@@ -498,17 +505,17 @@ function reviewInfo(){
 
 
 
-function vehicleValidation(e){
+function vehicleValidation(e) {
 
     var maker = document.querySelector('select[name="maker"]');
     var model = document.querySelector('select[name="model"]');
     var year = document.querySelector('select[name="year"]');
 
-    if ( maker.value == '' && model.value == '' && year.value == '') {
+    if (maker.value == '' && model.value == '' && year.value == '') {
 
         console.log('fuck');
 
-    }else {
+    } else {
 
         vehicleInfoBasic.classList.add('hide');
         vehicleInfoUsage.classList.remove('hide');
@@ -522,16 +529,16 @@ function vehicleValidation(e){
 }
 
 
-function vehicleUsageValidation(e){
+function vehicleUsageValidation(e) {
 
-    var  usageYears = document.querySelector('input[name="usage_years"]');
-    var  acquisitionDate = document.querySelector('input[name="acquisition_date"]');
-    var  totalDistance = document.querySelector('input[name="init_miles"]');
+    var usageYears = document.querySelector('input[name="usage_years"]');
+    var acquisitionDate = document.querySelector('input[name="acquisition_date"]');
+    var totalDistance = document.querySelector('input[name="init_miles"]');
 
-    if ( usageYears.value == '' && acquisitionDate.value == '' && totalDistance.value == '') {
+    if (usageYears.value == '' && acquisitionDate.value == '' && totalDistance.value == '') {
 
 
-    }else {
+    } else {
 
         vehicleInfoUsage.classList.add('hide');
         vehicleInfoMisc.classList.remove('hide');
@@ -539,26 +546,26 @@ function vehicleUsageValidation(e){
 
 }
 
-function signUpValidation(){
+function signUpValidation() {
 
-    var  username = document.querySelector('input[name="username"]').value;
-    var  email = document.querySelector('input[name="email"]').value;
-    var  password = document.querySelector('input[name="password"]').value;
+    var username = document.querySelector('input[name="username"]').value;
+    var email = document.querySelector('input[name="email"]').value;
+    var password = document.querySelector('input[name="password"]').value;
 
 
-    if (username !== '' && email !== '' &&  password !== '' && emailPtrn.test(email) == true ) {
+    if (username !== '' && email !== '' && password !== '' && emailPtrn.test(email) == true) {
 
         document.querySelector('#signup-vehicle-info-basic').classList.remove('hide');
         userDetails.classList.add('hide');
-        document.querySelector('.tabs-title.is-active').classList.replace('is-active','is-done');
+        document.querySelector('.tabs-title.is-active').classList.replace('is-active', 'is-done');
         document.querySelector('.tabs-title.is-done').nextElementSibling.classList.add('is-active');
         continueBTN = document.querySelector(addVehicleForms[1] + ' a.success').onclick = vehicleValidation;
 
 
 
-    }else{
+    } else {
     }
-    alert('Revisar tu:' + username + ' '+ password + ' ' + email);
+    alert('Revisar tu:' + username + ' ' + password + ' ' + email);
 
 }
 
@@ -567,14 +574,14 @@ function signUpValidation(){
 
 if (filename == '/sign-up') {
 
-    continueBTN.onclick = function(){
+    continueBTN.onclick = function () {
         signUpValidation();
 
     };
 
     previewBtn.addEventListener('click', (e) => {
 
-        document.querySelector('.tabs-title').nextElementSibling.classList.remove('is-done','is-active');
+        document.querySelector('.tabs-title').nextElementSibling.classList.remove('is-done', 'is-active');
         vehicleInfoMisc.classList.add('hide');
         userDetails.classList.remove('hide');
         document.querySelector('.tabs-title ').classList.add('is-active');
@@ -602,7 +609,7 @@ var signUpBtn = document.querySelector('a[href="sign-up"]'),
     body = document.querySelector('body'),
     expenses = document.querySelector('#expenses');
 
-if(filename !== 'sign-up' && filename !== 'login' ){
+if (filename !== 'sign-up' && filename !== 'login') {
     var menuChild = document.querySelector('[data-dropdown-menu] li:last-child');
 }
 
@@ -614,10 +621,10 @@ var overlayExist = false;
 var overlay;
 
 
-class overlayPop{
-    createOverlay(){
+class overlayPop {
+    createOverlay() {
 
-        var  elm = document.createElement('div');
+        var elm = document.createElement('div');
         elm.className = 'overlay';
         body.appendChild(elm);
 
@@ -629,7 +636,7 @@ class overlayPop{
 
     }
 
-    closeOverlay(){
+    closeOverlay() {
 
         for (var i = 0; i < overlay.length; i++) {
             overlay[i].remove();
@@ -637,7 +644,7 @@ class overlayPop{
         overlayExist = false;
     }
 
-    removeOverlay(toHide){
+    removeOverlay(toHide) {
 
         for (var i = 0; i < overlay.length; i++) {
             overlay[i].remove();
@@ -653,17 +660,17 @@ class overlayPop{
 // Creates menu overlay
 var p = new overlayPop();
 
-if(filename == '/index' || filename == '/my-car' || filename == '/' ){
+if (filename == '/index' || filename == '/my-car' || filename == '/') {
 
 
-    selector.onclick = function(e){
+    selector.onclick = function (e) {
 
         if (overlayExist == false) {
             p.createOverlay();
-            overlay[0].onclick=function(){
+            overlay[0].onclick = function () {
                 p.removeOverlay(menuDropDown);
             };
-        }else {
+        } else {
             p.removeOverlay(menuDropDown);
         }
 
@@ -674,19 +681,19 @@ if(filename == '/index' || filename == '/my-car' || filename == '/' ){
 
 // Executes code if logged in and in 'My car view'
 // This code pertains to mainly to graphs and filters manipulations.
-if(filename == '/my-car'){
+if (filename == '/my-car') {
     if (windowSize <= sm) {
         var overviewGraph = document.querySelector('#overview-graph');
 
         var filters = [].slice.call(document.querySelectorAll('[data-expense-filter]'));
         var filtersBtn = document.createElement('a');
-        filtersBtn.setAttribute('href','#');
+        filtersBtn.setAttribute('href', '#');
         var overviewFilters = document.createElement('div');
 
-        overviewFilters.classList.add('card','clear-card','filters-accordion');
+        overviewFilters.classList.add('card', 'clear-card', 'filters-accordion');
         var accHeight = 42;
 
-        filtersBtn.onclick= (e)=>{
+        filtersBtn.onclick = (e) => {
             overviewFilters.classList.toggle('filters-accordion-full');
             e.preventDefault();
 
@@ -726,25 +733,25 @@ $('.maintenance-service').click(function (e) {
 
 // Conditions for mobile only scripts
 
-if(windowSize <= sm){
+if (windowSize <= sm) {
 
     // creates Floating Action Button
-    if(isUserSignedIn == true){
+    if (isUserSignedIn == true) {
         var fActionButton = document.querySelector('.fab');
 
-        fActionButton.addEventListener('touchstart', function(e){
+        fActionButton.addEventListener('touchstart', function (e) {
 
             this.classList.toggle('active');
 
-            if(overlayExist == false){
+            if (overlayExist == false) {
 
                 p.createOverlay();
                 overlay[0].style.zIndex = 999;
-                overlay[0].addEventListener('touchstart', function(){
+                overlay[0].addEventListener('touchstart', function () {
                     p.closeOverlay();
                     fActionButton.classList.remove('active');
-                } );
-            }else {
+                });
+            } else {
                 p.closeOverlay();
             }
 
@@ -768,18 +775,18 @@ if(windowSize <= sm){
 
 
 
-    if(filename !== '/sign-up' & filename !== '/login' ){
+    if (filename !== '/sign-up' & filename !== '/login') {
 
         header.appendChild(miscButtons);
         document.querySelector('.top-bar-right').remove();
         body.insertBefore(menuDropDown, header.nextSibling);
 
-        if(isUserSignedIn == true){
+        if (isUserSignedIn == true) {
 
             header.appendChild(userSttgBtn)
 
 
-        }else if(isUserSignedIn == false){
+        } else if (isUserSignedIn == false) {
             var logInBtn = document.querySelector('ul[data-misc] li:nth-child(3)');
 
             menuDropDownList.appendChild(logInBtn)
@@ -792,6 +799,6 @@ if(windowSize <= sm){
 }
 
 
-$('a.success').click( (e)=>{
+$('a.success').click((e) => {
     e.preventDefault()
 });
