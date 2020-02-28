@@ -5,7 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
 <script src="{{asset('js/vendor/what-input.js')}}"></script>
 <script src="{{asset( 'js/c3.min.js' )}}"></script>
-
+<!-- 
 <script>
         @if (Route::has('login'))
 
@@ -168,7 +168,8 @@
 
 
 
-</script>
+</script> -->
+
 @endif
 
 

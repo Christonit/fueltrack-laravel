@@ -10,7 +10,10 @@ use App\vehicle_performance;
 use App\vehicle_maintenance;
 use App\MaintenancesServicesPerformed;
 
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 use Illuminate\Support\Collection;
 
 
@@ -45,6 +48,7 @@ class ExpensesController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $fueltype = null;
 
         $logged_user_id = auth()->id();
@@ -53,8 +57,20 @@ class ExpensesController extends Controller
         where('user',$logged_user_id)
             ->value('id');
 
-
         $expenses =  request()->all();
+
+        $validator =  Validator::make($expenses,[
+            'FuelType'=>'required|string',
+            'budget'=>'required|numeric',
+            'Date'=>'required|date'
+        ]);
+
+        if($validator->fails()){
+            $errors['Errors'] = $validator->messages();
+            return $errors;
+        }
+
+
         $date =  $request->input('Date');
 
         $expenses['vehicle'] = $vehicle_id;
@@ -80,10 +96,8 @@ class ExpensesController extends Controller
         $expenses['Current_fuel_price'] = $fuelprice;
         $expenses['Galons'] = (request()->input('budget')/$fuelprice);
 
-//        return [$fueltype,$expenses];
-        expenses::create($expenses);
+        return expenses::create($expenses);
 
-        return 'Expense logged succesful.';
     }
 
     /**

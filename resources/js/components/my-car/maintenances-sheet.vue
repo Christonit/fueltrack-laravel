@@ -7,7 +7,7 @@
 
         <div class="clearfix">
             <h5 class="float-left">Maintenances</h5>
-            <button class="hollow  button float-right alternative" data-open="add-service">Add service</button>
+            <button class="hollow  button float-right alternative" @click="showAddServiceModal">Add service</button>
         </div>
 
         <span id='maintenance-resume-total' class="text-center">
@@ -131,6 +131,8 @@
 
     </div>
 
+    <add-service-form ref='addServiceModal'></add-service-form>
+
 </section>
 
 </template>
@@ -138,11 +140,14 @@
 <script>
 import MaintenancesChart from './maintenances-chart.vue';
 import MaintenancesDoughnut from './maintenances-pie-chart.vue';
+import AddServiceForm from '../forms/add-service';
 
 export default {
             name: "user-vehicle-maintenances",
             components:{
-               MaintenancesDoughnut
+               MaintenancesDoughnut,
+               AddServiceForm
+               
             },
             data(){
                 return {
@@ -206,7 +211,9 @@ export default {
             },
             
             methods:{
-         
+                showAddServiceModal(){
+                    return this.$refs.addServiceModal.$el.classList.add('show');
+                },
                daysBetween(targetDate){
 
                     let target = new Date(targetDate);

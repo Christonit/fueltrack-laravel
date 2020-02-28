@@ -101,7 +101,7 @@ const app = new Vue({
         currentYear: new Date().getFullYear(),
         compare: true,
         hasVehicle: false,
-        vehicle: {}
+        vehicle: {},
     },
     components: {
         AddExpenseForm,

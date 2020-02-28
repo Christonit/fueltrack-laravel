@@ -206,8 +206,8 @@ class expenses extends Model
 
         }
 
-        $last5Weeks['Dates'] = $weeks;
-        $last5Weeks['Expenses'] = $expenses;
+        $last5Weeks['Dates'] = array_reverse($weeks);
+        $last5Weeks['Expenses'] = array_reverse($expenses);
 
         return $last5Weeks;
 

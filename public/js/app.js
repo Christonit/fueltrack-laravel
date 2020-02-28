@@ -8541,6 +8541,7 @@ if (inBrowser) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _my_car_mixins_laravel_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../my-car/mixins/laravel-utilities */ "./resources/js/components/my-car/mixins/laravel-utilities.js");
 //
 //
 //
@@ -8600,19 +8601,222 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "add-expense-form",
+  mixins: [_my_car_mixins_laravel_utilities__WEBPACK_IMPORTED_MODULE_0__["default"]],
   data: function data() {
     return {
-      loaded: false
+      loaded: false,
+      error: ''
     };
   },
+  // props:['csrf'],
   mounted: function mounted() {},
   computed: {},
   methods: {
     closeModal: function closeModal(e) {
       var el = e.target.closest('.modal');
       return el.classList.remove('show');
+    },
+    getData: function getData(e) {
+      var _this = this;
+
+      var fuel_type = this.$refs.FuelType.value;
+      var budget = this.$refs.budget.value;
+      var date = this.$refs.date.value;
+      var expense = {
+        FuelType: fuel_type,
+        budget: budget,
+        Date: date
+      };
+      fetch('/add-expense', {
+        method: 'POST',
+        body: JSON.stringify(expense),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': this.csrf
+        }
+      }).then(function (res) {
+        return res.text();
+      }).then(function (response) {
+        var res = JSON.parse(response);
+
+        if (res.Errors) {
+          _this.error = res.Errors;
+        } else {
+          cons;
+          document.querySelector('.modal').classList.remove('show');
+        }
+      })["catch"](function (error) {
+        return console.error('Error:', error);
+      });
+      e.preventDefault();
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-service.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/add-service.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _my_car_mixins_laravel_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../my-car/mixins/laravel-utilities */ "./resources/js/components/my-car/mixins/laravel-utilities.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "add-service-form",
+  data: function data() {
+    return {
+      loaded: false,
+      error: ''
+    };
+  },
+  mixins: [_my_car_mixins_laravel_utilities__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  mounted: function mounted() {},
+  computed: {},
+  methods: {
+    closeModal: function closeModal(e) {
+      var el = e.target.closest('.modal');
+      return el.classList.remove('show');
+    },
+    getData: function getData(e) {
+      var _this = this;
+
+      var fuel_type = this.$refs.FuelType.value;
+      var budget = this.$refs.budget.value;
+      var date = this.$refs.date.value;
+      var expense = {
+        FuelType: fuel_type,
+        budget: budget,
+        Date: date
+      };
+      fetch('/add-expense', {
+        method: 'POST',
+        body: JSON.stringify(expense),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': this.csrf
+        }
+      }).then(function (res) {
+        return res.text();
+      }).then(function (response) {
+        var res = JSON.parse(response);
+
+        if (res.Errors) {
+          _this.error = res.Errors;
+        } else {
+          cons;
+          document.querySelector('.modal').classList.remove('show');
+        }
+      })["catch"](function (error) {
+        return console.error('Error:', error);
+      });
+      e.preventDefault();
     }
   }
 });
@@ -9596,6 +9800,7 @@ var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["mixins"].reactivePr
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _maintenances_chart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./maintenances-chart.vue */ "./resources/js/components/my-car/maintenances-chart.vue");
 /* harmony import */ var _maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./maintenances-pie-chart.vue */ "./resources/js/components/my-car/maintenances-pie-chart.vue");
+/* harmony import */ var _forms_add_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../forms/add-service */ "./resources/js/components/forms/add-service.vue");
 //
 //
 //
@@ -9733,12 +9938,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "user-vehicle-maintenances",
   components: {
-    MaintenancesDoughnut: _maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    MaintenancesDoughnut: _maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AddServiceForm: _forms_add_service__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -9801,6 +10010,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
+    showAddServiceModal: function showAddServiceModal() {
+      return this.$refs.addServiceModal.$el.classList.add('show');
+    },
     daysBetween: function daysBetween(targetDate) {
       var target = new Date(targetDate);
       var today = new Date(this.today);
@@ -44661,7 +44873,89 @@ var render = function() {
           [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
         ),
         _vm._v(" "),
-        _vm._m(0)
+        _c("form", { attrs: { name: "add-expense" } }, [
+          _c("input", {
+            attrs: { type: "hidden", name: "_token" },
+            domProps: { value: _vm.csrf }
+          }),
+          _vm._v(" "),
+          _c("div", [
+            _c("fieldset", { staticClass: "grid-x" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "small-9 cell" }, [
+                _c(
+                  "select",
+                  { ref: "FuelType", attrs: { name: "FuelType", id: "" } },
+                  [
+                    _c("option", { attrs: { value: "Gasolina Premium" } }, [
+                      _vm._v("Premium gasoline")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Gasolina Regular" } }, [
+                      _vm._v("Regular gasoline")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Gas Natural" } }, [
+                      _vm._v("Natural gas")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "GLP" } }, [_vm._v("LPG")])
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("fieldset", { staticClass: "grid-x" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "small-12 medium-9 cell" }, [
+                _c("input", {
+                  ref: "date",
+                  attrs: {
+                    type: "date",
+                    id: "middle-label",
+                    name: "Date",
+                    placeholder: "Right- and middle-aligned text input"
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("fieldset", { staticClass: "grid-x" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "small-12 medium-9 cell" }, [
+                _c("input", {
+                  ref: "budget",
+                  attrs: {
+                    type: "number",
+                    id: "middle-label",
+                    name: "budget",
+                    placeholder: "Right- and middle-aligned text input"
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "expanded button-group " }, [
+            _c(
+              "a",
+              {
+                staticClass: "hollow button secondary cancel",
+                attrs: { href: "#" }
+              },
+              [_vm._v("Cancel")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "button success", on: { click: _vm.getData } },
+              [_vm._v("Add")]
+            )
+          ])
+        ])
       ]
     )
   ])
@@ -44671,104 +44965,303 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { name: "add-expense" } }, [
-      _vm._v("\n            @csrf\n            "),
-      _c("div", [
-        _c("fieldset", { staticClass: "grid-x" }, [
-          _c("div", { staticClass: "small-3 cell" }, [
-            _c(
-              "label",
-              {
-                staticClass: "text-left middle",
-                attrs: { for: "middle-label" }
-              },
-              [_vm._v("Fuel type")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "small-9 cell" }, [
-            _c("select", { attrs: { name: "FuelType", id: "" } }, [
-              _c("option", { attrs: { value: "Gasolina Premium" } }, [
-                _vm._v("Premium gasoline")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Gasolina Regular" } }, [
-                _vm._v("Regular gasoline")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Gas Natural" } }, [
-                _vm._v("Natural gas")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "GLP" } }, [_vm._v("LPG")])
-            ])
-          ])
-        ]),
+    return _c("div", { staticClass: "small-3  cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Fuel type")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "small-12 medium-3 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Date")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "small-12 medium-3 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Budget")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-service.vue?vue&type=template&id=32128c6e&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/add-service.vue?vue&type=template&id=32128c6e& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "modal" }, [
+    _c("span", { staticClass: "overlay", on: { click: _vm.closeModal } }),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "reveal ",
+        attrs: { id: "add-service", "data-reveal": "" }
+      },
+      [
+        _c("h3", { staticClass: "text-center" }, [_vm._v("Add service")]),
         _vm._v(" "),
-        _c("fieldset", { staticClass: "grid-x" }, [
-          _c("div", { staticClass: "small-12 medium-3 cell" }, [
-            _c(
-              "label",
-              {
-                staticClass: "text-left middle",
-                attrs: { for: "middle-label" }
-              },
-              [_vm._v("Date")]
-            )
-          ]),
+        _c("form", { attrs: { action: "", name: "add-service" } }, [
+          _c("input", {
+            attrs: { type: "hidden", name: "_token" },
+            domProps: { value: _vm.csrf }
+          }),
           _vm._v(" "),
-          _c("div", { staticClass: "small-12 medium-9 cell" }, [
-            _c("input", {
-              attrs: {
-                type: "date",
-                id: "middle-label",
-                name: "Date",
-                placeholder: "Right- and middle-aligned text input"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("fieldset", { staticClass: "grid-x" }, [
-          _c("div", { staticClass: "small-12 medium-3 cell" }, [
-            _c(
-              "label",
-              {
-                staticClass: "text-left middle",
-                attrs: { for: "middle-label" }
-              },
-              [_vm._v("Budget")]
-            )
-          ]),
+          _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "small-12 medium-9 cell" }, [
-            _c("input", {
-              attrs: {
-                type: "number",
-                id: "middle-label",
-                name: "budget",
-                placeholder: "Right- and middle-aligned text input"
-              }
-            })
-          ])
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5)
         ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("fieldset", { staticClass: "grid-x" }, [
+      _c("div", { staticClass: "small-12 medium-3 cell" }, [
+        _c(
+          "label",
+          { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+          [_vm._v("Service")]
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "expanded button-group " }, [
-        _c(
-          "a",
-          {
-            staticClass: "hollow button secondary cancel",
-            attrs: { href: "#" }
-          },
-          [_vm._v("Cancel")]
-        ),
-        _vm._v(" "),
-        _c("a", { staticClass: "button success", attrs: { href: "#" } }, [
-          _vm._v("Add")
+      _c("div", { staticClass: "small-12 medium-9 cell" }, [
+        _c("select", { attrs: { name: "maintenance_service", id: "" } }, [
+          _c("option", { attrs: { value: "wheel change" } }, [
+            _vm._v("Wheel change")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "body fix" } }, [_vm._v("Body fix")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "brake check" } }, [
+            _vm._v("Brake check")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "alignment" } }, [
+            _vm._v("Alignment")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "battery change" } }, [
+            _vm._v("Battery change")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "cleaning" } }, [_vm._v("Cleaning")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "coolant fill" } }, [
+            _vm._v("Coolant fill")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "electricity check" } }, [
+            _vm._v("Electricity check")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "engine check" } }, [
+            _vm._v("Engine check")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "filter change" } }, [
+            _vm._v("Filter change")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "tire change" } }, [
+            _vm._v("Tire change")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "transmission check" } }, [
+            _vm._v("Transmission check")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "urgent check" } }, [
+            _vm._v("Urgent check")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "part change" } }, [
+            _vm._v("Part change")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "oil change" } }, [
+            _vm._v("Oil change")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "paint job" } }, [
+            _vm._v("Paint job")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "preassure check" } }, [
+            _vm._v("Preassure check")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "scheduled maintenance" } }, [
+            _vm._v("Scheduled maintenance")
+          ])
         ])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("fieldset", { staticClass: "grid-x" }, [
+      _c("div", { staticClass: "small-12 medium-12" }, [
+        _c("legend", [_vm._v("Due moment")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: {
+            type: "radio",
+            name: "due_moment",
+            value: "Specific distance",
+            checked: ""
+          }
+        }),
+        _c("label", { attrs: { for: "Specific distance" } }, [
+          _vm._v("Specific distance")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "radio", name: "due_moment", value: "Inmediate" }
+        }),
+        _c("label", { attrs: { for: "Inmediate" } }, [_vm._v("Inmediate")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "radio", name: "due_moment", value: "Specific date" }
+        }),
+        _c("label", { attrs: { for: "Specific date" } }, [_vm._v("Date")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "fieldset",
+      { staticClass: "grid-x show", attrs: { id: "tracked-distance-details" } },
+      [
+        _c("div", { staticClass: "small-12 medium-4 cell" }, [
+          _c(
+            "label",
+            { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+            [_vm._v("Tracked distance")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "small-12 medium-8 cell" }, [
+          _c("input", {
+            attrs: {
+              type: "number",
+              id: "middle-label",
+              name: "tracked_distance",
+              placeholder: "Right- and middle-aligned text input"
+            }
+          })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "fieldset",
+      { staticClass: "grid-x hide", attrs: { id: "due-date-details" } },
+      [
+        _c("div", { staticClass: "small-12 medium-4 cell" }, [
+          _c(
+            "label",
+            { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+            [_vm._v("Tracked date")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "small-12 medium-8 cell" }, [
+          _c("input", {
+            attrs: {
+              type: "date",
+              id: "middle-label",
+              name: "final_date",
+              placeholder: "Right- and middle-aligned text input"
+            }
+          })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "expanded button-group " }, [
+      _c(
+        "a",
+        { staticClass: "hollow button secondary cancel", attrs: { href: "#" } },
+        [_vm._v("Cancel")]
+      ),
+      _vm._v(" "),
+      _c("a", { staticClass: "button success", attrs: { href: "#" } }, [
+        _vm._v("Add")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close-button",
+        attrs: {
+          "data-close": "",
+          "aria-label": "Close reveal",
+          type: "button"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
@@ -45946,7 +46439,18 @@ var render = function() {
           attrs: { id: "maintenance-resume" }
         },
         [
-          _vm._m(0),
+          _c("div", { staticClass: "clearfix" }, [
+            _c("h5", { staticClass: "float-left" }, [_vm._v("Maintenances")]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "hollow  button float-right alternative",
+                on: { click: _vm.showAddServiceModal }
+              },
+              [_vm._v("Add service")]
+            )
+          ]),
           _vm._v(" "),
           _c(
             "span",
@@ -46016,7 +46520,7 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(1, true),
+                        _vm._m(0, true),
                         _vm._v(" "),
                         maintenance.due_moment == "Inmediate" ||
                         (maintenance.due_moment == "Specific distance" &&
@@ -46171,7 +46675,7 @@ var render = function() {
                         _vm._v(" "),
                         maintenance.due_moment == "Inmediate"
                           ? [
-                              _vm._m(2, true),
+                              _vm._m(1, true),
                               _vm._v(" "),
                               _c("span", {
                                 staticClass: "status-current text-right"
@@ -46191,32 +46695,18 @@ var render = function() {
             : _c(
                 "div",
                 { staticClass: "scheduled-maintenance-card clearfix" },
-                [_vm._m(3)]
+                [_vm._m(2)]
               )
         ],
         2
-      )
-    ]
+      ),
+      _vm._v(" "),
+      _c("add-service-form", { ref: "addServiceModal" })
+    ],
+    1
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "clearfix" }, [
-      _c("h5", { staticClass: "float-left" }, [_vm._v("Maintenances")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "hollow  button float-right alternative",
-          attrs: { "data-open": "add-service" }
-        },
-        [_vm._v("Add service")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -60711,6 +61201,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/forms/add-service.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/forms/add-service.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _add_service_vue_vue_type_template_id_32128c6e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add-service.vue?vue&type=template&id=32128c6e& */ "./resources/js/components/forms/add-service.vue?vue&type=template&id=32128c6e&");
+/* harmony import */ var _add_service_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-service.vue?vue&type=script&lang=js& */ "./resources/js/components/forms/add-service.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _add_service_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _add_service_vue_vue_type_template_id_32128c6e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _add_service_vue_vue_type_template_id_32128c6e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/forms/add-service.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/add-service.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/forms/add-service.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_add_service_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./add-service.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-service.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_add_service_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/add-service.vue?vue&type=template&id=32128c6e&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/forms/add-service.vue?vue&type=template&id=32128c6e& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_service_vue_vue_type_template_id_32128c6e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./add-service.vue?vue&type=template&id=32128c6e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-service.vue?vue&type=template&id=32128c6e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_service_vue_vue_type_template_id_32128c6e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_service_vue_vue_type_template_id_32128c6e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/forms/add-vehicle-form.vue":
 /*!************************************************************!*\
   !*** ./resources/js/components/forms/add-vehicle-form.vue ***!
@@ -61567,6 +62126,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_maintenances_sheet_vue_vue_type_template_id_ae80f49a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/my-car/mixins/laravel-utilities.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/my-car/mixins/laravel-utilities.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  }
+});
 
 /***/ }),
 

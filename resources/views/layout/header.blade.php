@@ -136,4 +136,4 @@
 
    </header>
 
-<add-expense-form ref='addExpenseModal'></add-expense-form>
+<add-expense-form ref='addExpenseModal' ></add-expense-form>
