@@ -8668,6 +8668,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _my_car_mixins_laravel_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../my-car/mixins/laravel-utilities */ "./resources/js/components/my-car/mixins/laravel-utilities.js");
+/* harmony import */ var _my_car_mixins_modals__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../my-car/mixins/modals */ "./resources/js/components/my-car/mixins/modals.js");
 //
 //
 //
@@ -8767,37 +8768,73 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "add-service-form",
   data: function data() {
     return {
       loaded: false,
-      error: ''
+      error: null,
+      due_moment: 'Specific distance',
+      maintenance_service: '',
+      tracked_distance: null,
+      tracked_date: null
     };
   },
-  mixins: [_my_car_mixins_laravel_utilities__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  mixins: [_my_car_mixins_laravel_utilities__WEBPACK_IMPORTED_MODULE_0__["default"], _my_car_mixins_modals__WEBPACK_IMPORTED_MODULE_1__["default"]],
   mounted: function mounted() {},
   computed: {},
   methods: {
-    closeModal: function closeModal(e) {
-      var el = e.target.closest('.modal');
-      return el.classList.remove('show');
-    },
     getData: function getData(e) {
       var _this = this;
 
-      var fuel_type = this.$refs.FuelType.value;
-      var budget = this.$refs.budget.value;
-      var date = this.$refs.date.value;
-      var expense = {
-        FuelType: fuel_type,
-        budget: budget,
-        Date: date
+      if (this.maintenance_service == '' && this.maintenance_service.length < 5) {
+        return this.error = {
+          maintenance_service: 'Please select a valid  maintenance service.'
+        };
+      }
+
+      if (this.due_moment == 'Specific distance') {
+        this.tracked_date = null;
+      } else if (this.due_moment == 'Specific date') {
+        this.tracked_distance = null;
+
+        if (this.tracked_date == null || this.tracked_date.length > 0 || new Date(this.tracked_date) == 'Invalid Date') {
+          return this.error = {
+            tracked_date: 'Please input a valid date.'
+          };
+        }
+      } else if (this.due_moment == 'Inmediate') {
+        this.tracked_distance = null;
+        this.tracked_date = null;
+        this.error == null;
+      } else {
+        return this.error = {
+          due_moment: 'Please select a valid due moment type.'
+        };
+      }
+
+      if (typeof parseInt(this.tracked_distance) != 'number') {
+        return this.error = {
+          tracked_distance: 'Please input a valid number.'
+        };
+      }
+
+      this.error = null;
+      var service = {
+        maintenance_service: this.maintenance_service,
+        due_moment: this.due_moment,
+        final_date: this.tracked_date,
+        tracked_distance: this.tracked_distance
       };
-      fetch('/add-expense', {
+      fetch('/add-service', {
         method: 'POST',
-        body: JSON.stringify(expense),
+        body: JSON.stringify(service),
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-TOKEN': this.csrf
@@ -8809,13 +8846,11 @@ __webpack_require__.r(__webpack_exports__);
 
         if (res.Errors) {
           _this.error = res.Errors;
-        } else {
-          cons;
-          document.querySelector('.modal').classList.remove('show');
         }
       })["catch"](function (error) {
         return console.error('Error:', error);
       });
+      document.querySelector('.modal').classList.remove('show');
       e.preventDefault();
     }
   }
@@ -45031,23 +45066,317 @@ var render = function() {
       [
         _c("h3", { staticClass: "text-center" }, [_vm._v("Add service")]),
         _vm._v(" "),
-        _c("form", { attrs: { action: "", name: "add-service" } }, [
+        _c("form", { attrs: { name: "add-service" } }, [
           _c("input", {
             attrs: { type: "hidden", name: "_token" },
             domProps: { value: _vm.csrf }
           }),
           _vm._v(" "),
-          _vm._m(0),
+          _c("fieldset", { staticClass: "grid-x" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "small-12 medium-9 cell" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.maintenance_service,
+                      expression: "maintenance_service"
+                    }
+                  ],
+                  attrs: { name: "maintenance_service", id: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.maintenance_service = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "wheel change" } }, [
+                    _vm._v("Wheel change")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "body fix" } }, [
+                    _vm._v("Body fix")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "brake check" } }, [
+                    _vm._v("Brake check")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "alignment" } }, [
+                    _vm._v("Alignment")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "battery change" } }, [
+                    _vm._v("Battery change")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "cleaning" } }, [
+                    _vm._v("Cleaning")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "coolant fill" } }, [
+                    _vm._v("Coolant fill")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "electricity check" } }, [
+                    _vm._v("Electricity check")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "engine check" } }, [
+                    _vm._v("Engine check")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "filter change" } }, [
+                    _vm._v("Filter change")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "tire change" } }, [
+                    _vm._v("Tire change")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "transmission check" } }, [
+                    _vm._v("Transmission check")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "urgent check" } }, [
+                    _vm._v("Urgent check")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "part change" } }, [
+                    _vm._v("Part change")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "oil change" } }, [
+                    _vm._v("Oil change")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "paint job" } }, [
+                    _vm._v("Paint job")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "preassure check" } }, [
+                    _vm._v("Preassure check")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "scheduled maintenance" } }, [
+                    _vm._v("Scheduled maintenance")
+                  ])
+                ]
+              )
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c("fieldset", { staticClass: "grid-x" }, [
+            _c("div", { staticClass: "small-12 medium-12" }, [
+              _c("legend", [_vm._v("Due moment")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.due_moment,
+                    expression: "due_moment"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  name: "due_moment",
+                  value: "Specific distance",
+                  checked: ""
+                },
+                domProps: {
+                  checked: _vm._q(_vm.due_moment, "Specific distance")
+                },
+                on: {
+                  change: function($event) {
+                    _vm.due_moment = "Specific distance"
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "Specific distance" } }, [
+                _vm._v("Specific distance")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.due_moment,
+                    expression: "due_moment"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  name: "due_moment",
+                  value: "Inmediate"
+                },
+                domProps: { checked: _vm._q(_vm.due_moment, "Inmediate") },
+                on: {
+                  change: function($event) {
+                    _vm.due_moment = "Inmediate"
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "Inmediate" } }, [
+                _vm._v("Inmediate")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.due_moment,
+                    expression: "due_moment"
+                  }
+                ],
+                attrs: {
+                  type: "radio",
+                  name: "due_moment",
+                  value: "Specific date"
+                },
+                domProps: { checked: _vm._q(_vm.due_moment, "Specific date") },
+                on: {
+                  change: function($event) {
+                    _vm.due_moment = "Specific date"
+                  }
+                }
+              }),
+              _c("label", { attrs: { for: "Specific date" } }, [_vm._v("Date")])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(2),
+          _vm.due_moment == "Specific distance"
+            ? _c(
+                "fieldset",
+                {
+                  staticClass: "grid-x ",
+                  attrs: { id: "tracked-distance-details" }
+                },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "small-12 medium-8 cell" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.tracked_distance,
+                          expression: "tracked_distance"
+                        }
+                      ],
+                      attrs: {
+                        type: "number",
+                        id: "middle-label",
+                        name: "tracked_distance",
+                        placeholder: "Right- and middle-aligned text input"
+                      },
+                      domProps: { value: _vm.tracked_distance },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.tracked_distance = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _vm._m(3),
+          _vm.due_moment == "Specific date"
+            ? _c(
+                "fieldset",
+                { staticClass: "grid-x ", attrs: { id: "due-date-details" } },
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "small-12 medium-8 cell" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.tracked_date,
+                          expression: "tracked_date"
+                        }
+                      ],
+                      attrs: {
+                        type: "date",
+                        id: "middle-label",
+                        name: "final_date",
+                        placeholder: "Right- and middle-aligned text input"
+                      },
+                      domProps: { value: _vm.tracked_date },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.tracked_date = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _vm._m(4),
+          _c("div", { staticClass: "expanded button-group " }, [
+            _c(
+              "a",
+              {
+                staticClass: "hollow button secondary cancel",
+                attrs: { href: "#" },
+                on: { click: _vm.closeModal }
+              },
+              [_vm._v("Cancel")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "button success",
+                attrs: { href: "#" },
+                on: { click: _vm.getData }
+              },
+              [_vm._v("Add")]
+            )
+          ]),
           _vm._v(" "),
-          _vm._m(5)
+          _c(
+            "button",
+            {
+              staticClass: "close-button",
+              attrs: {
+                "data-close": "",
+                "aria-label": "Close reveal",
+                type: "button"
+              },
+              on: { click: _vm.closeModal }
+            },
+            [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+          )
         ])
       ]
     )
@@ -45058,210 +45387,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("fieldset", { staticClass: "grid-x" }, [
-      _c("div", { staticClass: "small-12 medium-3 cell" }, [
-        _c(
-          "label",
-          { staticClass: "text-left middle", attrs: { for: "middle-label" } },
-          [_vm._v("Service")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "small-12 medium-9 cell" }, [
-        _c("select", { attrs: { name: "maintenance_service", id: "" } }, [
-          _c("option", { attrs: { value: "wheel change" } }, [
-            _vm._v("Wheel change")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "body fix" } }, [_vm._v("Body fix")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "brake check" } }, [
-            _vm._v("Brake check")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "alignment" } }, [
-            _vm._v("Alignment")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "battery change" } }, [
-            _vm._v("Battery change")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "cleaning" } }, [_vm._v("Cleaning")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "coolant fill" } }, [
-            _vm._v("Coolant fill")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "electricity check" } }, [
-            _vm._v("Electricity check")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "engine check" } }, [
-            _vm._v("Engine check")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "filter change" } }, [
-            _vm._v("Filter change")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "tire change" } }, [
-            _vm._v("Tire change")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "transmission check" } }, [
-            _vm._v("Transmission check")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "urgent check" } }, [
-            _vm._v("Urgent check")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "part change" } }, [
-            _vm._v("Part change")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "oil change" } }, [
-            _vm._v("Oil change")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "paint job" } }, [
-            _vm._v("Paint job")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "preassure check" } }, [
-            _vm._v("Preassure check")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "scheduled maintenance" } }, [
-            _vm._v("Scheduled maintenance")
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("fieldset", { staticClass: "grid-x" }, [
-      _c("div", { staticClass: "small-12 medium-12" }, [
-        _c("legend", [_vm._v("Due moment")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            type: "radio",
-            name: "due_moment",
-            value: "Specific distance",
-            checked: ""
-          }
-        }),
-        _c("label", { attrs: { for: "Specific distance" } }, [
-          _vm._v("Specific distance")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "radio", name: "due_moment", value: "Inmediate" }
-        }),
-        _c("label", { attrs: { for: "Inmediate" } }, [_vm._v("Inmediate")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "radio", name: "due_moment", value: "Specific date" }
-        }),
-        _c("label", { attrs: { for: "Specific date" } }, [_vm._v("Date")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "fieldset",
-      { staticClass: "grid-x show", attrs: { id: "tracked-distance-details" } },
-      [
-        _c("div", { staticClass: "small-12 medium-4 cell" }, [
-          _c(
-            "label",
-            { staticClass: "text-left middle", attrs: { for: "middle-label" } },
-            [_vm._v("Tracked distance")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "small-12 medium-8 cell" }, [
-          _c("input", {
-            attrs: {
-              type: "number",
-              id: "middle-label",
-              name: "tracked_distance",
-              placeholder: "Right- and middle-aligned text input"
-            }
-          })
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "fieldset",
-      { staticClass: "grid-x hide", attrs: { id: "due-date-details" } },
-      [
-        _c("div", { staticClass: "small-12 medium-4 cell" }, [
-          _c(
-            "label",
-            { staticClass: "text-left middle", attrs: { for: "middle-label" } },
-            [_vm._v("Tracked date")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "small-12 medium-8 cell" }, [
-          _c("input", {
-            attrs: {
-              type: "date",
-              id: "middle-label",
-              name: "final_date",
-              placeholder: "Right- and middle-aligned text input"
-            }
-          })
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "expanded button-group " }, [
+    return _c("div", { staticClass: "small-12 medium-3 cell" }, [
       _c(
-        "a",
-        { staticClass: "hollow button secondary cancel", attrs: { href: "#" } },
-        [_vm._v("Cancel")]
-      ),
-      _vm._v(" "),
-      _c("a", { staticClass: "button success", attrs: { href: "#" } }, [
-        _vm._v("Add")
-      ])
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Service")]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close-button",
-        attrs: {
-          "data-close": "",
-          "aria-label": "Close reveal",
-          type: "button"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
+    return _c("div", { staticClass: "small-12 medium-4 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Tracked distance")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "small-12 medium-4 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Tracked date")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -60535,6 +60691,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_forms_register_users_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/forms/register-users.vue */ "./resources/js/components/forms/register-users.vue");
 /* harmony import */ var _components_forms_add_vehicle_form_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/forms/add-vehicle-form.vue */ "./resources/js/components/forms/add-vehicle-form.vue");
 /* harmony import */ var _components_forms_add_expense_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/forms/add-expense.vue */ "./resources/js/components/forms/add-expense.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -60543,9 +60700,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 window.Vue = __webpack_require__(/*! Vue */ "./node_modules/Vue/dist/vue.runtime.esm.js");
  // import StatsTable from './modules/fuelgov/stats-table.vue';
+
 
 
 
@@ -60603,6 +60767,7 @@ var previewBtn = document.querySelector('[data-add-vehicle="review"]'); // Sign 
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#app',
   store: _store_index_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  // VehicleExpensesStore,
   data: {
     message: 'hola mundo',
     makers: '',
@@ -60629,12 +60794,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   },
   created: function created() {},
   mounted: function mounted() {},
-  computed: {
-    testStore: function testStore() {
-      return this.$store.state.test;
-    }
-  },
-  methods: {
+  computed: {},
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_13__["mapActions"])(['fetchLastExpense']), {
     showAddExpenseModal: function showAddExpenseModal() {
       return this.$refs.addExpenseModal.$el.classList.add('show');
     },
@@ -60882,7 +61043,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
         };
       });
     }
-  } // components:{
+  }) // components:{
   //     ExampleComponent
   // }
 
@@ -62148,6 +62309,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/my-car/mixins/modals.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/my-car/mixins/modals.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  methods: {
+    closeModal: function closeModal(e) {
+      var el = e.target.closest('.modal');
+      return el.classList.remove('show');
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/components/my-car/my-car-resume.vue":
 /*!**********************************************************!*\
   !*** ./resources/js/components/my-car/my-car-resume.vue ***!
@@ -62355,6 +62536,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/store/expenses/vehicle-expenses.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/store/expenses/vehicle-expenses.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: {
+    lastestExpenses: []
+  },
+  mutations: {
+    lastestExpense: function lastestExpense(state, expense) {
+      state.lastestExpenses.push(expense);
+      return state.lastestExpenses;
+    }
+  },
+  getters: {},
+  actions: {
+    fetchLastExpense: function fetchLastExpense(context) {
+      fetch('/latest-expense').then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return context.commit('lastestExpense', data);
+      });
+      return;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/index.js":
 /*!*************************************!*\
   !*** ./resources/js/store/index.js ***!
@@ -62367,10 +62582,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _expenses_vehicle_expenses__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./expenses/vehicle-expenses */ "./resources/js/store/expenses/vehicle-expenses.js");
+
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  modules: {
+    Expenses: _expenses_vehicle_expenses__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
   state: {
     test: 'Exito',
     years: [],
@@ -62380,17 +62600,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   },
   mutations: {
     storeYears: function storeYears(state, years) {
-      state.years = years;
+      return state.years = years;
     },
     storeMakers: function storeMakers(state, makers) {
-      state.makers = makers;
+      return state.makers = makers;
     },
     storeModels: function storeModels(state, models) {
-      state.models = models;
+      return state.models = models;
     },
     storeStats: function storeStats(state, stats) {
       // console.log(stats)
-      state.stats = stats;
+      return state.stats = stats;
     }
   },
   actions: {

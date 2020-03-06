@@ -6,7 +6,7 @@
         <div class="reveal " id="add-service" data-reveal>
             <h3 class="text-center">Add service</h3>
 
-            <form action="" name="add-service">
+            <form name="add-service">
 
                 <input type="hidden" name="_token" :value="csrf">
 
@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="small-12 medium-9 cell">
-                        <select name="maintenance_service" id="">
+                        <select name="maintenance_service" id="" v-model="maintenance_service">
                             <option value="wheel change">Wheel change</option>
                             <option value="body fix">Body fix</option>
                             <option value="brake check">Brake check</option>
@@ -46,43 +46,47 @@
 
                     <div class="small-12 medium-12">
                         <legend>Due moment</legend>
-                        <input type="radio" name="due_moment" value="Specific distance" checked><label for="Specific distance">Specific distance</label>
-                        <input type="radio" name="due_moment" value="Inmediate" ><label for="Inmediate">Inmediate</label>
-                        <input type="radio" name="due_moment" value="Specific date" ><label for="Specific date">Date</label>
+                        <input type="radio" name="due_moment" value="Specific distance" checked v-model="due_moment"><label for="Specific distance">Specific distance</label>
+                        <input type="radio" name="due_moment" value="Inmediate" v-model="due_moment"><label for="Inmediate">Inmediate</label>
+                        <input type="radio" name="due_moment" value="Specific date" v-model="due_moment"><label for="Specific date">Date</label>
                     </div>
 
                 </fieldset>
 
-                <fieldset id="tracked-distance-details" class="grid-x show">
+                <fieldset id="tracked-distance-details" class="grid-x "
+                 v-if="due_moment == 'Specific distance'">
 
                     <div class="small-12 medium-4 cell">
                         <label for="middle-label" class="text-left middle">Tracked distance</label>
                     </div>
 
                     <div class="small-12 medium-8 cell">
-                        <input type="number" id="middle-label" name="tracked_distance" placeholder="Right- and middle-aligned text input">
+                        <input type="number" id="middle-label" name="tracked_distance" placeholder="Right- and middle-aligned text input"
+                        v-model="tracked_distance">
                     </div>
 
                 </fieldset>
 
-                <fieldset id="due-date-details" class="grid-x hide">
+                <fieldset id="due-date-details" class="grid-x " 
+                v-if="due_moment == 'Specific date'">
 
                     <div class="small-12 medium-4 cell">
                         <label for="middle-label" class="text-left middle">Tracked date</label>
                     </div>
 
                     <div class="small-12 medium-8 cell">
-                        <input type="date" id="middle-label" name="final_date" placeholder="Right- and middle-aligned text input">
+                        <input type="date" id="middle-label" name="final_date" placeholder="Right- and middle-aligned text input"
+                        v-model="tracked_date">
                     </div>
 
                 </fieldset>
 
             <div class="expanded button-group ">
-                <a href="#" class="hollow button secondary cancel">Cancel</a>
-                <a class="button success" href="#">Add</a>
+                <a href="#" class="hollow button secondary cancel" @click="closeModal">Cancel</a>
+                <a class="button success" href="#" @click="getData">Add</a>
             </div>
 
-            <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <button class="close-button" data-close aria-label="Close reveal" type="button" @click="closeModal">
                 <span aria-hidden="true">&times;</span>
             </button>
 
@@ -99,16 +103,21 @@
 
 <script>
 import csrf from '../my-car/mixins/laravel-utilities';
+import modals from '../my-car/mixins/modals';
 
 export default {
     name: "add-service-form",           
     data(){
         return {
             loaded:false,
-            error:''
+            error:null,
+            due_moment:'Specific distance',
+            maintenance_service:'',
+            tracked_distance:null,
+            tracked_date:null
         }
     },
-    mixins:[csrf],
+    mixins:[csrf,modals],
     mounted(){
         
     },
@@ -117,24 +126,56 @@ export default {
 
     methods:{
 
-        closeModal(e){
-            let el = e.target.closest('.modal');
-            return el.classList.remove('show');
-        },
         getData(e){
-               let fuel_type = this.$refs.FuelType.value;
-               let budget = this.$refs.budget.value;
-               let date = this.$refs.date.value;
+               
+               
 
-               let expense = { 
-                FuelType: fuel_type,
-                budget: budget,
-                Date: date 
+               if(this.maintenance_service == '' && this.maintenance_service.length < 5){
+                   return this.error = {maintenance_service: 'Please select a valid  maintenance service.'}
+               }
+
+               if(this.due_moment == 'Specific distance'){
+
+                    this.tracked_date = null
+
+               }else if(this.due_moment == 'Specific date'){
+
+                    this.tracked_distance = null;
+
+                    if( this.tracked_date == null || this.tracked_date.length > 0 || (new Date(this.tracked_date) == 'Invalid Date') ){
+
+                        return this.error = {tracked_date:'Please input a valid date.'};
+
+                    }
+
+               }else if(this.due_moment == 'Inmediate'){
+                   
+                    this.tracked_distance = null;
+                    this.tracked_date = null;
+                    this.error == null;
+
+               }else {
+                    return this.error = {due_moment:'Please select a valid due moment type.'};
+               }
+
+
+               if( typeof parseInt(this.tracked_distance) != 'number'){
+                    return this.error = {tracked_distance:'Please input a valid number.'};
+
+               }
+
+                this.error = null;
+
+               let service = { 
+                maintenance_service: this.maintenance_service,
+                due_moment: this.due_moment,
+                final_date: this.tracked_date,
+                tracked_distance: this.tracked_distance 
                } 
 
-               fetch('/add-expense',{
+               fetch('/add-service',{
                    method:'POST',
-                   body: JSON.stringify(expense),
+                   body: JSON.stringify(service),
                    headers:{
                        'Content-Type': 'application/json',
                        'X-CSRF-TOKEN':this.csrf
@@ -144,17 +185,14 @@ export default {
                   let res = JSON.parse(response);
                   if(res.Errors){
                     this.error = res.Errors;
-                  }else{
-                      cons
-                      document.querySelector('.modal').classList.remove('show')
                   }
-
 
                    
                    })
                .catch(error => console.error('Error:', error));
             
 
+            document.querySelector('.modal').classList.remove('show')
                e.preventDefault()
 
         }

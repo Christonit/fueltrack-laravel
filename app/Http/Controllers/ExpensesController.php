@@ -122,10 +122,9 @@ class ExpensesController extends Controller
     {
 
         $vehicle_id = vehicle::userVehicle();
-        $expense = expenses::where('vehicle',$vehicle_id)->get()->sortBy('Created_at')->last();
-        $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
+        $expense = expenses::where('vehicle',$vehicle_id)->get(['Galons','FuelType','Current_fuel_price','Date'])->sortBy('Created_at')->last();
 
-        return compact(['expense','vehicle_p']);
+        return $expense;
 
 
     }

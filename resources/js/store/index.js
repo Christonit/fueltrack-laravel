@@ -1,33 +1,38 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+import Expenses from './expenses/vehicle-expenses'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+    modules:{
+        Expenses
+    },
     state:{
         test:'Exito',
         years:[],
         makers:'',
         models:'',
         stats:''
-    },
+        },
     mutations: {
         storeYears(state,years){
-            state.years = years;
+            return state.years = years;
         },
         storeMakers(state,makers){
-            state.makers = makers
+            return state.makers = makers
         },
         storeModels(state,models){
-            state.models = models
+            return state.models = models
         },
         storeStats(state,stats){
             // console.log(stats)
-            state.stats = stats
+            return state.stats = stats
 
         }
+        
     },
     actions:{
+       
         getYears(context){
 
             let parser = new DOMParser();

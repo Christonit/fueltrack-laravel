@@ -11,6 +11,8 @@ use Auth;
 
 use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 
 class VehicleMaintenanceController extends Controller
 {
@@ -48,12 +50,18 @@ class VehicleMaintenanceController extends Controller
 
 //        $vehicle_maintenance = new vehicle_maintenance();
 
-        $service = request()->validate([
+        $service = request()->all();
+
+
+        $validator =  Validator::make($service,[
             'maintenance_service'=>['required'],
             'due_moment'=>['required']
         ]);
 
-
+        if($validator->fails()){
+            $errors['Errors'] = $validator->messages();
+            return $errors;
+        }
 
 
         $service['vehicle'] = vehicle::userVehicle();
@@ -73,7 +81,7 @@ class VehicleMaintenanceController extends Controller
         $service['status'] = true;
 
 
-         vehicle_maintenance::create($service);
+        vehicle_maintenance::create($service);
 
 
 //        $vehicle_maintenance->status = $status;
@@ -85,7 +93,7 @@ class VehicleMaintenanceController extends Controller
 
 
 
-        return;
+        return "true";
 
 
 

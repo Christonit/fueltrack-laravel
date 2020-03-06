@@ -45,7 +45,7 @@ if (windowSize <= sm) {
 var bar_ctx = document.getElementById('bar-chart').getContext('2d');
 
 var purple_orange_gradient = bar_ctx.createLinearGradient(0, 0, 0, 600);
-purple_orange_gradient.addColorStop(0, 'rgba(235,87,87,0.7)');
+purple_orange_gradient.addColorStop(0, 'rgba(235,87,87,0.3)');
 purple_orange_gradient.addColorStop(1, 'rgba(255,255,255,0)');
 
 let weekly_expenses = new Array();
