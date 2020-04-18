@@ -66,7 +66,7 @@
                         <b>Current</b>
                         <br>
                         <template v-if="maintenance.current_distance > maintenance.tracked_distance">
-                            {{`${maintenances.current_distance - maintenance.tracked_distance } miles overdue`}}
+                            {{`${maintenance.current_distance - maintenance.tracked_distance } miles overdue`}}
                         </template>
 
                         <template v-else>
@@ -149,12 +149,13 @@ export default {
                AddServiceForm
                
             },
+           
             data(){
                 return {
                    maintenance_list:'',
                    today: null ,
                    maintenance_expenses:[],
-                   maintenance_services_performed:{}
+                //    maintenance_services_performed:{}
                 }
             },
             props:['printIcon'],
@@ -178,9 +179,6 @@ export default {
                 },
                 maintenanceExpenses(){
 
-                //     let label;
-                //     let cost;
-
                    let name = this.maintenance_expenses.map(maintenance =>  maintenance.maintenance_service )
                    let cost = this.maintenance_expenses.map(maintenance =>  maintenance.cost )
                    return {name,cost}
@@ -189,6 +187,7 @@ export default {
 
             },
             created(){
+
                 let currentDate = new Date();
                 this.today = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1 }-${currentDate.getDate()}`;
 
@@ -204,6 +203,8 @@ export default {
                         return this.maintenance_expenses = JSON.parse(data);
 
                 })
+
+
             },
 
             mounted(){

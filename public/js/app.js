@@ -9988,8 +9988,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       maintenance_list: '',
       today: null,
-      maintenance_expenses: [],
-      maintenance_services_performed: {}
+      maintenance_expenses: [] //    maintenance_services_performed:{}
+
     };
   },
   props: ['printIcon'],
@@ -10012,8 +10012,6 @@ __webpack_require__.r(__webpack_exports__);
       return total;
     },
     maintenanceExpenses: function maintenanceExpenses() {
-      //     let label;
-      //     let cost;
       var name = this.maintenance_expenses.map(function (maintenance) {
         return maintenance.maintenance_service;
       });
@@ -46119,12 +46117,12 @@ var render = function() {
       [
         _c("expenses-historic", {
           ref: "fuel-expenses-logs",
+          staticClass: "is-active",
           attrs: { id: "fuel-expenses-logs" }
         }),
         _vm._v(" "),
         _c("maintenances-historic", {
           ref: "maintenance-logs",
-          staticClass: "is-active",
           attrs: { id: "maintenance-logs", "print-icon": _vm.printIcon }
         })
       ],
@@ -46722,8 +46720,7 @@ var render = function() {
                                         _vm._v(
                                           "\n                            " +
                                             _vm._s(
-                                              _vm.maintenances
-                                                .current_distance -
+                                              maintenance.current_distance -
                                                 maintenance.tracked_distance +
                                                 " miles overdue"
                                             ) +

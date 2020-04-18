@@ -9,8 +9,8 @@
         <div class="tabs-content" data-tabs-content="deeplinked-tabs">
 
 
-            <expenses-historic  id="fuel-expenses-logs" ref="fuel-expenses-logs"></expenses-historic>
-            <maintenances-historic class="is-active" id="maintenance-logs" ref="maintenance-logs" :print-icon="printIcon"></maintenances-historic>
+            <expenses-historic  class="is-active" id="fuel-expenses-logs" ref="fuel-expenses-logs"></expenses-historic>
+            <maintenances-historic id="maintenance-logs" ref="maintenance-logs" :print-icon="printIcon"></maintenances-historic>
 
 
 

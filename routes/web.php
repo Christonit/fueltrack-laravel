@@ -70,7 +70,6 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::get('/{username}/my-car', 'VehicleController@show');
 
 

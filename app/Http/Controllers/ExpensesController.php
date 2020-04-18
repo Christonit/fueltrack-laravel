@@ -110,9 +110,9 @@ class ExpensesController extends Controller
     {
         //
         $vehicle_id = vehicle::userVehicle();
-        $expense = expenses::where('vehicle',$vehicle_id)->paginate(15);
+        // $expense = expenses::where('vehicle',$vehicle_id)->paginate(15);
+        $expense = expenses::where('vehicle',$vehicle_id)->orderBy('Date','desc')->paginate(6);
         $vehicle_p = vehicle_performance::where('vehicle',$vehicle_id)->get();
-
         return compact(['expense','vehicle_p']);
 
     }
