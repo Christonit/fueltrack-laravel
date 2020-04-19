@@ -69,9 +69,15 @@ export default {
         name: "expenses-historic",
         data(){
             return {
-                expenses : '',
+                // expenses : '',
                 performance:0,
                 hasExpenses:false
+            }
+        },
+        computed:{
+            expenses(){
+                 return this.$store.state.expensesHistoric.expense.data;
+
             }
         },
         created(){
@@ -82,8 +88,8 @@ export default {
 
                 let res = this.$store.state.expensesHistoric;
                 this.performance = res.vehicle_p[0]
-                this.expenses = res.expense.data;
-                    if(!this.expenses == ''){
+                let x = res.expense.data;
+                    if(!x == ''){
                         return this.hasExpenses = true;
                     }else{
                         return false

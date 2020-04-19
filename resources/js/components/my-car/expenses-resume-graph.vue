@@ -42,8 +42,8 @@
     <script>
     import ExpensesChart from './expenses-chart.vue';
     import ExpensesLogs from './expenses-logs.vue';
-    import store from '../../store/index.js';
 
+    import {mapState} from 'vuex';
     export default {
             name: "expenses-resume-graph",
             components:{
@@ -52,19 +52,20 @@
             },
             data(){
                 return {
-                    fuelUps : '',
+                    // fuelUps : '',
                     performance:0,
                     hasExpenses:false,
                     loaded:false,
                     
                 }
             },
+
             props:['printIcon'],
             created(){
                 // Candidato a irse a State Management.
                 this.$store.dispatch('graphExpensesWeekly').then( data => {
                     
-                        this.fuelUps = this.$store.state.weeklyExpenses;
+                        // this.fuelUps = this.$store.state.weeklyExpenses;
                         this.loaded = true;
 
                 })
@@ -74,6 +75,9 @@
                 
             },
             computed:{
+                ...mapState({
+                    fuelUps : 'weeklyExpenses'
+                }),
                  fuelUpsChartData(){
                     return {
                             labels:this.fuelUps.Dates,

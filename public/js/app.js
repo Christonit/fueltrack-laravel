@@ -8645,8 +8645,13 @@ __webpack_require__.r(__webpack_exports__);
         if (res.Errors) {
           _this.error = res.Errors;
         } else {
-          cons;
-          document.querySelector('.modal').classList.remove('show');
+          document.querySelector('.modal.show').classList.remove('show');
+
+          _this.$store.dispatch('expensesHistoric');
+
+          _this.$store.dispatch('expensesResume');
+
+          _this.$store.dispatch('graphExpensesWeekly');
         }
       })["catch"](function (error) {
         return console.error('Error:', error);
@@ -9375,10 +9380,15 @@ __webpack_require__.r(__webpack_exports__);
   name: "expenses-historic",
   data: function data() {
     return {
-      expenses: '',
+      // expenses : '',
       performance: 0,
       hasExpenses: false
     };
+  },
+  computed: {
+    expenses: function expenses() {
+      return this.$store.state.expensesHistoric.expense.data;
+    }
   },
   created: function created() {
     var _this = this;
@@ -9387,9 +9397,9 @@ __webpack_require__.r(__webpack_exports__);
     this.$store.dispatch('expensesHistoric').then(function () {
       var res = _this.$store.state.expensesHistoric;
       _this.performance = res.vehicle_p[0];
-      _this.expenses = res.expense.data;
+      var x = res.expense.data;
 
-      if (!_this.expenses == '') {
+      if (!x == '') {
         return _this.hasExpenses = true;
       } else {
         return false;
@@ -9472,7 +9482,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _expenses_chart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./expenses-chart.vue */ "./resources/js/components/my-car/expenses-chart.vue");
 /* harmony import */ var _expenses_logs_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./expenses-logs.vue */ "./resources/js/components/my-car/expenses-logs.vue");
-/* harmony import */ var _store_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/index.js */ "./resources/js/store/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -9525,7 +9541,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      fuelUps: '',
+      // fuelUps : '',
       performance: 0,
       hasExpenses: false,
       loaded: false
@@ -9537,12 +9553,14 @@ __webpack_require__.r(__webpack_exports__);
 
     // Candidato a irse a State Management.
     this.$store.dispatch('graphExpensesWeekly').then(function (data) {
-      _this.fuelUps = _this.$store.state.weeklyExpenses;
+      // this.fuelUps = this.$store.state.weeklyExpenses;
       _this.loaded = true;
     });
   },
   mounted: function mounted() {},
-  computed: {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
+    fuelUps: 'weeklyExpenses'
+  }), {
     fuelUpsChartData: function fuelUpsChartData() {
       return {
         labels: this.fuelUps.Dates,
@@ -9567,7 +9585,7 @@ __webpack_require__.r(__webpack_exports__);
         }]
       };
     }
-  },
+  }),
   methods: {
     setGradient: function setGradient() {}
   }
@@ -9695,6 +9713,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _maintenances_historic_row_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./maintenances-historic-row.vue */ "./resources/js/components/my-car/maintenances-historic-row.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -9740,26 +9765,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "maintenances-historic",
   components: {
     MaintenancesHistoricRow: _maintenances_historic_row_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+    maintentance_services_list: 'maintenanceHistoric'
+  })),
   data: function data() {
     return {
-      maintentance_services_list: '',
+      // maintentance_services_list : '',
       performance: 0,
       hasExpenses: false
     };
   },
   props: ['printIcon'],
   created: function created() {
-    var _this = this;
-
-    this.$store.dispatch('maintenanceHistoric').then(function () {
-      _this.maintentance_services_list = _this.$store.state.maintenanceHistoric;
-    });
+    this.$store.dispatch('maintenanceHistoric'); // this.$store.dispatch('maintenanceHistoric').then( () => {
+    //     this.maintentance_services_list = this.$store.state.maintenanceHistoric;
+    // })
   },
   methods: {
     tableIsActive: function tableIsActive(e) {
@@ -10058,7 +10085,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _store_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/index.js */ "./resources/js/store/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -10137,19 +10170,17 @@ __webpack_require__.r(__webpack_exports__);
   name: "my-car-resume",
   data: function data() {
     return {
-      loaded: false,
-      averages: ''
+      loaded: false // averages:''
+
     };
   },
   created: function created() {
-    var _this = this;
-
-    this.$store.dispatch('expensesResume').then(function (data) {
-      _this.averages = _this.$store.state.averages;
-    });
+    this.$store.dispatch('expensesResume');
   },
   mounted: function mounted() {},
-  computed: {},
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    averages: 'averages'
+  })),
   methods: {}
 });
 
@@ -62604,31 +62635,24 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       return state.models = models;
     },
     storeStats: function storeStats(state, stats) {
-      // console.log(stats)
       return state.stats = stats;
     },
     storeAverages: function storeAverages(state, payload) {
-      // console.log(stats)
       return state.averages = payload;
     },
     storeWeeklyExpenses: function storeWeeklyExpenses(state, payload) {
-      // console.log(stats)
       return state.weeklyExpenses = payload;
     },
     storeExpensesHistoric: function storeExpensesHistoric(state, payload) {
-      // console.log(stats)
       return state.expensesHistoric = payload;
     },
     storeMaintenanceHistoric: function storeMaintenanceHistoric(state, payload) {
-      // console.log(stats)
       return state.maintenanceHistoric = payload;
     },
     storeActiveMaintenances: function storeActiveMaintenances(state, payload) {
-      // console.log(stats)
       return state.activeMaintenances = payload;
     },
     storeMaintenancesExpenses: function storeMaintenancesExpenses(state, payload) {
-      console.log(payload);
       return state.maintenancesExpenses = payload;
     }
   },

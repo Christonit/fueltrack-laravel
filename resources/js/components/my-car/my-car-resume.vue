@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import store from '../../store/index.js';
+import {mapState} from 'vuex';
 
     export default {
             name: "my-car-resume",
@@ -80,22 +80,21 @@ import store from '../../store/index.js';
             data(){
                 return {
                     loaded:false,
-                    averages:''
+                    // averages:''
                 }
             },
             created(){
 
-                this.$store.dispatch('expensesResume').then( data => {
-
-                        this.averages = this.$store.state.averages;
-
-                })
+                this.$store.dispatch('expensesResume')
 
             },
             mounted(){
                 
             },
             computed:{
+                ...mapState({
+                    averages: 'averages'
+                })
             },
 
             methods:{

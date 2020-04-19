@@ -103,12 +103,18 @@ export default {
                }).then( res => res.text() )
                .then(response =>  {
                   let res = JSON.parse(response);
-                  if(res.Errors){
-                    this.error = res.Errors;
-                  }else{
-                      cons
-                      document.querySelector('.modal').classList.remove('show')
-                  }
+                        if(res.Errors){
+                            this.error = res.Errors;
+                        }else{
+                            
+                            document.querySelector('.modal.show').classList.remove('show')
+
+                            this.$store.dispatch('expensesHistoric')
+                            this.$store.dispatch('expensesResume')
+                            this.$store.dispatch('graphExpensesWeekly')
+
+
+                        }
 
 
                    

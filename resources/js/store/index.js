@@ -22,46 +22,48 @@ export default new Vuex.Store({
     },
     mutations: {
         storeYears(state,years){
+
             return state.years = years;
         },
         storeMakers(state,makers){
+            
             return state.makers = makers
         },
         storeModels(state,models){
             return state.models = models
         },
         storeStats(state,stats){
-            // console.log(stats)
+
             return state.stats = stats
 
         },
         storeAverages(state,payload){
-            // console.log(stats)
+
             return state.averages = payload
 
         },
         storeWeeklyExpenses(state,payload){
-            // console.log(stats)
+
             return state.weeklyExpenses = payload
 
         },
         storeExpensesHistoric(state,payload){
-            // console.log(stats)
+
             return state.expensesHistoric = payload
 
         },
         storeMaintenanceHistoric(state,payload){
-            // console.log(stats)
+
             return state.maintenanceHistoric = payload
 
         },
         storeActiveMaintenances(state,payload){
-            // console.log(stats)
+
             return state.activeMaintenances = payload
 
         },
         storeMaintenancesExpenses(state,payload){
-            console.log(payload)
+
             return state.maintenancesExpenses = payload
 
         }

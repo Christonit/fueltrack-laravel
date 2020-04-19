@@ -45,23 +45,31 @@
 
     <script>
     import MaintenancesHistoricRow from './maintenances-historic-row.vue';
+    import { mapState } from 'vuex';
     export default {
             name: "maintenances-historic",
             components:{
                 MaintenancesHistoricRow
             },
+            computed: {
+                ...mapState({
+                    maintentance_services_list: 'maintenanceHistoric'
+                })
+            },
             data(){
                 return {
-                    maintentance_services_list : '',
+                    // maintentance_services_list : '',
                     performance:0,
                     hasExpenses:false
                 }
             },
             props:['printIcon'],
             created(){
-                this.$store.dispatch('maintenanceHistoric').then( () => {
-                    this.maintentance_services_list = this.$store.state.maintenanceHistoric;
-                })
+                this.$store.dispatch('maintenanceHistoric');
+
+                // this.$store.dispatch('maintenanceHistoric').then( () => {
+                //     this.maintentance_services_list = this.$store.state.maintenanceHistoric;
+                // })
                 
             },
 
