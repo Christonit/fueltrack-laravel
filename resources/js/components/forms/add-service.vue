@@ -187,12 +187,14 @@ export default {
                     this.error = res.Errors;
                   }
 
-                   
-                   })
+                    this.$store.dispatch('getActiveMaintenances')
+
+                })
                .catch(error => console.error('Error:', error));
             
 
-            document.querySelector('.modal').classList.remove('show')
+
+            document.querySelector('.modal.show').classList.remove('show')
                e.preventDefault()
 
         }

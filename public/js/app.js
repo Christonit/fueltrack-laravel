@@ -8532,6 +8532,236 @@ if (inBrowser) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-done-service.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/add-done-service.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _my_car_mixins_laravel_utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../my-car/mixins/laravel-utilities */ "./resources/js/components/my-car/mixins/laravel-utilities.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "done-service-form",
+  mixins: [_my_car_mixins_laravel_utilities__WEBPACK_IMPORTED_MODULE_0__["default"]],
+  data: function data() {
+    return {
+      loaded: false,
+      error: ''
+    };
+  },
+  // props:['csrf'],
+  mounted: function mounted() {},
+  computed: {},
+  methods: {
+    closeModal: function closeModal(e) {
+      var el = document.querySelector('.modal.show');
+      return el.classList.remove('show');
+    },
+    getData: function getData(e) {
+      var _this = this;
+
+      var fuel_type = this.$refs.FuelType.value;
+      var budget = this.$refs.budget.value;
+      var date = this.$refs.date.value;
+      var expense = {
+        FuelType: fuel_type,
+        budget: budget,
+        Date: date
+      };
+      fetch('/add-expense', {
+        method: 'POST',
+        body: JSON.stringify(expense),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': this.csrf
+        }
+      }).then(function (res) {
+        return res.text();
+      }).then(function (response) {
+        var res = JSON.parse(response);
+
+        if (res.Errors) {
+          _this.error = res.Errors;
+        } else {
+          document.querySelector('.modal.show').classList.remove('show');
+
+          _this.$store.dispatch('expensesHistoric');
+
+          _this.$store.dispatch('expensesResume');
+
+          _this.$store.dispatch('graphExpensesWeekly');
+        }
+      })["catch"](function (error) {
+        return console.error('Error:', error);
+      });
+      e.preventDefault();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-expense.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/add-expense.vue?vue&type=script&lang=js& ***!
@@ -8852,10 +9082,12 @@ __webpack_require__.r(__webpack_exports__);
         if (res.Errors) {
           _this.error = res.Errors;
         }
+
+        _this.$store.dispatch('getActiveMaintenances');
       })["catch"](function (error) {
         return console.error('Error:', error);
       });
-      document.querySelector('.modal').classList.remove('show');
+      document.querySelector('.modal.show').classList.remove('show');
       e.preventDefault();
     }
   }
@@ -9860,6 +10092,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _maintenances_chart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./maintenances-chart.vue */ "./resources/js/components/my-car/maintenances-chart.vue");
 /* harmony import */ var _maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./maintenances-pie-chart.vue */ "./resources/js/components/my-car/maintenances-pie-chart.vue");
 /* harmony import */ var _forms_add_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../forms/add-service */ "./resources/js/components/forms/add-service.vue");
+/* harmony import */ var _forms_add_done_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../forms/add-done-service */ "./resources/js/components/forms/add-done-service.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -9999,6 +10239,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -10006,62 +10253,82 @@ __webpack_require__.r(__webpack_exports__);
   name: "user-vehicle-maintenances",
   components: {
     MaintenancesDoughnut: _maintenances_pie_chart_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    AddServiceForm: _forms_add_service__WEBPACK_IMPORTED_MODULE_2__["default"]
+    AddServiceForm: _forms_add_service__WEBPACK_IMPORTED_MODULE_2__["default"],
+    DoneServiceForm: _forms_add_done_service__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
-      maintenance_list: '',
       today: null,
-      maintenance_expenses: [] //    maintenance_services_performed:{}
-
+      loaded: false
     };
   },
   props: ['printIcon'],
-  computed: {
+  computed: _objectSpread({
+    totalExpenses: function totalExpenses() {
+      var total = 0;
+      var storeMaintenance = this.$store.state.maintenancesExpenses;
+
+      if (storeMaintenance != '') {
+        storeMaintenance.forEach(function (expense) {
+          return total += expense.cost;
+        });
+        return total;
+      }
+    },
+    maintenanceExpenses: function maintenanceExpenses() {
+      var storeMaintenance = this.$store.state.maintenancesExpenses;
+
+      if (storeMaintenance != '') {
+        var name = storeMaintenance.map(function (maintenance) {
+          return maintenance.maintenance_service;
+        });
+        var cost = storeMaintenance.map(function (maintenance) {
+          return maintenance.cost;
+        });
+        return {
+          name: name,
+          cost: cost
+        };
+      }
+    },
     chartData: function chartData() {
+      var storeMaintenance = this.$store.state.maintenancesExpenses;
+      var name = '';
+      var cost = '';
+
+      if (storeMaintenance != '') {
+        name = storeMaintenance.map(function (maintenance) {
+          return maintenance.maintenance_service;
+        });
+        cost = storeMaintenance.map(function (maintenance) {
+          return maintenance.cost;
+        });
+      }
+
       return {
-        labels: this.maintenanceExpenses.name,
+        labels: name,
         datasets: [{
           label: 'Data One',
           backgroundColor: '#f87979',
-          data: this.maintenanceExpenses.cost
+          data: cost
         }]
       };
-    },
-    totalExpenses: function totalExpenses() {
-      var total = 0;
-      this.maintenance_expenses.forEach(function (expense) {
-        return total += expense.cost;
-      });
-      return total;
-    },
-    maintenanceExpenses: function maintenanceExpenses() {
-      var name = this.maintenance_expenses.map(function (maintenance) {
-        return maintenance.maintenance_service;
-      });
-      var cost = this.maintenance_expenses.map(function (maintenance) {
-        return maintenance.cost;
-      });
-      return {
-        name: name,
-        cost: cost
-      };
     }
-  },
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapState"])({
+    maintenance_list: 'activeMaintenances',
+    maintenance_expenses: 'maintenancesExpenses'
+  })),
   created: function created() {
-    var _this = this;
-
     var currentDate = new Date();
     this.today = "".concat(currentDate.getFullYear(), "-").concat(currentDate.getMonth() + 1, "-").concat(currentDate.getDate());
-    this.$store.dispatch('getActiveMaintenances').then(function () {
-      return _this.maintenance_list = _this.$store.state.activeMaintenances;
-    });
-    this.$store.dispatch('getMaintenancesExpenses').then(function () {
-      return _this.maintenance_expenses = _this.$store.state.maintenancesExpenses;
-    });
+    this.$store.dispatch('getActiveMaintenances');
+    this.$store.dispatch('getMaintenancesExpenses').then(this.loaded = true);
   },
   mounted: function mounted() {},
   methods: {
+    showDoneServiceModal: function showDoneServiceModal() {
+      return this.$refs.doneServiceModal.$el.classList.add('show');
+    },
     showAddServiceModal: function showAddServiceModal() {
       return this.$refs.addServiceModal.$el.classList.add('show');
     },
@@ -44894,6 +45161,312 @@ var reactiveProp = {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-done-service.vue?vue&type=template&id=427d0001&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/add-done-service.vue?vue&type=template&id=427d0001& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "modal" }, [
+    _c("span", { staticClass: "overlay", on: { click: _vm.closeModal } }),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "reveal ",
+        attrs: { id: "add-expense", "data-reveal": "" }
+      },
+      [
+        _c("h3", { staticClass: "text-center" }, [_vm._v("Add fuel expense")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "close-button", on: { click: _vm.closeModal } },
+          [
+            _c(
+              "span",
+              {
+                attrs: { "aria-hidden": "true" },
+                on: { click: _vm.closeModal }
+              },
+              [_vm._v("×")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("form", { attrs: { name: "service-performed" } }, [
+          _c("input", {
+            attrs: { type: "hidden", name: "_token" },
+            domProps: { value: _vm.csrf }
+          }),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "reveal ",
+        attrs: { id: "done-service", "data-reveal": "" }
+      },
+      [
+        _c("h3", { staticClass: "text-center" }, [_vm._v("Service performed")]),
+        _vm._v(" "),
+        _c("input", {
+          attrs: { type: "hidden", name: "maintenance_service", value: "" }
+        }),
+        _vm._v(" "),
+        _c("fieldset", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "small-12 medium-5 cell" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-left middle",
+                attrs: { for: "middle-label" }
+              },
+              [_vm._v("Date performed")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "small-12 medium-7 cell" }, [
+            _c("div", { staticClass: "small-12 medium-3  cell" }, [
+              _c("input", {
+                attrs: { type: "date", name: "date_performed", value: "" }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("fieldset", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "small-12 medium-5 cell" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-left middle",
+                attrs: { for: "middle-label" }
+              },
+              [_vm._v("Cost")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "small-12 medium-7  cell" }, [
+            _c("input", { attrs: { type: "number", name: "cost" } })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("fieldset", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "small-12 medium-5 cell" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-left middle",
+                attrs: { for: "middle-label" }
+              },
+              [_vm._v("Service category")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "small-12 medium-7 cell" }, [
+            _c("select", { attrs: { name: "service_category" } }, [
+              _c("option", { attrs: { value: "part change" } }, [
+                _vm._v("Part change")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "accesory install" } }, [
+                _vm._v("Accesory install")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "maintenance" } }, [
+                _vm._v("Maintenance")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "miscellaneous" } }, [
+                _vm._v("Miscellaneous")
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "expanded button-group " }, [
+          _c(
+            "a",
+            {
+              staticClass: "hollow button secondary cancel",
+              attrs: { href: "#" }
+            },
+            [_vm._v("Cancel")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "button success",
+              attrs: { href: "#", "data-open": "done-service-details" }
+            },
+            [_vm._v("Next")]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close-button",
+            attrs: {
+              "data-close": "",
+              "aria-label": "Close reveal",
+              type: "button"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "reveal",
+        attrs: { id: "done-service-details", "data-reveal": "" }
+      },
+      [
+        _c("h3", { staticClass: "text-center" }, [_vm._v("Service performed")]),
+        _vm._v(" "),
+        _c(
+          "fieldset",
+          { staticClass: "grid-x", attrs: { id: "warranty-options" } },
+          [
+            _c("div", { staticClass: "small-12 medium-5 cell" }, [
+              _c(
+                "label",
+                { staticClass: "text-left", attrs: { for: "middle-label" } },
+                [_vm._v("Warranty/Insurance")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "small-12 medium-7 cell" }, [
+              _c("input", {
+                attrs: { type: "radio", name: "warranty_insurance", value: "1" }
+              }),
+              _c("label", { attrs: { for: "warranty_insurance" } }, [
+                _vm._v("Yes")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "radio", name: "warranty_insurance", value: "0" }
+              }),
+              _c("label", { attrs: { for: "warranty_insurance" } }, [
+                _vm._v("No")
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("fieldset", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "small-12 medium-5 cell" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-left middle",
+                attrs: { for: "middle-label" }
+              },
+              [_vm._v("Workshop name")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "small-12 medium-7  cell" }, [
+            _c("input", {
+              attrs: { type: "text", name: "workshop", value: "" }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("fieldset", { staticClass: "grid-x" }, [
+          _c("div", { staticClass: "small-12 medium-5 cell" }, [
+            _c(
+              "label",
+              {
+                staticClass: "text-left middle",
+                attrs: { for: "middle-label" }
+              },
+              [_vm._v("Details")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "small-12 medium-7  cell" }, [
+            _c("textarea", { attrs: { name: "details", rows: "3" } })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "expanded button-group " }, [
+          _c(
+            "a",
+            {
+              staticClass: "hollow button secondary cancel",
+              attrs: { href: "#", "data-open": "done-service" }
+            },
+            [_vm._v("Previews")]
+          ),
+          _vm._v("\n\n                    button\n\n                    "),
+          _c(
+            "a",
+            {
+              staticClass: "button success",
+              attrs: {
+                href: "#",
+                "data-form-action": "continue",
+                "data-close": "",
+                "aria-label": "Close reveal"
+              }
+            },
+            [_vm._v("Continue")]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "close-button",
+            attrs: {
+              "data-close": "",
+              "aria-label": "Close reveal",
+              type: "button"
+            }
+          },
+          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        )
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-expense.vue?vue&type=template&id=44540491&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forms/add-expense.vue?vue&type=template&id=44540491& ***!
@@ -46607,277 +47180,299 @@ var render = function() {
     "section",
     { staticClass: "small-12 medium-3", attrs: { id: "maintenance" } },
     [
-      _c(
-        "div",
-        {
-          staticClass: "card no-m-bottom",
-          attrs: { id: "maintenance-resume" }
-        },
-        [
-          _c("div", { staticClass: "clearfix" }, [
-            _c("h5", { staticClass: "float-left" }, [_vm._v("Maintenances")]),
+      _vm.loaded
+        ? [
+            _c(
+              "div",
+              {
+                staticClass: "card no-m-bottom",
+                attrs: { id: "maintenance-resume" }
+              },
+              [
+                _c("div", { staticClass: "clearfix" }, [
+                  _c("h5", { staticClass: "float-left" }, [
+                    _vm._v("Maintenances")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "hollow  button float-right alternative",
+                      on: { click: _vm.showAddServiceModal }
+                    },
+                    [_vm._v("Add service")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "text-center",
+                    attrs: { id: "maintenance-resume-total" }
+                  },
+                  [
+                    _c("span", { staticClass: "stat" }, [
+                      _vm._v(_vm._s(_vm.totalExpenses))
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "stats-list-label" }, [
+                      _vm._v(
+                        "\n                    Total expenses\n                "
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("maintenances-doughnut", {
+                  attrs: {
+                    id: "maintenance-chart",
+                    "chart-data": _vm.chartData
+                  }
+                })
+              ],
+              1
+            ),
             _vm._v(" "),
             _c(
-              "button",
+              "div",
               {
-                staticClass: "hollow  button float-right alternative",
-                on: { click: _vm.showAddServiceModal }
+                staticClass: "card no-m-top",
+                attrs: { id: "scheduled-maintenance" }
               },
-              [_vm._v("Add service")]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass: "text-center",
-              attrs: { id: "maintenance-resume-total" }
-            },
-            [
-              _c("span", { staticClass: "stat" }, [
-                _vm._v(_vm._s(_vm.totalExpenses))
-              ]),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("span", { staticClass: "stats-list-label" }, [
-                _vm._v("\n                Total expenses\n            ")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("maintenances-doughnut", {
-            attrs: { id: "maintenance-chart", "chart-data": _vm.chartData }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "card no-m-top",
-          attrs: { id: "scheduled-maintenance" }
-        },
-        [
-          _vm.maintenance_list.length > 0
-            ? _vm._l(_vm.maintenance_list, function(maintenance) {
-                return _c(
-                  "div",
-                  { staticClass: "scheduled-maintenance-card clearfix" },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "scheduled-maintenance-detail" },
-                      [
-                        _c("i", {
-                          staticClass:
-                            "service-icon scheduled-maintenance-category float-left",
-                          domProps: {
-                            innerHTML: _vm._s(
-                              _vm.printIcon(maintenance.maintenance_service)
-                            )
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "h6",
-                          {
-                            staticClass:
-                              "scheduled-maintenance-title float-center"
-                          },
-                          [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(maintenance.maintenance_service) +
-                                "\n                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._m(0, true),
-                        _vm._v(" "),
-                        maintenance.due_moment == "Inmediate" ||
-                        (maintenance.due_moment == "Specific distance" &&
-                          maintenance.maintenance_current_distance >
-                            maintenance.tracked_distance) ||
-                        (maintenance.due_moment == "Specific date" &&
-                          _vm.today > maintenance.final_date)
-                          ? [
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "faux-checkbox",
-                                  attrs: {
-                                    "data-maintenance-id": maintenance.id,
-                                    "data-open": "done-service"
-                                  }
-                                },
-                                [_c("span", { staticClass: "dot" })]
-                              )
-                            ]
-                          : _vm._e()
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "status-progress" },
-                      [
-                        maintenance.due_moment == "Specific distance"
-                          ? [
-                              _c(
-                                "span",
-                                { staticClass: "status-current" },
-                                [
-                                  _c("b", [_vm._v("Current")]),
-                                  _vm._v(" "),
-                                  _c("br"),
-                                  _vm._v(" "),
-                                  maintenance.current_distance >
-                                  maintenance.tracked_distance
-                                    ? [
-                                        _vm._v(
-                                          "\n                            " +
-                                            _vm._s(
-                                              maintenance.current_distance -
-                                                maintenance.tracked_distance +
-                                                " miles overdue"
-                                            ) +
-                                            "\n                        "
-                                        )
-                                      ]
-                                    : [
-                                        _vm._v(
-                                          "\n                            " +
-                                            _vm._s(
-                                              maintenance.current_distance
-                                            ) +
-                                            "\n                        "
-                                        )
-                                      ]
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "status-current text-right" },
-                                [
-                                  _c("b", [_vm._v("Tracked")]),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(maintenance.tracked_distance) +
-                                      "\n                    "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("progress", {
-                                attrs: { max: "100" },
+              [
+                _vm.maintenance_list.length > 0
+                  ? _vm._l(_vm.maintenance_list, function(maintenance) {
+                      return _c(
+                        "div",
+                        { staticClass: "scheduled-maintenance-card clearfix" },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "scheduled-maintenance-detail" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "service-icon scheduled-maintenance-category float-left",
                                 domProps: {
-                                  value:
-                                    (maintenance.current_distance /
-                                      maintenance.tracked_distance) *
-                                    100
+                                  innerHTML: _vm._s(
+                                    _vm.printIcon(
+                                      maintenance.maintenance_service
+                                    )
+                                  )
                                 }
-                              })
-                            ]
-                          : _vm._e(),
-                        _vm._v(" "),
-                        maintenance.due_moment == "Specific date"
-                          ? [
-                              _vm.daysBetween(maintenance.final_date) > 0
-                                ? _c(
-                                    "span",
-                                    { staticClass: "status-current" },
-                                    [
-                                      _c("b", [_vm._v("Days left")]),
-                                      _c("br"),
-                                      _vm._v(
-                                        "\n                        " +
-                                          _vm._s(
-                                            _vm.daysBetween(
-                                              maintenance.final_date
-                                            )
-                                          ) +
-                                          "\n                    "
-                                      )
-                                    ]
-                                  )
-                                : _c(
-                                    "span",
-                                    { staticClass: "status-current" },
-                                    [
-                                      _c("b", [_vm._v("Days overdue")]),
-                                      _c("br"),
-                                      _vm._v(
-                                        "\n                        " +
-                                          _vm._s(
-                                            " " +
-                                              -1 *
-                                                _vm.daysBetween(
-                                                  maintenance.final_date
-                                                )
-                                          ) +
-                                          "\n                    "
-                                      )
-                                    ]
-                                  ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "status-current text-right" },
-                                [
-                                  _c("b", [_vm._v("Target date")]),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                        " +
-                                      _vm._s(maintenance.final_date) +
-                                      "\n                    "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("progress", {
-                                attrs: { max: "100", value: "90" }
-                              })
-                            ]
-                          : _vm._e(),
-                        _vm._v(" "),
-                        maintenance.due_moment == "Inmediate"
-                          ? [
-                              _vm._m(1, true),
-                              _vm._v(" "),
-                              _c("span", {
-                                staticClass: "status-current text-right"
                               }),
                               _vm._v(" "),
-                              _c("progress", {
-                                attrs: { max: "100", value: "100" }
-                              })
-                            ]
-                          : _vm._e()
-                      ],
-                      2
+                              _c(
+                                "h6",
+                                {
+                                  staticClass:
+                                    "scheduled-maintenance-title float-center"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(maintenance.maintenance_service) +
+                                      "\n                        "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm._m(0, true),
+                              _vm._v(" "),
+                              maintenance.due_moment == "Inmediate" ||
+                              (maintenance.due_moment == "Specific distance" &&
+                                maintenance.maintenance_current_distance >
+                                  maintenance.tracked_distance) ||
+                              (maintenance.due_moment == "Specific date" &&
+                                _vm.today > maintenance.final_date)
+                                ? [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass: "faux-checkbox",
+                                        attrs: {
+                                          "data-maintenance-id": maintenance.id,
+                                          "data-open": "done-service"
+                                        },
+                                        on: { click: _vm.showDoneServiceModal }
+                                      },
+                                      [_c("span", { staticClass: "dot" })]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "status-progress" },
+                            [
+                              maintenance.due_moment == "Specific distance"
+                                ? [
+                                    _c(
+                                      "span",
+                                      { staticClass: "status-current" },
+                                      [
+                                        _c("b", [_vm._v("Current")]),
+                                        _vm._v(" "),
+                                        _c("br"),
+                                        _vm._v(" "),
+                                        maintenance.current_distance >
+                                        maintenance.tracked_distance
+                                          ? [
+                                              _vm._v(
+                                                "\n                                " +
+                                                  _vm._s(
+                                                    maintenance.current_distance -
+                                                      maintenance.tracked_distance +
+                                                      " miles overdue"
+                                                  ) +
+                                                  "\n                            "
+                                              )
+                                            ]
+                                          : [
+                                              _vm._v(
+                                                "\n                                " +
+                                                  _vm._s(
+                                                    maintenance.current_distance
+                                                  ) +
+                                                  "\n                            "
+                                              )
+                                            ]
+                                      ],
+                                      2
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass: "status-current text-right"
+                                      },
+                                      [
+                                        _c("b", [_vm._v("Tracked")]),
+                                        _c("br"),
+                                        _vm._v(
+                                          "\n                            " +
+                                            _vm._s(
+                                              maintenance.tracked_distance
+                                            ) +
+                                            "\n                        "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("progress", {
+                                      attrs: { max: "100" },
+                                      domProps: {
+                                        value:
+                                          (maintenance.current_distance /
+                                            maintenance.tracked_distance) *
+                                          100
+                                      }
+                                    })
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              maintenance.due_moment == "Specific date"
+                                ? [
+                                    _vm.daysBetween(maintenance.final_date) > 0
+                                      ? _c(
+                                          "span",
+                                          { staticClass: "status-current" },
+                                          [
+                                            _c("b", [_vm._v("Days left")]),
+                                            _c("br"),
+                                            _vm._v(
+                                              "\n                            " +
+                                                _vm._s(
+                                                  _vm.daysBetween(
+                                                    maintenance.final_date
+                                                  )
+                                                ) +
+                                                "\n                        "
+                                            )
+                                          ]
+                                        )
+                                      : _c(
+                                          "span",
+                                          { staticClass: "status-current" },
+                                          [
+                                            _c("b", [_vm._v("Days overdue")]),
+                                            _c("br"),
+                                            _vm._v(
+                                              "\n                            " +
+                                                _vm._s(
+                                                  " " +
+                                                    -1 *
+                                                      _vm.daysBetween(
+                                                        maintenance.final_date
+                                                      )
+                                                ) +
+                                                "\n                        "
+                                            )
+                                          ]
+                                        ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass: "status-current text-right"
+                                      },
+                                      [
+                                        _c("b", [_vm._v("Target date")]),
+                                        _c("br"),
+                                        _vm._v(
+                                          "\n                            " +
+                                            _vm._s(maintenance.final_date) +
+                                            "\n                        "
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("progress", {
+                                      attrs: { max: "100", value: "90" }
+                                    })
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              maintenance.due_moment == "Inmediate"
+                                ? [
+                                    _vm._m(1, true),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      staticClass: "status-current text-right"
+                                    }),
+                                    _vm._v(" "),
+                                    _c("progress", {
+                                      attrs: { max: "100", value: "100" }
+                                    })
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          )
+                        ]
+                      )
+                    })
+                  : _c(
+                      "div",
+                      { staticClass: "scheduled-maintenance-card clearfix" },
+                      [_vm._m(2)]
                     )
-                  ]
-                )
-              })
-            : _c(
-                "div",
-                { staticClass: "scheduled-maintenance-card clearfix" },
-                [_vm._m(2)]
-              )
-        ],
-        2
-      ),
+              ],
+              2
+            )
+          ]
+        : _vm._e(),
       _vm._v(" "),
-      _c("add-service-form", { ref: "addServiceModal" })
+      _c("add-service-form", { ref: "addServiceModal" }),
+      _vm._v(" "),
+      _c("done-service-form", { ref: "doneServiceModal" })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = [
@@ -46896,7 +47491,7 @@ var staticRenderFns = [
           _c("a", { attrs: { href: "#" } }, [
             _c("i", { staticClass: "material-icons" }, [
               _vm._v(
-                "\n                                    more_vert\n                                "
+                "\n                                        more_vert\n                                    "
               )
             ])
           ]),
@@ -46915,7 +47510,9 @@ var staticRenderFns = [
     return _c("span", { staticClass: "status-current" }, [
       _c("b", [_vm._v("Urgency")]),
       _c("br"),
-      _vm._v("\n                        Inmediate\n                    ")
+      _vm._v(
+        "\n                            Inmediate\n                        "
+      )
     ])
   },
   function() {
@@ -46928,7 +47525,7 @@ var staticRenderFns = [
       [
         _c("h4", { staticClass: "text-center" }, [
           _vm._v(
-            "\n                        Currently there are no maintenances pending.\n                    "
+            "\n                            Currently there are no maintenances pending.\n                        "
           )
         ])
       ]
@@ -61310,6 +61907,75 @@ if (windowSize <= sm) {
 $('a.success').click(function (e) {
   e.preventDefault();
 });
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/add-done-service.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/forms/add-done-service.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _add_done_service_vue_vue_type_template_id_427d0001___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add-done-service.vue?vue&type=template&id=427d0001& */ "./resources/js/components/forms/add-done-service.vue?vue&type=template&id=427d0001&");
+/* harmony import */ var _add_done_service_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./add-done-service.vue?vue&type=script&lang=js& */ "./resources/js/components/forms/add-done-service.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _add_done_service_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _add_done_service_vue_vue_type_template_id_427d0001___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _add_done_service_vue_vue_type_template_id_427d0001___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/forms/add-done-service.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/add-done-service.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/forms/add-done-service.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_add_done_service_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./add-done-service.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-done-service.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_add_done_service_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/forms/add-done-service.vue?vue&type=template&id=427d0001&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/forms/add-done-service.vue?vue&type=template&id=427d0001& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_done_service_vue_vue_type_template_id_427d0001___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./add-done-service.vue?vue&type=template&id=427d0001& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forms/add-done-service.vue?vue&type=template&id=427d0001&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_done_service_vue_vue_type_template_id_427d0001___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_add_done_service_vue_vue_type_template_id_427d0001___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

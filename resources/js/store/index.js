@@ -20,13 +20,14 @@ export default new Vuex.Store({
         maintenancesExpenses:'',
         maintenanceHistoric:''
     },
+
     mutations: {
         storeYears(state,years){
 
             return state.years = years;
         },
         storeMakers(state,makers){
-            
+
             return state.makers = makers
         },
         storeModels(state,models){
