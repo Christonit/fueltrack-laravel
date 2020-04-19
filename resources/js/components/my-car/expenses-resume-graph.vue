@@ -42,6 +42,8 @@
     <script>
     import ExpensesChart from './expenses-chart.vue';
     import ExpensesLogs from './expenses-logs.vue';
+    import store from '../../store/index.js';
+
     export default {
             name: "expenses-resume-graph",
             components:{
@@ -60,14 +62,12 @@
             props:['printIcon'],
             created(){
                 // Candidato a irse a State Management.
+                this.$store.dispatch('graphExpensesWeekly').then( data => {
+                    
+                        this.fuelUps = this.$store.state.weeklyExpenses;
+                        this.loaded = true;
 
-                
-                fetch('/expenses/weekly-basis').then( response => response.text()).then( data => {
-
-                            this.fuelUps =JSON.parse( data);
-                            this.loaded = true;
-                    })
-
+                })
 
             },
             mounted(){

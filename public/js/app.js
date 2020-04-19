@@ -9304,6 +9304,7 @@ var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["mixins"].reactivePr
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/index.js */ "./resources/js/store/index.js");
 //
 //
 //
@@ -9369,6 +9370,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "expenses-historic",
   data: function data() {
@@ -9382,10 +9384,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     // Candidato a irse a State Management.
-    fetch('/expenses/historic').then(function (response) {
-      return response.text();
-    }).then(function (data) {
-      var res = JSON.parse(data);
+    this.$store.dispatch('expensesHistoric').then(function () {
+      var res = _this.$store.state.expensesHistoric;
       _this.performance = res.vehicle_p[0];
       _this.expenses = res.expense.data;
 
@@ -9472,6 +9472,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _expenses_chart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./expenses-chart.vue */ "./resources/js/components/my-car/expenses-chart.vue");
 /* harmony import */ var _expenses_logs_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./expenses-logs.vue */ "./resources/js/components/my-car/expenses-logs.vue");
+/* harmony import */ var _store_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store/index.js */ "./resources/js/store/index.js");
 //
 //
 //
@@ -9513,6 +9514,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -9534,10 +9536,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     // Candidato a irse a State Management.
-    fetch('/expenses/weekly-basis').then(function (response) {
-      return response.text();
-    }).then(function (data) {
-      _this.fuelUps = JSON.parse(data);
+    this.$store.dispatch('graphExpensesWeekly').then(function (data) {
+      _this.fuelUps = _this.$store.state.weeklyExpenses;
       _this.loaded = true;
     });
   },
@@ -9757,11 +9757,8 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    // Candidato a irse a State Management.
-    fetch('/maintenances/all-maintenances').then(function (response) {
-      return response.text();
-    }).then(function (data) {
-      _this.maintentance_services_list = JSON.parse(data);
+    this.$store.dispatch('maintenanceHistoric').then(function () {
+      _this.maintentance_services_list = _this.$store.state.maintenanceHistoric;
     });
   },
   methods: {
@@ -10028,17 +10025,12 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     var currentDate = new Date();
-    this.today = "".concat(currentDate.getFullYear(), "-").concat(currentDate.getMonth() + 1, "-").concat(currentDate.getDate()); // Candidato a irse a State Management.
-
-    fetch('/maintenances/user/active-mainetances').then(function (response) {
-      return response.text();
-    }).then(function (data) {
-      return _this.maintenance_list = JSON.parse(data);
+    this.today = "".concat(currentDate.getFullYear(), "-").concat(currentDate.getMonth() + 1, "-").concat(currentDate.getDate());
+    this.$store.dispatch('getActiveMaintenances').then(function () {
+      return _this.maintenance_list = _this.$store.state.activeMaintenances;
     });
-    fetch('/maintenances/user/mainetances-expenses').then(function (response) {
-      return response.text();
-    }).then(function (data) {
-      return _this.maintenance_expenses = JSON.parse(data);
+    this.$store.dispatch('getMaintenancesExpenses').then(function () {
+      return _this.maintenance_expenses = _this.$store.state.maintenancesExpenses;
     });
   },
   mounted: function mounted() {},
@@ -10066,6 +10058,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/index.js */ "./resources/js/store/index.js");
 //
 //
 //
@@ -10139,6 +10132,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "my-car-resume",
   data: function data() {
@@ -10150,12 +10144,8 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    // Candidato a irse a State Management.
-    fetch('/vehicle/expenses-averages').then(function (response) {
-      return response.text();
-    }).then(function (data) {
-      _this.averages = JSON.parse(data);
-      _this.loaded = true;
+    this.$store.dispatch('expensesResume').then(function (data) {
+      _this.averages = _this.$store.state.averages;
     });
   },
   mounted: function mounted() {},
@@ -46940,103 +46930,105 @@ var render = function() {
     { staticClass: "grid-x card", attrs: { id: "expenses-resume" } },
     [
       _c("div", { staticClass: "small-12 medium-12" }, [
-        _c("ul", { staticClass: "stats-list" }, [
-          _c("li", [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("span", { staticClass: "stat" }, [
-              _vm._v("$ " + _vm._s(_vm.averages.current_week))
-            ]),
-            _vm._v(" "),
-            _c("span", [
-              _c("i", { staticClass: "material-icons" }, [
-                _vm._v(
-                  "\r\n                                " +
-                    _vm._s(
-                      _vm.averages.increase_decrease_percentage < 0
-                        ? "arrow_downward"
-                        : "arrow_upward"
-                    ) +
-                    "\r\n                            "
-                )
+        _vm.averages !== 0
+          ? _c("ul", { staticClass: "stats-list" }, [
+              _c("li", [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("span", { staticClass: "stat" }, [
+                  _vm._v("$ " + _vm._s(_vm.averages.current_week))
+                ]),
+                _vm._v(" "),
+                _c("span", [
+                  _c("i", { staticClass: "material-icons" }, [
+                    _vm._v(
+                      "\r\n                                " +
+                        _vm._s(
+                          _vm.averages.increase_decrease_percentage < 0
+                            ? "arrow_downward"
+                            : "arrow_upward"
+                        ) +
+                        "\r\n                            "
+                    )
+                  ]),
+                  _vm._v(
+                    "\r\n                            " +
+                      _vm._s(_vm.averages.increase_decrease_percentage) +
+                      "%\r\n                        "
+                  )
+                ])
               ]),
-              _vm._v(
-                "\r\n                            " +
-                  _vm._s(_vm.averages.increase_decrease_percentage) +
-                  "%\r\n                        "
-              )
+              _vm._v(" "),
+              _c("li", { staticClass: "stats-list-positive" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("span", { staticClass: "stat" }, [
+                  _vm._v("$" + _vm._s(_vm.averages.last_week))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "stats-list-positive" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("span", { staticClass: "stat" }, [
+                  _vm._v("$" + _vm._s(_vm.averages.last_month))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "stats-list-negative" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("span", { staticClass: "stat" }, [
+                  _vm._v(_vm._s(_vm.averages.tracked_current_week))
+                ]),
+                _vm._v(" miles\r\n            ")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "stats-list-negative" }, [
+                _vm._m(4),
+                _vm._v(" "),
+                _c("span", { staticClass: "stat" }, [
+                  _vm._v(_vm._s(_vm.averages.total_distance))
+                ]),
+                _vm._v(" miles\r\n            ")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "stats-list-negative" }, [
+                _vm._m(5),
+                _vm._v(" "),
+                _c("span", { staticClass: "stat" }, [
+                  _vm._v(_vm._s(_vm.averages.fuelups_current_month))
+                ]),
+                _vm._v(" this month\r\n\r\n            ")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "stats-list-negative" }, [
+                _vm._m(6),
+                _vm._v(" "),
+                _c("span", { staticClass: "stat" }, [
+                  _vm._v(_vm._s(_vm.averages.fuelups_last_month))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "stats-list-negative" }, [
+                _vm._m(7),
+                _vm._v(" "),
+                _c("span", { staticClass: "stat" }, [
+                  _vm._v(_vm._s(_vm.averages.fuelups_current_year) + " ")
+                ]),
+                _vm._v("this year\r\n            ")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "stats-list-negative" }, [
+                _vm._m(8),
+                _vm._v(" "),
+                _c("span", { staticClass: "stat" }, [
+                  _vm._v("$ " + _vm._s(_vm.averages.total_maintenance_expenses))
+                ]),
+                _vm._v(" Yearly\r\n            ")
+              ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "stats-list-positive" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("span", { staticClass: "stat" }, [
-              _vm._v("$" + _vm._s(_vm.averages.last_week))
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "stats-list-positive" }, [
-            _vm._m(2),
-            _vm._v(" "),
-            _c("span", { staticClass: "stat" }, [
-              _vm._v("$" + _vm._s(_vm.averages.last_month))
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "stats-list-negative" }, [
-            _vm._m(3),
-            _vm._v(" "),
-            _c("span", { staticClass: "stat" }, [
-              _vm._v(_vm._s(_vm.averages.tracked_current_week))
-            ]),
-            _vm._v(" miles\r\n            ")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "stats-list-negative" }, [
-            _vm._m(4),
-            _vm._v(" "),
-            _c("span", { staticClass: "stat" }, [
-              _vm._v(_vm._s(_vm.averages.total_distance))
-            ]),
-            _vm._v(" miles\r\n            ")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "stats-list-negative" }, [
-            _vm._m(5),
-            _vm._v(" "),
-            _c("span", { staticClass: "stat" }, [
-              _vm._v(_vm._s(_vm.averages.fuelups_current_month))
-            ]),
-            _vm._v(" this month\r\n\r\n            ")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "stats-list-negative" }, [
-            _vm._m(6),
-            _vm._v(" "),
-            _c("span", { staticClass: "stat" }, [
-              _vm._v(_vm._s(_vm.averages.fuelups_last_month))
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "stats-list-negative" }, [
-            _vm._m(7),
-            _vm._v(" "),
-            _c("span", { staticClass: "stat" }, [
-              _vm._v(_vm._s(_vm.averages.fuelups_current_year) + " ")
-            ]),
-            _vm._v("this year\r\n            ")
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "stats-list-negative" }, [
-            _vm._m(8),
-            _vm._v(" "),
-            _c("span", { staticClass: "stat" }, [
-              _vm._v("$ " + _vm._s(_vm.averages.total_maintenance_expenses))
-            ]),
-            _vm._v(" Yearly\r\n            ")
-          ])
-        ])
+          : _vm._e()
       ])
     ]
   )
@@ -62593,7 +62585,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     years: [],
     makers: '',
     models: '',
-    stats: ''
+    stats: '',
+    averages: '',
+    weeklyExpenses: '',
+    expensesHistoric: '',
+    activeMaintenances: '',
+    maintenancesExpenses: '',
+    maintenanceHistoric: ''
   },
   mutations: {
     storeYears: function storeYears(state, years) {
@@ -62608,9 +62606,81 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     storeStats: function storeStats(state, stats) {
       // console.log(stats)
       return state.stats = stats;
+    },
+    storeAverages: function storeAverages(state, payload) {
+      // console.log(stats)
+      return state.averages = payload;
+    },
+    storeWeeklyExpenses: function storeWeeklyExpenses(state, payload) {
+      // console.log(stats)
+      return state.weeklyExpenses = payload;
+    },
+    storeExpensesHistoric: function storeExpensesHistoric(state, payload) {
+      // console.log(stats)
+      return state.expensesHistoric = payload;
+    },
+    storeMaintenanceHistoric: function storeMaintenanceHistoric(state, payload) {
+      // console.log(stats)
+      return state.maintenanceHistoric = payload;
+    },
+    storeActiveMaintenances: function storeActiveMaintenances(state, payload) {
+      // console.log(stats)
+      return state.activeMaintenances = payload;
+    },
+    storeMaintenancesExpenses: function storeMaintenancesExpenses(state, payload) {
+      console.log(payload);
+      return state.maintenancesExpenses = payload;
     }
   },
   actions: {
+    expensesHistoric: function expensesHistoric(context) {
+      return fetch('/expenses/historic').then(function (response) {
+        return response.text();
+      }).then(function (data) {
+        var payload = JSON.parse(data);
+        context.commit('storeExpensesHistoric', payload);
+      });
+    },
+    maintenanceHistoric: function maintenanceHistoric(context) {
+      return fetch('/maintenances/all-maintenances').then(function (response) {
+        return response.text();
+      }).then(function (data) {
+        var payload = JSON.parse(data);
+        context.commit('storeMaintenanceHistoric', payload);
+      });
+    },
+    getActiveMaintenances: function getActiveMaintenances(context) {
+      return fetch('/maintenances/user/active-mainetances').then(function (response) {
+        return response.text();
+      }).then(function (data) {
+        var payload = JSON.parse(data);
+        context.commit('storeActiveMaintenances', payload);
+      });
+    },
+    getMaintenancesExpenses: function getMaintenancesExpenses(context) {
+      return fetch('/maintenances/user/mainetances-expenses').then(function (response) {
+        return response.text();
+      }).then(function (data) {
+        var payload = JSON.parse(data);
+        context.commit('storeMaintenancesExpenses', payload);
+      });
+    },
+    expensesResume: function expensesResume(context) {
+      return fetch('/vehicle/expenses-averages').then(function (response) {
+        return response.text();
+      }).then(function (data) {
+        var payload = JSON.parse(data);
+        context.commit('storeAverages', payload);
+      });
+    },
+    graphExpensesWeekly: function graphExpensesWeekly(context) {
+      return fetch('/expenses/weekly-basis').then(function (response) {
+        return response.text();
+      }).then(function (data) {
+        var payload = JSON.parse(data);
+        context.commit('storeWeeklyExpenses', payload);
+      });
+    },
     getYears: function getYears(context) {
       var parser = new DOMParser();
 

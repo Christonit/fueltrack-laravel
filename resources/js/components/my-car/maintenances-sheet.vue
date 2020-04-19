@@ -191,16 +191,14 @@ export default {
                 let currentDate = new Date();
                 this.today = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1 }-${currentDate.getDate()}`;
 
-                // Candidato a irse a State Management.
-                fetch('/maintenances/user/active-mainetances').then( response => response.text()).then( data => {
+                 this.$store.dispatch('getActiveMaintenances').then( () => {
 
-                        return this.maintenance_list = JSON.parse(data);
+                        return this.maintenance_list = this.$store.state.activeMaintenances
 
                 })
+                this.$store.dispatch('getMaintenancesExpenses').then( () => {
 
-                fetch('/maintenances/user/mainetances-expenses').then( response => response.text()).then( data => {
-
-                        return this.maintenance_expenses = JSON.parse(data);
+                        return this.maintenance_expenses = this.$store.state.maintenancesExpenses
 
                 })
 

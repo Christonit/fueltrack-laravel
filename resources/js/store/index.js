@@ -12,8 +12,14 @@ export default new Vuex.Store({
         years:[],
         makers:'',
         models:'',
-        stats:''
-        },
+        stats:'',
+        averages: '',
+        weeklyExpenses: '',
+        expensesHistoric: '',
+        activeMaintenances: '',
+        maintenancesExpenses:'',
+        maintenanceHistoric:''
+    },
     mutations: {
         storeYears(state,years){
             return state.years = years;
@@ -28,10 +34,84 @@ export default new Vuex.Store({
             // console.log(stats)
             return state.stats = stats
 
+        },
+        storeAverages(state,payload){
+            // console.log(stats)
+            return state.averages = payload
+
+        },
+        storeWeeklyExpenses(state,payload){
+            // console.log(stats)
+            return state.weeklyExpenses = payload
+
+        },
+        storeExpensesHistoric(state,payload){
+            // console.log(stats)
+            return state.expensesHistoric = payload
+
+        },
+        storeMaintenanceHistoric(state,payload){
+            // console.log(stats)
+            return state.maintenanceHistoric = payload
+
+        },
+        storeActiveMaintenances(state,payload){
+            // console.log(stats)
+            return state.activeMaintenances = payload
+
+        },
+        storeMaintenancesExpenses(state,payload){
+            console.log(payload)
+            return state.maintenancesExpenses = payload
+
         }
+
+
         
     },
     actions:{
+        expensesHistoric(context){
+            return fetch('/expenses/historic').then( response => response.text()).then( data =>{
+                let payload = JSON.parse( data);
+                    context.commit( 'storeExpensesHistoric', payload)
+            })
+
+        },
+        maintenanceHistoric(context){
+            return fetch('/maintenances/all-maintenances').then( response => response.text()).then( data =>{
+                let payload = JSON.parse( data);
+                    context.commit( 'storeMaintenanceHistoric', payload)
+            })
+
+        },
+        getActiveMaintenances(context){
+            return fetch('/maintenances/user/active-mainetances').then( response => response.text()).then( data =>{
+                let payload = JSON.parse( data);
+                    context.commit( 'storeActiveMaintenances', payload)
+            })
+
+        },
+        getMaintenancesExpenses(context){
+            return fetch('/maintenances/user/mainetances-expenses').then( response => response.text()).then( data =>{
+                let payload = JSON.parse( data);
+                    context.commit( 'storeMaintenancesExpenses', payload)
+            })
+
+        },
+        expensesResume(context){
+            return fetch('/vehicle/expenses-averages').then( response => response.text()).then( data => {
+                        let payload = JSON.parse( data);
+                        context.commit( 'storeAverages', payload)
+
+                    })
+        },
+        graphExpensesWeekly(context){
+            return  fetch('/expenses/weekly-basis').then( response => response.text()).then( data => {
+                        let payload = JSON.parse( data);
+                        context.commit( 'storeWeeklyExpenses', payload)
+
+                    })
+        },
        
         getYears(context){
 

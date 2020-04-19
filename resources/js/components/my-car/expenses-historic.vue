@@ -64,6 +64,7 @@
 
 
 <script>
+import store from '../../store/index.js';
 export default {
         name: "expenses-historic",
         data(){
@@ -76,18 +77,17 @@ export default {
         created(){
 
             // Candidato a irse a State Management.
-            fetch('/expenses/historic').then( response => response.text()).then( data => {
 
-                let res = JSON.parse(data)
+            this.$store.dispatch('expensesHistoric').then( () => {
+
+                let res = this.$store.state.expensesHistoric;
                 this.performance = res.vehicle_p[0]
                 this.expenses = res.expense.data;
-
                     if(!this.expenses == ''){
                         return this.hasExpenses = true;
                     }else{
                         return false
                     }
-
                 })
         },
 

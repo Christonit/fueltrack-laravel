@@ -3,7 +3,7 @@
 
     <div class="small-12 medium-12">
 
-        <ul class="stats-list">
+        <ul v-if="averages !== 0" class="stats-list">
 
 
             <li>
@@ -72,6 +72,8 @@
 </template>
 
 <script>
+import store from '../../store/index.js';
+
     export default {
             name: "my-car-resume",
            
@@ -82,15 +84,12 @@
                 }
             },
             created(){
-                // Candidato a irse a State Management.
 
-                
-                fetch('/vehicle/expenses-averages').then( response => response.text()).then( data => {
+                this.$store.dispatch('expensesResume').then( data => {
 
-                            this.averages =JSON.parse( data);
-                            this.loaded = true;
-                    })
+                        this.averages = this.$store.state.averages;
 
+                })
 
             },
             mounted(){

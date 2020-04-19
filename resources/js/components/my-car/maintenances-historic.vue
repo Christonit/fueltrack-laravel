@@ -59,14 +59,10 @@
             },
             props:['printIcon'],
             created(){
-                // Candidato a irse a State Management.
-                fetch('/maintenances/all-maintenances').then( response => response.text()).then( data => {
-
-                            this.maintentance_services_list =JSON.parse( data);
-
-                    })
-
-
+                this.$store.dispatch('maintenanceHistoric').then( () => {
+                    this.maintentance_services_list = this.$store.state.maintenanceHistoric;
+                })
+                
             },
 
             methods:{
