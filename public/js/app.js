@@ -9260,7 +9260,7 @@ __webpack_require__.r(__webpack_exports__);
       } else if (this.due_moment == 'Specific date') {
         this.tracked_distance = null;
 
-        if (this.tracked_date == null || this.tracked_date.length > 0 || new Date(this.tracked_date) == 'Invalid Date') {
+        if (this.tracked_date == null || this.tracked_date.length < 0) {
           return this.error = {
             tracked_date: 'Please input a valid date.'
           };
