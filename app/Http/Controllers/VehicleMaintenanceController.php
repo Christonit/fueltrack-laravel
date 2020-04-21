@@ -198,12 +198,11 @@ class VehicleMaintenanceController extends Controller
         $maintenance['status'] = false;
 
         $maintenance_details['vehicle'] = $maintenance->vehicle;
+        $maintenance_details['maintenance_service'] = $id;
 
         $maintenance->save();
 
-        MaintenancesServicesPerformed::create($maintenance_details);
-
-        return;
+        return MaintenancesServicesPerformed::firstOrCreate($maintenance_details);
 
     }
 

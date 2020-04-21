@@ -51,7 +51,7 @@
                             </li>
 
                         </ul>
-                        <template v-if="maintenance.due_moment == 'Inmediate' || maintenance.due_moment == 'Specific distance' &&   maintenance.maintenance_current_distance > maintenance.tracked_distance || maintenance.due_moment == 'Specific date' &&  today > maintenance.final_date">
+                        <template v-if="(maintenance.due_moment == 'Inmediate' || maintenance.due_moment == 'Specific distance' &&   maintenance.maintenance_current_distance > maintenance.tracked_distance || maintenance.due_moment == 'Specific date' &&  today > maintenance.final_date)">
                                 <span :data-maintenance-id="maintenance.id" class="faux-checkbox" data-open="done-service" @click="showDoneServiceModal"> 
                                         <span class="dot"></span>
                                 </span>
@@ -136,7 +136,7 @@
     </template>
 
     <add-service-form ref='addServiceModal'></add-service-form>
-    <done-service-form ref='doneServiceModal'></done-service-form>
+    <done-service-form ref='doneServiceModal' :service-id='serviceToPerform' @serviceToDefault='serviceToPerform=0'></done-service-form>
 
 </section>
 
@@ -160,7 +160,8 @@ export default {
             data(){
                 return {
                    today: null ,
-                   loaded: false 
+                   loaded: false,
+                   serviceToPerform:0 
                 }
             },
             props:['printIcon'],
@@ -230,7 +231,8 @@ export default {
             },
             
             methods:{
-                showDoneServiceModal(){
+                showDoneServiceModal(e){
+                    this.serviceToPerform = parseInt(e.target.getAttribute('data-maintenance-id'));
                     return this.$refs.doneServiceModal.$el.classList.add('show');
                 },
                 showAddServiceModal(){

@@ -8700,6 +8700,106 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "done-service-form",
@@ -8707,51 +8807,172 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       loaded: false,
-      error: ''
+      error: {
+        service_category: null,
+        cost: null,
+        date: null
+      },
+      date_performed: '',
+      cost: '',
+      service_category: '',
+      warranty_insurance: '',
+      self_service: '',
+      original_rep: '',
+      workshop: '',
+      details: ''
     };
   },
-  // props:['csrf'],
+  props: {
+    serviceId: {
+      type: Number,
+      "default": 0
+    }
+  },
   mounted: function mounted() {},
   computed: {},
   methods: {
+    prevEl: function prevEl(e) {
+      document.querySelector('#done-service-details').classList.add('hide');
+      document.querySelector('#done-service').classList.remove('hide');
+      e.preventDefault();
+    },
+    first_step_validation: function first_step_validation(e) {
+      if (this.date_performed == '') {
+        this.error.date = 'Insert a valid date';
+      } else {
+        this.error.date = '';
+      }
+
+      if (typeof this.cost != 'number' && this.cost.length < 1 && this.cost.length == '') {
+        this.error.cost = 'Insert service cost';
+      } else {
+        this.error.cost = '';
+      }
+
+      if (!(this.service_category == 'part change' || this.service_category == 'accesory install' || this.service_category == 'maintenance' || this.service_category == 'miscellaneous')) {
+        this.error.service_category = 'Select a service category';
+      } else {
+        this.error.service_category = '';
+      }
+
+      if (!(this.date_performed == '' && this.cost == '' && this.service_category == '')) {
+        document.querySelector('#done-service-details').classList.remove('hide');
+        document.querySelector('#done-service').classList.add('hide');
+      }
+
+      e.preventDefault();
+    },
     closeModal: function closeModal(e) {
       var el = document.querySelector('.modal.show');
+      this.$emit('serviceToDefault');
       return el.classList.remove('show');
     },
     getData: function getData(e) {
       var _this = this;
 
-      var fuel_type = this.$refs.FuelType.value;
-      var budget = this.$refs.budget.value;
-      var date = this.$refs.date.value;
-      var expense = {
-        FuelType: fuel_type,
-        budget: budget,
-        Date: date
+      if (this.service_category == 'part change') {
+        if (this.original_rep == '') {
+          this.error.original_rep = 'Please select an option';
+        } else {
+          this.error.original_rep = '';
+        }
+
+        if (this.self_service == '') {
+          this.error.self_service = 'Please select an option';
+        } else {
+          this.error.self_service = '';
+        }
+
+        if (this.warranty_insurance == '') {
+          this.error.warranty_insurance = 'Please select an option';
+        } else {
+          this.error.warranty_insurance = '';
+        }
+
+        if (this.self_service == 1 && this.workshop == '') {
+          this.workshop = 'At home';
+        } else if (this.self_service == 0 && this.workshop == '') {
+          this.error.workshop = "This field is mandatory";
+        } else {
+          this.error.workshop = "";
+        }
+      }
+
+      if (this.service_category == 'accesory install' || this.service_category == 'miscellaneous') {
+        this.error.original_rep = null;
+
+        if (this.self_service == '') {
+          this.error.self_service = 'Please select an option';
+        } else {
+          this.error.self_service = '';
+        }
+
+        if (this.warranty_insurance == '') {
+          this.error.warranty_insurance = 'Please select an option';
+        } else {
+          this.error.warranty_insurance = '';
+        }
+
+        if (this.self_service == 1 && this.workshop == '') {
+          this.workshop = 'At home';
+        } else if (this.self_service == 0 && this.workshop == '') {
+          this.error.workshop = "This field is mandatory";
+        } else {
+          this.error.workshop = "";
+        }
+      }
+
+      if (this.service_category == 'maintenance') {
+        this.error.original_rep = null;
+        this.self_service == null;
+
+        if (this.warranty_insurance == '') {
+          this.error.warranty_insurance = 'Please select an option';
+        } else {
+          this.error.warranty_insurance = '';
+        }
+
+        if (this.workshop == '') {
+          this.workshop = 'At home';
+        }
+      }
+
+      var payload = {
+        date_performed: this.date_performed,
+        cost: this.cost,
+        service_category: this.service_category,
+        warranty_insurance: this.warranty_insurance,
+        self_service: this.self_service,
+        original_rep: this.original_rep,
+        workshop: this.workshop,
+        details: this.details // maintenance_service:this.serviceId
+
       };
-      fetch('/add-expense', {
+      fetch('/mark-as-performed/' + this.serviceId, {
         method: 'POST',
-        body: JSON.stringify(expense),
+        body: JSON.stringify(payload),
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-TOKEN': this.csrf
         }
       }).then(function (res) {
-        return res.text();
-      }).then(function (response) {
-        var res = JSON.parse(response);
+        console.log(res.status);
 
-        if (res.Errors) {
-          _this.error = res.Errors;
-        } else {
-          document.querySelector('.modal.show').classList.remove('show');
+        if (res.status == 200 || res.status == 201) {
+          _this.$store.dispatch('getActiveMaintenances');
 
-          _this.$store.dispatch('expensesHistoric');
+          _this.$store.dispatch('getMaintenancesExpenses');
 
           _this.$store.dispatch('expensesResume');
 
-          _this.$store.dispatch('graphExpensesWeekly');
+          _this.$store.dispatch('maintenanceHistoric');
+
+          return _this.closeModal();
         }
+
+        return res.text();
+      }).then(function (response) {
+        console.log(response);
       })["catch"](function (error) {
         return console.error('Error:', error);
       });
@@ -10259,7 +10480,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       today: null,
-      loaded: false
+      loaded: false,
+      serviceToPerform: 0
     };
   },
   props: ['printIcon'],
@@ -10326,7 +10548,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {},
   methods: {
-    showDoneServiceModal: function showDoneServiceModal() {
+    showDoneServiceModal: function showDoneServiceModal(e) {
+      this.serviceToPerform = parseInt(e.target.getAttribute('data-maintenance-id'));
       return this.$refs.doneServiceModal.$el.classList.add('show');
     },
     showAddServiceModal: function showAddServiceModal() {
@@ -45186,22 +45409,7 @@ var render = function() {
         attrs: { id: "add-expense", "data-reveal": "" }
       },
       [
-        _c("h3", { staticClass: "text-center" }, [_vm._v("Add fuel expense")]),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "close-button", on: { click: _vm.closeModal } },
-          [
-            _c(
-              "span",
-              {
-                attrs: { "aria-hidden": "true" },
-                on: { click: _vm.closeModal }
-              },
-              [_vm._v("×")]
-            )
-          ]
-        ),
+        _c("h3", { staticClass: "text-center" }, [_vm._v("Service performed")]),
         _vm._v(" "),
         _c("form", { attrs: { name: "service-performed" } }, [
           _c("input", {
@@ -45209,9 +45417,787 @@ var render = function() {
             domProps: { value: _vm.csrf }
           }),
           _vm._v(" "),
-          _vm._m(0),
+          _c(
+            "div",
+            {
+              staticClass: "revealbutton",
+              attrs: { id: "done-service", "data-reveal": "" }
+            },
+            [
+              _c("input", {
+                attrs: {
+                  type: "hidden",
+                  name: "maintenance_service",
+                  value: ""
+                }
+              }),
+              _vm._v(" "),
+              _c("fieldset", { staticClass: "grid-x" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "small-12 medium-7 cell" }, [
+                  _c("div", { staticClass: "small-12 medium-3  cell" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.date_performed,
+                          expression: "date_performed"
+                        }
+                      ],
+                      attrs: {
+                        type: "date",
+                        name: "date_performed",
+                        value: ""
+                      },
+                      domProps: { value: _vm.date_performed },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.date_performed = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.error.date != ""
+                  ? _c("span", { staticClass: "small-12 alert" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.error.date) +
+                          "\n                        "
+                      )
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("fieldset", { staticClass: "grid-x" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "small-12 medium-7  cell" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.cost,
+                        expression: "cost"
+                      }
+                    ],
+                    attrs: { type: "number", name: "cost" },
+                    domProps: { value: _vm.cost },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.cost = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm.error.cost != ""
+                  ? _c("span", { staticClass: "small-12 alert" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.error.cost) +
+                          "\n                        "
+                      )
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("fieldset", { staticClass: "grid-x" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("div", { staticClass: "small-12 medium-7 cell" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.service_category,
+                          expression: "service_category"
+                        }
+                      ],
+                      attrs: { name: "service_category" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.service_category = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "part change" } }, [
+                        _vm._v("Part change")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "accesory install" } }, [
+                        _vm._v("Accesory install")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "maintenance" } }, [
+                        _vm._v("Maintenance")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "miscellaneous" } }, [
+                        _vm._v("Miscellaneous")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm.error.service_category != ""
+                  ? _c("span", { staticClass: "small-12 alert" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.error.service_category) +
+                          "\n                        "
+                      )
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "expanded button-group " }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "hollow button secondary cancel",
+                    on: { click: _vm.closeModal }
+                  },
+                  [_vm._v("Cancel")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button success",
+                    attrs: {
+                      type: "button",
+                      "data-open": "done-service-details"
+                    },
+                    on: { click: _vm.first_step_validation }
+                  },
+                  [_vm._v("Next")]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(3)
+            ]
+          ),
           _vm._v(" "),
-          _vm._m(1)
+          _c(
+            "div",
+            {
+              staticClass: "reveal hide",
+              attrs: { id: "done-service-details", "data-reveal": "" }
+            },
+            [
+              _c("h3", { staticClass: "text-center" }, [
+                _vm._v("Service performed")
+              ]),
+              _vm._v(" "),
+              _vm.service_category == "maintenance"
+                ? [
+                    _c(
+                      "fieldset",
+                      {
+                        staticClass: "grid-x",
+                        attrs: { id: "warranty-options" }
+                      },
+                      [
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "small-12 medium-7 cell" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.warranty_insurance,
+                                expression: "warranty_insurance"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "warranty_insurance",
+                              value: "1"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.warranty_insurance, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.warranty_insurance = "1"
+                              }
+                            }
+                          }),
+                          _c(
+                            "label",
+                            { attrs: { for: "warranty_insurance" } },
+                            [_vm._v("Yes")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.warranty_insurance,
+                                expression: "warranty_insurance"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "warranty_insurance",
+                              value: "0"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.warranty_insurance, "0")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.warranty_insurance = "0"
+                              }
+                            }
+                          }),
+                          _c(
+                            "label",
+                            { attrs: { for: "warranty_insurance" } },
+                            [_vm._v("No")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm.error.warranty_insurance != ""
+                          ? _c("span", { staticClass: "small-12 alert" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.error.warranty_insurance) +
+                                  "\n                            "
+                              )
+                            ])
+                          : _vm._e()
+                      ]
+                    )
+                  ]
+                : _vm.service_category == "part change"
+                ? [
+                    _c(
+                      "fieldset",
+                      {
+                        staticClass: "grid-x",
+                        attrs: { id: "warranty-options" }
+                      },
+                      [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "small-12 medium-7 cell" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.warranty_insurance,
+                                expression: "warranty_insurance"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "warranty_insurance",
+                              value: "1"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.warranty_insurance, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.warranty_insurance = "1"
+                              }
+                            }
+                          }),
+                          _c(
+                            "label",
+                            { attrs: { for: "warranty_insurance" } },
+                            [_vm._v("Yes")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.warranty_insurance,
+                                expression: "warranty_insurance"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "warranty_insurance",
+                              value: "0"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.warranty_insurance, "0")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.warranty_insurance = "0"
+                              }
+                            }
+                          }),
+                          _c(
+                            "label",
+                            { attrs: { for: "warranty_insurance" } },
+                            [_vm._v("No")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm.error.warranty_insurance != ""
+                          ? _c("span", { staticClass: "small-12 alert" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.error.warranty_insurance) +
+                                  "\n                            "
+                              )
+                            ])
+                          : _vm._e()
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "grid-x", attrs: { id: "other-options" } },
+                      [
+                        _c("div", { staticClass: "small-12 medium-6 cell" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "text-left",
+                              attrs: { for: "middle-label" }
+                            },
+                            [_vm._v("Self service")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.self_service,
+                                expression: "self_service"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "self_service",
+                              value: "1"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.self_service, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.self_service = "1"
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "self-service" } }, [
+                            _vm._v("Yes")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.self_service,
+                                expression: "self_service"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "self_service",
+                              value: "0"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.self_service, "0")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.self_service = "0"
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "self-service" } }, [
+                            _vm._v("No")
+                          ]),
+                          _vm._v(" "),
+                          _vm.error.self_service != ""
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(_vm.error.self_service) +
+                                    "\n                                \n                                "
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "small-12 medium-6 cell" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "text-left",
+                              attrs: { for: "middle-label" }
+                            },
+                            [_vm._v("Is original")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.original_rep,
+                                expression: "original_rep"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "original_rep",
+                              value: "1"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.original_rep, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.original_rep = "1"
+                              }
+                            }
+                          }),
+                          _c("label", { attrs: { for: "original_rep" } }, [
+                            _vm._v("Yes")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.original_rep,
+                                expression: "original_rep"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "original_rep",
+                              value: "0"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.original_rep, "0")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.original_rep = "0"
+                              }
+                            }
+                          }),
+                          _c("label", { attrs: { for: "original_rep" } }, [
+                            _vm._v("No")
+                          ]),
+                          _vm._v(" "),
+                          _vm.error.original_rep != ""
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(_vm.error.original_rep) +
+                                    "\n                                "
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      ]
+                    )
+                  ]
+                : [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "grid-x middle",
+                        attrs: { id: "service-options" }
+                      },
+                      [
+                        _c("div", { staticClass: "small-12 medium-6 cell" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "text-left",
+                              attrs: { for: "middle-label" }
+                            },
+                            [_vm._v("Self service")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.self_service,
+                                expression: "self_service"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "self_service",
+                              value: "1"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.self_service, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.self_service = "1"
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "self-service" } }, [
+                            _vm._v("Yes")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.self_service,
+                                expression: "self_service"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "self_service",
+                              value: "0"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.self_service, "0")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.self_service = "0"
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("label", { attrs: { for: "self-service" } }, [
+                            _vm._v("No")
+                          ]),
+                          _vm._v(" "),
+                          _vm.error.original_rep != ""
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(_vm.error.original_rep) +
+                                    "\n                                "
+                                )
+                              ])
+                            : _vm._e()
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "small-12 medium-6 cell" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "text-left",
+                              attrs: { for: "middle-label" }
+                            },
+                            [_vm._v("Warranty/Insurance")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.warranty_insurance,
+                                expression: "warranty_insurance"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "warranty_insurance",
+                              value: "1"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.warranty_insurance, "1")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.warranty_insurance = "1"
+                              }
+                            }
+                          }),
+                          _c(
+                            "label",
+                            { attrs: { for: "warranty_insurance" } },
+                            [_vm._v("Yes")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.warranty_insurance,
+                                expression: "warranty_insurance"
+                              }
+                            ],
+                            attrs: {
+                              type: "radio",
+                              name: "warranty_insurance",
+                              value: "0"
+                            },
+                            domProps: {
+                              checked: _vm._q(_vm.warranty_insurance, "0")
+                            },
+                            on: {
+                              change: function($event) {
+                                _vm.warranty_insurance = "0"
+                              }
+                            }
+                          }),
+                          _c(
+                            "label",
+                            { attrs: { for: "warranty_insurance" } },
+                            [_vm._v("No")]
+                          ),
+                          _vm._v(" "),
+                          _vm.error.warranty_insurance != ""
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(_vm.error.warranty_insurance) +
+                                    "\n                                "
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      ]
+                    )
+                  ],
+              _vm._v(" "),
+              _vm.self_service == 0
+                ? _c("fieldset", { staticClass: "grid-x" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "small-12 medium-7  cell" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.workshop,
+                            expression: "workshop"
+                          }
+                        ],
+                        attrs: { type: "text", name: "workshop", value: "" },
+                        domProps: { value: _vm.workshop },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.workshop = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("fieldset", { staticClass: "grid-x" }, [
+                _vm._m(7),
+                _vm._v(" "),
+                _c("div", { staticClass: "small-12 medium-7  cell" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.details,
+                        expression: "details"
+                      }
+                    ],
+                    attrs: { name: "details", rows: "3" },
+                    domProps: { value: _vm.details },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.details = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "expanded button-group " }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "hollow button secondary cancel",
+                    on: { click: _vm.prevEl }
+                  },
+                  [_vm._v("Previews")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "button success", on: { click: _vm.getData } },
+                  [_vm._v("Continue")]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "close-button",
+                  attrs: {
+                    "data-close": "",
+                    "aria-label": "Close reveal",
+                    type: "button"
+                  },
+                  on: { click: _vm.closeModal }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
+                  ])
+                ]
+              )
+            ],
+            2
+          )
         ])
       ]
     )
@@ -45222,243 +46208,102 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "reveal ",
-        attrs: { id: "done-service", "data-reveal": "" }
-      },
-      [
-        _c("h3", { staticClass: "text-center" }, [_vm._v("Service performed")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "hidden", name: "maintenance_service", value: "" }
-        }),
-        _vm._v(" "),
-        _c("fieldset", { staticClass: "grid-x" }, [
-          _c("div", { staticClass: "small-12 medium-5 cell" }, [
-            _c(
-              "label",
-              {
-                staticClass: "text-left middle",
-                attrs: { for: "middle-label" }
-              },
-              [_vm._v("Date performed")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "small-12 medium-7 cell" }, [
-            _c("div", { staticClass: "small-12 medium-3  cell" }, [
-              _c("input", {
-                attrs: { type: "date", name: "date_performed", value: "" }
-              })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("fieldset", { staticClass: "grid-x" }, [
-          _c("div", { staticClass: "small-12 medium-5 cell" }, [
-            _c(
-              "label",
-              {
-                staticClass: "text-left middle",
-                attrs: { for: "middle-label" }
-              },
-              [_vm._v("Cost")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "small-12 medium-7  cell" }, [
-            _c("input", { attrs: { type: "number", name: "cost" } })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("fieldset", { staticClass: "grid-x" }, [
-          _c("div", { staticClass: "small-12 medium-5 cell" }, [
-            _c(
-              "label",
-              {
-                staticClass: "text-left middle",
-                attrs: { for: "middle-label" }
-              },
-              [_vm._v("Service category")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "small-12 medium-7 cell" }, [
-            _c("select", { attrs: { name: "service_category" } }, [
-              _c("option", { attrs: { value: "part change" } }, [
-                _vm._v("Part change")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "accesory install" } }, [
-                _vm._v("Accesory install")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "maintenance" } }, [
-                _vm._v("Maintenance")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "miscellaneous" } }, [
-                _vm._v("Miscellaneous")
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "expanded button-group " }, [
-          _c(
-            "a",
-            {
-              staticClass: "hollow button secondary cancel",
-              attrs: { href: "#" }
-            },
-            [_vm._v("Cancel")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "button success",
-              attrs: { href: "#", "data-open": "done-service-details" }
-            },
-            [_vm._v("Next")]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close-button",
-            attrs: {
-              "data-close": "",
-              "aria-label": "Close reveal",
-              type: "button"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "small-12 medium-5 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Date performed")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "small-12 medium-5 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Cost")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "small-12 medium-5 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Service category")]
+      )
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "div",
+      "button",
       {
-        staticClass: "reveal",
-        attrs: { id: "done-service-details", "data-reveal": "" }
+        staticClass: "close-button",
+        attrs: {
+          "data-close": "",
+          "aria-label": "Close reveal",
+          type: "button"
+        }
       },
-      [
-        _c("h3", { staticClass: "text-center" }, [_vm._v("Service performed")]),
-        _vm._v(" "),
-        _c(
-          "fieldset",
-          { staticClass: "grid-x", attrs: { id: "warranty-options" } },
-          [
-            _c("div", { staticClass: "small-12 medium-5 cell" }, [
-              _c(
-                "label",
-                { staticClass: "text-left", attrs: { for: "middle-label" } },
-                [_vm._v("Warranty/Insurance")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "small-12 medium-7 cell" }, [
-              _c("input", {
-                attrs: { type: "radio", name: "warranty_insurance", value: "1" }
-              }),
-              _c("label", { attrs: { for: "warranty_insurance" } }, [
-                _vm._v("Yes")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { type: "radio", name: "warranty_insurance", value: "0" }
-              }),
-              _c("label", { attrs: { for: "warranty_insurance" } }, [
-                _vm._v("No")
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("fieldset", { staticClass: "grid-x" }, [
-          _c("div", { staticClass: "small-12 medium-5 cell" }, [
-            _c(
-              "label",
-              {
-                staticClass: "text-left middle",
-                attrs: { for: "middle-label" }
-              },
-              [_vm._v("Workshop name")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "small-12 medium-7  cell" }, [
-            _c("input", {
-              attrs: { type: "text", name: "workshop", value: "" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("fieldset", { staticClass: "grid-x" }, [
-          _c("div", { staticClass: "small-12 medium-5 cell" }, [
-            _c(
-              "label",
-              {
-                staticClass: "text-left middle",
-                attrs: { for: "middle-label" }
-              },
-              [_vm._v("Details")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "small-12 medium-7  cell" }, [
-            _c("textarea", { attrs: { name: "details", rows: "3" } })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "expanded button-group " }, [
-          _c(
-            "a",
-            {
-              staticClass: "hollow button secondary cancel",
-              attrs: { href: "#", "data-open": "done-service" }
-            },
-            [_vm._v("Previews")]
-          ),
-          _vm._v("\n\n                    button\n\n                    "),
-          _c(
-            "a",
-            {
-              staticClass: "button success",
-              attrs: {
-                href: "#",
-                "data-form-action": "continue",
-                "data-close": "",
-                "aria-label": "Close reveal"
-              }
-            },
-            [_vm._v("Continue")]
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "close-button",
-            attrs: {
-              "data-close": "",
-              "aria-label": "Close reveal",
-              type: "button"
-            }
-          },
-          [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-        )
-      ]
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "small-12 medium-5 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left", attrs: { for: "middle-label" } },
+        [_vm._v("Warranty/Insurance")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "small-12 medium-5 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left", attrs: { for: "middle-label" } },
+        [_vm._v("Warranty/Insurance")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "small-12 medium-5 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Workshop name")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "small-12 medium-5 cell" }, [
+      _c(
+        "label",
+        { staticClass: "text-left middle", attrs: { for: "middle-label" } },
+        [_vm._v("Details")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -47470,7 +48315,15 @@ var render = function() {
       _vm._v(" "),
       _c("add-service-form", { ref: "addServiceModal" }),
       _vm._v(" "),
-      _c("done-service-form", { ref: "doneServiceModal" })
+      _c("done-service-form", {
+        ref: "doneServiceModal",
+        attrs: { "service-id": _vm.serviceToPerform },
+        on: {
+          serviceToDefault: function($event) {
+            _vm.serviceToPerform = 0
+          }
+        }
+      })
     ],
     2
   )
