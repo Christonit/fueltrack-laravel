@@ -48434,7 +48434,11 @@ var render = function() {
                   ]),
                   _vm._v(
                     "\r\n                            " +
-                      _vm._s(_vm.averages.increase_decrease_percentage) +
+                      _vm._s(
+                        Math.abs(
+                          Math.round(_vm.averages.increase_decrease_percentage)
+                        )
+                      ) +
                       "%\r\n                        "
                   )
                 ])
@@ -48444,7 +48448,7 @@ var render = function() {
                 _vm._m(1),
                 _vm._v(" "),
                 _c("span", { staticClass: "stat" }, [
-                  _vm._v("$" + _vm._s(_vm.averages.last_week))
+                  _vm._v("$" + _vm._s(Math.round(_vm.averages.last_week)))
                 ])
               ]),
               _vm._v(" "),
@@ -48452,7 +48456,7 @@ var render = function() {
                 _vm._m(2),
                 _vm._v(" "),
                 _c("span", { staticClass: "stat" }, [
-                  _vm._v("$" + _vm._s(_vm.averages.last_month))
+                  _vm._v("$" + _vm._s(Math.round(_vm.averages.last_month)))
                 ])
               ]),
               _vm._v(" "),
@@ -48460,7 +48464,7 @@ var render = function() {
                 _vm._m(3),
                 _vm._v(" "),
                 _c("span", { staticClass: "stat" }, [
-                  _vm._v(_vm._s(_vm.averages.tracked_current_week))
+                  _vm._v(_vm._s(Math.round(_vm.averages.tracked_current_week)))
                 ]),
                 _vm._v(" miles\r\n            ")
               ]),
@@ -48469,7 +48473,7 @@ var render = function() {
                 _vm._m(4),
                 _vm._v(" "),
                 _c("span", { staticClass: "stat" }, [
-                  _vm._v(_vm._s(_vm.averages.total_distance))
+                  _vm._v(_vm._s(Math.round(_vm.averages.total_distance)))
                 ]),
                 _vm._v(" miles\r\n            ")
               ]),
@@ -48478,7 +48482,7 @@ var render = function() {
                 _vm._m(5),
                 _vm._v(" "),
                 _c("span", { staticClass: "stat" }, [
-                  _vm._v(_vm._s(_vm.averages.fuelups_current_month))
+                  _vm._v(_vm._s(Math.round(_vm.averages.fuelups_current_month)))
                 ]),
                 _vm._v(" this month\r\n\r\n            ")
               ]),
@@ -48487,7 +48491,7 @@ var render = function() {
                 _vm._m(6),
                 _vm._v(" "),
                 _c("span", { staticClass: "stat" }, [
-                  _vm._v(_vm._s(_vm.averages.fuelups_last_month))
+                  _vm._v(_vm._s(Math.round(_vm.averages.fuelups_last_month)))
                 ])
               ]),
               _vm._v(" "),
@@ -48495,7 +48499,9 @@ var render = function() {
                 _vm._m(7),
                 _vm._v(" "),
                 _c("span", { staticClass: "stat" }, [
-                  _vm._v(_vm._s(_vm.averages.fuelups_current_year) + " ")
+                  _vm._v(
+                    _vm._s(Math.round(_vm.averages.fuelups_current_year)) + " "
+                  )
                 ]),
                 _vm._v("this year\r\n            ")
               ]),
@@ -48504,7 +48510,12 @@ var render = function() {
                 _vm._m(8),
                 _vm._v(" "),
                 _c("span", { staticClass: "stat" }, [
-                  _vm._v("$ " + _vm._s(_vm.averages.total_maintenance_expenses))
+                  _vm._v(
+                    "$ " +
+                      _vm._s(
+                        Math.round(_vm.averages.total_maintenance_expenses)
+                      )
+                  )
                 ]),
                 _vm._v(" Yearly\r\n            ")
               ])

@@ -138,7 +138,7 @@ export default {
 
                     this.tracked_date = null
 
-               }else if(this.due_moment == 'Specific date'){
+               }else if(this.due_moment == 'Specific date'){    
 
                     this.tracked_distance = null;
 

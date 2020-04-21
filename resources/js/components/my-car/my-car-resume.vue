@@ -16,48 +16,48 @@
                             <i class="material-icons">
                                 {{ (averages.increase_decrease_percentage < 0) ? "arrow_downward":"arrow_upward" }}
                             </i>
-                            {{averages.increase_decrease_percentage}}%
+                            {{Math.abs(Math.round(averages.increase_decrease_percentage))}}%
                         </span>
             </li>
 
             <li class="stats-list-positive">
                 <span class="stats-list-label"><b>Last week</b></span>
-                <span class="stat">${{averages.last_week}}</span>
+                <span class="stat">${{Math.round(averages.last_week)}}</span>
             </li>
             <li class="stats-list-positive">
                 <span class="stats-list-label"><b>Last Month expenses</b></span>
-                <span class="stat">${{averages.last_month}}</span>
+                <span class="stat">${{Math.round(averages.last_month)}}</span>
             </li>
             <li class="stats-list-negative">
                 <span class="stats-list-label"><b>Tracked this week</b></span>
-                <span class="stat">{{averages.tracked_current_week}}</span> miles
+                <span class="stat">{{Math.round(averages.tracked_current_week)}}</span> miles
             </li>
 
             <li class="stats-list-negative">
                 <span class="stats-list-label"><b>Total Dis. Tracked</b></span>
-                <span class="stat">{{averages.total_distance }}</span> miles
+                <span class="stat">{{Math.round(averages.total_distance) }}</span> miles
             </li>
 
             <li class="stats-list-negative">
                 <span class="stats-list-label"><b>Fuel Ups</b></span>
-                <span class="stat">{{averages.fuelups_current_month}}</span> this month
+                <span class="stat">{{Math.round(averages.fuelups_current_month)}}</span> this month
 
             </li>
 
             <li class="stats-list-negative">
                 <span class="stats-list-label"><b>Fuel Ups Last Month</b></span>
-                <span class="stat">{{averages.fuelups_last_month}}</span>
+                <span class="stat">{{Math.round(averages.fuelups_last_month)}}</span>
             </li>
 
 
             <li class="stats-list-negative">
                 <span class="stats-list-label"><b>Total Fuel Ups</b></span>
-                <span class="stat">{{ averages.fuelups_current_year}} </span>this year
+                <span class="stat">{{Math.round( averages.fuelups_current_year)}} </span>this year
             </li>
 
             <li class="stats-list-negative">
                 <span class="stats-list-label"><b>Maintenance cost</b></span>
-                <span class="stat">$ {{averages.total_maintenance_expenses}}</span> Yearly
+                <span class="stat">$ {{Math.round(averages.total_maintenance_expenses)}}</span> Yearly
             </li>
 
         </ul>
